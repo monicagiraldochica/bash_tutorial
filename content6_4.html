@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h3>6.4. Condition-testing to compare arrays</h3>
+					<table>
+						<tr>
+							<th><b>Condition</b></th>
+							<th><b>Meaning</b></th>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ "${array1[*]}" == "${array2[*]}" ]</font></td>
+							<td>Tests if <font class="bashcommand">array1</font> equals to <font class="bashcommand">array2</font>.</td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ "${array1[*]}" != "${array2[*]}" ]</font></td>
+							<td>Tests if array1 is different to array2.</td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">[ "${array1[*]}" == "${array2[*]}" ]:</font>
+						<font class="bashcommand">
+							$ arr1=(a b c)<br>
+							$ arr2=(a b c d)<br>
+							$ arr3=(a b c)<br>
+							$ if [ "${arr1[*]}" == "${arr3[*]}" ]<br>
+							&gt; then<br>
+							&gt; echo "equal"<br>
+							&gt; else<br>
+							&gt; echo "different"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">equal</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${arr1[*]}" == "${arr3[*]}" ] &gt;&gt; echo "equal" || echo "different"<br>
+							<font class="bashcommand-result">equal</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ if [ "${arr1[*]}" == "${arr2[*]}" ]<br>
+							&gt; then<br>
+							&gt; echo "equal"<br>
+							&gt; else<br>
+							&gt; echo "different"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">different</font>
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${arr1[*]}" == "${arr2[*]}" ] &gt;&gt; echo "equal" || echo "different"<br>
+							<font class="bashcommand-result">different</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ "${arr1[*]}" != "${arr2[*]}" ]:</font>
+						<font class="bashcommand">
+							$ if [ "${arr1[*]}" != "${arr2[*]}" ]<br>
+							&gt; then<br>
+							&gt; echo "different"<br>
+							&gt; else<br>
+							&gt; echo "equal"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">different</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${arr1[*]}" != "${arr2[*]}" ] &gt;&gt; echo "different" || echo "equal"<br>
+							<font class="bashcommand-result">different</font>
+						</font>
+					</p>
+</body>
+</html>

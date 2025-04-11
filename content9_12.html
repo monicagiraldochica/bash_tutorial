@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.12. Examples: Reading specific columns or lines in a file or a list of files, that contain a searched value</h3>
+
+        <font class="example">Print the line(s) of file3.csv that contain the string C11137439</font>
+
+        <p>
+        Using <font class="bashcommand">awk</font>:<br>
+        <font class="bashcommand">
+        $ awk '/C11137439/' file3.csv<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        Using <font class="bashcommand">grep</font>:<br>
+        <font class="bashcommand">
+        $ grep C11137439 file3.csv<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        <font class="example">Print the line(s) of file3.csv that contain the string AAA (which is <b>stored in a variable</b>)</font>
+        <font class="bashcommand">$ VAR=C11137439</font>
+        </p>
+
+        <p>
+        Using <font class="bashcommand">awk</font>:<br>
+        <font class="bashcommand">
+        $ awk -v var=$VAR '$0~var' file3.csv<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        Using <font class="bashcommand">grep</font>:<br>
+        <font class="bashcommand">
+        $ grep $VAR file3.csv<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        <font class="example">Print the line(s) of file3.csv that contain the strings C11137439 <b>or</b> B11119909</font>
+        To search for more than one expression, add the flag <font class="bashcommand">-e</font> in front of each expression.
+        </p>
+
+        <p><font class="bashcommand">
+        $ grep -e "C11137439" -e "B11119909" file3.csv<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15<br>
+        B11119909,Group2 b,61 
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of file3.csv that contain the strings C11137439, B11119909 or B11110893</font>
+
+        <p><font class="bashcommand">
+        $ grep -e "C11137439" -e "B11119909" -e "B11110893" file3.csv<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15<br>
+        B11119909,Group2 b,61<br>
+        B11110893,Group1,28 
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of file3.csv that contain the strings C11137439 or B11119909 (which are <b>stored in a file</b> called patterns.txt)</font>
+
+        <p><font class="bashcommand">
+        $ cat patterns.txt<br>
+        <font class="bashcommand-result">
+        C11137439<br>
+        B11119909 
+        </font>
+        </font></p>
+
+        <p><font class="bashcommand">
+        $ grep -f patterns.txt file3.csv<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15<br>
+        B11119909,Group2 b,61 
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of file3.csv that <b>do not contain</b> the string C11137439</font>
+
+        <p><font class="bashcommand">
+        $ grep -v "C11137439" file3.csv<br>
+        <font class="bashcommand-result">
+        Anonymized ID,Subject Group,AGE<br>
+        C11138122,MISSING,21<br>
+        C11138192,Group1,54<br>
+        B12226507,Group1,68<br>
+        B12226546,Group1,67<br>
+        C11138122,Group1,24<br>
+        C11138184,Group1,59<br>
+        C11138797,Group1,22<br>
+        C11138152,Group1,53<br>
+        C11138150,Group1,41<br>
+        C11137167,Group3,14<br>
+        C11137159,Group3,13<br>
+        C11137167,Group3,16<br>
+        C11137159,Group3,13<br>
+        C11131039,Group2 b,67<br>
+        C11135566,Group2 b,73<br>
+        B11119903,Group2 b,83<br>
+        C11137544,Group1,21<br>
+        C11137443,Group3,11<br>
+        C11137123,Group2 b,69<br>
+        C11133100,Group1,23<br>
+        D11144030,Group3,13<br>
+        B11108399,Group1,23<br>
+        B11108326,Group1,59<br>
+        B11119909,Group2 b,61<br>
+        B11110893,Group1,28 
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of any file in the current directory that contain the string C11137439</font>
+
+        <p><font class="bashcommand">
+        $ awk '/C11137439/' *<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15<br>
+        C11137439 Group3 15<br>
+        C11137439 Group3 79<br>
+        C11137439 
+        </font>
+        </font></p>
+
+        <p><font class="bashcommand">
+        $ grep C11137439 *<br>
+        <font class="bashcommand-result">
+        file3.csv:C11137439,Group3,79<br>
+        file3.csv:C11137439,Group3,15<br>
+        file4.txt:C11137439 Group3 15<br>
+        file4.txt:C11137439 Group3 79<br>
+        patterns.txt:C11137439 
+        </font>
+        </font></p>
+
+        <p>
+        To omit the file names in the grep option, use the flag <font class="bashcommand">-h</font>:<br> 
+        <font class="bashcommand">
+        $ grep -h C11137439 *<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15<br>
+        C11137439 Group3 15<br>
+        C11137439 Group3 79<br>
+        C11137439 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        If you wanted to include the line number for each match, you can add the flag <font class="bashcommand">-n</font>:<br>
+        <font class="bashcommand">
+        $ grep -n "C11137439" *<br>
+        <font class="bashcommand-result">
+        file3.csv:21:C11137439,Group3,79<br>
+        file3.csv:22:C11137439,Group3,15<br>
+        file4.txt:15:C11137439 Group3 15<br>
+        file4.txt:16:C11137439 Group3 79<br>
+        patterns.txt:1:C11137439 
+        </font>
+        </font>
+        </p>
+
+        <p><font class="bashcommand">
+        $ grep -h -n "C11137439" *<br>
+        <font class="bashcommand-result">
+        <b>21</b>:C11137439,Group3,79<br>
+        <b>22</b>:C11137439,Group3,15<br>
+        <b>15</b>:C11137439 Group3 15<br>
+        <b>16</b>:C11137439 Group3 79<br>
+        <b>1</b>:C11137439 
+        </font>
+        </font></p>
+
+        <p>
+        If you want to show only the first three matches, you can add the flag <font class="bashcommand">-m</font> with the parameter <font class="bashcommand">3</font> (to print only three lines):<br>
+        <font class="bashcommand">
+        $ grep -m 3 "C11137439" *<br>
+        <font class="bashcommand-result">
+        file3.csv:C11137439,Group3,79<br>
+        file3.csv:C11137439,Group3,15<br>
+        file4.txt:C11137439 Group3 15 
+        </font>
+        </font>
+        </p>
+
+        <p><font class="bashcommand">
+        $ grep -m 3 "C11137439" * -h<br>
+        <font class="bashcommand-result">
+        C11137439,Group3,79<br>
+        C11137439,Group3,15<br>
+        C11137439 Group3 15 
+        </font>
+        </font></p>
+
+        <font class="example">Print the number of lines in each file of the current directory that contain the string C11137439.</font>
+
+        <p><font class="bashcommand">
+        $ grep -c "C11137439" *<br>
+        <font class="bashcommand-result">
+        file1.csv:0<br>
+        file1_reordered.csv:0<br>
+        file2.txt:0<br>
+        file3.csv:2<br>
+        file4.txt:2<br>
+        patterns.txt:1<br>
+        patterns2.txt:0
+        </font>
+        </font></p>
+
+        <font class="example">Print only the name of the files in the current directory that contain the string C11137439.</font>
+
+        <p><font class="bashcommand">
+        $ grep -l "C11137439" *<br>
+        <font class="bashcommand-result">
+        file3.csv<br>
+        file4.txt<br>
+        patterns.txt 
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of any file in the current directory that contain the string C11137439, each line followed by the next three lines in the corresponding file (if there is three or more lines after the matched one).</font>
+        
+        <p><font class="bashcommand">
+        $ grep -A 3 "C11137439" *<br>
+        <font class="bashcommand-result">
+        <b>file3.csv:C11137439,Group3,79<br>
+        file3.csv:C11137439,Group3,15</b><br>
+        file3.csv-C11133100,Group1,23<br>
+        file3.csv-D11144030,Group3,13<br>
+        file3.csv-B11108399,Group1,23<br> 
+        <b>--<br>
+        file4.txt:C11137439 Group3 15<br>
+        file4.txt:C11137439 Group3 79</b><br>
+        file4.txt-C11137443 Group3 15<br>
+        file4.txt-C11137544 Group1 22<br>
+        file4.txt-C11137123 Group2 68<br>
+        <b>--<br>
+        patterns.txt:C11137439</b><br>
+        patterns.txt-B11119909 
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines in the corresponding file (if there is three or more lines before the matched one).</font>
+
+        <p><font class="bashcommand">
+        $ grep -B 3 "C11137439" *<br>
+        <font class="bashcommand-result">
+        file3.csv-C11137544,Group1,21<br>
+        file3.csv-C11137443,Group3,11<br>
+        file3.csv-C11137123,Group2 b,69<br>
+        <b>file3.csv:C11137439,Group3,79<br>
+        file3.csv:C11137439,Group3,15</b><br>
+        --<br>
+        file4.txt-C11137159 Group3 12<br>
+        file4.txt-C11137167 Group3 14<br>
+        file4.txt-C11137167 Group3 16<br>
+        <b>file4.txt:C11137439 Group3 15<br> 
+        file4.txt:C11137439 Group3 79</b><br>
+        --<br>
+        <b>patterns.txt:C11137439</b>
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines and followed by the next three lines in the corresponding file (if there is three or more lines before/after the matched one).</font>
+
+        <p><font class="bashcommand">
+        $ grep -C 3 "C11137439" *<br>
+        <font class="bashcommand-result">
+        file3.csv-C11137544,Group1,21<br>
+        file3.csv-C11137443,Group3,11<br>
+        file3.csv-C11137123,Group2 b,69<br>
+        <b>file3.csv:C11137439,Group3,79<br>
+        file3.csv:C11137439,Group3,15</b><br>
+        file3.csv-C11133100,Group1,23<br>
+        file3.csv-D11144030,Group3,13<br>
+        file3.csv-B11108399,Group1,23<br>
+        --<br>
+        --<br>
+        file4.txt-C11137159 Group3 12<br>
+        file4.txt-C11137167 Group3 14<br>
+        file4.txt-C11137167 Group3 16<br>
+        <b>file4.txt:C11137439 Group3 15<br>
+        file4.txt:C11137439 Group3 79</b><br>
+        file4.txt-C11137443 Group3 15<br>
+        file4.txt-C11137544 Group1 22<br>
+        file4.txt-C11137123 Group2 68<br>
+        --<br>
+        --<br>
+        <b>patterns.txt:C11137439</b><br>
+        patterns.txt-B11119909 
+        </font>
+        </font></p>
+
+        <p><font class="bashcommand">
+        $ grep -A 3 -B 3 "C11137439" *<br>
+        <font class="bashcommand-result">
+        file3.csv-C11137544,Group1,21<br>
+        file3.csv-C11137443,Group3,11<br>
+        file3.csv-C11137123,Group2 b,69<br>
+        <b>file3.csv:C11137439,Group3,79<br>
+        file3.csv:C11137439,Group3,15</b><br>
+        file3.csv-C11133100,Group1,23<br>
+        file3.csv-D11144030,Group3,13<br>
+        file3.csv-B11108399,Group1,23<br>
+        --<br>
+        --<br>
+        file4.txt-C11137159 Group3 12<br>
+        file4.txt-C11137167 Group3 14<br>
+        file4.txt-C11137167 Group3 16<br>
+        <b>file4.txt:C11137439 Group3 15<br>
+        file4.txt:C11137439 Group3 79</b><br>
+        file4.txt-C11137443 Group3 15<br>
+        file4.txt-C11137544 Group1 22<br>
+        file4.txt-C11137123 Group2 68<br>
+        --<br>
+        --<br>
+        <b>patterns.txt:C11137439</b><br>
+        patterns.txt-B11119909 
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of any file in the current directory that contain the string "B11133232" (including the quotation marks ").</font>
+
+        <p><font class="bashcommand">
+        $ awk '/"B11133232"/' *<br>
+        <font class="bashcommand-result">
+        "B11133232" "Group1" "500" "MissingData"<br>
+        "B11133232" "Group1" "456" "MissingData" 
+        </font>
+        </font></p>
+
+        <p><font class="bashcommand">
+        $ grep \"B11133232\" *<br>
+        <font class="bashcommand-result"> 
+        file2.txt:"B11133232" "Group1" "500" "MissingData"<br>
+        file2.txt:"B11133232" "Group1" "456" "MissingData" 
+        </font>
+        </font></p>
+
+        <p>With the <font class="bashcommand">grep</font> command, you must include the backslash (<font class="bashcommand">\</font>) before the quotation marks (<font class="bashcommand">\"</font>) if you want to search only those lines that contain the string that includes the quotation marks. Otherwise, it will interpret the search value as <font class="bashcommand">B11133232</font> and not <font class="bashcommand">"B11133232"</font>.</p>
+    
+        <p>
+        <font class="example">Print the line(s) of file3.csv that contain the values B11108399 or B11108326.</font>
+        This search has the following rules: We're looking for words that start with the following seven characters: <font class="bashcommand">B111083</font>, the 8<sup>th</sup> character can be a <font class="bashcommand">9</font> or a <font class="bashcommand">2</font>, and the last character can be a <font class="bashcommand">9</font> or a <font class="bashcommand">6</font>. So, in the <font class="bashcommand">grep</font> command, we replace the 8<sup>th</sup> character by <font class="bashcommand">[92]</font> to indicate that it can have any of those two values, and the last character by <font class="bashcommand">[96]</font> to indicate that it can have value <font class="bashcommand">9</font> or <font class="bashcommand">6</font>.
+        </p>
+
+        <p><font class="bashcommand">
+        $ grep B111083[92][96] file3.csv<br>
+        <font class="bashcommand-result">
+        B11108399,Group1,23<br>
+        B11108326,Group1,59 
+        </font>
+        </font></p>
+
+        <font class="example">Print the line(s) of file3.csv that contain the values <font class="bashcommand">Group1</font> or <font class="bashcommand">Group2</font>.</font>
+
+        <p><font class="bashcommand">
+        $ grep Group[12] file3.csv<br>
+        <font class="bashcommand-result">
+        C11138192,Group1,54<br>
+        B12226507,Group1,68<br>
+        B12226546,Group1,67<br>
+        C11138122,Group1,24<br>
+        C11138184,Group1,59<br>
+        C11138797,Group1,22<br>
+        C11138152,Group1,53<br>
+        C11138150,Group1,41<br>
+        C11131039,Group2 b,67<br>
+        C11135566,Group2 b,73<br>
+        B11119903,Group2 b,83<br>
+        C11137544,Group1,21<br>
+        C11137123,Group2 b,69<br>
+        C11133100,Group1,23<br>
+        B11108399,Group1,23<br>
+        B11108326,Group1,59<br>
+        B11119909,Group2 b,61<br>
+        B11110893,Group1,28 
+        </font>
+        </font></p>
+
+        <p>With the <font class="bashcommand">grep</font> command, you must include the backslash (<font class="bashcommand">\</font>) before the quotation marks (<font class="bashcommand">\"</font>) if you want to search only those lines that contain the string that includes the quotation marks. Otherwise, it will interpret the search value as <font class="bashcommand">B11133232</font> and not <font class="bashcommand">"B11133232"</font>.</p>
+    
+        <p>
+        <font class="example">Print the first column of file2.txt and file3.csv for those lines that contain the values <font class="bashcommand">Group1</font> or <font class="bashcommand">Group2</font>.</font>
+        Remember that you have to use the flag <font class="bashcommand">-F','</font> with the command <font class="bashcommand">awk</font> when the columns of the file are separated by commas and not spaces. 
+        </p>
+
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ grep Group[12] file2.txt | awk '{print $1}'<br>
+                <font class="bashcommand-result">
+                "B11130912"<br>
+                "B11137244"<br>
+                "B11154534"<br>
+                "B11144100"<br>
+                "B11137244"<br>
+                "B12226566"<br>
+                "B11134987"<br>
+                "B11144345"<br>
+                "B11110676"<br>
+                "C11138929"<br>
+                "B11154532"<br>
+                "B11137120"<br>
+                "B33191224"<br>
+                "C11138999"<br>
+                "B11131605"<br>
+                "B11137784"<br>
+                "B11156098"<br>
+                "B11133232"<br>
+                "C11138912"<br>
+                "B11150911"<br>
+                "B11152577"<br>
+                "B11156098"<br>
+                "B11133232" 
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ grep Group[12] file3.csv | awk -F',' '{print $1}'<br>
+                <font class="bashcommand-result">
+                C11138192<br>
+                B12226507<br>
+                B12226546<br>
+                C11138122<br>
+                C11138184<br>
+                C11138797<br>
+                C11138152<br>
+                C11138150<br>
+                C11131039<br>
+                C11135566<br>
+                B11119903<br>
+                C11137544<br>
+                C11137123<br>
+                C11133100<br>
+                B11108399<br>
+                B11108326<br>
+                B11119909<br>
+                B11110893
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <font class="example">Print the first and second columns of file2.txt and file3.csv for those lines that contain the values <font class="bashcommand">Group1</font> or <font class="bashcommand">Group2</font>.</font>
+    
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ grep Group[12] file2.txt | awk '{print $1,$2}'<br>
+                <font class="bashcommand-result">
+                "B11130912" "Group2b"<br>
+                "B11137244" "Group1"<br>
+                "B11154534" "Group1"<br>
+                "B11144100" "Group1"<br>
+                "B11137244" "Group1"<br>
+                "B12226566" "Group2b"<br>
+                "B11134987" "Group1"<br>
+                "B11144345" "Group1"<br>
+                "B11110676" "Group1"<br>
+                "C11138929" "Group2b"<br>
+                "B11154532" "Group1"<br>
+                "B11137120" "Group2b"<br>
+                "B33191224" "Group2b"<br>
+                "C11138999" "Group2b"<br>
+                "B11131605" "Group1"<br>
+                "B11137784" "Group1"<br>
+                "B11156098" "Group1"<br>
+                "B11133232" "Group1"<br>
+                "C11138912" "Group2b"<br>
+                "B11150911" "Group2b"<br>
+                "B11152577" "Group1"<br>
+                "B11156098" "Group1"<br>
+                "B11133232" "Group1"
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ grep Group[12] file3.csv | awk -F',' '{print $1,$2}'<br>
+                <font class="bashcommand-result">
+                C11138192 Group1<br>
+                B12226507 Group1<br>
+                B12226546 Group1<br>
+                C11138122 Group1<br>
+                C11138184 Group1<br>
+                C11138797 Group1<br>
+                C11138152 Group1<br>
+                C11138150 Group1<br>
+                C11131039 Group2 b<br>
+                C11135566 Group2 b<br>
+                B11119903 Group2 b<br>
+                C11137544 Group1<br>
+                C11137123 Group2 b<br>
+                C11133100 Group1<br>
+                B11108399 Group1<br>
+                B11108326 Group1<br>
+                B11119909 Group2 b<br>
+                B11110893 Group1
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+</html>

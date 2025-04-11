@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<h3>4.2. Non-integer calculations</h3>
+					<p>
+						When programming in bash, you will often need to do mathematical operations that involve non-integer 
+						calculations. To do this, you will need the <font class="bashcommand">bc</font> utility. You can use this 
+						utility also for integer calculations, but it is normally left for advanced math.
+					</p>
+					
+					<table>
+						<tr>
+							<th style="width:30%"><b>Syntax</b></th>
+							<th style="width:70%"><b>Usage</b></th>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">echo "OPERATION" | bc</font>
+							</td>
+							<td>
+								Evaluates <font class="bashcommand">OPERATION</font>. This can be any arithmetic operation with 
+								integer or non-integer numbers. Including addition (<font class="bashcommand">+</font>), 
+								subtraction (<font class="bashcommand">-</font>), multiplication 
+								(<font class="bashcommand">*</font>), division (<font class="bashcommand">/</font>), square root 
+								(<font class="bashcommand">sqrt(NUM)</font>), exponentiation 
+								(<font class="bashcommand">NUM**EXP</font>), etc. It will round the result to the closest 
+								integer.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">echo "OPERATION" | bc -l</font>
+							</td>
+							<td>
+								Flag <font class="bashcommand">-l</font> will not round the result. Instead, will print it with 
+								all the decimals.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">echo "scale=NDECIMALS; OPERATION" | bc -l</font>
+							</td>
+							<td>
+								Will only print <font class="bashcommand">NDECIMALS</font> instead of all the decimals.
+							</td>
+						</tr>
+					</table><br>
+					
+					<font class="example">echo "OPERATION" | bc</font>
+					<p>
+						<font class="bashcommand">
+							$ echo "2.34 / 1.895" | bc<br>
+							<font class="bashcommand-result">1</font><br>
+							$ echo "2 / 3" | bc<br>
+							<font class="bashcommand-result">0</font>
+						</font>
+					</p>
+					
+					<font class="example">echo "OPERATION" | bc -l</font>
+					<p>
+						<font class="bashcommand">
+							$ echo "2.34 / 1.895" | bc -l<br>
+							<font class="bashcommand-result">1.23482849604221635883</font><br>
+							$ echo "2 / 3" | bc -l<br>
+							<font class="bashcommand-result">.66666666666666666666</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ A=$(echo "2.34 / 1.895" | bc)<br>
+							$ B=$(echo "2.34 / 1.895" | bc -l)<br>
+							$ echo ${A}<br>
+							<font class="bashcommand-result">1</font><br>
+							$ echo ${B}<br>
+							<font class="bashcommand-result">1.23482849604221635883</font><br>
+							$ echo "${A} + ${B}" | bc -l<br>
+							<font class="bashcommand-result">2.23482849604221635883</font><br>
+							$ echo "${A} + ${B}"<br>
+							<font class="bashcommand-result">1 + 1.23482849604221635883</font>
+						</font>
+					</p>
+					
+					<p>
+						Look at the difference between the last two expressions. They are almost the same except for the 
+						<font class="bashcommand">| bc -l</font> at the end of the first expression. Yet, the results are very 
+						different. That is because in the second case we are just printing the text 
+						<font class="bashcommand">"${A} + ${B}"</font>, while in the first one we are evaluating the expression 
+						written in that text, with the use of the <font class="bashcommand">bc</font> utility. The following 
+						example may clarify this concept:
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ echo "${A} + ${B}=$(echo "${A} + ${B}" | bc -l)"<br>
+							<font class="bashcommand-result">1 + 1.23482849604221635883=2.23482849604221635883</font>
+						</font>
+					</p>
+					
+					<p>
+						To find the square root of a number you use the expression <font class="bashcommand">sqrt()</font>, like 
+						in many other programming languages.
+					</p>
+					
+					<font class="example">finding the square root of 10 and saving it in variable A</font>
+					<p>
+						<font class="bashcommand">
+							$ A=$(echo "sqrt (10)" | bc -l)<br>
+							$ echo ${A}<br>
+							<font class="bashcommand-result">3.16227766016837933199</font>
+						</font>
+					</p>
+					
+					<p>
+						Knowing this, you can do any type of operations with non-integer numbers. Just by writing the desired 
+						expression between the quotation marks, or combine integer and non-integer calculations. Let’s look at 
+						a few more examples:
+					</p>
+					
+					<font class="bashcommand">
+						<p>
+							$ echo "(2.34 / 1.895) + sqrt (10)" | bc -l<br>
+							<font class="bashcommand-result">4.39710615621059569082</font><br>
+							$ echo $((2**3))<br>
+							<font class="bashcommand-result">12.397106156210595690828</font><br>
+							$ echo "(2.34 / 1.895) + sqrt (10) + $((2**3))" | bc -l<br>
+							<font class="bashcommand-result">12.39710615621059569082</font><br>
+							$ echo "(2.34 / 1.895) + sqrt (10) + 2^3" | bc -l<br>
+							<font class="bashcommand-result">12.39710615621059569082</font><br>
+							$ echo "2 + 2" | bc -l<br>
+							<font class="bashcommand-result">4</font><br>
+							$ echo "2 + 2"<br>
+							<font class="bashcommand-result">2 + 2</font><br>
+							$ echo "2 + 2 = $(echo "2 + 2" | bc -l)"<br>
+							<font class="bashcommand-result">2 + 2 = 4</font>
+						</p>	
+							
+						<p>
+							$ A=$(echo "(2.34 / 1.895) + sqrt (10)" | bc -l)<br>
+							$ echo ${A}<br>
+							<font class="bashcommand-result">4.39710615621059569082</font><br>
+							$ echo $(echo "(2.34 / 1.895) + sqrt (10)" | bc -l)<br>
+							<font class="bashcommand-result">4.39710615621059569082</font><br>
+							$ echo "(2.34 / 1.895) + sqrt (10)= $(echo "(2.34 / 1.895) + sqrt (10)" | bc -l)"<br>
+							<font class="bashcommand-result">(2.34 / 1.895) + sqrt (10)= 4.39710615621059569082</font>				
+						</p>
+					</font>
+					
+					<font class="example">echo "scale=NDECIMALS; OPERATION" | bc -l</font>
+					<p>
+						Clearly, some of the results of the previous examples have way too many decimals. You can cut the number 
+						of decimals using scale.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ echo "(2.34 / 1.895) + sqrt (10)" | bc -l<br>
+							<font class="bashcommand-result">4.39710615621059569082</font><br>
+							$ echo "scale=3; (2.34 / 1.895) + sqrt (10)" | bc -l<br>
+							<font class="bashcommand-result">4.396</font><br>
+							$ echo "scale=0; (2.34 / 1.895) + sqrt (10)" | bc -l<br>
+							<font class="bashcommand-result">4</font>
+						</font>
+					</p>
+					
+					<font class="example">Comparing non-integers</font>
+					<p>
+						In order to compare non-integers you can use the <font class="bashcommand">awk</font> function. This 
+						function will be studied more in detail in later chapters as it is mainly used for processing files and 
+						strings. But as this example shows, it can also be used to deal with numbers.
+					</p>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.8. Examples: Reading specific columns from a file or a list of files and sorting the result in alphabetical order and/or removing duplicate values</h3>
+        <p>
+        <font class="example">Print the first column of file1.csv and file2.txt <b>in alphabetical order</b>.</font>
+        In order to do this, you sort the result after printing the first column. First, use <font class="bashcommand">awk</font> to print the desired column, followed by <font class="bashcommand">| sort</font> to sort it in alphabetical order. 
+        </p>
+
+        <p><table class="ghostTable">
+        <tr>
+            <th>Space-separated file</th>
+            <th>Comma-separated file</th>
+        </tr>
+            
+        <tr>
+            <td><font class="bashcommand">
+            $ awk '{print $1}' file2.txt | sort<br>
+            <font class="bashcommand-result">
+            "AnonymizedID"<br>
+            "B11110676"<br>
+            "B11130912"<br>
+            "B11131605"<br>
+            "B11133232"<br>
+            "B11133232"<br>
+            "B11134987"<br>
+            "B11135292"<br>
+            "B11137120"<br>
+            "B11137244"<br>
+            "B11137244"<br>
+            "B11137784"<br>
+            "B11144100"<br>
+            "B11144345"<br>
+            "B11150911"<br>
+            "B11152577"<br>
+            "B11154532"<br>
+            "B11154534"<br>
+            "B11155267"<br>
+            "B11155267"<br>
+            "B11156098"<br>
+            "B11156098"<br>
+            "B11156453"<br>
+            "B12226566"<br>
+            "B33191224"<br>
+            "C11137159"<br>
+            "C11138912"<br>
+            "C11138929"<br>
+            "C11138999"
+            </font>
+            </font></td>
+            
+            <td><font class="bashcommand">
+            $ awk -F ',' '{print $1}' file1.csv | sort<br>
+            <font class="bashcommand-result">
+            "Anonymized ID"<br>
+            "B11110455"<br>
+            "B11110603"<br>
+            "B11110690"<br>
+            "B11110925"<br>
+            "B11110927"<br>
+            "B11131290"<br>
+            "B11135072"<br>
+            "B11135291"<br>
+            "B11135291"<br>
+            "B11137879"<br>
+            "B11137879"<br>
+            "B11141503"<br>
+            "B11144410"<br>
+            "B11147712"<br>
+            "B11152799"<br>
+            "B11153927"<br>
+            "B11154358"<br>
+            "B11157958"<br>
+            "B11157974"<br>
+            "B11177579"<br>
+            "B11177806"<br>
+            "B33191224"<br>
+            "B33191224"<br>
+            "B33199522"<br>
+            "B33199522"<br>
+            "B33199603"<br>
+            "B33199603"<br>
+            "C11137159"
+            </font>
+            </font></td>
+        </tr>
+        </table></p>
+
+        <p>
+        <font class="example">Print the first column of file1.csv and file2.txt <b>in alphabetical removing any duplicate values</b>.</font>
+        In order to do this, you remove the duplicates after printing and sorting the first column. First, use <font class="bashcommand">awk</font> to print the desired column, followed by <font class="bashcommand">sort | uniq</font> to sort and remove the duplicates on the result.
+        </p>
+
+        <p><table class="ghostTable">
+        <tr>
+            <th>Space-separated file</th>
+            <th>Comma-separated file</th>
+        </tr>
+            
+        <tr>
+            <td><font class="bashcommand">
+            $ awk '{print $1}' file2.txt | sort | uniq<br>
+            <font class="bashcommand-result">
+            "AnonymizedID"<br>
+            "B11130912"<br>
+            "B11137244"<br>
+            "B11154534"<br>
+            "B11144100"<br>
+            "B11137244"<br>
+            "B12226566"<br>
+            "B11134987"<br>
+            "B11144345"<br>
+            "C11137159"<br>
+            "B11156453"<br>
+            "B11110676"<br>
+            "C11138929"<br>
+            "B11154532"<br>
+            "B11155267"<br>
+            "B11137120"<br>
+            "B33191224"<br>
+            "B11155267"<br>
+            "C11138999"<br>
+            "B11131605"<br>
+            "B11137784"<br>
+            "B11156098"<br>
+            "B11133232"<br>
+            "B11135292"<br>
+            "C11138912"<br>
+            "B11150911"<br>
+            "B11152577"<br>
+            "B11156098"<br>
+            "B11133232"
+            </font>
+            </font></td>	
+            
+            <td><font class="bashcommand">
+            $ awk -F ',' '{print $1}' file1.csv | sort | uniq<br>
+            <font class="bashcommand-result">
+            "Anonymized ID"<br>
+            "B33199522"<br>
+            "B33199603"<br>
+            "B11137879"<br>
+            "B11144410"<br>
+            "B11110455"<br>
+            "B11135291"<br>
+            "B11153927"<br>
+            "B11177579"<br>
+            "B11177806"<br>
+            "B11157958"<br>
+            "B11110690"<br>
+            "B11152799"<br>
+            "B11154358"<br>
+            "B11110925"<br>
+            "B11135291"<br>
+            "B11135072"<br>
+            "B33199603"<br>
+            "B11137879"<br>
+            "B11110603"<br>
+            "B11110927"<br>
+            "B11147712"<br>
+            "B33191224"<br>
+            "B11131290"<br>
+            "B11157974"<br>
+            "B33191224"<br>
+            "B11141503"<br>
+            "C11137159"<br>
+            "B33199522"
+            </font>
+            </font></td>
+        </tr>
+        </table></p>
+
+        <p>
+        Print the first column of file1.csv and file3.csv combined, in alphabetical order and with no duplicates.<br>
+        As explained in a previous example, to print the first column of file1.csv and file3.csv combined just use the command <font class="bashcommand">awk</font> with the list of files to be read (file1.csv file3.csv) at the end of the command. Then, use <font class="bashcommand">| sort</font> to organize the output in alphabetical order, and finally use <font class="bashcommand">| uniq</font> to remove the duplicates. 
+        </p>
+
+        <p>In this case, because the strings in file1.csv all start by colons (<font class="bashcommand">"</font>), while the values in file3.csv don't, then all the values of file1.csv will be printed before those of file3.csv (because alphabetically, special characters such as <font class="bashcommand">"</font> go before any letter (including <font class="bashcommand">A</font>). So, for bash <font class="bashcommand">"B11110455"</font> goes before <font class="bashcommand">Anonymized ID</font>.</p>
+
+        <p><font class="bashcommand">
+        $ awk -F ',' '{print $1}' file1.csv file3.csv | sort | uniq<br>
+        <font class="bashcommand-result">
+        "Anonymized ID"<br>
+        "B11110455"<br>
+        "B11110603"<br>
+        "B11110690"<br>
+        "B11110925"<br>
+        "B11110927"<br>
+        "B11131290"<br>
+        "B11135072"<br>
+        "B11135291"<br>
+        "B11137879"<br>
+        "B11141503"<br>
+        "B11144410"<br>
+        "B11147712"<br>
+        "B11152799"<br>
+        "B11153927"<br>
+        "B11154358"<br>
+        "B11157958"<br>
+        "B11157974"<br>
+        "B11177579"<br>
+        "B11177806"<br>
+        "B33191224"<br>
+        "B33199522"<br>
+        "B33199603"<br>
+        "C11137159"<br>
+        Anonymized ID<br>
+        B11108326<br>
+        B11108399<br>
+        B11110893<br>
+        B11119903<br>
+        B11119909<br>
+        B12226507<br>
+        B12226546<br>
+        C11131039<br>
+        C11133100<br>
+        C11135566<br>
+        C11137123<br>
+        C11137159<br>
+        C11137167<br>
+        C11137439<br>
+        C11137443<br>
+        C11137544<br>
+        C11138122<br>
+        C11138150<br>
+        C11138152<br>
+        C11138184<br>
+        C11138192<br>
+        C11138797<br>
+        D11144030
+        </font>
+        </font></p>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.11. Reading specific lines from one or more files.</h3>
+
+        <p>
+        <font class="example">Print the <b>first</b> line of file1.csv</font>
+        In order to print the first line of the file we first read it using the <font class="bashcommand">cat</font> command, and then we select the first line from the previous output using <font class="bashcommand">head -n 1</font>.
+        </p>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | head -n 1<br>
+        <font class="bashcommand-result">
+        "Anonymized ID","Subject Group","HASCONDITION","CONDITION" 
+        </font>
+        </font></p>
+
+        <p>
+        <font class="example">Print the <b>first two</b> lines of file1.csv</font>
+        In order to print the first two lines of the file we first read it using the <font class="bashcommand">cat</font> command, and then we select those lines from the previous output using <font class="bashcommand">head -n 2</font>.
+        </p>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | head -n 2<br>
+        <font class="bashcommand-result">
+        "Anonymized ID","Subject Group","HASCONDITION","CONDITION"<br>
+        "B33199522","Group1","0","" 
+        </font>
+        </font></p>
+
+        <font class="example">Print the <b>first three</b> lines of file1.csv</font>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | head -n 3<br>
+        <font class="bashcommand-result">
+        "Anonymized ID","Subject Group","HASCONDITION","CONDITION"<br>
+        "B33199522","Group1","0",""<br>
+        "B33199603","Group3","0","" 
+        </font>
+        </font></p>
+
+        <p>
+        <font class="example">Print the <b>last</b> line of file1.csv</font>
+        In order to print the last line of the file we first read it using the <font class="bashcommand">cat</font> command, and then we select the last line from the previous output using <font class="bashcommand">tail -n 1</font>. 
+        </p>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | tail -n 1<br>
+        <font class="bashcommand-result">
+        "B33199522","Group1","0","" 
+        </font>
+        </font></p>
+    
+        <font class="example">Print the <b>last two</b> lines of file1.csv</font>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | tail -n 2<br>
+        <font class="bashcommand-result">
+        "C11137159","Group3","9","mTBI"<br>
+        "B33199522","Group1","0","" 
+        </font>
+        </font></p>
+
+        <font class="example">Print the <b>last three</b> lines of file1.csv</font>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | tail -n 3<br>
+        <font class="bashcommand-result">
+        "B11141503","Group3","0",""<br>
+        "C11137159","Group3","9","mTBI"<br>
+        "B33199522","Group1","0",""
+        </font>
+        </font></p>
+
+        <p>
+        <font class="example">Print the <b>last three</b> lines of file1.csv in <b>reverse</b></font>
+        As we learned previously, the flag <font class="bashcommand">-r</font> of <font class="bashcommand">tail</font> command can be used to print things in reversed order. 
+        </p>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | tail -r -n 3<br>
+        <font class="bashcommand-result">
+        "B33199522","Group1","0",""<br>
+        "C11137159","Group3","9","mTBI"<br>
+        "B11141503","Group3","0","" 
+        </font>
+        </font></p>
+
+        <font class="example">Print <b>from the beginning until the second line</b> of file1.csv (same result as printing the first two lines)</font>
+        
+        <p><font class="bashcommand">
+        $ cat file1.csv | head -n+2<br>
+        <font class="bashcommand-result">
+        "Anonymized ID","Subject Group","HASCONDITION","CONDITION"<br>
+        "B33199522","Group1","0","" 
+        </font>
+        </font></p>
+
+        <font class="example">Print <b>from the beginning until the third line</b> of file1.csv (same result as printing the first three lines)</font>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | head -n+3<br>
+        <font class="bashcommand-result">
+        "Anonymized ID","Subject Group","HASCONDITION","CONDITION"<br>
+        "B33199522","Group1","0",""<br>
+        "B33199603","Group3","0","" 
+        </font>
+        </font></p>
+            
+        <font class="example">Print <b>from the second line until the last line</b> of file1.csv</font>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | tail -n+2<br>
+        <font class="bashcommand-result">
+        "B33199522","Group1","0",""<br>
+        "B33199603","Group3","0",""<br>
+        "B11137879","Group1","0",""<br>
+        "B11144410","Group2 b","0",""<br>
+        "B11110455","Group2 b","0",""<br>
+        "B11135291","Group3","0",""<br>
+        "B11153927","Group1","0",""<br>
+        "B11177579","Group2 b","0",""<br>
+        "B11177806","Group1","MD",""<br>
+        "B11157958","Group3","0",""<br>
+        "B11110690","Group3","0",""<br>
+        "B11152799","Group1","0",""<br>
+        "B11154358","Group1","0",""<br>
+        "B11110925","Group1","0",""<br>
+        "B11135291","Group3","9","mTBI"<br>
+        "B11135072","MISSING","0",""<br>
+        "B33199603","Group3","0",""<br>
+        "B11137879","Group1","0",""<br>
+        "B11110603","Group1","0",""<br>
+        "B11110927","Group1","0",""<br>
+        "B11147712","Group1","0",""<br>
+        "B33191224","Group2 b","0",""<br>
+        "B11131290","Group2 b","0",""<br>
+        "B11157974","Group1","0",""<br>
+        "B33191224","Group2 b","0",""<br>
+        "B11141503","Group3","0",""<br>
+        "C11137159","Group3","9","mTBI"<br>
+        "B33199522","Group1","0","" 
+        </font>
+        </font></p>
+
+        <font class="example">Print <b>from the third line until the last line</b> of file1.csv</font>
+
+        <p><font class="bashcommand">
+        $ cat file1.csv | tail -n+3<br>
+        <font class="bashcommand-result">
+        "B33199603","Group3","0",""<br>
+        "B11137879","Group1","0",""<br>
+        "B11144410","Group2 b","0",""<br>
+        "B11110455","Group2 b","0",""<br>
+        "B11135291","Group3","0",""<br>
+        "B11153927","Group1","0",""<br>
+        "B11177579","Group2 b","0",""<br>
+        "B11177806","Group1","MD",""<br>
+        "B11157958","Group3","0",""<br>
+        "B11110690","Group3","0",""<br>
+        "B11152799","Group1","0",""<br>
+        "B11154358","Group1","0",""<br>
+        "B11110925","Group1","0",""<br>
+        "B11135291","Group3","9","mTBI"<br>
+        "B11135072","MISSING","0",""<br>
+        "B33199603","Group3","0",""<br>
+        "B11137879","Group1","0",""<br>
+        "B11110603","Group1","0",""<br>
+        "B11110927","Group1","0",""<br>
+        "B11147712","Group1","0",""<br>
+        "B33191224","Group2 b","0",""<br>
+        "B11131290","Group2 b","0",""<br>
+        "B11157974","Group1","0",""<br>
+        "B33191224","Group2 b","0",""<br>
+        "B11141503","Group3","0",""<br>
+        "C11137159","Group3","9","mTBI"<br>
+        "B33199522","Group1","0","" 
+        </font>
+        </font></p>
+</html>

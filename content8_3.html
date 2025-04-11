@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <h3>8.3. Changing the working directory</h3>
+				<h4>The cd command</h4>
+
+				<table>
+					<tr>
+						<th>Option</th>
+						<th>Usage</th>
+					</tr>
+					
+					<tr>
+						<td><font class="bashcommand">cd ~</font></td>
+						<td>Goes to the home directory</td>
+					</tr>
+					
+					<tr>
+						<td><font class="bashcommand">cd dir</font></td>
+						<td>Goes to <font class="bashcommand">dir</font>, which is a sub directory located in the current directory</td>
+					</tr>
+					
+					<tr>
+						<td><font class="bashcommand">cd /dir</font></td>
+						<td>Goes to <font class="bashcommand">dir</font>, which is a sub directory located in the home directory</td>
+					</tr>
+					
+					<tr>
+						<td><font class="bashcommand">cd ..</font></td>
+						<td>Goes to the parent directory</td>
+					</tr>
+					
+					<tr>
+						<td><font class="bashcommand">cd -</font></td>
+						<td>Goes to the previous directory</td>
+					</tr>
+					
+					<tr>
+						<td><font class="bashcommand">cd ~username</font></td>
+						<td>Goes to the user home directory</td>
+					</tr>
+				</table>
+
+				<p><font class="bashcommand">cd</font> changes the current working directory. The syntax is <font class="bashcommand">cd new_path</font>, where <font class="bashcommand">new_path</font> can be the absolute or relative path of the new working directory.</p>
+
+				<p>Absolute paths are file locations with respect to the home directory and start with <font class="bashcommand">/</font>. Relative paths are file locations with respect to the current directory.</p>
+
+				<p> 
+					<font class="example">Go to the parent directory</font>
+					Remember that double points (<font class="bashcommand">..</font>) represent the parent directory. If my current working directory is <font class="bashcommand">/Users/user_name/Desktop/SomeFolder</font>, after typing <font class="bashcommand">cd ..</font> the new working directory will be <font class="bashcommand">/Users/user_name/Desktop</font> (one folder up). If you type again <font class="bashcommand">cd ..</font>, now the working directory will be: <font class="bashcommand">/Users/user_name</font> (another folder up), etc. 
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ pwd<br>
+					<font class="bashcommand-result">/Users/user_name/Desktop/SomeFolder</font><br>
+					$ cd ..<br>
+					$ pwd<br>
+					<font class="bashcommand-result">/Users/user_name/Desktop</font><br>
+					$ cd ..<br>
+					$ pwd<br>
+					<font class="bashcommand-result">/Users/user_name</font><br>
+					$ cd ..<br> 
+					$ pwd<br>
+					<font class="bashcommand-result">/Users</font><br>
+					$ cd ..<br>
+					$ pwd<br>
+					<font class="bashcommand-result">/</font><br>
+					</font>
+				</p>
+
+				<p><font class="bashcommand">/</font> represents the home directory and you cannot go up any more folders.</p>
+
+				<p>
+					<font class="example">Go to a folder specified by its absolute path</font>
+					In this example, I am using the absolute path of a folder to jump from my current directory to that folder: 
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ pwd<br>
+					<font class="bashcommand-result">/Users/user_name/Desktop/SomeFolder</font><br>
+					$ cd /Volumes/Shared<br>
+					$ pwd<br>
+					<font class="bashcommand-result">/Volumes/Shared</font>
+					</font>
+				</p>
+
+				<p><font class="example">Go to the parent directory of my parent directory</font></p>
+
+				<p>
+					<font class="bashcommand">
+					$ pwd<br>
+					<font class="bashcommand-result">/Users/user_name/Desktop/SomeFolder</font><br>
+					$ cd ../..<br>
+					$ pwd<br>
+					<font class="bashcommand-result">/Users/user_name</font>
+					</font>
+				</p>
+
+				<p>
+					<font class="example">Using other relative paths to change directory</font><br>
+					If inside my current directory (<font class="bashcommand">/Users/user_name/Desktop/SomeFolder</font>) there is another folder (i.e. <font class="bashcommand">AnotherFolder</font>), I can go to that folder using its relative path: 
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ pwd<br>
+					<font class="bashcommand-result">/Users/user_name/Desktop/SomeFolder</font><br>
+					$ cd AnotherFolder<br>
+					<font class="bashcommand-result">/Users/user_name/Desktop/SomeFolder/AnotherFolder</font>
+					</font>
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ pwd<br>
+					<font class="bashcommand-result">/Users/user_name/Desktop/SomeFolder</font><br>
+					$ cd ./AnotherFolder<br>
+					<font class="bashcommand-result">/Users/user_name/Desktop/SomeFolder/AnotherFolder</font>
+					</font>
+				</p>
+
+				<p>
+					<font class="example">Jumping to the previous directory</font><br>
+					In this example, the first working directory is <font class="bashcommand">/Volumes/Shared</font>, then I jump to <font class="bashcommand">/Volumes/Shared/Articles</font> using the command <font class="bashcommand">cd</font>. Finally, I go back to the first working directory <font class="bashcommand">/Volumes/Shared</font>) using <font class="bashcommand">cd -</font>. 
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ pwd<br>
+					<font class="bashcommand-result">/Volumes/Shared</font><br>
+					$ cd Articles<br>
+					$ pwd<br>
+					<font class="bashcommand-result">/Volumes/Shared/Articles</font><br>
+					$ cd -<br>
+					$ pwd<br>
+					<font class="bashcommand-result">/Volumes/Shared</font>
+					</font>
+				</p>
+</html>

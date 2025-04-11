@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.6. The grep command</h3>
+            <p>Searches a given pattern or text in a file or list of files. <font class="bashcommand">grep</font> is is able to find simple patterns and basic regular expressions, <font class="bashcommand">egrep</font> can perform search of extended regular expressions. <font class="bashcommand">fgrep</font> is quicker than both tools but can only handle fixed patterns. <font class="bashcommand">zgrep</font>, <font class="bashcommand">zegrep</font>, and <font class="bashcommand">zfgrep</font> act like <font class="bashcommand">grep</font>, <font class="bashcommand">egrep</font>, and <font class="bashcommand">fgrep</font>, respectively, but accept compressed files as input.</p>
+    
+        <p>Syntax: <font class="bashcommand">grep [flag] [pattern] [file(s)]</font></p>
+
+        <p>
+        <table>
+            <tr>
+                <th>grep format</th>
+                <th>meaning</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">grep string files</font></td>
+                <td>Searches the list of <font class="bashcommand">files</font> for lines that <u>contain</u> <font class="bashcommand">string</font>. See examples here.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">grep '^expression' files</font></td>
+                <td> 
+                    <p>Search for any lines that <u>start with</u> <font class="bashcommand">expression</font> in the list of <font class="bashcommand">files</font>. If <font class="bashcommand">expression</font> contains a back slash (<font class="bashcommand">\</font>), the special meaning of the next special character is turned off. If <font class="bashcommand">expression</font> contains a dot (<font class="bashcommand">.</font>) that is not preceded by a black slash, it will match a single character of any value in the position of the dot.</p>
+                    
+                    <p>e.i. <font class="bashcommand">grep '^string' file.txt</font> will search for any lines in <font class="bashcommand">file.txt</font> that start with <font class="bashcommand">string</font>. See more examples here.</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">grep 'expression$' files</font></td>
+                <td> 
+                    <p>Search for any lines that <u>end with</u> <font class="bashcommand">expression</font> in the list of <font class="bashcommand">files</font>. If <font class="bashcommand">expression</font> contains a back slash (<font class="bashcommand">\</font>), the special meaning of the next special character is turned off. If <font class="bashcommand">expression</font> contains a dot (<font class="bashcommand">.</font>) that is not preceded by a black slash, it will match a single character of any value in the position of the dot.</p>
+                    
+                    <p>
+                    Examples:<br>
+                    <font class="bashcommand">grep 'string$' file</font> matches any lines in <font class="bashcommand">file</font> that end with <font class="bashcommand">string</font>. See more examples here. 
+                    </p>
+                    
+                    <p><font class="bashcommand">grep '^string$' files</font> matches any lines in <font class="bashcommand">file</font> that start and end with <font class="bashcommand">string</font> (lines containing only string).</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">grep '[characters]' files</font></td>
+                <td> 
+                    <p>Search for any lines that contain any of the characters enclosed between the brackets. Use a hyphen for a range of values.</p>
+                    
+                    <p>
+                    Examples:<br> 
+                    <font class="bashcommand">grep '[abcde]' files</font> matches any lines in <font class="bashcommand">file</font> that contain <font class="bashcommand">a</font>, <font class="bashcommand">b</font>, <font class="bashcommand">c</font>, <font class="bashcommand">d</font> or <font class="bashcommand">e</font>. 
+                    </p>
+                    
+                    <p><font class="bashcommand">grep '[Ss]tring' file</font> matches any lines in <font class="bashcommand">file</font> that contain the words <font class="bashcommand"><u>s</u>tring</font> or <font class="bashcommand"><u>S</u>tring</font>.</p>
+                    
+                    <p><font class="bashcommand">grep 'B[ai][dt]' file</font> matches any <font class="bashcommand">lines</font> in <font class="bashcommand">file</font> that contain the words <font class="bashcommand">Bad</font>, <font class="bashcommand">Bat</font>, <font class="bashcommand">Bid</font> or <font class="bashcommand">Bit</font> (the second character can be <font class="bashcommand">a</font> or <font class="bashcommand">i</font> and the third character <font class="bashcommand">d</font> or <font class="bashcommand">t</font>).</p>
+                    
+                    <p><font class="bashcommand">grep '[0-9][0-9]' file</font> matches any lines in <font class="bashcommand">file</font> that contain a pair of numeric digits.</p>
+                    
+                    <p><font class="bashcommand">grep '[a-zA-Z]' file</font> matches any lines in <font class="bashcommand">file</font> with at least one letter.</p>
+                    
+                    <p><font class="bashcommand">grep '^$' file</font> matches any empty lines.</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">grep '[^characters]' files</font></td>
+                <td> 
+                    <p>Search for any lines that <u>don't contain</u> any of the characters enclosed between he brackets. Use a hyphen for a range of values.</p>		
+                    <p>e.i. <font class="bashcommand">grep '[^a-zA-Z0-9]' file</font> matches any lines in file that don't contain any letter or number (any lines that contain only special characters).</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">grep 'character*' files</font></td>
+                <td> 
+                    <p>The character preceding the asterisk is optional when matching lines.</p>
+                    <p>e.i. <font class="bashcommand">grep '"*smug"*' file</font> matches any lines in file that contain <font class="bashcommand">smug</font> or <font class="bashcommand">"smug"</font> (with or without the quotes that precede the asterisks).</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">grep 'expression\{n\}' files</font></td>
+                <td> 
+                    <p>Match exactly <font class="bashcommand">n</font> occurrences of <font class="bashcommand">expression</font>.</p>
+                    <p>e.i. <font class="bashcommand">grep '[0-9]\{3\}-[0-9]\{4\}' file</font> matches any lines in <font class="bashcommand">file</font> that contain three digits, followed by a line and four digits.</p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">grep 'expression \{n,\}' files</font></td>
+                <td> 
+                    <p>Matches n or more occurrences of <font class="bashcommand">expression</font>.</p>
+                    <p>e.i. <font class="bashcommand">grep '[0-9]\{3,\}' file</font> matches any lines in <font class="bashcommand">file</font> that contain three or more digits.</p>
+                </td>
+            </tr>
+        </table>
+        </p>
+
+        <p>
+        <table>
+            <tr>
+                <th>Flag</th>
+                <th>Meaning</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-A num</font></td>
+                <td>Print <font class="bashcommand">num</font> lines of trailing context after each match. See here for an example.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-B num</font></td>
+                <td>Print <font class="bashcommand">num</font> lines of leading context before each match. See here for an example.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-C num</font></td>
+                <td>Print <font class="bashcommand">num</font> lines of leading and trailing context surrounding each match. If <font class="bashcommand">num</font> is not specified, <font class="bashcommand">num=2</font>. See here for an example.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-c</font></td>
+                <td>Print the number of matched lines per file instead of the actual lines.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">--colour=when</font></td>
+                <td>Mark up the matching text with the expression stored in <font class="bashcommand">GREP_COLOR</font> environment variable. The possible values of when can be: <font class="bashcommand">never</font>, <font class="bashcommand">always</font> or <font class="bashcommand">auto</font>.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-d action</font></td>
+                <td>Specify the demanded action for directories. The possible values of action are: <font class="bashcommand">read</font> (default), which means that the directories are read in the same manner as normal files; <font class="bashcommand">skip</font> to silently ignore the directories, and <font class="bashcommand">recourse</font> to read them recursively, which has the same effect as the <font class="bashcommand">-R</font> and <font class="bashcommand">-r</font> option.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-e pattern</font></td>
+                <td>To search for more than one pattern/expression, add the flag <font class="bashcommand">-e</font> in front of each expression.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">--exclude</font></td>
+                <td>If specified, it excludes files matching the given filename pattern from the search. Note that <font class="bashcommand">--exclude</font> patterns take priority over <font class="bashcommand">--include</font> patterns. Patterns are matched to the full path specified, not only to the filename component.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">--exclude-dir filename_pattern</font></td>
+                <td>If <font class="bashcommand">-R</font> is specified, it excludes directories matching the given <font class="bashcommand">filename_pattern</font> from the search.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-f file</font></td>
+                <td>Read one or more newline separated patterns from <font class="bashcommand">file</font>. Empty pattern lines match every input line. Newlines are not considered part of a pattern. If <font class="bashcommand">file</font> is empty, nothing is matched.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-h</font></td>
+                <td>Omit the filename headers with output lines.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">--help</font></td>
+                <td>Print a brief help message.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">--include</font></td>
+                <td>If specified, only files matching the given filename pattern are searched. Note that <font class="bashcommand">--exclude</font> patterns take priority over <font class="bashcommand">--include</font> patterns. Patterns are matched to the full path specified, not only to the filename component.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">--include-dir filename_pattern</font></td>
+                <td>If <font class="bashcommand">-R</font> is specified, only directories matching the given <font class="bashcommand">filename_pattern</font> are searched. Note that <font class="bashcommand">--exclude-dir</font> patterns take priority over <font class="bashcommand">--include-dir</font> patterns.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-L</font></td>
+                <td>Only the names of files not containing selected lines are listed.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-l</font></td>
+                <td>Only the names of files containing selected lines are listed.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-m num</font></td>
+                <td>Stop reading the file after <font class="bashcommand">num</font> matches.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-n</font></td>
+                <td>Each output line is preceded by its relative line number in the file, <u>starting at line 1</u>. The line number counter is reset for each file processed. This option is ignored if <font class="bashcommand">-c</font>, <font class="bashcommand">-L</font>, <font class="bashcommand">-l</font>, or <font class="bashcommand">-q</font> is specified.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">--null</font></td>
+                <td>Prints a zero-byte after the file name.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-O</font></td>
+                <td>If <font class="bashcommand">-R</font> is specified, follow symbolic links only if they were explicitly listed on the command line. The default is not to follow symbolic links.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-o</font></td>
+                <td>Prints only the matching part of the lines.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-q</font></td>
+                <td>Suppress normal output.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-R</font> or <font class="bashcommand">-r</font></td>
+                <td>Recursively search subdirectories listed.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-S</font></td>
+                <td>If <font class="bashcommand">-R</font> is specified, all symbolic links are followed. The default is not to follow symbolic links.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-s</font></td>
+                <td>Suppress error messages from nonexistent or unreadable files.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-V</font></td>
+                <td>Display version information and exit.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-v</font></td>
+                <td>Selected lines are those <u>not</u> matching any of the specified patterns.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-w</font></td>
+                <td>The expression is searched for as a whole word.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-x</font></td>
+                <td>Show only the cases where the whole line equals the expression.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-Z</font> or <font class="bashcommand">-z</font></td>
+                <td>Accepts compressed input files.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">--line-buffered</font></td>
+                <td>Force output to be line buffered. By default, output is line buffered when standard output is a terminal and block buffered otherwise.</td>
+            </tr>
+        </table>
+        </p>
+
+        <p>The following examples will show how to read and manipulate files using different command line tools. Each example will read one or more of the following files. file1.csv and file3.csv use comma as the separator between columns. On the other hand, file2.txt and file file4.txt use a space as the separator between columns.</p>
+
+        <p>
+        Content of file1.csv:<br>
+        "Anonymized ID","Subject Group","HASCONDITION","CONDITION"<br>
+        "B33199522","Group1","0",""<br>
+        "B33199603","Group3","0",""<br>
+        "B11137879","Group1","0",""<br>
+        "B11144410","Group2 b","0",""<br>
+        "B11110455","Group2 b","0",""<br>
+        "B11135291","Group3","0",""<br>
+        "B11153927","Group1","0",""<br>
+        "B11177579","Group2 b","0",""<br>
+        "B11177806","Group1","MD",""<br>
+        "B11157958","Group3","0",""<br>
+        "B11110690","Group3","0",""<br>
+        "B11152799","Group1","0",""<br>
+        "B11154358","Group1","0",""<br>
+        "B11110925","Group1","0",""<br>
+        "B11135291","Group3","9","mTBI"<br> 
+        "B11135072","MISSING","0",""<br>
+        "B33199603","Group3","0",""<br>
+        "B11137879","Group1","0",""<br>
+        "B11110603","Group1","0",""<br>
+        "B11110927","Group1","0",""<br>
+        "B11147712","Group1","0",""<br>
+        "B33191224","Group2 b","0",""<br>
+        "B11131290","Group2 b","0",""<br>
+        "B11157974","Group1","0",""<br>
+        "B33191224","Group2 b","0",""<br>
+        "B11141503","Group3","0",""<br>
+        "C11137159","Group3","9","mTBI"<br> 
+        "B33199522","Group1","0","" 
+        </p>
+
+        <p>
+        Content of file2.txt:<br> 
+        "AnonymizedID" "SubjectGroup" "TEST1" "TEST2"<br> 
+        "B11130912" "Group2b" "900" "MissingData"<br> 
+        "B11137244" "Group1" "450" "555"<br> 
+        "B11154534" "Group1" "456" "456"<br> 
+        "B11144100" "Group1" "450" "886"<br> 
+        "B11137244" "Group1" "450" "456"<br> 
+        "B12226566" "Group2b" "450" "MissingData"<br> 
+        "B11134987" "Group1" "900" "MissingData"<br> 
+        "B11144345" "Group1" "900" "776"<br> 
+        "C11137159" "Group3" "MissingData" "MissingData"<br> 
+        "B11156453" "Group4" "456" "2"<br> 
+        "B11110676" "Group1" "900" "10"<br> 
+        "C11138929" "Group2b" "2" "MissingData"<br> 
+        "B11154532" "Group1" "456" "886"<br> 
+        "B11155267" "Group3" "900" "10"<br> 
+        "B11137120" "Group2b" "450" "456"<br> 
+        "B33191224" "Group2b" "450" "776"<br> 
+        "B11155267" "Group3" "900" "10"<br> 
+        "C11138999" "Group2b" "900" "MissingData"<br> 
+        "B11131605" "Group1" "456" "MissingData"<br> 
+        "B11137784" "Group1" "900" "436"<br> 
+        "B11156098" "Group1" "500" "886"<br> 
+        "B11133232" "Group1" "500" "MissingData"<br> 
+        "B11135292" "Group3" "MissingData" "MissingData"<br> 
+        "C11138912" "Group2b" "900" "MissingData"<br> 
+        "B11150911" "Group2b" "900" "117"<br> 
+        "B11152577" "Group1" "900" "756"<br> 
+        "B11156098" "Group1" "456" "886"<br> 
+        "B11133232" "Group1" "456" "MissingData" 
+        </p>
+
+        <p>
+        Content of file3.csv:<br> 
+        Anonymized ID,Subject Group,AGE<br> 
+        C11138122,MISSING,21<br> 
+        C11138192,Group1,54<br> 
+        B12226507,Group1,68<br> 
+        B12226546,Group1,67<br> 
+        C11138122,Group1,24<br> 
+        C11138184,Group1,59<br> 
+        C11138797,Group1,22<br> 
+        C11138152,Group1,53<br> 
+        C11138150,Group1,41<br> 
+        C11137167,Group3,14<br> 
+        C11137159,Group3,13<br> 
+        C11137167,Group3,16<br> 
+        C11137159,Group3,13<br> 
+        C11131039,Group2 b,67<br> 
+        C11135566,Group2 b,73<br> 
+        B11119903,Group2 b,83<br> 
+        C11137544,Group1,21<br> 
+        C11137443,Group3,11<br> 
+        C11137123,Group2 b,69<br> 
+        C11137439,Group3,79<br> 
+        C11137439,Group3,15<br> 
+        C11133100,Group1,23<br> 
+        D11144030,Group3,13<br> 
+        B11108399,Group1,23<br> 
+        B11108326,Group1,59<br> 
+        B11119909,Group2 b,61<br> 
+        B11110893,Group1,28
+        </p>
+
+        <p>
+        Content of file4.txt:<br>
+        AnonymizedID SubjectGroup AGE<br> 
+        B11108326 Group1 59<br> 
+        B11108399 Group1 23<br> 
+        B11110893 Group1 28<br> 
+        B11119909 Group2 61<br> 
+        D11144030 Group3 11<br> 
+        D11144030 Group3 13<br> 
+        B11119903 Group2 84<br> 
+        C11131039 Group2 67<br> 
+        C11133100 Group1 23<br> 
+        C11135566 Group2 72<br> 
+        C11137159 Group3 11<br> 
+        C11137159 Group3 12<br> 
+        C11137167 Group3 14<br> 
+        C11137167 Group3 16<br> 
+        C11137439 Group3 15<br> 
+        C11137439 Group3 79<br> 
+        C11137443 Group3 15<br> 
+        C11137544 Group1 22<br> 
+        C11137123 Group2 68<br> 
+        C11138150 Group1 44<br> 
+        C11138152 Group1 10<br> 
+        C11138797 Group1 24<br> 
+        C11138184 Group1 57<br> 
+        C11138122 Group1 23<br> 
+        C11138122 MISSING 25<br> 
+        C11138192 Group1 45<br> 
+        B12226507 Group1 26<br> 
+        B12226546 Group1 55 
+        </p>
+</html>

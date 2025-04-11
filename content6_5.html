@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<h3>6.5. Combining different expressions for condition-testing</h3>
+					<table>
+						<tr>
+							<th><b>Condition</b></th>
+							<th><b>Meaning</b></th>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ EXPR ]</font></td>
+							<td>Tests if the expression <font class="bashcommand">EXPR</font> is <b>true</b>.</td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ ! EXPR ]</font></td>
+							<td>Tests if the expression <font class="bashcommand">EXPR</font> is <b>false</b>.</td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ EXPR1 ] || [ EXPR2 ]</font></td>
+							<td>Tests if <font class="bashcommand">EXPR1</font> <b>or</b> <font class="bashcommand">EXPR2</font> are true. You can add as many expressions as desired.</td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ EXPR1 ] &amp;&amp; [ EXPR2 ]</font></td>
+							<td>Tests if <font class="bashcommand">EXPR1</font> <b>and</b> <font class="bashcommand">EXPR2</font> are true. You can add as many expressions as desired.</td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">[ EXPR ] vs [ ! EXPR ]</font>
+						<font class="bashcommand">
+							$ if [ 3 -eq 3 ]<br>
+							&gt; then<br>
+							&gt; echo "This will be printed if the expression 3 equals 3 is true."<br>
+							&gt; else<br>
+							&gt; echo "This will be printed if the expression is false (3 is not equal to 3)."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">This will be printed if the expression 3 equals 3 is true.</font>
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ 3 -eq 3 ] &gt;&gt;  echo "This will be printed if the expression 3 equals 3 is true." || echo "This will be printed if the expression is false (3 is not equal to 3)."<br>
+							<font class="bashcommand-result">This will be printed if the expression 3 equals 3 is true.</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ if [ ! 3 -eq 3 ]<br>
+							&gt; then<br>
+							&gt; echo "This will be printed if it is false that 3 equals 3 (so, if 3 is different than 3)."<br>
+							&gt; else<br>
+							&gt; echo "This will be printed if it is not false (it's true) that 3 equals 3."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">This will be printed if it is not false (it's true) that 3 equals 3.</font>
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ ! 3 -eq 3 ] &gt;&gt; echo "This will be printed if it is false that 3 equals 3 (so, if 3 is different than 3)." || echo "This will be printed if it is not false (it's true) that 3 equals 3."<br>
+							<font class="bashcommand-result">This will be printed if it is not false (it's true) that 3 equals 3.</font>
+						</font>
+					</p>
+					
+					<p>We learned that the expression <font class="bashcommand">-f FILE</font> tests if a file exists. If we want to test if a file doesn't exist, then we just need to test if <font class="bashcommand">-f FILE</font> is false.</p>
+
+					<font class="bashcommand">
+						<p>
+							$ FILE="SomeFileThatExists.txt"<br>
+							$ if [ -f ${FILE} ]<br>
+							&gt; then<br>
+							&gt; echo "The file exist"<br>
+							&gt; fi <br>
+							<font class="bashcommand-result">The file exist</font>
+						</p>
+						
+						<p>
+							The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+							<font class="bashcommand">$ [ -f ${FILE} ] &gt;&gt; echo "The file exist"</font><br>
+							<font class="bashcommand-result">The file exist</font>
+						</p>
+						
+						<p>
+							$ FILE="SomeFileThatDoesntExist.txt"<br>
+							$ if [ ! -f ${FILE} ]<br>
+							&gt; then<br>
+							&gt; echo "The file doesn't exist"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">The file doesn't exist</font>
+						</p>
+						
+						<p>
+							The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+							<font class="bashcommand">$ [ ! -f ${FILE} ] &gt;&gt; echo "The file doesn't exist"</font><br>
+							<font class="bashcommand-result">The file doesn't exist</font>
+						</p>
+					</font>
+					
+					<p>
+						<font class="example">[ EXPR1 ] || [ EXPR2 ]:</font>
+						Test if any of the two expressions are true.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ if [ 2 -lt 3 ] || [ 4 -lt 3 ]<br>
+							&gt; then<br>
+							&gt; echo "This will be echoed if any of the two expressions are true: 2&lt;3 OR 4&lt;3."<br>
+							&gt; else<br>
+							&gt; echo "This will be echoed if none of the two expressions are true"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">This will be echoed if any of the two expressions are true: 2&lt;3 OR 4&lt;3.</font> 
+						</font>
+					</p>
+					
+					<p>The previous example can also be written using a shorter syntax. When using multiple expressions, they will have to be encapsulated in parentheses using the following syntax: ( expressions ) &amp;&amp; what_to_do_if_true || what_to_do_if_false</p>
+					
+					<p>
+						Shorter version:<br>
+						<font class="bashcommand">
+							$ ( [ 2 -lt 3 ] || [ 4 -lt 3 ] ) &amp;&amp; echo "This will be echoed if any of the two expressions are true: 2&lt;3 OR 4&lt;3." || echo "This will be echoed if none of the two expressions are true":<br>
+							<font class="bashcommand-result">This will be echoed if any of the two expressions are true: 2&lt;3 OR 4&lt;3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ EXPR1 ] &amp;&amp; [ EXPR2 ]:</font>
+						Test if the two expressions are true. The second expression, contrary to the previous example, has the negation (<font class="bashcommand">!</font>). So, the second expression is not testing if 4 is less than 3, it is testing if 4 is <b>NOT</b> less than 3. So, both of the expressions are true, because 4 is not less than 3, and 2 is less than 3. 
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ if [ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ]<br>
+							&gt; then<br>
+							&gt; echo "This will be echoed if the two expressions are true."<br>
+							&gt; else<br>
+							&gt; echo "This will be echoed if one of the two expressions are false, or if both are false."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">This will be echoed if the two expressions are true.</font> 
+						</font>
+					</p>
+					
+					<p>The previous example can also be written using a shorter syntax. Remember that when using multiple expressions, they will have to be encapsulated in parentheses using the following syntax: ( expressions ) &amp;&amp; what_to_do_if_true || what_to_do_if_false</p>
+					
+					<p>
+						This is the shorter version:<br>
+						<font class="bashcommand">
+							$ ( [ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ] ) &amp;&amp; echo "This will be echoed if the two expressions are true." || echo "This will be echoed if one of the two expressions are false, or if both are false."<br>
+							<font class="bashcommand-result">This will be echoed if the two expressions are true.</font> 
+						</font>
+					</p>
+					
+					<font class="example">Using the and (&amp;&amp;) and or (||) operands to test more than two conditions:</font>
+					
+					<p>
+						Using &amp;&amp; to test more than two conditions:<br>
+						You can combine more than two expressions. In the following example I am combining three. Because I am using the <b>AND</b> operator, the whole condition will test true <b>if and only if</b> all the three expressions are true. If one is false, then the whole expression will be false.  
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ if [ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ] &amp;&amp; [ 4 -lt 3 ]<br>
+							&gt; then<br>
+							&gt; echo "This will be echoed if all the three expressions are true."<br>
+							&gt; else<br>
+							&gt; echo "This will be echoed if any of the three expressions is false."<br> 
+							&gt; fi<br>
+							<font class="bashcommand-result">This will be echoed if any of the three expressions is false.</font> 
+						</font>
+					</p>
+					
+					<p>
+						Let's take a look at why the whole expression evaluates false:<br>
+						<font class="bashcommand">[ 2 -lt 3 ]</font>: This is true, 2 &lt; 3.<br>
+						<font class="bashcommand">[ ! 4 -lt 3 ]</font>: This is true, 4 is not less than 3.<br> 
+						<font class="bashcommand">[ 4 -lt 3 ]</font>: This is false, It is false that 4 be less than 3.<br>
+						<font class="bashcommand">[ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ] &amp;&amp; [ 4 -lt 3 ]</font>: This is false because one of the three expressions is false. 
+					</p>
+					
+					<p>The previous example can also be written using a shorter syntax. Remember that when using multiple expressions, they will have to be encapsulated in parentheses using the following syntax: ( expressions ) &amp;&amp; what_to_do_if_true || what_to_do_if_false</p>
+					
+					<p>
+						This is the shorter version:</br>
+						<font class="bashcommand">
+							$ ( [ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ] &amp;&amp; [ 4 -lt 3 ] ) &amp;&amp; echo "This will be echoed if all the three expressions are true." || echo "This will be echoed if any of the three expressions is false."<br>
+							<font class="bashcommand-result">This will be echoed if any of the three expressions is false.</font> 
+						</font>
+					</p>
+					
+					<p>
+						Using <font class="bashcommand">||</font> to test more than two conditions:<br>
+						This example is very similar than the previous one but instead of using the operator AND (<font class="bashcommand">&gt;&gt;</font>)), we are using the operator OR (<font class="bashcommand">||</font>). So, the whole expression will be true if ANY of the three expressions is true. Since the first two are true, then the result is true. 
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ if [ 2 -lt 3 ] || [ ! 4 -lt 3 ] || [ 4 -lt 3 ]<br>
+							&gt; then<br>
+							&gt; echo "This will be echoed if ANY of the three expressions is true."<br>
+							&gt; else<br>
+							&gt; echo "This will be echoed if all of the three expressions are false."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">This will be echoed if ANY of the three expressions is true.</font>
+						</font>
+					</p>
+					
+					<p>The previous example can also be written using a shorter syntax. Remember that when using multiple expressions, they will have to be encapsulated in parentheses using the following syntax: ( expressions ) &amp;&amp; what_to_do_if_true || what_to_do_if_false</p>
+					
+					<p>
+						This is the shorter version:<br>
+						<font class="bashcommand">
+							$ ( [ 2 -lt 3 ] || [ ! 4 -lt 3 ] || [ 4 -lt 3 ] ) &amp;&amp; echo "This will be echoed if ANY of the three expressions is true." || echo "This will be echoed if all of the three expressions are false."<br>
+							<font class="bashcommand-result">This will be echoed if ANY of the three expressions is true.</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">Combining &amp;&amp; and || into one expression:</font>
+						When combining both operands (&amp;&amp;, ||), it is better to always use parenthesis to indicate the order in which you want the operations to be evaluated. In the following example we have three files. The path of the three files are saved in the variables <font class="bashcommand">${FILE1} ${FILE2}</font> and <font class="bashcommand">${FILE3}</font>. Files <font class="bashcommand">${FILE1}</font> and <font class="bashcommand">${FILE3}</font> exist, but <font class="bashcommand">${FILE2}</font> doesn't exist. We want to evaluate the following condition: Does <font class="bashcommand">${FILE3}</font> and one of the other two files exists?
+					</p>
+					
+					<p>
+						<font class="bashcommand">[ -f ${FILE3} ]</font> This condition is true because <font class="bashcommand">${FILE3}</font> exists.<br> 
+						<font class="bashcommand">[ -f ${FILE2} ] || [ -f ${FILE1} ]</font> This condition is true because even though <font class="bashcommand">${FILE2}</font> doesn't exist, <font class="bashcommand">${FILE1}</font> does exist. And with an <font class="bashcommand">OR</font> (<font class="bashcommand">||</font>) we only need one of the expressions to be true.<br> 
+						<font class="bashcommand">( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) &amp;&amp; [ -f ${FILE3} ]</font> This is true because both of expressions are true.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+						$ if ( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) &amp;&amp; [ -f ${FILE3} ]<br>
+						&gt; then<br>
+						&gt; echo "The condition is true"<br>
+						&gt; else<br>
+						&gt; echo "The condition is false"<br>
+						&gt; fi<br>
+						<font class="bashcommand-result">The condition is true</font>
+						</font>
+					</p>
+					
+					<p>
+						This is the shorter version for the previous command:<br>
+						<font class="bashcommand">
+						( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) &amp;&amp; [ -f ${FILE3} ] &amp;&amp; echo "The condition is true" || echo "The condition is false"
+						</font>
+					</p>
+					
+					<p>In the following example, we want to include a subject if it is female and age less than six or male and age greater than ten. </p>
+					
+					<p>
+						<font class="bashcommand">
+							$ GENDER="MALE"<br>
+							$ AGE=23<br>
+							$ if ( [ "${GENDER}" == "FEMALE" ] && [ "${AGE}" -lt "6" ] ) || ( [ "${GENDER}" == "MALE" ] && [ "${AGE}" -gt "10" ] )<br>
+							&gt; then<br>
+							&gt; echo "Include subject"<br>
+							&gt; else<br>
+							&gt; echo "Exclude subject"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Include subject</font>
+						</font>
+					</p>
+</body>
+</html>

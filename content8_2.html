@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <h3>8.2. Listing files using patterns</h3>
+		    	<p>You can print information about a group of files based on patterns or characters using wildcards.</p>
+
+				<p>
+				<table>
+					<tr>
+						<th>Wildcard</th>
+						<th>Meaning</th>
+					</tr>
+					<tr>
+						<td><font class="bashcommand">*</font></td>
+						<td>Matches any number of characters</td>
+					</tr>
+					<tr>
+						<td><font class="bashcommand">?</font></td>
+						<td>Matches any single character</td>
+					</tr>
+					<tr>
+						<td>[character_class]</td>
+						<td>
+							Matches any character that is a member of the specified character class.<br><br>
+							
+							Character Classes:<br>
+							<font class="bashcommand">[:alnum:]</font> Alphanumeric characters<br>
+							<font class="bashcommand">[:alpha:]</font> Alphabetic characters<br>
+							<font class="bashcommand">[:digit:]</font> Numerals<br>
+							<font class="bashcommand">[:upper:]</font> Uppercase alphabetic characters<br>
+							<font class="bashcommand">[:lower:]</font> Lowercase alphabetic characters 
+						</td>
+					</tr>
+					<tr>
+						<td>[!character_class]</td>
+						<td>Matches any character that is not a member of the specified character class</td>
+					</tr>
+				</table>
+				</p>
+
+				<p>
+				<table>
+					<tr>
+						<th>Pattern</th>
+						<th>Matches</th>
+					</tr>
+					<tr>
+						<td>AB*</td>
+						<td>List all the filenames that begin with "AB"</td>
+					</tr>
+					<tr>
+						<td>*AB</td>
+						<td>List all the filenames that end with "AB"</td>
+					</tr>
+					<tr>
+						<td>AB*.txt</td>
+						<td>List all the filenames that begin with "AB" and end with ".txt"</td>
+					</tr>
+					<tr>
+						<td>AB???</td>
+						<td>List all the filenames that begin with "AB" followed by exactly three characters</td>
+					</tr>
+					<tr>
+						<td>[aA]*</td>
+						<td>List all the filenames that begin with "a" or "A"</td>
+					</tr>
+					<tr>
+						<td>[aA]?.txt</td>
+						<td>List all the filenames that begin with "a" or "A" followed by one character and ".txt"</td>
+					</tr>
+					<tr>
+						<td>[[:upper:]]*</td>
+						<td>List any filenames that begin with an uppercase letter</td>
+					</tr>
+					<tr>
+						<td>[![:upper:]]*</td>
+						<td>List any filenames that do not begin with an uppercase letter</td>
+					</tr>
+				</table>
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ ls /Volumes/MyDrive/MyFolder/Articles/p*<br>
+					<font class="bashcommand-result">
+					/Volumes/MyDrive/MyFolder/Articles/patel and shen.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/perez 2013.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/pnas-0502843102.pdf<br> 
+					/Volumes/MyDrive/MyFolder/Articles/pnas.201604898.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/pnas01522-0696.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/poldrack ROI analysis.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/pone.0088419.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/pone.0113807.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/pq004724.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/pq008939.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/precuneus.pdf<br>
+					/Volumes/MyDrive/MyFolder/Articles/prefrontalCortex.pdf 
+					</font>
+					</font>
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ ls /Volumes/MyExternalDrive/Shared/Articles/[pr]*<br>
+					<font class="bashcommand-result">
+					/Volumes/MyExternalDrive/Shared/Articles/patel and shen.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/perez 2013.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pnas-0502843102.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pnas.201604898.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pnas01522-0696.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/poldrack ROI analysis.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pone.0088419.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pone.0113807.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pq004724.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pq008939.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/precuneus.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/prefrontalCortex.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/raz 2004.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/read1_Brain-2006-Ciccarelli-1859-71.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/read2_6165.pdf 
+					</font>
+					</font>
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ ls /Volumes/MyExternalDrive/Shared/Articles/[pr]*.pdf<br>
+					<font class="bashcommand-result">
+					/Volumes/MyExternalDrive/Shared/Articles/patel and shen.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/perez 2013.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pnas-0502843102.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pnas.201604898.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pnas01522-0696.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/poldrack ROI analysis.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pone.0088419.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pone.0113807.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pq004724.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/pq008939.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/precuneus.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/prefrontalCortex.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/raz 2004.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/read1_Brain-2006-Ciccarelli-1859-71.pdf<br>
+					/Volumes/MyExternalDrive/Shared/Articles/read2_6165.pdf 
+					</font>
+					</font>
+				</p>
+
+				<p>
+					<font class="bashcommand">
+					$ ls /Volumes/MyExternalDrive/Shared/Articles/[pr]????????.pdf<br>
+					<font class="bashcommand-result">
+					/Volumes/MyExternalDrive/Shared/Articles/precuneus.pdf
+					</font>
+					</font>
+				</p>
+</html>

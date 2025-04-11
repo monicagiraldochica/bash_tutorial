@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<h3>3.4. Using &lt;&lt;&lt; to get input from a different source</h3>
+					<p>
+						So far, we have used the command <font class="bashcommand">read</font> to save the user input into a variable. 
+						This command can also be used to read from other sources (i.e. other variables or files).
+					</p>
+					
+					<p>
+						<font class="example">Reading content from a variable</font>
+						In the following example, <font class="bashcommand">read</font> reads the content of the variable 
+						<font class="bashcommand">VAR</font>, but only keeps the first character (because it is using the 
+						<font class="bashcommand">-n 1</font> flag):
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+						$ VAR=yes<br>
+						$ read -n 1 R &lt;&lt;&lt; ${VAR}<br>
+						$ echo ${R}<br>
+						<font class="bashcommand-result">y</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">Reading and saving the output of a function</font>	
+						<font class="bashcommand">read</font> also allows you to read the output of a function and save it in a variable. 
+						In this example, we are saving the output of the <font class="bashcommand">pwd</font> function into the variable 
+						<font class="bashcommand">CURRENT_DIR</font>. <font class="bashcommand">pwd</font> is a function that prints the 
+						current folder in which you are located in the command line. 
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+						$ pwd<br>
+						<font class="bashcommand-result">/Users/myUserName</font><br>
+						$ read CURRENT_DIR &lt;&lt;&lt; $(pwd)<br>
+						$ echo ${CURRENT_DIR}<br>
+						<font class="bashcommand-result">/Users/myUserName</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">**Example specific for people doing neuroimaging**</font>
+						<b>WARNING:</b> If you have never analyzed MRI brain images, the following paragraph might sound like written in 
+						extraterrestrial language, and it probably will not work in your computer since you need neuroimaging software
+						to execute it.
+					</p>
+					
+					<p>	
+						In this example, we are reading the output of a function and saving it in the variable 
+						<font class="bashcommand">VOL</font>. The output of this function (<font class="bashcommand">fslstats -V</font>) 
+						consists of two values separated by a space. The first value is the volume of a region of interest (ROI) from 
+						an MRI file in number of voxels, and the second value is the volume in mm<sup>3</sup>. Because we are using the 
+						flag <font class="bashcommand">-d ' '</font>, it will read only until the first space (which is the character 
+						we are choosing to indicate the end of line). So, bash will save in the variable 
+						<font class="bashcommand">VOL</font> only the volume in number of voxels and not in mm<sup>3</sup>. 
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+						$ fslstats /Users/myUserName/Desktop/MRI/subject001/LGN_L.nii.gz -V<br>
+						<font class="bashcommand-result">196 186.920166</font><br>
+						$ read -d ' ' VOL &lt;&lt;&lt; $(fslstats /Users/myUserName/Desktop/MRI/subject001/LGN_L.nii.gz -V)<br>
+						$ echo $VOL<br>
+						<font class="bashcommand-result">196</font>
+						</font>
+					</p>
+</body>
+
+</html>

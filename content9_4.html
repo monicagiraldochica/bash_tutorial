@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.4 Reading comma-separated CSV files using the read utility but no file descriptor</h3>
+
+    <p>In the following example we are going to read a csv file called example.csv. The file has five columns (five fields per line). We are going to use the <font class="bashcommand">while</font> loop to iterate through each line of the csv file and save the fields in variables <font class="bashcommand">f1</font>, <font class="bashcommand">f2</font>, <font class="bashcommand">f3</font>, <font class="bashcommand">f4</font>. Before starting to iterate, we have to tell bash that comma (<font class="bashcommand">,</font>) will be the separator in each line: <font class="bashcommand">IFS=','</font>.</p>
+
+    <p><font class="bashcommand">
+    $ IFS=','<br> 
+        $ i=1<br>
+        $ while read f1 f2 f3 f4<br> 
+        &gt; do<br>  
+        &gt; echo "Line $((i++)):"<br> 
+        &gt; echo "Field 1: $f1"<br> 
+        &gt; echo "Field 2: $f2"<br> 
+        &gt; echo "Field 3: $f3"<br> 
+        &gt; echo "Field 4: $f4"<br> 
+        &gt; done &lt; example.csv<br> 
+        <font class="bashcommand-result">
+        Line 1:<br> 
+        Field 1: "SUBJ1"<br> 
+        Field 2: "Age 22-30"<br> 
+        Field 3: "VISIT1"<br> 
+        Field 4: "DIAGN: Major Depressive Disorder, Single Episode"<br> 
+        Line 2:<br> 
+        Field 1: "SUBJ2"<br> 
+        Field 2: "Age 22-30"<br> 
+        Field 3: "VISIT1"<br> 
+        Field 4: "DIAGN: Bipolar, Schizophrenia"<br> 
+        Line 3:<br> 
+        Field 1: "SUBJ3"<br> 
+        Field 2: "Age 22-30"<br> 
+        Field 3: "VISIT1"<br> 
+        Field 4: "DIAGN: Major Depressive Disorder"<br> 
+        Line 4:<br> 
+        Field 1: "SUBJ4"<br> 
+        Field 2: "Age 22-30"<br> 
+        Field 3: "VISIT1"<br> 
+        Field 4: "DIAGN: Autism, Dyslexia, ADHD" 
+        </font>
+        </font></p>
+</html>

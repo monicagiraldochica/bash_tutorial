@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.7. Examples: Reading specific columns from a file or a list of files</h3>
+        <p>
+            <font class="example">Print the first column of each file</font>
+            In order to print the first column of these files, we will use <font class="bashcommand">awk</font> utility. As it was shown before, the command for this utility consists on some optional flags followed by an action statement and then the list of files. In this case the action statement is <font class="bashcommand">'{print $1}'</font>, because we want to print only the first column (<font class="bashcommand">$1</font>). Files file2.txt and file4.txt use a space as a column separator (which is the separator for default). So, to access the first column of these files we don't need the <font class="bashcommand">-F</font> flag. However, files file1.csv and file3.csv use a comma as a separator. So, in order for <font class="bashcommand">awk</font> to distinguish the different columns we have to use the <font class="bashcommand">-F</font> flag. In this case, the parameter of the <font class="bashcommand">-F</font> flag is a comma (<font class="bashcommand">-F','</font>). If you are trying to read a file which has the columns separated by a different character, then use that character instead of <font class="bashcommand">','</font>. 
+        </p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <th>Space-separated files</th>
+                <th>Comma-separated files</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">$ awk '{print $1}' file2.txt</font></td>
+                <td><font class="bashcommand">$ awk -F',' '{print $1}' file1.csv</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"AnonymizedID"</font></td>
+                <td><font class="bashcommand-result">"Anonymized ID"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11130912"</font></td>
+                <td><font class="bashcommand-result">"B33199522"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137244"</font></td>
+                <td><font class="bashcommand-result">"B33199603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11154534"</font></td>
+                <td><font class="bashcommand-result">"B11137879"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11144100"</font></td>
+                <td><font class="bashcommand-result">"B11144410"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137244"</font></td>
+                <td><font class="bashcommand-result">"B11110455"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B12226566"</font></td>
+                <td><font class="bashcommand-result">"B11135291"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11134987"</font></td>
+                <td><font class="bashcommand-result">"B11153927"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11144345"</font></td>
+                <td><font class="bashcommand-result">"B11177579"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11137159"</font></td>
+                <td><font class="bashcommand-result">"B11177806"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11156453"</font></td>
+                <td><font class="bashcommand-result">"B11157958"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11110676"</font></td>
+                <td><font class="bashcommand-result">"B11110690"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11138929"</font></td>
+                <td><font class="bashcommand-result">"B11152799"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11154532"</font></td>
+                <td><font class="bashcommand-result">"B11154358"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11155267"</font></td>
+                <td><font class="bashcommand-result">"B11110925"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137120"</font></td>
+                <td><font class="bashcommand-result">"B11135291"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B33191224"</font></td>
+                <td><font class="bashcommand-result">"B11135072"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11155267"</font></td>
+                <td><font class="bashcommand-result">"B33199603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11138999"</font></td>
+                <td><font class="bashcommand-result">"B11137879"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11131605"</font></td>
+                <td><font class="bashcommand-result">"B11131605"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137784"</font></td>
+                <td><font class="bashcommand-result">"B11110927"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11156098"</font></td>
+                <td><font class="bashcommand-result">"B11147712"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11133232"</font></td>
+                <td><font class="bashcommand-result">"B33191224"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11135292"</font></td>
+                <td><font class="bashcommand-result">"B11131290"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11138912"</font></td>
+                <td><font class="bashcommand-result">"B11157974"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11150911"</font></td>
+                <td><font class="bashcommand-result">"B33191224"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11152577"</font></td>
+                <td><font class="bashcommand-result">"B11141503"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11156098"</font></td>
+                <td><font class="bashcommand-result">"C11137159"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11133232"</font></td>
+                <td><font class="bashcommand-result">"B33199522"</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <td><font class="bashcommand">$ awk '{print $1}' file4.txt</font></td>
+                <td><font class="bashcommand">$ awk -F',' '{print $1}' file3.csv</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">AnonymizedID</font></td>
+                <td><font class="bashcommand-result">Anonymized ID</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">B11108326</font></td>
+                <td><font class="bashcommand-result">C11138122</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">B11110893</font></td>
+                <td><font class="bashcommand-result">C11138192</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">B11119909</font></td>
+                <td><font class="bashcommand-result">B12226507</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">D11144030</font></td>
+                <td><font class="bashcommand-result">B12226546</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">D11144030</font></td>
+                <td><font class="bashcommand-result">C11138122</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">B11119903</font></td>
+                <td><font class="bashcommand-result">C11138184</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11131039</font></td>
+                <td><font class="bashcommand-result">C11138797</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11133100</font></td>
+                <td><font class="bashcommand-result">C11138152</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11135566</font></td>
+                <td><font class="bashcommand-result">C11138150</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137159</font></td>
+                <td><font class="bashcommand-result">C11137167</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137159</font></td>
+                <td><font class="bashcommand-result">C11137159</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137167</font></td>
+                <td><font class="bashcommand-result">C11137167</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137167</font></td>
+                <td><font class="bashcommand-result">C11137159</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137439</font></td>
+                <td><font class="bashcommand-result">C11131039</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137439</font></td>
+                <td><font class="bashcommand-result">C11135566</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137443</font></td>
+                <td><font class="bashcommand-result">B11119903</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137544</font></td>
+                <td><font class="bashcommand-result">C11137544</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11137123</font></td>
+                <td><font class="bashcommand-result">C11137443</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11138150</font></td>
+                <td><font class="bashcommand-result">C11137123</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11138152</font></td>
+                <td><font class="bashcommand-result">C11137439</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11138797</font></td>
+                <td><font class="bashcommand-result">C11137439</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11138184</font></td>
+                <td><font class="bashcommand-result">C11133100</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11138122</font></td>
+                <td><font class="bashcommand-result">D11144030</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11138122</font></td>
+                <td><font class="bashcommand-result">B11108399</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">C11138192</font></td>
+                <td><font class="bashcommand-result">B11108326</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">B12226507</font></td>
+                <td><font class="bashcommand-result">B11119909</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">B12226546</font></td>
+                <td><font class="bashcommand-result">B11110893</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>To precede each line by the line number, add <font class="bashcommand">NR</font>, after the string <font class="bashcommand">print</font> in the <font class="bashcommand">awk</font> command to indicate that you want to print the Number Row before the column 1 (<font class="bashcommand">$1</font>):</p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <th>Space-separated files</th>
+                <th>Comma-separated files</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">$ awk '{print NR,$1}' file2.txt</font></td>
+                <td><font class="bashcommand">$ awk -F',' '{print NR, $1}' file1.csv</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">1 "AnonymizedID"</font></td>
+                <td><font class="bashcommand-result">1 "Anonymized ID"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">2 "B11130912"</font></td>
+                <td><font class="bashcommand-result">2 "B33199522"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">3 "B11137244"</font></td>
+                <td><font class="bashcommand-result">3 "B33199603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">4 "B11154534"</font></td>
+                <td><font class="bashcommand-result">4 "B11137879"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">5 "B11144100"</font></td>
+                <td><font class="bashcommand-result">5 "B11144410"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">6 "B11137244"</font></td>
+                <td><font class="bashcommand-result">6 "B11110455"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">7 "B12226566"</font></td>
+                <td><font class="bashcommand-result">7 "B11135291"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">8 "B11134987"</font></td>
+                <td><font class="bashcommand-result">8 "B11153927"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">9 "B11144345"</font></td>
+                <td><font class="bashcommand-result">9 "B11177579"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">10 "C11137159"</font></td>
+                <td><font class="bashcommand-result">10 "B11177806"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">11 "B11156453"</font></td>
+                <td><font class="bashcommand-result">11 "B11157958"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">12 "B11110676"</font></td>
+                <td><font class="bashcommand-result">12 "B11110690"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">13 "C11138929"</font></td>
+                <td><font class="bashcommand-result">13 "B11152799"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">14 "B11154532"</font></td>
+                <td><font class="bashcommand-result">14 "B11154358"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">15 "B11155267"</font></td>
+                <td><font class="bashcommand-result">15 "B11110925"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">16 "B11137120"</font></td>
+                <td><font class="bashcommand-result">16 "B11135291"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">17 "B33191224"</font></td>
+                <td><font class="bashcommand-result">17 "B11135072"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">18 "B11155267"</font></td>
+                <td><font class="bashcommand-result">18 "B33199603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">19 "C11138999"</font></td>
+                <td><font class="bashcommand-result">19 "B11137879"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">20 "B11131605"</font></td>
+                <td><font class="bashcommand-result">20 "B11131605"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">21 "B11137784"</font></td>
+                <td><font class="bashcommand-result">21 "B11110927"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">22 "B11156098"</font></td>
+                <td><font class="bashcommand-result">22 "B11147712"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">23 "B11133232"</font></td>
+                <td><font class="bashcommand-result">23 "B33191224"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">24 "B11135292"</font></td>
+                <td><font class="bashcommand-result">24 "B11131290"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">25 "C11138912"</font></td>
+                <td><font class="bashcommand-result">25 "B11157974"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">26 "B11150911"</font></td>
+                <td><font class="bashcommand-result">26 "B33191224"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">27 "B11152577"</font></td>
+                <td><font class="bashcommand-result">27 "B11141503"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">28 "B11156098"</font></td>
+                <td><font class="bashcommand-result">28 "C11137159"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">29 "B11133232"</font></td>
+                <td><font class="bashcommand-result">29 "B33199522"</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <td><font class="bashcommand">$ awk '{print NR, $1}' file4.txt</font></td>
+                <td><font class="bashcommand">$ awk -F',' '{print NR, $1}' file3.csv</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">1 AnonymizedID</font></td>
+                <td><font class="bashcommand-result">1 Anonymized ID</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">2 B11108326</font></td>
+                <td><font class="bashcommand-result">2 C11138122</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">3 B11110893</font></td>
+                <td><font class="bashcommand-result">3 C11138192</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">4 B11119909</font></td>
+                <td><font class="bashcommand-result">4 B12226507</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">5 D11144030</font></td>
+                <td><font class="bashcommand-result">5 B12226546</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">6 D11144030</font></td>
+                <td><font class="bashcommand-result">6 C11138122</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">7 B11119903</font></td>
+                <td><font class="bashcommand-result">7 C11138184</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">8 C11131039</font></td>
+                <td><font class="bashcommand-result">8 C11138797</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">9 C11133100</font></td>
+                <td><font class="bashcommand-result">9 C11138152</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">10 C11135566</font></td>
+                <td><font class="bashcommand-result">10 C11138150</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">11 C11137159</font></td>
+                <td><font class="bashcommand-result">11 C11137167</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">12 C11137159</font></td>
+                <td><font class="bashcommand-result">12 C11137159</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">13 C11137167</font></td>
+                <td><font class="bashcommand-result">13 C11137167</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">14 C11137167</font></td>
+                <td><font class="bashcommand-result">14 C11137159</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">15 C11137439</font></td>
+                <td><font class="bashcommand-result">15 C11131039</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">16 C11137439</font></td>
+                <td><font class="bashcommand-result">16 C11135566</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">17 C11137443</font></td>
+                <td><font class="bashcommand-result">17 B11119903</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">18 C11137544</font></td>
+                <td><font class="bashcommand-result">18 C11137544</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">19 C11137123</font></td>
+                <td><font class="bashcommand-result">19 C11137443</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">20 C11138150</font></td>
+                <td><font class="bashcommand-result">20 C11137123</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">21 C11138152</font></td>
+                <td><font class="bashcommand-result">21 C11137439</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">22 C11138797</font></td>
+                <td><font class="bashcommand-result">22 C11137439</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">23 C11138184</font></td>
+                <td><font class="bashcommand-result">23 C11133100</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">24 C11138122</font></td>
+                <td><font class="bashcommand-result">24 D11144030</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">25 C11138122</font></td>
+                <td><font class="bashcommand-result">25 B11108399</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">26 C11138192</font></td>
+                <td><font class="bashcommand-result">26 B11108326</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">27 B12226507</font></td>
+                <td><font class="bashcommand-result">27 B11119909</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">28 B12226546</font></td>
+                <td><font class="bashcommand-result">28 B11110893</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>
+            <font class="example">Print the first column of file1.csv and file2.txt in reverse order</font>
+            In order to print from the last line to the first line, you can use the command <font class="bashcommand">tail</font> with the flag <font class="bashcommand">-r</font> (for reverse) after the command <font class="bashcommand">awk</font>. The command line will first execute the <font class="bashcommand">awk</font> command which is written before the <font class="bashcommand">|</font> symbol, and then it will run the <font class="bashcommand">tail</font> command which inverts the order of the previous output. Remember that for file1.csv you need to use <font class="bashcommand">-F','</font> to indicate that the columns are separated by commas and not spaces.
+        </p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">$ awk '{print $1}' file2.txt | tail -r</font></td>
+                <td><font class="bashcommand">$ awk -F',' '{print $1}' file1.csv | tail -r</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11133232"</font></td>
+                <td><font class="bashcommand-result">"B33199522"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11156098"</font></td>
+                <td><font class="bashcommand-result">"C11137159"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11152577"</font></td>
+                <td><font class="bashcommand-result">"B11141503"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11150911"</font></td>
+                <td><font class="bashcommand-result">"B33191224"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11138912"</font></td>
+                <td><font class="bashcommand-result">"B11157974"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11135292"</font></td>
+                <td><font class="bashcommand-result">"B11131290"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11133232"</font></td>
+                <td><font class="bashcommand-result">"B33191224"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11156098"</font></td>
+                <td><font class="bashcommand-result">"B11147712"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137784"</font></td>
+                <td><font class="bashcommand-result">"B11110927"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11131605"</font></td>
+                <td><font class="bashcommand-result">"B11110603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11138999"</font></td>
+                <td><font class="bashcommand-result">"B11137879"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11155267"</font></td>
+                <td><font class="bashcommand-result">"B33199603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B33191224"</font></td>
+                <td><font class="bashcommand-result">"B11135072"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137120"</font></td>
+                <td><font class="bashcommand-result">"B11135291"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11155267"</font></td>
+                <td><font class="bashcommand-result">"B11110925"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11154532"</font></td>
+                <td><font class="bashcommand-result">"B11154358"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11138929"</font></td>
+                <td><font class="bashcommand-result">"B11152799"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11110676"</font></td>
+                <td><font class="bashcommand-result">"B11110690"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11156453"</font></td>
+                <td><font class="bashcommand-result">"B11157958"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11137159"</font></td>
+                <td><font class="bashcommand-result">"B11177806"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11144345"</font></td>
+                <td><font class="bashcommand-result">"B11177579"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11134987"</font></td>
+                <td><font class="bashcommand-result">"B11153927"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B12226566"</font></td>
+                <td><font class="bashcommand-result">"B11135291"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137244"</font></td>
+                <td><font class="bashcommand-result">"B11110455"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11144100"</font></td>
+                <td><font class="bashcommand-result">"B11144410"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11154534"</font></td>
+                <td><font class="bashcommand-result">"B11137879"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137244"</font></td>
+                <td><font class="bashcommand-result">"B33199603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11130912"</font></td>
+                <td><font class="bashcommand-result">"B33199522"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"AnonymizedID"</font></td>
+                <td><font class="bashcommand-result">"Anonymized ID"</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>The same as in example 1, to precede each line by the line number, add <font class="bashcommand">NR</font>, after the string <font class="bashcommand">print</font> in the <font class="bashcommand">awk</font> command to indicate that you want to print the Number Row before the column 1 (<font class="bashcommand">$1</font>):</p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">$ awk '{print NR, $1}' file2.txt | tail -r</font></td>
+                <td><font class="bashcommand">$ awk -F',' '{print NR, $1}' file1.csv | tail -r</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">29 "B11133232"</font></td>
+                <td><font class="bashcommand-result">29 "B33199522"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">28 "B11156098"</font></td>
+                <td><font class="bashcommand-result">28 "C11137159"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">27 "B11152577"</font></td>
+                <td><font class="bashcommand-result">27 "B11141503"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">26 "B11150911"</font></td>
+                <td><font class="bashcommand-result">26 "B33191224"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">25 "C11138912"</font></td>
+                <td><font class="bashcommand-result">25 "B11157974"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">24 "B11135292"</font></td>
+                <td><font class="bashcommand-result">24 "B11131290"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">23 "B11133232"</font></td>
+                <td><font class="bashcommand-result">23 "B33191224"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">22 "B11156098"</font></td>
+                <td><font class="bashcommand-result">22 "B11147712"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">21 "B11137784"</font></td>
+                <td><font class="bashcommand-result">21 "B11110927"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">20 "B11131605"</font></td>
+                <td><font class="bashcommand-result">20 "B11110603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">19 "C11138999"</font></td>
+                <td><font class="bashcommand-result">19 "B11137879"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">18 "B11155267"</font></td>
+                <td><font class="bashcommand-result">18 "B33199603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">17 "B33191224"</font></td>
+                <td><font class="bashcommand-result">17 "B11135072"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">16 "B11137120"</font></td>
+                <td><font class="bashcommand-result">16 "B11135291"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">15 "B11155267"</font></td>
+                <td><font class="bashcommand-result">15 "B11110925"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">14 "B11154532"</font></td>
+                <td><font class="bashcommand-result">14 "B11154358"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">13 "C11138929"</font></td>
+                <td><font class="bashcommand-result">13 "B11152799"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">12 "B11110676"</font></td>
+                <td><font class="bashcommand-result">12 "B11110690"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">11 "B11156453"</font></td>
+                <td><font class="bashcommand-result">11 "B11157958"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">10 "C11137159"</font></td>
+                <td><font class="bashcommand-result">10 "B11177806"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">9 "B11144345"</font></td>
+                <td><font class="bashcommand-result">9 "B11177579"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">8 "B11134987"</font></td>
+                <td><font class="bashcommand-result">8 "B11153927"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">7 "B12226566"</font></td>
+                <td><font class="bashcommand-result">7 "B11135291"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">6 "B11137244"</font></td>
+                <td><font class="bashcommand-result">6 "B11110455"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">5 "B11144100"</font></td>
+                <td><font class="bashcommand-result">5 "B11144410"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">4 "B11154534"</font></td>
+                <td><font class="bashcommand-result">4 "B11137879"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">3 "B11137244"</font></td>
+                <td><font class="bashcommand-result">3 "B33199603"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">2 "B11130912"</font></td>
+                <td><font class="bashcommand-result">2 "B33199522"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">1 "AnonymizedID"</font></td>
+                <td><font class="bashcommand-result">1 "Anonymized ID"</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>
+        <font class="example">Print the second and third columns of file1.csv and file2.txt. Show the lines of file2.txt in <b>reverse order</b>.</font>
+        In the previous examples we used the action statement <font class="bashcommand">'{print $1}'</font> to print the first column. Since we now want to print the second and third columns instead of the first one, we replace  <font class="bashcommand">$1</font> by  <font class="bashcommand">$2</font>, <font class="bashcommand">$3</font>. If you wanted to print column 4 and 5 instead, then you would simply use <font class="bashcommand">$4</font>,<font class="bashcommand">$5</font>, etc. In order to print the output in reverse order for file2.txt, use the <font class="bashcommand">tail -r</font> command after the <font class="bashcommand">awk</font>. 
+        </p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">$ awk '{print $2,$3}' file2.txt</font></td>
+                <td><font class="bashcommand">$ awk -F',' '{print $2,$3}' file1.csv | tail -r</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"SubjectGroup" "TEST1"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group2b" "900"</font></td>
+                <td><font class="bashcommand-result">"Group3" "9"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "450"</font></td>
+                <td><font class="bashcommand-result">"Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "456"</font></td>
+                <td><font class="bashcommand-result">"Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "450"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "450"</font></td>
+                <td><font class="bashcommand-result">"Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group2b" "450"</font></td>
+                <td><font class="bashcommand-result">"Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "900"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "900"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group3" "MissingData"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group4" "456"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "900"</font></td>
+                <td><font class="bashcommand-result">"Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group2b" "2"</font></td>
+                <td><font class="bashcommand-result">"MISSING" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "456"</font></td>
+                <td><font class="bashcommand-result">"Group3" "9"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group3" "900"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group2b" "450"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group2b" "450"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group3" "900"</font></td>
+                <td><font class="bashcommand-result">"Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group2b" "900"</font></td>
+                <td><font class="bashcommand-result">"Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "456"</font></td>
+                <td><font class="bashcommand-result">"Group1" "MD"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "900"</font></td>
+                <td><font class="bashcommand-result">"Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "500"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "500"</font></td>
+                <td><font class="bashcommand-result">"Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group3" "MissingData"</td>
+                <td><font class="bashcommand-result">"Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group2b" "900"</font></td>
+                <td><font class="bashcommand-result">"Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group2b" "900"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "900"</font></td>
+                <td><font class="bashcommand-result">"Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "456"</font></td>
+                <td><font class="bashcommand-result">"Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Group1" "456"</font></td>
+                <td><font class="bashcommand-result">"Subject Group" "HASCONDITION"</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>To precede each line by the line number, add <font class="bashcommand">NR</font>, after the string <font class="bashcommand">print</font> in the <font class="bashcommand">awk</font> command to indicate that you want to print the Number Row before the column 1 (<font class="bashcommand">$1</font>):</p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">$ awk '{print NR,$2,$3}' file2.txt</font></td>
+                <td><font class="bashcommand">$ awk -F',' '{print NR,$2,$3}' file1.csv | tail -r</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">1 "SubjectGroup" "TEST1"</font></td>
+                <td><font class="bashcommand-result">29 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">2 "Group2b" "900"</font></td>
+                <td><font class="bashcommand-result">28 "Group3" "9"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">3 "Group1" "450"</font></td>
+                <td><font class="bashcommand-result">27 "Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">4 "Group1" "456"</font></td>
+                <td><font class="bashcommand-result">26 "Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">5 "Group1" "450"</font></td>
+                <td><font class="bashcommand-result">25 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">6 "Group1" "450"</font></td>
+                <td><font class="bashcommand-result">24 "Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">7 "Group2b" "450"</font></td>
+                <td><font class="bashcommand-result">23 "Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">8 "Group1" "900"</font></td>
+                <td><font class="bashcommand-result">22 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">9 "Group1" "900"</font></td>
+                <td><font class="bashcommand-result">21 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">10 "Group3" "MissingData"</font></td>
+                <td><font class="bashcommand-result">20 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">11 "Group4" "456"</font></td>
+                <td><font class="bashcommand-result">19 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">12 "Group1" "900"</font></td>
+                <td><font class="bashcommand-result">18 "Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">13 "Group2b" "2"</font></td>
+                <td><font class="bashcommand-result">17 "MISSING" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">14 "Group1" "456"</font></td>
+                <td><font class="bashcommand-result">16 "Group3" "9"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">15 "Group3" "900"</font></td>
+                <td><font class="bashcommand-result">15 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">16 "Group2b" "450"</font></td>
+                <td><font class="bashcommand-result">14 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">17 "Group2b" "450"</font></td>
+                <td><font class="bashcommand-result">13 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">18 "Group3" "900"</font></td>
+                <td><font class="bashcommand-result">12 "Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">19 "Group2b" "900"</font></td>
+                <td><font class="bashcommand-result">11 "Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">20 "Group1" "456"</font></td>
+                <td><font class="bashcommand-result">10 "Group1" "MD"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">21 "Group1" "900"</font></td>
+                <td><font class="bashcommand-result">9 "Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">22 "Group1" "500"</font></td>
+                <td><font class="bashcommand-result">8 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">23 "Group1" "500"</font></td>
+                <td><font class="bashcommand-result">7 "Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">24 "Group3" "MissingData"</font></td>
+                <td><font class="bashcommand-result">6 "Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">25 "Group2b" "900"</font></td>
+                <td><font class="bashcommand-result">5 "Group2 b" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">26 "Group2b" "900"</font></td>
+                <td><font class="bashcommand-result">4 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">27 "Group1" "900"</font></td>
+                <td><font class="bashcommand-result">3 "Group3" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">28 "Group1" "456"</font></td>
+                <td><font class="bashcommand-result">2 "Group1" "0"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">29 "Group1" "456"</font></td>
+                <td><font class="bashcommand-result">1 "Subject Group" "HASCONDITION"</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>
+            <font class="example">Print all the columns of file1.csv showing the lines in <b>reverse order</b>.</font>
+            To print all the columns of a file using <font class="bashcommand">awk</font> simply use <font class="bashcommand">$0</font> (instead of a column number). Or use the command <font class="bashcommand">cat</font>.
+        </p>
+
+        <p>
+        <table class="ghostTable">
+            <tr>
+                <th>Using <font class="bashcommand">awk</font></th>
+                <th>Using <font class="bashcommand">cat</font></th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">$ awk -F',' '{print $0}' file1.csv | tail -r</font></td>
+                <td><font class="bashcommand">$ cat file1.csv | tail -r</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B33199522","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B33199522","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"C11137159","Group3","9","mTBI"</font></td>
+                <td><font class="bashcommand-result">"C11137159","Group3","9","mTBI"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11141503","Group3","0",""</font></td>
+                <td><font class="bashcommand-result">"B11141503","Group3","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B33191224","Group2 b","0",""</font></td>
+                <td><font class="bashcommand-result">"B33191224","Group2 b","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11157974","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11157974","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11131290","Group2 b","0",""</font></td>
+                <td><font class="bashcommand-result">"B11131290","Group2 b","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B33191224","Group2 b","0",""</font></td>
+                <td><font class="bashcommand-result">"B33191224","Group2 b","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11147712","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11147712","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11110927","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11110927","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11110603","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11110603","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137879","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11137879","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B33199603","Group3","0",""</font></td>
+                <td><font class="bashcommand-result">"B33199603","Group3","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11135072","MISSING","0",""</font></td>
+                <td><font class="bashcommand-result">"B11135072","MISSING","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11135291","Group3","9","mTBI"</font></td>
+                <td><font class="bashcommand-result">"B11135291","Group3","9","mTBI"</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11110925","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11110925","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11154358","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11154358","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11152799","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11152799","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11110690","Group3","0",""</font></td>
+                <td><font class="bashcommand-result">"B11110690","Group3","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11157958","Group3","0",""</font></td>
+                <td><font class="bashcommand-result">"B11157958","Group3","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11177806","Group1","MD",""</font></td>
+                <td><font class="bashcommand-result">"B11177806","Group1","MD",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11177579","Group2 b","0",""</font></td>
+                <td><font class="bashcommand-result">"B11177579","Group2 b","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11153927","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11153927","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11135291","Group3","0",""</font></td>
+                <td><font class="bashcommand-result">"B11135291","Group3","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11110455","Group2 b","0",""</font></td>
+                <td><font class="bashcommand-result">"B11110455","Group2 b","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11144410","Group2 b","0",""</font></td>
+                <td><font class="bashcommand-result">"B11144410","Group2 b","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B11137879","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B11137879","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B33199603","Group3","0",""</font></td>
+                <td><font class="bashcommand-result">"B33199603","Group3","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"B33199522","Group1","0",""</font></td>
+                <td><font class="bashcommand-result">"B33199522","Group1","0",""</font></td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand-result">"Anonymized ID","Subject Group","HASCONDITION","CONDITION"</font></td>
+                <td><font class="bashcommand-result">"Anonymized ID","Subject Group","HASCONDITION","CONDITION"</font></td>
+            </tr>
+        </table>
+        </p>
+
+        <p>
+            <font class="example">Print all the columns of file1.csv in <b>reversed order</b> (first the third column, then the second and finally the first one), and save the re-ordered columns in a new file called file1_reordered.csv.</font>
+            If you were going to print the columns one to three in normal order, you would use <font class="bashcommand">'{print $1,$2,$3}'</font>. To print them in reverse order, you just reverse the order of the columns in <font class="bashcommand">print</font>: <font class="bashcommand">'{print $3,$2,$1}'</font>.<br>
+            To save the output to a file instead of showing it in the terminal, use <font class="bashcommand">&gt;&gt; file</font> as explained in previous sections.<br>
+            Remember to use the <font class="bashcommand">-F','</font> flag to indicate that the columns are separated by commas and not the default space.
+        </p>
+
+        <p><font class="bashcommand">
+        $ awk -F',' '{print $3,$2,$1}' file1.csv &gt;&gt; file1_reordered.csv<br>
+        $ cat file1_reordered.csv<br>
+        <font class="bashcommand-result"><br>
+        "HASCONDITION" "Subject Group" "Anonymized ID"<br>
+        "0" "Group1" "B33199522"<br>
+        "0" "Group3" "B33199603"<br>
+        "0" "Group1" "B11137879"<br>
+        "0" "Group2 b" "B11144410"<br>
+        "0" "Group2 b" "B11110455"<br>
+        "0" "Group3" "B11135291"<br>
+        "0" "Group1" "B11153927"<br>
+        "0" "Group2 b" "B11177579"<br>
+        "MD" "Group1" "B11177806"<br>
+        "0" "Group3" "B11157958"<br>
+        "0" "Group3" "B11110690"<br>
+        "0" "Group1" "B11152799"<br>
+        "0" "Group1" "B11154358"<br>
+        "0" "Group1" "B11110925"<br>
+        "9" "Group3" "B11135291"<br>
+        "0" "MISSING" "B11135072"<br>
+        "0" "Group3" "B33199603"<br>
+        "0" "Group1" "B11137879"<br>
+        "0" "Group1" "B11110603"<br>
+        "0" "Group1" "B11110927"<br>
+        "0" "Group1" "B11147712"<br>
+        "0" "Group2 b" "B33191224"<br>
+        "0" "Group2 b" "B11131290"<br>
+        "0" "Group1" "B11157974"<br>
+        "0" "Group2 b" "B33191224"<br>
+        "0" "Group3" "B11141503"<br>
+        "9" "Group3" "C11137159"<br>
+        "0" "Group1" "B33199522"
+        </font>
+        </font></p>
+
+        <p>
+        <font class="example">Print all the columns of file1.csv in <b>reversed order</b> (first the third column, then the second and finally the first one). Print the lines also in reverse order (from the last line to the first one).</font><br>
+        Use the same command as before, adding <font class="bashcommand">| tail -r</font> at the end to invert also the lines. 
+        </p>
+
+        <p><font class="bashcommand">
+        $ awk -F',' '{print $3,$2,$1}' file1.csv | tail -r<br>
+        <font class="bashcommand-result">
+        "0" "Group1" "B33199522"<br>
+        "9" "Group3" "C11137159"<br>
+        "0" "Group3" "B11141503"<br>
+        "0" "Group2 b" "B33191224"<br>
+        "0" "Group1" "B11157974"<br>
+        "0" "Group2 b" "B11131290"<br>
+        "0" "Group2 b" "B33191224"<br>
+        "0" "Group1" "B11147712"<br>
+        "0" "Group1" "B11110927"<br>
+        "0" "Group1" "B11110603"<br>
+        "0" "Group1" "B11137879"<br>
+        "0" "Group3" "B33199603"<br>
+        "0" "MISSING" "B11135072"<br>
+        "9" "Group3" "B11135291"<br>
+        "0" "Group1" "B11110925"<br>
+        "0" "Group1" "B11154358"<br>
+        "0" "Group1" "B11152799"<br>
+        "0" "Group3" "B11110690"<br>
+        "0" "Group3" "B11157958"<br>
+        "MD" "Group1" "B11177806"<br>
+        "0" "Group2 b" "B11177579"<br>
+        "0" "Group1" "B11153927"<br>
+        "0" "Group3" "B11135291"<br>
+        "0" "Group2 b" "B11110455"<br>
+        "0" "Group2 b" "B11144410"<br>
+        "0" "Group1" "B11137879"<br>
+        "0" "Group3" "B33199603"<br>
+        "0" "Group1" "B33199522"<br>
+        "HASCONDITION" "Subject Group" "Anonymized ID" 
+        </font>
+        </font></p>
+
+        <p>
+        <font class="example">Read the second column of file1.csv and file2.txt and save it into an array.</font> 
+        When saving a column of a file into an array, you must specify that the elements of the array are separated by new lines (<font class="bashcommand">'\n'</font>). You do this using the command <font class="bashcommand">IFS=$'\n'</font>.<br> 
+        The elements of the array will be saved in the variable <font class="bashcommand">ARRAY</font>. As it was learned in previous chapters, to access the individual elements of <font class="bashcommand">ARRAY</font> you use the syntax <font class="bashcommand">${ARRAY[index]}</font>. With <font class="bashcommand">index</font> starting at <font class="bashcommand">0</font>. So, to access the first element the command is <font class="bashcommand">echo ${ARRAY[0]}</font>, to access the second element <font class="bashcommand">echo ${ARRAY[1]}</font>, etc. Type <font class="bashcommand">echo ${ARRAY[@]}</font> to view all elements and to obtain the number of elements (size of <font class="bashcommand">ARRAY</font>).<br>
+        Remember, the system variable <font class="bashcommand">IFS</font> contains the separator that is being used to separate each feld within the lines of a file. You can change the value of this variable at any time: <font class="bashcommand">IFS='character'</font>
+        </p>
+
+        <table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ IFS=$'\n'<br>
+                $ ARRAY=($(awk '{print $2}' file2.txt))<br>
+                $ echo ${ARRAY[0]}<br> 
+                <font class="bashcommand-result">"SubjectGroup"</font><br>
+                $ echo ${ARRAY[1]}<br>
+                <font class="bashcommand-result">"Group2b"</font><br>
+                $ echo ${ARRAY[@]}<br>
+                <font class="bashcommand-result">"SubjectGroup" "Group2b" "Group1" "Group1" "Group1" "Group1" "Group2b" "Group1" "Group1" "Group3" "Group4" "Group1" "Group2b" "Group1" "Group3" "Group2b" "Group2b" "Group3" "Group2b" "Group1" "Group1" "Group1" "Group1" "Group3" "Group2b" "Group2b" "Group1" "Group1" "Group1"</font><br>
+                $ echo ${#ARRAY[@]}<br>
+                <font class="bashcommand-result">29</font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ IFS=$'\n'<br>
+                $ ARRAY=($(awk -F',' '{print $2}' file1.csv))<br>
+                $ echo ${ARRAY[0]}<br>
+                <font class="bashcommand-result">"Subject Group"</font><br>
+                $ echo ${ARRAY[1]}<br>
+                <font class="bashcommand-result">"Group1"</font><br>
+                $ echo ${ARRAY[@]}<br>
+                <font class="bashcommand-result">"Subject Group" "Group1" "Group3" "Group1" "Group2 b" "Group2 b" "Group3" "Group1" "Group2 b" "Group1" "Group3" "Group3" "Group1" "Group1" "Group1" "Group3" "MISSING" "Group3" "Group1" "Group1" "Group1" "Group1" "Group2 b" "Group2 b" "Group1" "Group2 b" "Group3" "Group3" "Group1"</font><br>
+                $ echo ${#ARRAY[@]}<br>
+                <font class="bashcommand-result">29</font>
+                </font></td>
+            </tr>
+        </table>
+
+        <p>
+        <font class="example">Print the first column of file2.txt followed by the first column of file4.txt.</font>
+        To print a specific column for more than one file, you use the same command, adding the list of files you want to print after the first one. However, all the files in the list must use the same column separator (in this case is a space). Since the column separator for this list of files is a space (the default), you don't need to use the <font class="bashcommand">-F</font> flag.
+        </p>
+
+        <p>
+        <font class="bashcommand">
+        $ awk '{print $1}' file2.txt file4.txt<br>
+        <font class="bashcommand-result">
+        "AnonymizedID"<br>
+        "B11130912"<br>
+        "B11137244"<br>
+        "B11154534"<br>
+        "B11144100"<br>
+        "B11137244"<br>
+        "B12226566"<br>
+        "B11134987"<br>
+        "B11144345"<br>
+        "C11137159"<br>
+        "B11156453"<br>
+        "B11110676"<br>
+        "C11138929"<br>
+        "B11154532"<br>
+        "B11155267"<br>
+        "B11137120"<br>
+        "B33191224"<br>
+        "B11155267"<br>
+        "C11138999"<br>
+        "B11131605"<br>
+        "B11137784"<br>
+        "B11156098"<br>
+        "B11133232"<br>
+        "B11135292"<br>
+        "C11138912"<br>
+        "B11150911"<br>
+        "B11152577"<br>
+        "B11156098"<br>
+        "B11133232"<br>
+        AnonymizedID<br>
+        B11108326<br>
+        B11110893<br>
+        B11119909<br>
+        D11144030<br>
+        D11144030<br>
+        B11119903<br>
+        C11131039<br>
+        C11133100<br>
+        C11135566<br>
+        C11137159<br>
+        C11137159<br>
+        C11137167<br>
+        C11137167<br>
+        C11137439<br>
+        C11137439<br>
+        C11137443<br>
+        C11137544<br>
+        C11137123<br>
+        C11138150<br>
+        C11138152<br>
+        C11138797<br>
+        C11138184<br>
+        C11138122<br>
+        C11138122<br>
+        C11138192<br>
+        B12226507<br>
+        B12226546
+        </font>
+        </font>
+        </p>
+
+        <p>
+        <font class="example">Print the first column of file3.csv followed by the first column of file1.csv.</font> 
+        Since the column separator for this list of files is a comma, you need to use the <font class="bashcommand">-F','</font> flag.
+        </p>
+
+        <p>
+        <font class="bashcommand">
+        $ awk -F',' '{print $1}' file3.csv file1.csv<br>
+        <font class="bashcommand-result">
+        Anonymized ID<br>
+        C11138122<br>
+        C11138192<br>
+        B12226507<br>
+        B12226546<br>
+        C11138122<br>
+        C11138184<br>
+        C11138797<br>
+        C11138152<br>
+        C11138150<br>
+        C11137167<br>
+        C11137159<br>
+        C11137167<br>
+        C11137159<br>
+        C11131039<br>
+        C11135566<br>
+        B11119903<br>
+        C11137544<br>
+        C11137443<br>
+        C11137123<br>
+        C11137439<br>
+        C11137439<br>
+        C11133100<br>
+        D11144030<br>
+        B11108399<br>
+        B11108326<br>
+        B11119909<br>
+        B11110893<br>
+        "Anonymized ID"<br>
+        "B33199522"<br>
+        "B33199603"<br>
+        "B11137879"<br>
+        "B11144410"<br>
+        "B11110455"<br>
+        "B11135291"<br>
+        "B11153927"<br>
+        "B11177579"<br>
+        "B11177806"<br>
+        "B11157958"<br>
+        "B11110690"<br>
+        "B11152799"<br>
+        "B11154358"<br>
+        "B11110925"<br>
+        "B11135291"<br>
+        "B11135072"<br>
+        "B33199603"<br>
+        "B11137879"<br>
+        "B11110603"<br>
+        "B11110927"<br>
+        "B11147712"<br>
+        "B33191224"<br>
+        "B11131290"<br>
+        "B11157974"<br>
+        "B33191224"<br>
+        "B11141503"<br>
+        "C11137159"<br>
+        "B33199522" 
+        </font>
+        </font>
+        </p>
+</html>

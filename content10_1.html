@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h3>10.1. Changing format or properties of an image file using sips (for Mac users)</h3>
+			    <p>Usage: <font class="bashcommand">sips [flags] inputFile [--out outputFile]</font></p>
+			    <p>Image modification flags:</p>
+			    
+			    <p><table>
+			    	<tr>
+					<th>Flag</th>
+					<th>Meaning</th>
+				</tr>
+			    	<tr>
+					<td><font class="bashcommand">-s</font> key value<br>or<br><font class="bashcommand">--setProperty key value</font></td>
+					<td>Set the <font class="bashcommand">value</font> for a <font class="bashcommand">key</font> (see tables below for the available profile property keys and acceptable values for each key).</td>
+				</tr>
+			    	<tr>
+					<td><font class="bashcommand">-r degreesCW</font><br>or<br><font class="bashcommand">--rotate degreesCW</font></td>
+					<td>Rotate an image several degrees clockwise.</td>
+				</tr>
+			    	<tr>
+					<td><font class="bashcommand">-f option</font><br>or<br><font class="bashcommand">--flip option</font></td>
+					<td>Flip the image using one of the following two options: <font class="bashcommand">horizontal</font> or <font class="bashcommand">vertical</font>.</td>
+				</tr>
+			    	<tr>
+					<td><font class="bashcommand">-c pixelsH pixelsW</font><br>or<br><font class="bashcommand">--cropToHeightWidth pixelsH pixelsW</font></td>
+			    		<td>Crop image to fit specified size. <font class="bashcommand">pixelsH</font> indicates the new height in number of pixels, <font class="bashcommand">pixelsW</font> indicates the new width in number of pixels.</td>
+			    	</tr>
+			    	<tr>
+					<td><font class="bashcommand">-z pixelsH pixelsW</font><br>or<br><font class="bashcommand">--resampleHeightWidth pixelsH pixelsW</font></td>
+					<td>Resample image at specified size. Image aspect ratio may be altered. <font class="bashcommand">pixelsH</font> indicate the new height in number of pixels, <font class="bashcommand">pixelsW</font> indicate the new width in number of pixels.</td>
+				</tr>
+			    	<tr>
+					<td><font class="bashcommand">-Z pixelsWH</font><br>or<br><font class="bashcommand">--resampleHeightWidthMax pixelsWH</font></td>
+					<td>Resample image so height and width aren't greater than specified.</td>
+				</tr>
+			    	<tr>
+					<td><font class="bashcommand">--resampleWidth pixelsW</font></td>
+					<td>Resample image to specified width. <font class="bashcommand">pixelsW</font> indicate the new width in number of pixels.</td>
+				</tr>
+			    	<tr>
+					<td><font class="bashcommand">--resampleHeight pixelsH</font></td>
+					<td>Resample image to specified height. <font class="bashcommand">pixelsH</font> indicate the new height in number of pixels.</td>
+				</tr>
+			    	<tr>
+					<td><font class="bashcommand">-o</font><br>or<br><font class="bashcommand">--optimizeColorForSharing</td>
+					<td>Optimize color for sharing.</td>
+				</tr>
+			    </p></table>
+
+			    <p>If you want to modify one image to match the properties of another image (for example have one image match the height of another image), you can use the flag <font class="bashcommand">--getProperty</font> with one of the following properties (which can also be used as parameters for some of the flags described above):</p>
+		    
+			    <p><table>
+				<tr>
+					<th>Profile property keys</th>
+					<th>Usage</th>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">dpiHeight</font></td>
+					<td>Height in dpi (printer dots per inch).</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">dpiWidth</font></td>
+					<td>Width in dpi (printer dots per inch).</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">pixelHeight</font></td>
+					<td>Height in number of pixels.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">pixelWidth</font></td>
+					<td>Width in number of pixels.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">format</font></td>
+					<td>Image format. Acceptable values for this key: <font class="bashcommand">jpeg</font>, <font class="bashcommand">tiff</font>, <font class="bashcommand">png</font>, <font class="bashcommand">gif</font>, <font class="bashcommand">jp2</font>, <font class="bashcommand">pict</font>, <font class="bashcommand">bmp</font>, <font class="bashcommand">qtif</font>, <font class="bashcommand">psd</font>, <font class="bashcommand">sgi</font>, <font class="bashcommand">tga</font>, <font class="bashcommand">pdf</font>.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">formatOptions</font></td>
+					<td>Quality of the new image. Acceptable values for this key: <font class="bashcommand">low</font>, <font class="bashcommand">normal</font>, <font class="bashcommand">high</font>, <font class="bashcommand">best</font>, or some percentage.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">samplesPerPixel</font></td>
+					<td>Samples per pixel.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">bitsPerSample</font></td>
+					<td>Bits per sample.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">software</font></td>
+					<td>Software use to create the image.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">description</font></td>
+					<td>Description.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">copyright</font></td>
+					<td>Copyright.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">version</font></td>
+					<td>Version.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">platform</font></td>
+					<td>Platform where file was created.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">quality</font></td>
+					<td>Acceptable values for this key: <font class="bashcommand">normal</font>, <font class="bashcommand">draft</font>, <font class="bashcommand">best</font>.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">renderingIntent</font></td>
+					<td>Acceptable values for this key: <font class="bashcommand">perceptual</font>, <font class="bashcommand">relative</font>, <font class="bashcommand">saturation</font>, <font class="bashcommand">absolute</font>.</td>
+				</tr>
+				<tr>
+					<td><font class="bashcommand">creator</font></td>
+					<td>Creator of the file.</td>
+				</tr>
+			    </p></table>
+
+			    <p>For the examples below I will be using the following image, taken from the following article, which I published long time ago: <a href='https://pubmed.ncbi.nlm.nih.gov/29113642/' target='_blank'>link to article</a>. <a href='https://pubmed.ncbi.nlm.nih.gov/29113642/#&gid=article-figures&pid=figure-2-uid-1' target='_blank'>Link to original image</a>.</p>
+
+			    <p><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/instance/5809301/bin/nihms909531f2.jpg" alt="thalamo-cortical connectivity"></p>
+
+			    <p>
+				<font class="example">Convert <a href='https://www.ncbi.nlm.nih.gov/pmc/articles/instance/5809301/bin/nihms909531f2.jpg' target='_blank'>AutismArticle1.png</a> to pdf.</font>
+				<font class="bashcommand">$ sips -s format pdf AutismArticle1.png --out AutismArticle1.pdf</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br> 
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.pdf</font>
+			    </p>
+
+			    <p>
+				<font class="example">Rotate <a href='https://www.ncbi.nlm.nih.gov/pmc/articles/instance/5809301/bin/nihms909531f2.jpg' target='_blank'>AutismArticle1.png</a> 45<sup>&#8728;</sup> clock-wise.</font>
+				<font class="bashcommand">$ sips -r 45 AutismArticle1.png --out test.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/test.png</font>
+			    </p>
+
+			    <p>Result image:</p>
+			    <p><img src="rotated1.png" alt="image rotated 45 degrees clock wise"></p>
+
+			<p>
+				<font class="example">Rotate <a href='https://www.ncbi.nlm.nih.gov/pmc/articles/instance/5809301/bin/nihms909531f2.jpg' target='_blank'>AutismArticle1.png</a> 45<sup>&#8728;</sup> counter-clock-wise.</font>
+				<font class="bashcommand">$ sips -r -45 AutismArticle1.png --out test.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/test2.png</font>
+			</p>
+
+			<p>Result image:</p>
+			<p><img src="rotated2.png" alt="image rotated 45 degrees counter clock wise"></p>
+
+			<p>
+				<font class="example">Flip <a href='https://www.ncbi.nlm.nih.gov/pmc/articles/instance/5809301/bin/nihms909531f2.jpg' target='_blank'>AutismArticle1.png</a> horizontally.</font>
+				<font class="bashcommand">$ sips -f horizontal AutismArticle1.png --out test.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/test.png</font>
+			</p>
+
+			<p>Result image:</p>
+			<p><img src="flipped.png" alt="image rotated 45 degrees counter clock wise"></p>
+
+			<p>
+				<font class="example">Flip <a href='https://www.ncbi.nlm.nih.gov/pmc/articles/instance/5809301/bin/nihms909531f2.jpg' target='_blank'>AutismArticle1.png</a> vertically.</font>
+				<font class="bashcommand">$ sips -f vertical AutismArticle1.png --out test.png</font><br> 
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br> 
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/test.png</font>
+			</p>
+
+			<p>Result image:</p>
+			<p><img src="flipped2.png" alt="image rotated 45 degrees counter clock wise"></p>
+
+			<p>
+				<font class="example">Crop <a href='https://www.ncbi.nlm.nih.gov/pmc/articles/instance/5809301/bin/nihms909531f2.jpg' target='_blank'>AutismArticle1.png</a> to fit a new size that be &#188;<sup>th</sup> of its original height and &#188;<sup>th</sup> of its original weight.</font>
+				The first step is to obtain the current width and height using <font class="bashcommand">sips</font> with the flags <font class="bashcommand">--getProperty pixelWidth</font> and <font class="bashcommand">--getProperty pixelHeight</font>. Then, divide the two numbers by four. And finally use <font class="bashcommand">sips</font> with the <font class="bashcommand">-c</font> flag to crop the file.
+			</p>
+
+			<p>
+			<font class="bashcommand">$ sips --getProperty pixelHeight AutismArticle1.png</font><br>
+			<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br>
+			<font class="bashcommand-result">&nbsp;&nbsp;pixelHeight: 440</font><br>
+			<font class="bashcommand">$ sips --getProperty pixelWidth AutismArticle1.png</font><br>
+			<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br>
+			<font class="bashcommand-result">&nbsp;&nbsp;pixelWidth: 727</font><br>
+			<font class="bashcommand">$ echo "440/4" | bc -l</font><br>
+			<font class="bashcommand-result">110.00000000000000000000</font><br>
+			<font class="bashcommand">$ echo "727/4" | bc -l</font><br>
+			<font class="bashcommand-result">181.75000000000000000000</font><br>
+			<font class="bashcommand">$ sips -c 110 181 AutismArticle1.png --out test.png</font><br>
+			<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br>
+			<font class="bashcommand-result">&nbsp;&nbsp;/Users/monica/Desktop/Backup/images_presentations/test.png</font>
+			</p>
+
+			<p>Result image:</p>
+			<p><img src="cropped.png" alt="cropped image"></p>
+
+			<p>
+				<font class="example">Resample image to 110x181.</font>
+				<font class="bashcommand">$ sips -z 110 181 AutismArticle1.png --out test.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png</font><br>
+				<font class="bashcommand-result">&nbsp;&nbsp;/Users/monica/Desktop/Backup/images_presentations/test.png</font><br>
+				<font class="bashcommand">$ sips --getProperty pixelHeight test.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/test.png</font><br>
+				<font class="bashcommand-result">&nbsp;&nbsp;pixelHeight: 110</font><br>
+				<font class="bashcommand">$ sips --getProperty pixelWidth test.png</font><br>
+				<font class="bashcommand-result">/Users/monica/Desktop/Backup/images_presentations/test.png</font><br>
+				<font class="bashcommand-result">&nbsp;&nbsp;pixelWidth: 181</font>
+			</p>
+
+			<p>Result image:</p>
+			<p><img src="resampled.png" alt="cropped image"></p>
+</body>
+
+</html>

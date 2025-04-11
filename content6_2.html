@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h3>6.2. Condition-testing to compare/evaluate strings</h3>
+					<p>
+						When comparing strings, it is mandatory to use the quotation marks. The spaces after <font class="bashcommand">[</font> and before <font class="bashcommand">]</font> are very important. If those spaces are missing, bash will give an error. 
+					</p>
+					
+					<table>
+						<tr>
+							<th style="width:30%"><b>Condition</b></th>
+							<th style="width:70%"><b>Meaning</b></th>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -z "STRING" ]</font>
+							</td>
+							<td>Tests if the length of <font class="bashcommand">STRING</font> is zero</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -n "STRING" ]</font>
+							</td>
+							<td>Tests if the length of <font class="bashcommand">STRING</font> is non-zero</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ "STRING1" == "STRING2" ]</font>
+							</td>
+							<td>Tests if the strings are equal</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ "STRING1" != "STRING2" ]</font>
+							</td>
+							<td>Tests if the strings are not equal</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ "STRING1" \< "STRING2" ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">STRING1</font> sorts before <font class="bashcommand">STRING2</font></td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ "STRING1" \> "STRING2" ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">STRING1</font> sorts after <font class="bashcommand">STRING2</font></td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">[ -z "STRING" ]:</font>
+						<font class="bashcommand">
+							$ if [ -z "" ]<br>
+							&gt; then<br>
+							&gt; echo "Empty string"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Empty string</font> 
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ -n "STRING" ]:</font>
+						<font class="bashcommand">
+							$ VAR="Some text"<br>
+							$ if [ -n "${VAR}" ]<br>
+							&gt; then<br>
+							&gt; echo "The string is not empty"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">The string is not empty</font> 
+						</font>
+					</p>
+					
+					<p>In this example, bash will show an error because I forgot to put the quotation marks around <font class="bashcommand">${VAR}</font>.</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ VAR="Some text"<br>
+							$ if [ -n ${VAR} ]<br>
+							&gt; then<br>
+							&gt; echo "The string is not empty"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">-bash: [: Some: binary operator expected</font> 
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ "STRING1" == "STRING2" ]:</font>
+						<font class="bashcommand">
+							$ QC="Good"<br>
+							$ if [ "${QC}" == "Good" ]<br>
+							&gt; then<br>
+							&gt; echo "Quality control good"<br>
+							&gt; else<br>
+							&gt; echo "Image has bad quality"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Quality control good</font> 
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ "STRING1" != "STRING2" ]:</font>
+						<font class="bashcommand">
+							$ QC="Good"<br>
+							$ if [ "${QC}" != "Good" ]<br>
+							&gt; then<br>
+							&gt; echo "Quality control is not good"<br>
+							&gt; else<br>
+							&gt; echo "Image has good quality"<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Image has good quality</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ "STRING1" \< "STRING2" ]:</font>
+						In the following example, I am comparing the strings <font class="bashcommand">"Canada"</font> with <font class="bashcommand">"Colombia"</font> and printing the one that sorts first. <font class="bashcommand">"Canada"</font> will be printed because the first letter of both words is the same but the second letter in <font class="bashcommand">"Canada"</font> (letter <font class="bashcommand">a</font>) comes before the second letter in <font class="bashcommand">"Colombia"</font> (letter <font class="bashcommand">o</font>).<br>
+						<font class="bashcommand">
+							$ VAR1="Canada"<br>
+							$ VAR2="Colombia"<br>
+							$ if [ "${VAR1}" \< "${VAR2}" ]<br>
+							&gt; then<br>
+							&gt; echo ${VAR1}<br>
+							&gt; else<br>
+							&gt; echo ${VAR2}<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Canada</font>
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${VAR1}" \< "${VAR2}" ] &gt;&gt; echo ${VAR1} || echo ${VAR2}<br>
+							<font class="bashcommand-result">Canada</font>
+						</font>	
+					</p>
+					
+					<p>
+						<font class="example">[ "STRING1" \> "STRING2" ]:</font>
+						<font class="bashcommand">
+							$ VAR1="Canada"<br> 
+							$ VAR2="Colombia"<br>
+							$ if [ "${VAR1}" \> "${VAR2}" ]<br>
+							&gt; then<br>
+							&gt; echo ${VAR2}<br>
+							&gt; else<br>
+							&gt; echo ${VAR1}<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Canada</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${VAR1}" \> "${VAR2}" ] &gt;&gt; echo ${VAR2} || echo ${VAR1}<br>
+							<font class="bashcommand-result">Canada</font>
+						</font>
+					</p>
+</body>
+</html>

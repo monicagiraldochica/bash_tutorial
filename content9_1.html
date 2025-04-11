@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.1. Writing files</h3>
+
+        <h4>echo</h4>
+        <p>So far we have used echo to print text into the terminal. You can also use this utility to print text into a file (and create a new file if it doesn't exist):</p>
+            
+        <p>
+        The following command will append <font class="bashcommand">"some text"</font> in a new line of <font class="bashcommand">someFile.txt</font> and add the new line character at the end. If someFile.txt didn’t exist, the file is created.<br>
+        <font class="bashcommand">echo "some text" >> someFile.txt</font>
+        </p>
+
+        <p>
+        If you add the flag <font class="bashcommand">-n</font>, bash won't print the trailing newline character:<br> 
+        <font class="bashcommand">echo -n "some text" >> someFile.txt</font>
+        </p>
+
+        <p>If you add the flag <font class="bashcommand">-e</font> it will interpret the character scape sequences in the text (see table below in the <font class="bashcommand">printf</font> section for a list of scape sequences).</p>
+
+        <p>If you use <font class="bashcommand">&gt;</font> instead of <font class="bashcommand">&gt;&gt;</font>, the previous contents of the file (if it existed) will be erased and replaced with the new text that you are echoing.</p>
+
+        <h4>printf</h4>
+        <p><font class="bashcommand">printf</font> is a powerful tool that allows you to format the information before printing it in a file, the command line or another variable. For example, you can specify the format of any number that you print and the number of decimal points you want to use. You could even use this tool to change the format of a variable (i.e. from scientific notation to float) and save the result in a new variable instead of a file. You can also add tab or any character scape sequence to your text.</p>
+
+        <p>Syntax: <font class="bashcommand">printf &lt;format&gt; &lt;arguments&gt;</font></p>
+
+        <p><font class="bashcommand">printf</font> uses the format specified in <font class="bashcommand">&lt;format&gt;</font> to print the objects (strings, numbers or variables) specified in <font class="bashcommand">&lt;arguments&gt;</font>. <font class="bashcommand">&lt;format&gt;</font> is a string that contains alphanumerical characters, character scape sequences and format specifications, each of which causes printing of the next successive argument. In contrast with the <font class="bashcommand">echo</font> command, <font class="bashcommand">printf</font> does not print the text in a new line by default, in order to add a new line the following character scape sequence should be added at the end of <font class="bashcommand">&lt;format&gt;</font>: <font class="bashcommand">\n</font>.</p>
+        
+        <table>
+            <tr>
+            <th>Character scape sequence</th>
+            <th>Meaning</th>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\b</font></td>
+            <td>
+                <p>Do not print the previous character (backspace).</p>
+                <p><font class="bashcommand">
+                    $ printf "%b" "abcdef"<br>
+                    <font class="bashcommand-result">abcdef</font>
+                </font></p>
+                <p><font class="bashcommand">
+                    $ printf "%b" "abc\bdef"<br>
+                    <font class="bashcommand-result">abdef</font>
+                </font></p>
+            </td>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\c</font></td>
+            <td> </td>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\n</font></td>
+            <td> 
+                <p>Write a new-line character.</p>
+                <p><font class="bashcommand">
+                    $ printf "%b" "abc\ndef"<br>
+                    <font class="bashcommand-result">
+                    abc<br>
+                    def
+                    </font>
+                </font></p>
+            </td>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\r</font></td>
+            <td>Write a &lt;carriage return&gt; character.</td>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\t</font></td>
+            <td> 
+                <p>Write a &lt;tab&gt; character.</p>
+                <p><font class="bashcommand">
+                    $ printf "%b" "abc\tdef"<br>
+                    <font class="bashcommand-result">abc   def</font>
+                </font></p>
+            </td>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\v</font></td>
+            <td> 
+                <p>Write a &lt;vertical tab&gt; character.</p>
+                <p><font class="bashcommand">
+                    $ printf "%b" "abc\vdef"<br>
+                    <font class="bashcommand-result">
+                    abc<br>
+                       def 
+                    </font>
+                </font></p>
+            </td>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\'</font></td>
+            <td>Write a single quote character.</td>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\\</font></td>
+            <td>Write a backslash character.</td>
+            </tr>
+
+            <tr>
+            <td><font class="bashcommand">\num</font></td>
+            <td>Write a byte whose value is the 1-, 2-, or 3-digit octal number <font class="bashcommand">num</font>. Multibyte characters can be constructed using multiple \num sequences.</td>
+            </tr>
+        </table>
+
+        <p>Each format specification is introduced by the percent character (<font class="bashcommand">%</font>), followed by the following fields (in the exact order). You must use one format specification for each argument (in the same order):</p>
+    
+        <table>
+            <tr>
+                <th>Flag</th>
+                <th>Meaning</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">#</font></td>
+                <td> 
+                    <p>When printing an octal number: Inserts a 0 prefix.</p>
+                    <p>(234)<sub>10</sub> = (352)<sub>8</sub></p>
+                    <p><font class="bashcommand">
+                        $ printf "%o\n%#o\n" 234 234<br>
+                        <font class="bashcommand-result">
+                        352<br>
+                        0352 
+                        </font>
+                    </font></p>
+                    <p>When printing a hexadecimal number: Inserts a 0x prefix.</p>
+                    <p>Given that (234)<sub>10</sub> = (EA)<sub>16</sub></p>
+                    <p><font class="bashcommand">
+                        $ printf "%x\n%#x\n" 234 234<br>
+                        <font class="bashcommand-result">
+                        ea<br>
+                        0xea 
+                        </font>
+                    </font></p>
+                    <p>When printing numbers using formats e (E), f (F) or g (G): Show the decimal point.</p>
+                </td>
+            </tr>	
+            
+            <tr>
+                <td><font class="bashcommand">-</font></td>
+                <td>Left justify.</td>
+            </tr>	
+            
+            <tr>
+                <td><font class="bashcommand">+</font></td>
+                <td>Place a sign before the number when using signed formats.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand"> </font></td>
+                <td>&lt;blank space&ht; Positive values begin with a blank. </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">0</font></td>
+                <td>Field is padded with zeros instead of blanks.</td>
+            </tr>
+        </table>
+
+        <p>Field width or precision: An integer number preceded by a period (<font class="bashcommand">.</font>) or an asterisk (<font class="bashcommand">*</font>). If a number is given, it will represent the number of characters or digits to print if the argument is a string or a number (respectively). If an asterisk is given instead of a number, the field width or precision will be specified as another argument.</p>
+
+        <p><font class="bashcommand">
+        $ printf "%s\n" "qwertyuiop"<br>
+        <font class="bashcommand-result">qwertyuiop</font>
+        </font></p>
+
+        <p><font class="bashcommand">
+        $ printf "%.4s\n" "qwertyuiop"<br>
+        <font class="bashcommand-result">qwer</font>
+        </font></p>
+
+        <p><font class="bashcommand">
+        $ printf "%.*s\n" 6 "qwertyuiop"<br>
+        <font class="bashcommand-result">qwerty</font>
+        </font></p>
+        
+        <p>Format: This is a character that indicates the type of format that should be used to print the arguments. The character options are listed in the following table.</p>
+
+        <table>
+            <tr>
+                <th>Character</th>
+                <th>Format</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">%</font></td>
+                <td> 
+                    <p>Prints the symbol <font class="bashcommand">%</font>. No argument is used</p>
+                    <p><font class="bashcommand">
+                    $ printf "%%"<br>
+                    <font class="bashcommand-result">%</font>
+                    </font></p>
+                    <p><font class="bashcommand">
+                    $ printf "%% %s" "Some string"<br>
+                    <font class="bashcommand-result">% Some string</font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">a</font> or <font class="bashcommand">A</font></td>
+                <td>Prints the argument in floating-point, hexadecimal form. The style used is <font class="bashcommand">[-h.hhh+-pd]</font>. Most probably you will never need to use this format other than for technical purposes.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">b</font></td>
+                <td> 
+                    <p>Same as <font class="bashcommand">s</font>, but interprets the character scape sequences instead of reading them as literal strings.</p>
+                    <p><font class="bashcommand">
+                    $ printf "%s" "text\ntext"<br> 
+                    <font class="bashcommand-result">text\ntext</font><br>
+                    </font></p>
+                    <p><font class="bashcommand">
+                    $ printf "%b" "text\ntext"<br>
+                    <font class="bashcommand-result">
+                    text<br>
+                    text 
+                    </font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">c</font></td>
+                <td>
+                    <p>The first byte of the argument is printed. Which will correspond to the first character if the argument is a string, or the first digit if it is a number.</p>
+                    <p><font class="bashcommand">
+                    $ printf "%c %c" "some string" 199<br>
+                    <font class="bashcommand-result">s 1</font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">d</font> or <font class="bashcommand">i</font></td>
+                <td> 
+                    <p>The argument must be a positive or negative integer. If no precision is specified, it just prints the number, otherwise it adds zeros before the integer to achieve the number of digits specified in the precision.</p>
+                    <p><font class="bashcommand">
+                    $ printf "%d\n%i\n" 2 -2<br>
+                    <font class="bashcommand-result">
+                    2<br>
+                    -2 
+                    </font>
+                    </font></p>
+                    <p><font class="bashcommand">
+                    $ printf "%.3d\n%.5i\n" -2 2<br>
+                    <font class="bashcommand-result">
+                    -002<br>
+                    00002 
+                    </font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">e</font> or <font class="bashcommand">E</font></td>
+                <td> 
+                    <p>Writes the number in the argument in scientific notation, with format <font class="bashcommand">[-]d.ddde+-dd</font>. There will be one digit before the decimal point and six digits after the decimal point if no precision is specified (or the number of digits specified in the precision). Infinity is printed as <font class="bashcommand">inf</font> and <font class="bashcommand">NaN</font> as <font class="bashcommand">nan</font>. If the flag is in upper case, the <font class="bashcommand">e</font> of the output will be printed in capital letter.</p>
+                    <p>234.567 equals 2.34567 × 102 in scientific notation. So, <font class="bashcommand">printf</font> would print that number in the following way:</p>
+                    <p><font class="bashcommand">
+                    $ printf "%e" 234.567<br> 
+                    <font class="bashcommand-result">2.345670e+02</font>
+                    </font></p>
+                    <p><font class="bashcommand">
+                    $ printf "%.1e" 234.567<br>
+                    <font class="bashcommand-result">2.3e+02</font>
+                    </font></p>
+                    <p><font class="bashcommand">
+                    $ printf "%.1E" 234.567<br> 
+                    <font class="bashcommand-result">2.3E+02</font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">f</font> or <font class="bashcommand">F</font></td>
+                <td> 
+                    <p>Prints the argument as a floating-point number with the format <font class="bashcommand">[-]ddd.ddd</font>. The number of digits after the decimal point equals the precision specification for the argument or six digits if no precision was specified. Infinity is printed as <font class="bashcommand">inf</font> and <font class="bashcommand">NaN</font> as <font class="bashcommand">nan</font>.</p>
+                    <p><font class="bashcommand">
+                    $ printf "%f\n" 2.34567890123<br>
+                    <font class="bashcommand-result">2.345679</font>
+                    </font></p>
+                    <p><font class="bashcommand">
+                    $ printf "%.3f\n" -2.34567890123<br>
+                    <font class="bashcommand-result">-2.346</font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">g</font> or <font class="bashcommand">G</font></td>
+                <td> 
+                    <p>The argument is printed in style <font class="bashcommand">f</font> (<font class="bashcommand">F</font>) or in style <font class="bashcommand">e</font> (<font class="bashcommand">E</font>) whichever gives full precision in minimum space.</p>
+                    <p><font class="bashcommand">
+                    $ printf "%g\n%g\n" 238.567 0.000001<br> 
+                    <font class="bashcommand-result">
+                    238.567<br> 
+                    1e-06 
+                    </font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">o</font></td>
+                <td> 
+                    <p>The argument must be a positive integer. Prints the octal value of the argument. it adds zeros before the octal to achieve the number of digits specified in the precision.</p>
+                    <p>Given that (234)<sub>10</sub> = (352)<sub>8</sub></p>
+                    <p><font class="bashcommand">
+                    $ printf "%o\n%.4o\n" 234 234<br> 
+                    <font class="bashcommand-result">
+                    352<br> 
+                    0352 
+                    </font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">s</font></td>
+                <td> 
+                    <p>Prints the string specified in the argument. It will stop when the number of characters specified in the precision is reached or at the end of the string if the precision is not specified (or if the string has less characters than the precision).</p>
+                    <p><font class="bashcommand">
+                    $ printf "%s" "example"<br> 
+                    <font class="bashcommand-result">example</font>
+                    </font></p>
+                    <p><font class="bashcommand">
+                    $ printf "%.3s" "example"<br> 
+                    <font class="bashcommand-result">exa</font>
+                    </font></p>
+                    <p><font class="bashcommand">
+                    $ printf "%.10s" "example"<br> 
+                    <font class="bashcommand-result">example</font> 
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">u</font></td>
+                <td> 
+                    <p>The argument must be a positive integer. If no precision is specified, it just prints the number, otherwise it adds zeros before the integer to achieve the number of digits specified in the precision.</p>
+                    <p><font class="bashcommand">
+                    $ printf "%u\n%.5u\n" 2 2<br> 
+                    <font class="bashcommand-result">
+                    2<br> 
+                    00002
+                    </font>
+                    </font></p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">x</font> or <font class="bashcommand">X</font></td>
+                <td> 
+                    <p>The argument should be a positive integer. Prints the hexadecimal value of the argument. If any precision is specified, it adds zeros before the hexadecimal to achieve the number of digits specified in the precision.</p>
+                    <p>Given that (234)<sub>10</sub> = (EA)<sub>16</sub></p>
+                    <p><font class="bashcommand">
+                    $ printf "%x\n%X\n%.4x\n" 234 234 234<br>
+                    <font class="bashcommand-result">
+                    ea<br>
+                    EA<br>
+                    00ea 
+                    </font>
+                    </font></p>
+                </td>
+            </tr>
+        </table>
+
+        <p>You can save the output of <font class="bashcommand">printf</font> into a variable instead of printing it. For example, if you have a number in scientific notation and you want to convert it to floating, you can type the following:</p>
+    
+        <p><font class="bashcommand">
+        $ FLOAT=$(printf "%f" 2.345670e+02)<br>
+        $ echo $FLOAT<br>
+        <font class="bashcommand-result">234.567000</font> 
+        </font></p>
+</html>

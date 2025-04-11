@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>content5</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">5. Arrays</h1>
+
+<h2 id="toc_1">5.1. Declaring and assigning values</h2>
+
+<p>An array is a data structure that stores a group of elements and allows you to access each element individually or all elements sequentially. Unlike in other programming languages, in bash you don&#39;t need to specify the type of elements that the array will contain and you can mix different types of elements in one array. For example, an array can contain strings and numbers. You can create and add elements to an array in different ways:</p>
+
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Usage</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>ARRAY[INDEX]=VAL</code></td>
+<td>If <code>ARRAY</code> has not been initialized, it will create the array and put element <code>VAL</code> in the position <code>INDEX</code>. The first element of an array is always in <code>INDEX</code>=0, instead of <code>INDEX</code>=1. If <code>ARRAY</code> already exists, it will replace <code>ARRAY</code> in the position <code>INDEX</code> with the new value <code>VAL</code>.</td>
+</tr>
+<tr>
+<td><code>declare -a ARRAY=(&#39;VAL1&#39; &#39;VAL2&#39; &#39;VAL3&#39; ...)</code></td>
+<td>Initializes <code>ARRAY</code> and puts the values inside the parenthesis into the array, respecting the same order. You can specify any number of values. The array is emptied before assigning the values if it already exists.</td>
+</tr>
+<tr>
+<td><code>read -a ARRAY</code></td>
+<td>Each word that the user input is assigned to sequential indices of <code>ARRAY</code>. The words must be separated by spaces. The array is emptied before assigning the values if it already exists.</td>
+</tr>
+<tr>
+<td><code>IFS=&#39;DEL&#39; read -a ARRAY</code></td>
+<td>Splits the user input using delimiter <code>DEL</code>, which must be a character or a space. Then, saves the different elements into <code>ARRAY</code>. The array is emptied before assigning the values if it already exists.</td>
+</tr>
+<tr>
+<td><code>IFS=&#39;DEL&#39; read -a ARRAY &lt;&lt;&lt; STRING</code></td>
+<td>Splits <code>STRING</code> using delimiter <code>DEL</code>, which must be a character or a space. Then, saves the different elements into <code>ARRAY</code>. The array is emptied before assigning the values if it already exists.</td>
+</tr>
+<tr>
+<td><code>ARRAY=($(seq FIRST STEP SIZE))</code></td>
+<td>Creates an array of equally spaced numbers beginning with <code>FIRST</code> and separated by <code>STEP</code>. It will add <code>SIZE</code> numbers to <code>ARRAY</code>.</td>
+</tr>
+<tr>
+<td><code>ARRAY=$(count -digits N FIRST LAST)</code></td>
+<td>Creates an array of numbers, each with <code>N</code> number of digits, starting with <code>FIRST</code> and ending with <code>LAST</code>. If the number has less digits, it will add zeros in front (i.e. if using two digits, number 1 will be saved as 01 in the array).</td>
+</tr>
+<tr>
+<td><code>ARRAY=$(seq N)</code></td>
+<td>Creates an array of sequential numbers, starting with 1 and ending with <code>N</code>.</td>
+</tr>
+<tr>
+<td><code>ARRAY=(ELEMENT1 ELEMENT3 ...)</code></td>
+<td>Creates an array with the elements specified inside the parenthesis.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_2">Usage of <code>${ARRAY[INDEX]}</code></h3>
+
+<p>The following examples will use the syntax <code>${ARRAY[INDEX]}</code> to access the element located in the position <code>INDEX</code> inside <code>ARRAY</code>.</p>
+
+<p>Remember that the first item in an array has index 0, the second item has index 1, etc. This is because in bash, arrays start in the position 0 instead of position 1.</p>
+
+<p>After assigning all the values to my array, I can print its contents using the expression <code>echo ${ARRAY[@]}</code>. I can also check the size of my array using <code>echo ${#ARRAY[@]}</code>.</p>
+
+<p>If I add an element to a position where the array already contains an element, then the old value will be replaced by the new value. In the example below, 59 was initially added to the position 0 of the array age. When another element (72) is added to the position 0, the previous value (59) is replaced.</p>
+
+<div><pre><code class="language-bash">$ # Create an array called age and add 5 elements to it
+$ age[0]=59
+$ age[1]=63
+$ age[2]=21
+$ age[3]=15
+$ age[4]=94
+$ # Print the content of the array
+$ echo &quot;Array: ${age[@]}&quot;
+Array: 59 63 21 15 94
+$ # Get the array size
+$ echo &quot;Array size: ${#age[@]}&quot;
+Array size: 5
+$ # Get the first element of the array
+$ echo &quot;First element: ${age[0]}&quot;
+First element: 59
+$ # Get the second element of the array
+$ echo &quot;Second element: ${age[1]}&quot;
+Second element: 63
+$ # Get the last element of the array
+$ size=${#age[@]}
+$ echo &quot;Last element: ${age[size-1]}&quot;
+Last element: 94
+$ # Get the penultimate element
+$ echo &quot;Penultimate element: ${age[size-2]}&quot;
+Penultimate element: 15
+$ # Replace the first value of the array for 72
+$ age[0]=72
+$ echo &quot;New array: ${age[@]}&quot;
+New array: 72 63 21 15 94</code></pre></div>
+
+<p>In the following example I will start assigning values to the array in the position 1 (instead of 0). That is not a problem, but the first position of my array (index=0) will remain empty, and my array will have only 4 values. If I echo the item in position 0 (<code>echo ${ARRAY[0]}</code>), I will get an empty string.</p>
+
+<p>Since I had previously created an array with the same name (<code>age</code>), I should first unset that variable (delete it). It is a good idea to do it if you&#39;re not sure if you already used that variable name before and you want to make sure you&#39;re creating a variable from zero.</p>
+
+<div><pre><code class="language-bash">$ # Delete the variable (empty array)
+$ unset age
+$ echo &quot;Array: ${age[@]}&quot;
+Array:
+$ # Create a new array with new elements, staring in the position 1 instead of 0
+$ age[1]=63
+$ age[2]=21
+$ age[3]=15
+$ age[4]=94
+$ echo &quot;Array: ${age[@]}&quot;
+Array: 63 21 15 94
+$ echo &quot;Array size: ${#age[@]}&quot;
+Array size: 4
+$ echo &quot;age[0]: ${age[0]}&quot;
+age[0]: 
+$ echo &quot;age[1]: ${age[1]}&quot;
+age[1]: 63</code></pre></div>
+
+<h3 id="toc_3">Usage of <code>declare -a ARRAY=(&#39;VAL1&#39; &#39;VAL2&#39; &#39;VAL3&#39; ...)</code></h3>
+
+<p>It is also possible to initiate an array and assign all the values at the same time. After you declare an array with some elements, it doesn&#39;t need to stay static. You can keep adding items.</p>
+
+<div><pre><code class="language-bash">$ # Initiate the array with some values
+$ declare -a array=(&#39;France&#39; &#39;Italy&#39; &#39;Germany&#39; &#39;Spain&#39; &#39;Canada&#39;)
+$ # Read the different elements of the array
+$ echo &quot;The element in position 0 is: ${array[0]}&quot;
+The element in position 0 is: France
+$ echo &quot;The element in position 1 is: ${array[1]}&quot;
+The element in position 1 is: Italy
+$ echo &quot;The element in position 2 is: ${array[2]}&quot;
+The element in position 2 is: Germany
+$ echo &quot;The element in position 3 is: ${array[3]}&quot;
+The element in position 3 is: Spain
+$ echo &quot;The element in position 4 is: ${array[4]}&quot;
+The element in position 4 is: Canada
+$ echo &quot;List of elements in the array: ${array[@]}&quot;
+List of elements in the array: France Italy Germany Spain Canada
+$ echo &quot;The number of elements in the array is ${#array[@]}&quot;
+The number of elements in the array is 5
+$ # Add more items to the array
+$ array[5]=&quot;Argentina&quot;
+$ array[6]=&quot;Mexico&quot;
+$ echo &quot;List of elements in the array: ${array[@]}&quot;
+List of elements in the array: France Italy Germany Spain Canada Argentina Mexico
+$ n=${#array[@]}
+$ echo &quot;The number of elements in the array is ${n}&quot;
+The number of elements in the array is 7
+$ # Add an element at the end of the array (in the position n, where n is the size of the array)
+$ array[n]=&quot;Portugal&quot;
+$ echo &quot;List of elements in the array: ${array[@]}&quot;
+List of elements in the array: France Italy Germany Spain Canada Argentina Mexico Portugal
+$ echo &quot;The number of elements in the array is ${#array[@]}&quot;
+The number of elements in the array is 8</code></pre></div>
+
+<h3 id="toc_4">Usage of <code>read -a ARRAY</code></h3>
+
+<p>Another way of creating and initializing an array is by reading a user input. The command <code>read</code> captures the user input and saves it in a variable. By using the flag <code>-a</code>, the user can input more than one word (separated by a space) and bash will assign each word to sequential indexes of the array, starting at 0.</p>
+
+<div><pre><code class="language-bash">$ read -a ARRAY
+Element1 Element2 Element3
+$ echo &quot;${ARRAY[0]}&quot;
+Element1
+$ echo &quot;${ARRAY[1]}&quot;
+Element2
+$ echo &quot;${ARRAY[2]}&quot;
+Element3</code></pre></div>
+
+<h3 id="toc_5">Usage of <code>IFS=&#39;DEL&#39; read -a ARRAY</code></h3>
+
+<p>If you want to use a different delimiter other than a space to split the user input into array elements, you can add <code>IFS=&#39;DEL&#39;</code> before read, with <code>DEL</code> being any character.</p>
+
+<div><pre><code class="language-bash">$ IFS=&#39;/&#39; read -a ARRAY
+Element1/Element2/Element3
+$ echo &quot;${ARRAY[0]}&quot;
+Element1
+$ echo &quot;${ARRAY[1]}&quot;
+Element2
+$ echo &quot;${ARRAY[2]}&quot;
+Element3
+$ IFS=&#39;.&#39; read -a ARRAY
+Element1.Element2.Element3
+$ echo &quot;${ARRAY[0]}&quot;
+Element1
+$ echo &quot;${ARRAY[1]}&quot;
+Element2
+$ echo &quot;${ARRAY[2]}&quot;
+Element3
+$ # If the wrong delimiter is used, the array wont be split correctly
+$ IFS=&#39;/&#39; read -a ARRAY
+Element1.Element2.Element3
+$ echo &quot;${ARRAY[0]}&quot;
+Element1.Element2.Element3
+$ echo &quot;${ARRAY[1]}&quot;
+
+$ echo &quot;${ARRAY[2]}&quot;
+</code></pre></div>
+
+<h3 id="toc_6">Usage of <code>IFS=&#39;DEL&#39; read -a ARRAY &lt;&lt;&lt; STRING</code></h3>
+
+<p>The same way as you can split a user input into elements of an array using a specific delimiter, you can also split elements of a string. This is very useful when trying to access parts of a file path.</p>
+
+<p>In the second example the delimiter is a slash (<code>/</code>). However, there are no characters before the first slash. So, the first element of the array will be empty. That empty value will still be counted when asking for the array size and will be located in the position 0. So home will be located in position 1 of the array instead of position 0.</p>
+
+<p>In the third example there are no characters after the last slash. If the last character of the input string is the delimiter, it will not add to the end of the array an empty character. So, the size of the array will be the same as if you exclude that last delimiter. As you can see in the examples below, the third array has the same size as the second array.</p>
+
+<p>However, if there is more than one repetition of the delimiter at the end of the string (see example 4 below), then the empty space between the two delimiters is counted as an element in the array.</p>
+
+<div><pre><code class="language-bash">$ # Convert a string into an array using the slash delimiter
+$ IFS=&#39;/&#39; read -a ARRAY &lt;&lt;&lt; &quot;Element1/Element2/Element3&quot;
+$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
+ARRAY[0]: Element1
+$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
+ARRAY[1]: Element2
+$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
+ARRAY[2]: Element3
+$ # Convert a string into an array using the slash delimiter
+$ my_string=&quot;/home/myuser/Documents/folder/subfolder&quot;
+$ echo &quot;String: ${my_string}&quot;
+String: /home/myuser/Documents/folder/subfolder
+$ IFS=&#39;/&#39; read -a ARRAY &lt;&lt;&lt; &quot;${my_string}&quot;
+$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
+ARRAY[0]:
+$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
+ARRAY[1]: home
+$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
+ARRAY[2]: myuser
+$ echo &quot;ARRAY[3]: ${ARRAY[3]}&quot;
+ARRAY[3]: Documents
+$ echo &quot;ARRAY[4]: ${ARRAY[4]}&quot;
+ARRAY[4]: folder
+$ echo &quot;ARRAY[5]: ${ARRAY[5]}&quot;
+ARRAY[5]: subfolder
+$ echo &quot;Array elements: ${ARRAY[@]}&quot;
+Array elements:  home myuser Documents folder subfolder
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 6
+$ # Convert a string into an array using the slash delimiter
+$ my_string=&quot;/home/myuser/Documents/folder/subfolder/&quot;
+$ echo &quot;String: ${my_string}&quot;
+String: /home/myuser/Documents/folder/subfolder/
+$ IFS=&#39;/&#39; read -a ARRAY &lt;&lt;&lt; &quot;${my_string}&quot;
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 6
+$ # Convert a string into an array using the slash delimiter
+$ my_string=&quot;/home/myuser/Documents/folder/subfolder//&quot;
+$ IFS=&#39;/&#39; read -a ARRAY &lt;&lt;&lt; &quot;${my_string}&quot;
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 7
+$ # Convert a string into an array using the slash delimiter
+$ my_string=&quot;/home/myuser/Documents/folder/subfolder//file.txt&quot;
+$ IFS=&#39;/&#39; read -a ARRAY &lt;&lt;&lt; &quot;${my_string}&quot;
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 8
+$ echo &quot;ARRAY[5]: ${ARRAY[5]}&quot;
+ARRAY[5]: subfolder
+$ echo &quot;ARRAY[6]: ${ARRAY[6]}&quot;
+ARRAY[6]:
+$ echo &quot;ARRAY[7]: ${ARRAY[7]}&quot;
+ARRAY[7]: file.txt
+$ # Convert a string into an array using the slash delimiter
+$ string=&quot;./Folder/Subfolder/file.txt&quot;
+$ IFS=&#39;/&#39; read -a ARRAY &lt;&lt;&lt; &quot;${string}&quot;
+$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
+ARRAY[0]: .
+$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
+ARRAY[1]: Folder
+$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
+ARRAY[2]: Subfolder
+$ echo &quot;ARRAY[3]: ${ARRAY[3]}&quot;
+ARRAY[3]: file.txt
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 4
+$ # Convert a string into an array using dot as delimiter
+$ string=&quot;./Folder/Subfolder/file.txt&quot;
+$ IFS=&#39;.&#39; read -a ARRAY &lt;&lt;&lt; &quot;${string}&quot;
+$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
+ARRAY[0]: 
+$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
+ARRAY[1]: /Folder/Subfolder/file
+$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
+ARRAY[2]: txt
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 3
+$ # Convert a string into an array using dot as delimiter
+$ string=&quot;1.2.3&quot;
+$ IFS=&#39;.&#39; read -a ARRAY &lt;&lt;&lt; &quot;${string}&quot;
+$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
+ARRAY[0]: 1
+$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
+ARRAY[1]: 2
+$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
+ARRAY[2]: 3
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 3
+$ # Convert a string into an array using dot as delimiter
+$ string=&quot;23.485&quot;
+$ IFS=&#39;.&#39; read -a ARRAY &lt;&lt;&lt; &quot;${string}&quot;
+$ echo &quot;The integer part of ${string} is ${ARRAY[0]}, and the decimal part is .${ARRAY[1]}&quot;
+The integer part of 23.485 is 23, and the decimal part is .485
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 2</code></pre></div>
+
+<h3 id="toc_7">Usage of <code>ARRAY=($(seq FIRST STEP SIZE))</code></h3>
+
+<p>You can also create an array of equally spaced or consecutive numbers using the command <code>seq</code>. In the following examples, I will create an array of numbers that go from 15 to 19. The distance between each number (<code>STEP</code>) will vary in each example.</p>
+
+<p>When the step between numbers is 1, it doesn&#39;t need to be specified.</p>
+
+<div><pre><code class="language-bash">$ # Array of equally spaced numbers (step size 0.5) from 15 to 19
+$ ARRAY=($(seq 15 0.5 19))
+$ # Print each element of the array
+$ echo &quot;Array of equally spaced numbers (step size 0.5) from 15 to 19: ${ARRAY[@]}&quot;
+Array of equally spaced numbers (step size 0.5) from 15 to 19: 15 15.5 16 16.5 17 17.5 18 18.5 19
+$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
+ARRAY[0]: 15
+$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
+ARRAY[1]: 15.5
+$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
+ARRAY[2]: 16
+$ echo &quot;ARRAY[3]: ${ARRAY[3]}&quot;
+ARRAY[3]: 16.5
+$ echo &quot;ARRAY[4]: ${ARRAY[4]}&quot;
+ARRAY[4]: 17
+$ echo &quot;ARRAY[5]: ${ARRAY[5]}&quot;
+ARRAY[5]: 17.5
+$ echo &quot;ARRAY[6]: ${ARRAY[6]}&quot;
+ARRAY[6]: 18
+$ echo &quot;ARRAY[7]: ${ARRAY[7]}&quot;
+ARRAY[7]: 18.5
+$ echo &quot;ARRAY[8]: ${ARRAY[8]}&quot;
+ARRAY[8]: 19
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 9
+$ # Array of equally spaced numbers (step size 2) from 1 to 10
+$ ARRAY=($(seq 1 2 10))
+$ # Print array
+$ echo &quot;Array of equally spaced numbers (step size 2) from 1 to 10: ${ARRAY[@]}&quot;
+Array of equally spaced numbers (step size 2) from 1 to 10: 1 3 5 7 9
+$ echo &quot;Array size: ${#ARRAY[@]}&quot;
+Array size: 5
+$ # Array of equally spaced numbers (step size 1) from 15 to 19
+$ echo &quot;Array of equally spaced numbers (step size 1) from 15 to 19:&quot;
+Array of equally spaced numbers (step size 1) from 15 to 19:
+$ ARRAY1=($(seq 15 1 19))
+$ echo &quot;Array1 (specifying the step size): ${ARRAY1[@]}&quot;
+Array1 (specifying the step size): 15 16 17 18 19
+$ ARRAY2=($(seq 15 19))
+$ echo &quot;Array2 (not specifying the step size): ${ARRAY2[@]}&quot;
+Array2 (not specifying the step size): 15 16 17 18 19</code></pre></div>
+
+<p>Bash has functions that return a list of elements. For example, as you will learn in the section of file manipulation, the command <code>ls</code> returns the list of files in your current working directory. In these cases, instead of manually entering a list of elements between parentheses to convert into an array, you can write the function name, and its output will be saved in the array:</p>
+
+<div><pre><code class="language-bash">$ # Array will contain the list of files in the current directory
+$ array=($(ls))
+$ echo &quot;Array: ${array[@]}&quot;
+Array: README.md Untitled.html Untitled.ipynb bash.html content1.html content10.html content10_1.html content11.html content11_1.html content11_2.html content11_3.html content11_4.html content12.html content13.html content14.html content15.html content16.html content17.html content18.html content19.html content2.html content20.html content2_1.html content2_2.html content2_3.html content2_4.html content3.html content3_1.html content3_2.html content3_3.html content3_4.html content4.html content4_1.html content4_2.html content5.html content5_1.html content5_2.html content6.html content6_1.html content6_2.html content6_3.html content6_4.html content6_5.html content7.html content7_1.html content7_2.html content7_3.html content8.html content8_1.html content8_2.html content8_3.html content8_4.html content9.html content9_1.html content9_10.html content9_11.html content9_12.html content9_13.html content9_14.html content9_15.html content9_16.html content9_2.html content9_3.html content9_4.html content9_5.html content9_6.html content9_7.html content9_8.html content9_9.html cropped.png flipped.png flipped2.png functions.js index.html neuroimgsoft.html pwd.png resampled.png rotated1.png rotated2.png styles.css styles2.css tmp.html vi_1.png vi_2.png vi_3.png vi_4.png vi_5.png vi_6.png</code></pre></div>
+
+
+
+
+</body>
+
+</html>

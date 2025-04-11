@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.16. Printing other information from a file</h3>
+
+        <p><font class="example">Print the number of lines in file3.csv and file4.txt.</font></p>
+
+        <p><table>
+            <tr>
+                <th>file3.csv</th>
+                <th>file4.csv</th>
+            </tr>
+            
+            <tr>
+                <td><p><font class="bashcommand">
+                $ awk '{print NF}' file3.csv | wc -l<br>
+                <font class="bashcommand-result">28</font>
+                </font></p>
+                
+                <p><font class="bashcommand">
+                $ nlines=$(awk '{print NF}' file3.csv | wc -l)<br>
+                $ echo $nlines<br>
+                <font class="bashcommand-result">28</font>
+                </font></p></td>
+                
+                <td><p><font class="bashcommand">
+                $ awk '{print NF}' file4.txt | wc -l<br>
+                <font class="bashcommand-result">29</font>
+                </font></p>
+                
+                <p><font class="bashcommand">
+                $ nlines=$(awk '{print NF}' file4.txt | wc -l)<br>
+                $ echo $nlines<br>
+                <font class="bashcommand-result">29</font>
+                </font></p></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Print the number of columns in file3.csv and file4.txt.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Comma-separated file</th>
+                <th>Space-separated file</th>
+            </tr>
+            
+            <tr>
+                <td><p><font class="bashcommand">
+                $ awk -F',' '{print NF}' file3.csv | sort –nu<br>
+                <font class="bashcommand-result">3</font>
+                </font></p>
+                
+                <p><font class="bashcommand">
+                $ ncols=$(awk -F',' '{print NF}' file3.csv | sort -nu)<br>
+                $ echo $ncols<br>
+                <font class="bashcommand-result">3</font>
+                </font></p></td>
+                
+                <td><p><font class="bashcommand">
+                $ awk '{print NF}' file4.txt | sort -nu<br>
+                <font class="bashcommand-result">3</font>
+                </font></p>
+                
+                <p><font class="bashcommand">
+                $ ncols=$(awk '{print NF}' file4.txt | sort -nu)<br>
+                $ echo $ncols<br>
+                <font class="bashcommand-result">3</font>
+                </font></p></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Print the length of each line of file4.txt.</font></p>
+
+        <p>To get the length of a string you can use the function <font class="bashcommand">length()</font>, and pass as parameter <font class="bashcommand">$0</font> which obtains all the fields (the whole line).</p>
+
+        <p><table>
+            <tr>
+                <th>Print each line</th>
+                <th>Print the length of each line</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '{print $0}' file4.txt<br>
+                <font class="bashcommand-result">
+                AnonymizedID SubjectGroup AGE<br>
+                B11108326 Group1 59<br>
+                B11108399 Group1 23<br>
+                B11110893 Group1 28<br>
+                B11119909 Group2 61<br>
+                D11144030 Group3 11<br>
+                D11144030 Group3 13<br>
+                B11119903 Group2 84<br>
+                C11131039 Group2 67<br>
+                C11133100 Group1 23<br>
+                C11135566 Group2 72<br>
+                C11137159 Group3 11<br>
+                C11137159 Group3 12<br>
+                C11137167 Group3 14<br>
+                C11137167 Group3 16<br>
+                C11137439 Group3 15<br>
+                C11137439 Group3 79<br>
+                C11137443 Group3 15<br>
+                C11137544 Group1 22<br>
+                C11137123 Group2 68<br>
+                C11138150 Group1 44<br>
+                C11138152 Group1 10<br>
+                C11138797 Group1 24<br>
+                C11138184 Group1 57<br>
+                C11138122 Group1 23<br>
+                C11138122 MISSING 25<br>
+                C11138192 Group1 45<br>
+                B12226507 Group1 26<br>
+                B12226546 Group1 55
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ awk '{print length($0)}' file4.txt<br>
+                <font class="bashcommand-result">
+                29<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>19<br>20<br>19<br>19<br>19
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Print the length of the second field (<font class="bashcommand">length($2)</font>) in file3.csv and file4.txt.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Comma-separated file</th>
+                <th>Space-separated file</th>
+            </tr>
+            
+            <tr>
+                <td><p><font class="bashcommand">
+                $ awk '{print length($2)}' file4.txt<br>
+                <font class="bashcommand-result">
+                12<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>7<br>6<br>6<br>6
+                </font>
+                </font></td>
+                
+                <td><p><font class="bashcommand">
+                $ awk -F',' '{print length($2)}' file3.csv<br>
+                <font class="bashcommand-result">
+                13<br>7<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>6<br>8<br>8<br>8<br>6<br>6<br>8<br>6<br>6<br>6<br>6<br>6<br>6<br>8<br>6
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p>
+        <font class="example">Print all the lines of file4.txt in upper-case.</font><br>
+        To convert a string to upper-case use the function <font class="bashcommand">toupper()</font> and pass as parameter <font class="bashcommand">$0</font> which contains the whole line.
+        </p>
+
+        <p><table>
+            <tr><td><font class="bashcommand">$ awk '{print toupper($0)}' file4.txt</font></td></tr>
+            <tr><td><font class="bashcommand-result">
+                ANONYMIZEDID SUBJECTGROUP AGE<br>
+                B11108326 GROUP1 59<br>
+                B11108399 GROUP1 23<br>
+                B11110893 GROUP1 28<br>
+                B11119909 GROUP2 61<br>
+                D11144030 GROUP3 11<br>
+                D11144030 GROUP3 13<br>
+                B11119903 GROUP2 84<br>
+                C11131039 GROUP2 67<br>
+                C11133100 GROUP1 23<br>
+                C11135566 GROUP2 72<br>
+                C11137159 GROUP3 11<br>
+                C11137159 GROUP3 12<br>
+                C11137167 GROUP3 14<br>
+                C11137167 GROUP3 16<br>
+                C11137439 GROUP3 15<br>
+                C11137439 GROUP3 79<br>
+                C11137443 GROUP3 15<br>
+                C11137544 GROUP1 22<br>
+                C11137123 GROUP2 68<br>
+                C11138150 GROUP1 44<br>
+                C11138152 GROUP1 10<br>
+                C11138797 GROUP1 24<br>
+                C11138184 GROUP1 57<br>
+                C11138122 GROUP1 23<br>
+                C11138122 MISSING 25<br>
+                C11138192 GROUP1 45<br>
+                B12226507 GROUP1 26<br>
+                B12226546 GROUP1 55 
+            </font></td></tr>
+        </table></p>
+
+        <p>
+        <font class="example">Print all the lines of file4.txt in lower-case.</font><br>
+        To convert a string to lower-case use the function <font class="bashcommand">tolower()</font> and pass as parameter <font class="bashcommand">$0</font> which contains the whole line.
+        </p>
+
+        <p><table>
+            <tr><td><font class="bashcommand">$ awk '{print tolower($0)}' file4.txt</font></tr></td>
+            <tr><td><font class="bashcommand-result">
+                anonymizedid subjectgroup age<br>
+                b11108326 group1 59<br>
+                b11108399 group1 23<br>
+                b11110893 group1 28<br>
+                b11119909 group2 61<br>
+                d11144030 group3 11<br>
+                d11144030 group3 13<br>
+                b11119903 group2 84<br>
+                c11131039 group2 67<br>
+                c11133100 group1 23<br>
+                c11135566 group2 72<br>
+                c11137159 group3 11<br>
+                c11137159 group3 12<br>
+                c11137167 group3 14<br>
+                c11137167 group3 16<br>
+                c11137439 group3 15<br>
+                c11137439 group3 79<br>
+                c11137443 group3 15<br>
+                c11137544 group1 22<br>
+                c11137123 group2 68<br>
+                c11138150 group1 44<br>
+                c11138152 group1 10<br>
+                c11138797 group1 24<br>
+                c11138184 group1 57<br>
+                c11138122 group1 23<br>
+                c11138122 missing 25<br>
+                c11138192 group1 45<br>
+                b12226507 group1 26<br>
+                b12226546 group1 55
+            </font></tr></td>
+        </p></table>
+
+        <p>Some other functions that can be used in addition to <font class="bashcommand">toupper()</font> and <font class="bashcommand">tolower()</font> can be found <a href="https://www.cs.princeton.edu/courses/archive/spr08/cos333/awk.help" target="_blank">here</a></p>
+</html>

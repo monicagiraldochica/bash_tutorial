@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.5. The awk command</h3>
+            <p><font class="bashcommand">awk</font> is a bash program that scans files and process their content using patterns. It reads each line of a file or a group of files searching for the specified pattern and each time that it finds the pattern, it performs an associated action. This tool can extract specific lines or columns from files, merge files, search the content of one file in the other, etc.</p>
+            
+        <p>When reading each line of the specified files, <font class="bashcommand">awk</font> will separate it into fields (columns) using the blank space as a separator. If your file uses a different separator (i.e. a comma). Then you must specify your separator using the <font class="bashcommand">-F</font> flag (see syntax below). The different fields will be denoted <font class="bashcommand">$1</font>, <font class="bashcommand">$2</font>, <font class="bashcommand">$3</font>... etc. <font class="bashcommand">$0</font> will refer to the entire line. If the field separator (<font class="bashcommand">FS</font>) is null, each line will be split into one field per character.</p>
+
+        <p>Syntax: <font class="bashcommand">awk [ -F fs ] [ -v var=value ] [ 'pattern {action}' ] [ files ] | [ other functions ]</font></p>
+
+        <table>
+            <tr>
+                <th>Flag</th>
+                <th>Meaning</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-F fs (optional)</font></td>
+                <td>Defines the input field separator to be the regular expression <font class="bashcommand">fs</font>. Use this flag when the columns of your file use a separator other than a space. See examples below.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">-v var=variableName (optional)</font></td>
+                <td>When the value that is being search is stored in a variable, you should use this flag. See below for examples on how to use this flag.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">files</font></td>
+                <td>List of files to be searched.</td>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">other functions</font> (optional)</td>
+                <td>You can apply to the output of <font class="bashcommand">awk</font> other functions such as <font class="bashcommand">head</font>, <font class="bashcommand">tail</font>, <font class="bashcommand">paste</font>, <font class="bashcommand">grep</font>, etc (some of them explained below and in the examples section)</td>
+            </tr>
+        </table>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.13. Examples: Reading lines of a file that contain the searched value in a specific column</h3>
+
+        <font class="example">Print the line(s) of file3.csv and file4.txt that have value <font class="bashcommand">11</font> <u>in the third column</u>.</font>
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '$3 == "11" {print $1,$2}' file4.txt<br>
+                <font class="bashcommand-result">
+                D11144030 Group3<br>
+                C11137159 Group3 
+                </font>
+                </font></td>
+            
+                <td><font class="bashcommand">
+                $ awk -F',' '$3 == "11" {print $1,$2}' file3.csv<br>
+                <font class="bashcommand-result">
+                C11137443 Group3 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <font class="example">Print the first and second columns of those lines in file3.csv and file4.txt that have value <font class="bashcommand">11</font> <u>in the third column</u>.</font>
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '$3 == "11" {print $1,$2}' file4.txt<br>
+                <font class="bashcommand-result">
+                D11144030 Group3<br>
+                C11137159 Group3 
+                </font>
+                </font></td>
+            
+                <td><font class="bashcommand">
+                $ awk -F',' '$3 == "11" {print $1,$2}' file3.csv<br>
+                <font class="bashcommand-result">
+                C11137443 Group3 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <font class="example">Print the line(s) of file1.csv and file2.txt that have value <font class="bashcommand">"Group1"</font> (including the colons <font class="bashcommand">""</font>) <u>in the second column</u>.</font>
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '$2 == "\"Group1\""' file2.txt<br>
+                <font class="bashcommand-result">
+                "B11137244" "Group1" "450" "555"<br>
+                "B11154534" "Group1" "456" "456"<br>
+                "B11144100" "Group1" "450" "886"<br>
+                "B11137244" "Group1" "450" "456"<br>
+                "B11134987" "Group1" "900" "MissingData"<br>
+                "B11144345" "Group1" "900" "776"<br>
+                "B11110676" "Group1" "900" "10"<br>
+                "B11154532" "Group1" "456" "886"<br>
+                "B11131605" "Group1" "456" "MissingData"<br>
+                "B11137784" "Group1" "900" "436"<br>
+                "B11156098" "Group1" "500" "886"<br>
+                "B11133232" "Group1" "500" "MissingData"<br>
+                "B11152577" "Group1" "900" "756"<br>
+                "B11156098" "Group1" "456" "886"<br>
+                "B11133232" "Group1" "456" "MissingData" 
+                </font>
+                </font></td>
+            
+                <td><font class="bashcommand">
+                $ awk -F',' '$2 == "\"Group1\""' file1.csv<br>
+                <font class="bashcommand-result">
+                "B33199522","Group1","0",""<br>
+                "B11137879","Group1","0",""<br>
+                "B11153927","Group1","0",""<br>
+                "B11177806","Group1","MD",""<br>
+                "B11152799","Group1","0",""<br>
+                "B11154358","Group1","0",""<br>
+                "B11110925","Group1","0",""<br>
+                "B11137879","Group1","0",""<br>
+                "B11110603","Group1","0",""<br>
+                "B11110927","Group1","0",""<br>
+                "B11147712","Group1","0",""<br>
+                "B11157974","Group1","0",""<br>
+                "B33199522","Group1","0","" 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <font class="example">Print the first column of those lines in file1.csv and file2.txt that have value <font class="bashcommand">"Group1"</font> (including the colons <font class="bashcommand">""</font>) <u>in the second column</u>.</font>
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '$2 == "\"Group1\"" {print $1}' file2.txt<br>
+                <font class="bashcommand-result">
+                "B11137244"<br>
+                "B11154534"<br>
+                "B11144100"<br>
+                "B11137244"<br>
+                "B11134987"<br>
+                "B11144345"<br>
+                "B11110676"<br>
+                "B11154532"<br>
+                "B11131605"<br>
+                "B11137784"<br>
+                "B11156098"<br>
+                "B11133232"<br>
+                "B11152577"<br>
+                "B11156098"<br>
+                "B11133232" 
+                </font>
+                </font></td>
+            
+                <td><font class="bashcommand">
+                $ awk -F',' '$2 == "\"Group1\"" {print $1}' file1.csv<br>
+                <font class="bashcommand-result">
+                "B33199522"<br>
+                "B11137879"<br>
+                "B11153927"<br>
+                "B11177806"<br>
+                "B11152799"<br>
+                "B11154358"<br>
+                "B11110925"<br>
+                "B11137879"<br>
+                "B11110603"<br>
+                "B11110927"<br>
+                "B11147712"<br>
+                "B11157974"<br>
+                "B33199522" 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+    <font class="example">Print the line(s) of file1.csv and file2.txt that <u>do not have</u> value <font class="bashcommand">"Group1"</font> (including the colons <font class="bashcommand">""</font>) <u>in the second column</u>.</font>
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '$2 != "\"Group1\""' file2.txt<br>
+                <font class="bashcommand-result">
+                "AnonymizedID" "SubjectGroup" "TEST1" "TEST2"<br>
+                "B11130912" "Group2b" "900" "MissingData"<br>
+                "B12226566" "Group2b" "450" "MissingData"<br>
+                "C11137159" "Group3" "MissingData" "MissingData"<br>
+                "B11156453" "Group4" "456" "2"<br>
+                "C11138929" "Group2b" "2" "MissingData"<br>
+                "B11155267" "Group3" "900" "10"<br>
+                "B11137120" "Group2b" "450" "456"<br>
+                "B33191224" "Group2b" "450" "776"<br>
+                "B11155267" "Group3" "900" "10"<br>
+                "C11138999" "Group2b" "900" "MissingData"<br>
+                "B11135292" "Group3" "MissingData" "MissingData"<br>
+                "C11138912" "Group2b" "900" "MissingData"<br>
+                "B11150911" "Group2b" "900" "117" 
+                </font>
+                </font></td>
+            
+                <td><font class="bashcommand">
+                $ awk -F',' '$2 != "\"Group1\""' file1.csv<br>
+                <font class="bashcommand-result">
+                "Anonymized ID","Subject Group","HASCONDITION","CONDITION"<br>
+                "B33199603","Group3","0",""<br>
+                "B11144410","Group2 b","0",""<br>
+                "B11110455","Group2 b","0",""<br>
+                "B11135291","Group3","0",""<br>
+                "B11177579","Group2 b","0",""<br>
+                "B11157958","Group3","0",""<br>
+                "B11110690","Group3","0",""<br>
+                "B11135291","Group3","9","mTBI"<br>
+                "B11135072","MISSING","0",""<br>
+                "B33199603","Group3","0",""<br>
+                "B33191224","Group2 b","0",""<br>
+                "B11131290","Group2 b","0",""<br>
+                "B33191224","Group2 b","0",""<br>
+                "B11141503","Group3","0",""<br>
+                "C11137159","Group3","9","mTBI" 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <font class="example">Print the first column of those lines in file1.csv and file2.txt that <u>do not have value</u> <font class="bashcommand">"Group1"</font> (including the colons <font class="bashcommand">""</font>) <u>in the second column</u>.</font>
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '$2 != "\"Group1\"" {print $1}' file2.txt<br>
+                <font class="bashcommand-result">
+                "AnonymizedID"<br>
+                "B11130912"<br>
+                "B12226566"<br>
+                "C11137159"<br>
+                "B11156453"<br>
+                "C11138929"<br>
+                "B11155267"<br>
+                "B11137120"<br>
+                "B33191224"<br>
+                "B11155267"<br>
+                "C11138999"<br>
+                "B11135292"<br>
+                "C11138912"<br>
+                "B11150911"  
+                </font>
+                </font></td>
+            
+                <td><font class="bashcommand">
+                $ awk -F',' '$2 != "\"Group1\"" {print $1}' file1.csv<br>
+                <font class="bashcommand-result">
+                "Anonymized ID"<br>
+                "B33199603"<br>
+                "B11144410"<br>
+                "B11110455"<br>
+                "B11135291"<br>
+                "B11177579"<br>
+                "B11157958"<br>
+                "B11110690"<br>
+                "B11135291"<br>
+                "B11135072"<br>
+                "B33199603"<br>
+                "B33191224"<br>
+                "B11131290"<br>
+                "B33191224"<br>
+                "B11141503"<br>
+                "C11137159" 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <font class="example">Print the ID (first column) of those subjects in file3.csv and file4.txt that have age (third column) <u>greater than</u> 20.</font>
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '$3 > "20" {print $1}' file4.txt<br>
+                <font class="bashcommand-result">
+                AnonymizedID<br>
+                B11108326<br>
+                B11110893<br>
+                B11119909<br>
+                B11119903<br>
+                C11131039<br>
+                C11133100<br>
+                C11135566<br>
+                C11137439<br>
+                C11137544<br>
+                C11137123<br>
+                C11138150<br>
+                C11138797<br>
+                C11138184<br>
+                C11138122<br>
+                C11138122<br>
+                C11138192<br>
+                B12226507<br>
+                B12226546 
+                </font>
+                </font></td>
+            
+                <td><font class="bashcommand">
+                $ awk -F',' '$3 > "20" {print $1}' file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID<br>
+                C11138122<br>
+                C11138192<br>
+                B12226507<br>
+                B12226546<br>
+                C11138122<br>
+                C11138184<br>
+                C11138797<br>
+                C11138152<br>
+                C11138150<br>
+                C11131039<br>
+                C11135566<br>
+                B11119903<br>
+                C11137544<br>
+                C11137123<br>
+                C11137439<br>
+                C11133100<br>
+                B11108399<br>
+                B11108326<br>
+                B11119909<br>
+                B11110893 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <font class="example">Print the ID (first column) of those subjects in file3.csv and file4.txt that have age (third column) <u>less than</u> 20.</font>
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk '$3 < "20" {print $1}' file4.txt<br>
+                <font class="bashcommand-result">
+                D11144030<br>
+                D11144030<br>
+                C11137159<br>
+                C11137159<br>
+                C11137167<br>
+                C11137167<br>
+                C11137439<br>
+                C11137443<br>
+                C11138152 
+                </font>
+                </font></td>
+            
+                <td><font class="bashcommand">
+                $ awk -F',' '$3 < "20" {print $1}' file3.csv<br>
+                <font class="bashcommand-result">
+                C11137167<br>
+                C11137159<br>
+                C11137167<br>
+                C11137159<br>
+                C11137443<br>
+                C11137439<br>
+                D11144030 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p>
+        <font class="example">Print the line(s) of file3.csv that have value <font class="bashcommand">"Group1"</font> <u>or</u> <font class="bashcommand">"Group3"</font> <u>in the second column</u>.</font>
+        When there is more than one rule, the easiest and more organized way to run the command is to put all the rules in a text file and call that text file using the flag <font class="bashcommand">-f</font>. In the following example, patterns3.txt contains the rules to filter the lines that are to be printed (<font class="bashcommand">$2 == "Group1"</font> and <font class="bashcommand">$2 == "Group3"</font>). 
+        </p>
+
+        <font class="bashcommand">
+            
+        <p>
+        $ cat patterns3.txt<br>
+        <font class="bashcommand-result">
+        $2 == "Group1"<br>
+        $2 == "Group3" 
+        </font>
+        </p>
+            
+        <p>
+        $ awk -F',' -f patterns3.txt file3.csv<br>
+        <font class="bashcommand-result">
+        C11138192,Group1,54<br>
+        B12226507,Group1,68<br>
+        B12226546,Group1,67<br>
+        C11138122,Group1,24<br>
+        C11138184,Group1,59<br>
+        C11138797,Group1,22<br>
+        C11138152,Group1,53<br>
+        C11138150,Group1,41<br>
+        C11137167,Group3,14<br>
+        C11137159,Group3,13<br>
+        C11137167,Group3,16<br>
+        C11137159,Group3,13<br>
+        C11137544,Group1,21<br>
+        C11137443,Group3,11<br>
+        C11137439,Group3,79<br>
+        C11137439,Group3,15<br>
+        C11133100,Group1,23<br>
+        D11144030,Group3,13<br>
+        B11108399,Group1,23<br>
+        B11108326,Group1,59<br>
+        B11110893,Group1,28 
+        </font>
+        </p>
+            
+        <p>
+        $ cat patterns4.txt<br>
+        <font class="bashcommand-result">
+        $2 == "Group1" || $2 == "Group3" 
+        </font>
+        </p>
+            
+        <p>
+        $ awk -F',' -f test.txt file3.csv<br>
+        <font class="bashcommand-result">
+        C11138192,Group1,54<br>
+        B12226507,Group1,68<br>
+        B12226546,Group1,67<br>
+        C11138122,Group1,24<br>
+        C11138184,Group1,59<br>
+        C11138797,Group1,22<br>
+        C11138152,Group1,53<br>
+        C11138150,Group1,41<br>
+        C11137167,Group3,14<br>
+        C11137159,Group3,13<br>
+        C11137167,Group3,16<br>
+        C11137159,Group3,13<br>
+        C11137544,Group1,21<br>
+        C11137443,Group3,11<br>
+        C11137439,Group3,79<br>
+        C11137439,Group3,15<br>
+        C11133100,Group1,23<br>
+        D11144030,Group3,13<br>
+        B11108399,Group1,23<br>
+        B11108326,Group1,59<br>
+        B11110893,Group1,28  
+        </font>
+        </p>
+            
+        </font>
+
+        <p>In this example, we obtained the same result using either patterns3.txt or patterns4.txt. When you want to select any line that contains any pattern in a list of patterns, you can either put each pattern in a different line of the text file or use the or (||) symbol to concatenate all the patterns or rules.</p>
+
+        <p>
+        <font class="example">Print the value of one column for those lines that have specific values in other columns</font>
+        Print the ID (first column) of those subjects in file3.csv that belong to <font class="bashcommand">"Group1"</font> (second column), and have age (third column) <u>greater than</u> 60, or that belong to <font class="bashcommand">"Group3"</font> (second column) and have age (third column) <u>less than</u> 20.
+        </p>
+
+        <p>
+        In this example, we want to print any line that contains one of the following rules:
+        <ul>
+            <li>Second column equals <font class="bashcommand">Group1</font> and third greater than 60: <font class="bashcommand">$2 == "Group1" && $3 > 60</font></li>
+            <li>Second column equals and <font class="bashcommand">Group3</font> third less than 20: <font class="bashcommand">$2 == "Group3" && $3 < 20</font></li>
+        </ul>
+        </p>
+
+        <p>
+        So, the content of our pattern file must be:<br>
+        <font class="bashcommand">
+        $ cat patterns5.txt<br>
+        <font class="bashcommand-result">
+        $2 == "Group1" && $3 > 60<br>
+        $2 == "Group3" && $3 < 20 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        To print all the columns from the selected lines:<br>
+        <font class="bashcommand">
+        $ awk -F',' -f patterns5.txt file3.csv<br>
+        <font class="bashcommand-result">
+        B12226507,Group1,68<br>
+        B12226546,Group1,67<br>
+        C11137167,Group3,14<br>
+        C11137159,Group3,13<br>
+        C11137167,Group3,16<br>
+        C11137159,Group3,13<br>
+        C11137443,Group3,11<br>
+        C11137439,Group3,15<br>
+        D11144030,Group3,13 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        To print the first column:<br>
+        <font class="bashcommand">
+        $ awk -F',' -f patterns5.txt file3.csv | awk -F',' '{print $1}'<br>
+        <font class="bashcommand-result">
+        B12226507<br>
+        B12226546<br>
+        C11137167<br>
+        C11137159<br>
+        C11137167<br>
+        C11137159<br>
+        C11137443<br>
+        C11137439<br>
+        D11144030 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        The following page contains a summary of other patterns that can be included in a pattern file: <a href="https://ss64.com/bash/awk.html" target="_blank">https://ss64.com/bash/awk.html</a>
+        </p>
+</html>

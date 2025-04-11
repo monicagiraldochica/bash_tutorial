@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>content2_1</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">2. Creating simple bash scripts</h1>
+
+<h2 id="toc_1">2.1. The vi editor</h2>
+
+<p>There are an unlimited number of editors available for writing shell scripts in Linux and Mac. A few are installed by default; some are used through the terminal and some others use a graphical interface (GUI). They all have pros and cons and the decision to use one or another is totally personal. In this section I will explain how to use the editor vi, which is installed by default in both Linux and MacOS and can be accessed and used through the terminal window.</p>
+
+<p>These are some of the advantages of vi:</p>
+
+<ul>
+<li>It is available in all Unix systems and any type of terminal.</li>
+<li>It doesn&#39;t require a lot of memory to run. So, if you are running many heavy programs in your computer, vi is a good option because it won&#39;t slow down the machine anymore and will still load very fast.</li>
+<li>Even though there are a lot of commands that you must learn to become skilled in using this program, once you learn them you can use very short and fast commands to accomplish a lot of things. For example, you can delete all the characters from your current cursor location to the end of the line, just by pressing two times the d in your keyboard (while in command mode). Below you will find a chart with the most commonly used shortcuts in vi.</li>
+<li>You can use it to code in different languages (i.e. it also works for Python, HTML, etc.).</li>
+<li>Some editors add special characters to the text and when you run scripts written in those editors, they could fail. vi doesn&#39;t add any special characters, and if it did, they are visible in the editor.</li>
+<li>If you don&#39;t like using your mouse too much, or you don&#39;t have a mouse, or your mouse doesn&#39;t work properly, then vi editor is a good choice because you rarely need to use the mouse. Most things are accomplished using the keyboard.</li>
+</ul>
+
+<p>However, there are some disadvantages too:</p>
+
+<ul>
+<li>The learning curve can be steep, especially for people who are new to programming and not very comfortable with computers. If you&#39;re new to bash, you not only need to learn the language, but also a whole set of commands specific to this program.</li>
+<li>Not being able to use your mouse can end up wasting your time while you learn all the commands that are used to scroll around the file or jump from one line to another.</li>
+<li>It doesn&#39;t give you any error messages or explanation of why it&#39;s not doing what you want. If you type the wrong command, it will just do nothing (or do the wrong thing).</li>
+</ul>
+
+<p>Generally, many people with relatively good experience programming love this editor. In my opinion, it&#39;s a good tool to use once you are familiar with shell and have been programming for a while. However, it might be a great option for you if you like challenges or if you are already somehow familiar with shell.</p>
+
+<p>To create a new file, type (on the command line) vi <filePath>/<filename>. For example, if you want to create a file called test.sh in the desktop, you should type vi ~/Desktop/test.sh. The vi editor will open in the current terminal.</p>
+
+<p>This program runs in two modes, the command mode and the typing mode. By default, it opens in command mode. What this means is that anything you type is not actually being registered in the file but are commands. For example, if you type :q! as soon as you open the file, it will quit without saving (because :q! is the command for ignoring any modifications and exiting. If you type :w it will save changes to the file (or if you haven&#39;t write anything, it will just create an empty file). To change to typing mode, type a (a is the command for entering typing mode). After you type a (in lower case), you can start editing your file. To go back to command mode (for example to save changes), press the key esc (top left corner of the keyboard).</p>
+
+<p>Using the vi editor for the first time Open the vi editor, create a script that prints &quot;Hello Word&quot;, and save it with the file name helloword.sh</p>
+
+<h3 id="toc_2">Step 1:</h3>
+
+<p>Open the vi editor</p>
+
+<p><img src="./vi_1.png" alt="image1"></p>
+
+<h3 id="toc_3">Step 2:</h3>
+
+<p>Type a to start editing the file. You will see that an <strong>--Insert--</strong> message in the bottom of the terminal appears. This means that now you are in typing mode.</p>
+
+<p><img src="./vi_2.png" alt="image2"></p>
+
+<h3 id="toc_4">Step3:</h3>
+
+<p>Start typing commands. The simplest command, to print a message such as &quot;Hello World&quot; (or any other) is echo. The syntax of this command is the word <code>echo</code> followed by the message you want to print out between quotation marks (in this case &quot;Hello World!&quot;).</p>
+
+<p><img src="./vi_3.png" alt="image3"></p>
+
+<h3 id="toc_5">Step4:</h3>
+
+<p>Once you finish your script, press the esc key to enter command mode. You will see that the <strong>--Insert--</strong> message at the bottom of the terminal disappears (this means that now you are in command mode).</p>
+
+<p><img src="./vi_4.png" alt="image4"></p>
+
+<h3 id="toc_6">Step5:</h3>
+
+<p>Save changes and exit the vi editor. In order to do this, type <code>:wq</code> (to write (w) and quit (q) at the same time). The table below will show you the most commonly used commands for vi.</p>
+
+<p><img src="./vi_5.png" alt="image5"></p>
+
+<p>The following table shows a <strong>list of vi commands</strong> that can be used in command mode and the action that will happen in each case. In general, a number preceding any vi command will tell vi to repeat the command that number of times. For example, <code>p</code> is the command for pasting. If you write (in command mode) <code>2p</code>, then vi will paste whatever you copied two times where the cursor is currently located.</p>
+
+<table>
+<thead>
+<tr>
+<th>Key/command</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>[ESC]</td>
+<td>Switch to command mode</td>
+</tr>
+<tr>
+<td>[ctrl] <code>b</code></td>
+<td>Scroll backward one screen</td>
+</tr>
+<tr>
+<td>[ctrl] <code>d</code></td>
+<td>Scroll down half screen</td>
+</tr>
+<tr>
+<td>[ctrl] <code>f</code></td>
+<td>Scroll forward one screen</td>
+</tr>
+<tr>
+<td>[ctrl] <code>f</code></td>
+<td>Scroll forward one screen</td>
+</tr>
+<tr>
+<td>[ctrl] <code>u</code></td>
+<td>Scroll up half screen</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>Repeat last command</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>Go to end of line</td>
+</tr>
+<tr>
+<td><code>? string</code></td>
+<td>Search backward for <code>string</code></td>
+</tr>
+<tr>
+<td><code>/ string</code></td>
+<td>Search forward for <code>string</code></td>
+</tr>
+<tr>
+<td><code>:0</code></td>
+<td>Go to beginning of line</td>
+</tr>
+<tr>
+<td><code>:N</code></td>
+<td>Go to line <code>N</code></td>
+</tr>
+<tr>
+<td><code>:N,Md</code></td>
+<td>Delete lines <code>N</code> to <code>M</code></td>
+</tr>
+<tr>
+<td><code>:N,MmP</code></td>
+<td>Move lines <code>N</code> to <code>M</code> and paste them after line <code>P</code></td>
+</tr>
+<tr>
+<td><code>:N,MmP</code></td>
+<td>Copy lines <code>N</code> to <code>M</code> and paste them after line <code>P</code></td>
+</tr>
+<tr>
+<td><code>:N,Mw file</code></td>
+<td>Save lines <code>N</code> to <code>M</code> to <code>file</code></td>
+</tr>
+<tr>
+<td><code>:q</code></td>
+<td>Quit (does not save any changes)</td>
+</tr>
+<tr>
+<td><code>:q!</code></td>
+<td>Ignore any modifications made and quit. Searches and replaces the string old by the string new in the entire file.</td>
+</tr>
+<tr>
+<td><code>:%s/old/new/option</code></td>
+<td>The following letters can be added in the field option: <code>c</code> to prompt for confirmation, <code>g</code> to replace all the occurrences of the string, Searches and replaces the string old by the string new in the line in which the cursor is located</td>
+</tr>
+<tr>
+<td><code>:s/old/new/option</code></td>
+<td>The following letters can be added in the field option: <code>c</code> to prompt for confirmation, <code>g</code> to replace all the occurrences of the string</td>
+</tr>
+<tr>
+<td><code>:set ignorecase</code></td>
+<td>Ignore case sensitivity during search</td>
+</tr>
+<tr>
+<td><code>:set noignorecase</code></td>
+<td>Restore case sensitivity during search</td>
+</tr>
+<tr>
+<td><code>:set number</code></td>
+<td>Turn on line numbering</td>
+</tr>
+<tr>
+<td><code>:set nonumber</code></td>
+<td>Turn off line numbering</td>
+</tr>
+<tr>
+<td><code>:syntax on</code></td>
+<td>Turn on syntax colors in the text</td>
+</tr>
+<tr>
+<td><code>:syntax off</code></td>
+<td>Turn off syntax colors in the text</td>
+</tr>
+<tr>
+<td><code>:w</code></td>
+<td>Save changes</td>
+</tr>
+<tr>
+<td><code>:w file</code></td>
+<td>Save changes to <code>file</code></td>
+</tr>
+<tr>
+<td><code>:wq</code></td>
+<td>Save changes and quit</td>
+</tr>
+<tr>
+<td><code>:x</code></td>
+<td>Save changes and quit</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Switch to editing mode and continue writing where the cursor is located</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>Switch to editing mode and continue writing at the end of the line where the cursor is located</td>
+</tr>
+<tr>
+<td><code>i</code></td>
+<td>Switch to editing mode and continue writing where the cursor is located</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>Switch to editing mode and continue writing at the beginning of the line where the cursor is located</td>
+</tr>
+<tr>
+<td><code>cw</code></td>
+<td>Delete the rest of the word in which the cursor is located (keeps the characters located before the cursor)</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>Delete the rest of the line in which the cursor is located (keeps the characters and words located before the cursor)</td>
+</tr>
+<tr>
+<td><code>dd</code></td>
+<td>Delete the entire line where the cursor is located</td>
+</tr>
+<tr>
+<td><code>dw</code></td>
+<td>Delete the whole word in which the cursor is located</td>
+</tr>
+<tr>
+<td><code>J</code></td>
+<td>Put the next line at the end of the line where the cursor is located</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>Open line below cursor</td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>Open line above cursor</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>Paste below current line</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>Paste above current line</td>
+</tr>
+<tr>
+<td><code>:u</code></td>
+<td>Undo previous command</td>
+</tr>
+<tr>
+<td><code>:U</code></td>
+<td>Undo all changes to line</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>Delete text at cursor</td>
+</tr>
+<tr>
+<td><code>X</code></td>
+<td>Delete (backspace) text at cursor</td>
+</tr>
+<tr>
+<td><code>yy</code></td>
+<td>Copy line in which the cursor is located</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</body>
+
+</html>

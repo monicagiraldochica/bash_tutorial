@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h3>6.1. Condition-testing to check files</h3>
+					<p>
+						In the following table, <font class="bashcommand">FILE</font> refers to the path of the file or to the 
+						variable that contains the path of the file. The spaces after <font class="bashcommand">[</font> and 
+						before <font class="bashcommand">]</font> are very important. If those spaces are missing, bash will 
+						give an error.
+					</p>
+					
+					<table>
+						<tr>
+							<th style="width:30%"><b>Condition</b></th>
+							<th style="width:70%"><b>Meaning</b></th>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -a FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -d FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is a directory.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -e FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -f FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is a regular file.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -g FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and its SGID bit is set.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -h FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is a symbolic link.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -k FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and its sticky bit is set.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -p FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is a named pipe (FIFO).</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -r FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is readable.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -s FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and has a size greater than zero.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -t FD ]</font>
+							</td>
+							<td>Tests if file descriptor <font class="bashcommand">FD</font> is open and refers to a terminal.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -u FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and its SUID (set user ID) bit is set.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -w FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is writable.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -x FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is executable.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -O FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is owned by the effective user ID.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -G FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is owned by the effective group ID.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -L FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is a symbolic link.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -N FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and has been modified since it was last read.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ -S FILE ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE</font> exists and is a socket.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ FILE1 -nt FILE2 ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE1</font> has been changed more recently than <font class="bashcommand">FILE2</font>, or if <font class="bashcommand">FILE1</font> exists and <font class="bashcommand">FILE2</font> does not.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ FILE1 -ot FILE2 ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE1</font> is older than <font class="bashcommand">FILE2</font>, or is <font class="bashcommand">FILE2</font> exists and <font class="bashcommand">FILE1</font> does not.</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">[ FILE1 -ef FILE2 ]</font>
+							</td>
+							<td>Tests if <font class="bashcommand">FILE1</font> and <font class="bashcommand">FILE2</font> refer to the same device and inode numbers.</td>
+						</tr>
+					</table>
+					
+				<p>
+					In the following section you will not find examples of the following flags because they are related to user permissions, a topic that has not been explained yet and will be explained in future chapters, or because they are less common. However, the use of these flags is the same as the ones explained below. 
+				</p>
+				
+				<p>
+					<font class="example">[ -a FILE ]:</font>
+					<font class="bashcommand">
+						$ FILE=/Users/MyUser/Desktop/someFile.txt<br>
+						$ if [ -a "${FILE}" ]<br>
+						&gt; then<br>
+						&gt; echo "${FILE} exists"<br>
+						&gt; else<br>
+						&gt; echo "${FILE} doesn't exist"<br>
+						&gt; fi 
+					</font>
+				</p>
+				
+				<p>
+					<font class="bashcommand">
+						$ if [ -a "/Users/MyUser/Desktop/someFile.txt" ]<br>
+						&gt; then<br>
+						&gt; echo "The file exists"<br>
+						&gt; else<br>
+						&gt; echo "The file doesn't exist"<br>
+						&gt; fi 
+					</font>
+				</p>
+				
+				<p>
+					The following example shows a common mistake. Here, the quotation marks surrounding the file path are missing. Since the path has spaces, bash gives an error: 
+				</p>
+				
+				<p>
+					<font class="bashcommand">
+						$ if [ -a /Users/MyUser/Desktop/some file name with spaces.txt ]<br>
+						&gt; then<br>
+						&gt; echo "The file exists"<br>
+						&gt; else<br>
+						&gt; echo "The file doesn't exist"<br>
+						&gt; fi<br>
+						<font class="bashcommand-result">-bash: [: too many argument</font>
+					</font>
+				</p>
+				
+				<p>
+					<font class="example">[ -d FILE ]:</font>
+					<font class="bashcommand">
+						$ FILE=/Users/MyUser/Desktop/someFile.txt<br>
+						$ if [ -a "${FILE}" ]<br>
+						&gt; then<br>
+						&gt; echo "The file exists. Now I will find out if it's a directory or a regular file."<br>
+						&gt; if [ -d "${FILE}" ]<br>
+						&gt; then<br>
+						&gt; echo "It is a directory."<br>
+						&gt; else<br>
+						&gt; echo "It is a regular file."<br>
+						&gt; fi<br>
+						&gt; else<br>
+						&gt; echo "The file doesn't exist."<br>
+						&gt; fi
+					</font>
+				</p>
+				
+				<p>
+					The following example shows a common mistake. Here, the spaces before and after the expression (<font class="bashcommand">-a "${FILE}"</font>) are missing. So, bash will give an error: 
+				</p>
+				
+				<p>
+					<font class="bashcommand">
+						$ FILE=/Users/MyUser/Desktop/someFile.txt<br>
+						$ if [-a "${FILE}"]<br>
+						&gt; then<br>
+						&gt; echo "The file exists. Now I will find out if it's a directory or a regular file."<br>
+						&gt; if [ -d "${FILE}" ]<br>
+						&gt; then<br>
+						&gt; echo "It is a directory."<br>
+						&gt; else<br>
+						&gt; echo "It is a regular file."<br>
+						&gt; fi<br>
+						&gt; else<br>
+						&gt; echo "The file doesn't exist."<br>
+						&gt; fi<br>
+						<font class="bashcommand-result">-bash: [-a: command not found</font>
+					</font>
+				</p>
+				
+				<p>
+					<font class="example">[ -f FILE ]:</font>
+					<font class="bashcommand">
+						$ FILE=/Users/MyUser/Desktop/someFile.txt<br>
+						$ if [ -a "${FILE}" ]<br>
+						&gt; then<br>
+						&gt; echo "The file exists. Now I will find out if it's a directory or a regular file."<br>
+						&gt; if [ -f "${FILE}" ]<br>
+						&gt; then<br>
+						&gt; echo "It is a regular file."<br>
+						&gt; else<br>
+						&gt; echo "It is a directory."<br>
+						&gt; fi<br>
+						&gt; else<br>
+						&gt; echo "The file doesn't exist."<br>
+						&gt; fi
+					</font>
+				</p>
+				
+				<p>
+					<font class="example">[ -N FILE ]:</font>
+					<font class="bashcommand">
+						$ if [ -N "/Users/MyUser/Desktop/someFile.txt" ]<br>
+						&gt; then<br>
+						&gt; echo "The file exists and has been modified since the last time it was opened."<br>
+						&gt; else<br>
+						&gt; echo "Either the file doesn't exist, or it hasn't been modified."<br>
+						&gt; fi 
+					</font>
+				</p>
+</body>
+</html>

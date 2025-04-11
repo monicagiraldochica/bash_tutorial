@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.15. Find and replace text</h3>
+
+        <p><font class="example">Replace all occurrences of C11137159 in file3.csv with XXXXXXXXX and save the modified content in file3_mod.csv.</font></p>
+
+        <p>
+        Command to execute the substitution:<br>
+        <font class="bashcommand">$ sed 's/C11137159/XXXXXXXXX/' file3.csv > file3_mod.csv</font>
+        </p>
+
+        <p><table>
+            <tr>
+                <th>Content of file3.csv before the substitution:</th>
+                <th>Content of the file after the substitution:</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3_mod.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                XXXXXXXXX,Group3,13<br>
+                C11137167,Group3,16<br>
+                XXXXXXXXX,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28 	
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p>In the following example, instead of replacing a fix string as we did in example 1, we will replace a group of characters (i.e. all upper-case characters in the file) by a single character or another group of characters (i.e. replace with lower-case characters). The groups of characters that can be used are listed in the following table:</p>
+
+        <p><table>
+            <tr>
+                <th>Expression</th>
+                <th>Group of characters</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:alnum:]</font></td>
+                <td>Letters and digits</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:alpha:]</font></td>
+                <td>Letters</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:blank:]</font></td>
+                <td>Horizontal white space</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:cntrl:]</font></td>
+                <td>Control characters</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:digit:]</font></td>
+                <td>Digits</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:graph:]</font></td>
+                <td>Printable characters, excluding space</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:lower:]</font></td>
+                <td>Lower-case letters</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:print:]</font></td>
+                <td>Printable characters, including space</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:punct:]</font></td>
+                <td>Punctuation characters</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:space:]</font></td>
+                <td>Horizontal or vertical white space</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:upper:]</font></td>
+                <td>Upper-case letters</td>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">[:xdigit:]</font></td>
+                <td>Hexadecimal digits</td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Replace all upper-case letters in file3.csv by lower-case.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr '[:upper:]' '[:lower:]'<br>
+                <font class="bashcommand-result">
+                anonymized id,subject group,age<br>
+                c11138122,missing,21<br>
+                c11138192,group1,54<br>
+                b12226507,group1,68<br>
+                b12226546,group1,67<br>
+                c11138122,group1,24<br>
+                c11138184,group1,59<br>
+                c11138797,group1,22<br>
+                c11138152,group1,53<br>
+                c11138150,group1,41<br>
+                c11137167,group3,14<br>
+                c11137159,group3,13<br>
+                c11137167,group3,16<br>
+                c11137159,group3,13<br>
+                c11131039,group2 b,67<br>
+                c11135566,group2 b,73<br>
+                b11119903,group2 b,83<br>
+                c11137544,group1,21<br>
+                c11137443,group3,11<br>
+                c11137123,group2 b,69<br>
+                c11137439,group3,79<br>
+                c11137439,group3,15<br>
+                c11133100,group1,23<br>
+                d11144030,group3,13<br>
+                b11108399,group1,23<br>
+                b11108326,group1,59<br>
+                b11119909,group2 b,61<br>
+                b11110893,group1,28 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Replace all lower-case letters in file3.csv by upper-case.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr '[:lower:]' '[:upper:]'<br>
+                <font class="bashcommand-result">
+                ANONYMIZED ID,SUBJECT GROUP,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,GROUP1,54<br>
+                B12226507,GROUP1,68<br>
+                B12226546,GROUP1,67<br>
+                C11138122,GROUP1,24<br>
+                C11138184,GROUP1,59<br>
+                C11138797,GROUP1,22<br>
+                C11138152,GROUP1,53<br>
+                C11138150,GROUP1,41<br>
+                C11137167,GROUP3,14<br>
+                C11137159,GROUP3,13<br>
+                C11137167,GROUP3,16<br>
+                C11137159,GROUP3,13<br>
+                C11131039,GROUP2 B,67<br>
+                C11135566,GROUP2 B,73<br>
+                B11119903,GROUP2 B,83<br>
+                C11137544,GROUP1,21<br>
+                C11137443,GROUP3,11<br>
+                C11137123,GROUP2 B,69<br>
+                C11137439,GROUP3,79<br>
+                C11137439,GROUP3,15<br>
+                C11133100,GROUP1,23<br>
+                D11144030,GROUP3,13<br>
+                B11108399,GROUP1,23<br>
+                B11108326,GROUP1,59<br>
+                B11119909,GROUP2 B,61<br>
+                B11110893,GROUP1,28
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Replace all alphabetical characters in file3.csv by the number 0</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr '[:alpha:]' 0<br>
+                <font class="bashcommand-result">
+                0000000000 00,0000000 00000,000<br>
+                011138122,0000000,21<br>
+                011138192,000001,54<br>
+                012226507,000001,68<br>
+                012226546,000001,67<br>
+                011138122,000001,24<br>
+                011138184,000001,59<br>
+                011138797,000001,22<br>
+                011138152,000001,53<br>
+                011138150,000001,41<br>
+                011137167,000003,14<br>
+                011137159,000003,13<br>
+                011137167,000003,16<br>
+                011137159,000003,13<br>
+                011131039,000002 0,67<br>
+                011135566,000002 0,73<br>
+                011119903,000002 0,83<br>
+                011137544,000001,21<br>
+                011137443,000003,11<br>
+                011137123,000002 0,69<br>
+                011137439,000003,79<br>
+                011137439,000003,15<br>
+                011133100,000001,23<br>
+                011144030,000003,13<br>
+                011108399,000001,23<br>
+                011108326,000001,59<br>
+                011119909,000002 0,61<br>
+                011110893,000001,28
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Replace all digits in file3.csv by the letter X.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr '[:digit:]' X<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                CXXXXXXXX,MISSING,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                BXXXXXXXX,GroupX,XX<br>
+                BXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX b,XX<br>
+                CXXXXXXXX,GroupX b,XX<br>
+                BXXXXXXXX,GroupX b,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX b,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                CXXXXXXXX,GroupX,XX<br>
+                DXXXXXXXX,GroupX,XX<br>
+                BXXXXXXXX,GroupX,XX<br>
+                BXXXXXXXX,GroupX,XX<br>
+                BXXXXXXXX,GroupX b,XX<br>
+                BXXXXXXXX,GroupX,XX
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Replace all punctuation characters in file3.csv by a space (<font class="bashcommand">' '</font>)</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr '[:punct:]' ' '<br>
+                <font class="bashcommand-result">
+                Anonymized ID Subject Group AGE<br>
+                C11138122 MISSING 21<br>
+                C11138192 Group1 54<br>
+                B12226507 Group1 68<br>
+                B12226546 Group1 67<br>
+                C11138122 Group1 24<br>
+                C11138184 Group1 59<br>
+                C11138797 Group1 22<br>
+                C11138152 Group1 53<br>
+                C11138150 Group1 41<br>
+                C11137167 Group3 14<br>
+                C11137159 Group3 13<br>
+                C11137167 Group3 16<br>
+                C11137159 Group3 13<br>
+                C11131039 Group2 b 67<br>
+                C11135566 Group2 b 73<br>
+                B11119903 Group2 b 83<br>
+                C11137544 Group1 21<br>
+                C11137443 Group3 11<br>
+                C11137123 Group2 b 69<br>
+                C11137439 Group3 79<br>
+                C11137439 Group3 15<br>
+                C11133100 Group1 23<br>
+                D11144030 Group3 13<br>
+                B11108399 Group1 23<br>
+                B11108326 Group1 59<br>
+                B11119909 Group2 b 61<br>
+                B11110893 Group1 28
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Replace all white spaces in file3.csv by an underscore <font class="bashcommand">'_'</font>.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr '[:blank:]' '_'<br>
+                <font class="bashcommand-result">
+                Anonymized_ID,Subject_Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2_b,67<br>
+                C11135566,Group2_b,73<br>
+                B11119903,Group2_b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2_b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2_b,61<br>
+                B11110893,Group1,28
+                </font>	
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p>You can also replace a range of letters or numbers:</p>
+
+        <p><font class="example">Replace any A, B or C (letters in the range A-C) in file3.csv by the letter D.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr 'A-C' 'D'<br>
+                <font class="bashcommand-result">
+                Dnonymized ID,Subject Group,DGE<br>
+                D11138122,MISSING,21<br>
+                D11138192,Group1,54<br>
+                D12226507,Group1,68<br>
+                D12226546,Group1,67<br>
+                D11138122,Group1,24<br>
+                D11138184,Group1,59<br>
+                D11138797,Group1,22<br>
+                D11138152,Group1,53<br>
+                D11138150,Group1,41<br>
+                D11137167,Group3,14<br>
+                D11137159,Group3,13<br>
+                D11137167,Group3,16<br>
+                D11137159,Group3,13<br>
+                D11131039,Group2 b,67<br>
+                D11135566,Group2 b,73<br>
+                D11119903,Group2 b,83<br>
+                D11137544,Group1,21<br>
+                D11137443,Group3,11<br>
+                D11137123,Group2 b,69<br>
+                D11137439,Group3,79<br>
+                D11137439,Group3,15<br>
+                D11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                D11108399,Group1,23<br>
+                D11108326,Group1,59<br>
+                D11119909,Group2 b,61<br>
+                D11110893,Group1,28
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Replace A by W, B by X, C by Y, and D by Z in file3.csv (replace letters in the range A-D with letters in the range W-Z)</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr 'A-D' 'W-Z'<br>
+                <font class="bashcommand-result">
+                Wnonymized IZ,Subject Group,WGE<br>
+                Y11138122,MISSING,21<br>
+                Y11138192,Group1,54<br>
+                X12226507,Group1,68<br>
+                X12226546,Group1,67<br>
+                Y11138122,Group1,24<br>
+                Y11138184,Group1,59<br>
+                Y11138797,Group1,22<br>
+                Y11138152,Group1,53<br>
+                Y11138150,Group1,41<br>
+                Y11137167,Group3,14<br>
+                Y11137159,Group3,13<br>
+                Y11137167,Group3,16<br>
+                Y11137159,Group3,13<br>
+                Y11131039,Group2 b,67<br>
+                Y11135566,Group2 b,73<br>
+                X11119903,Group2 b,83<br>
+                Y11137544,Group1,21<br>
+                Y11137443,Group3,11<br>
+                Y11137123,Group2 b,69<br>
+                Y11137439,Group3,79<br>
+                Y11137439,Group3,15<br>
+                Y11133100,Group1,23<br>
+                Z11144030,Group3,13<br>
+                X11108399,Group1,23<br>
+                X11108326,Group1,59<br>
+                X11119909,Group2 b,61<br>
+                X11110893,Group1,28
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p>The command <font class="bashcommand">tr</font> doesn't allow you to replace by an empty space in order to delete a character or a set of characters, but you can use the <font class="bashcommand">-d</font> flag for deletion.</p>
+
+        <p><font class="example">Remove all spaces in file3.csv.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                $ cat file3.csv<br>
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr -d '[:blank:]'<br>
+                <font class="bashcommand-result">
+                AnonymizedID,SubjectGroup,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2b,67<br>
+                C11135566,Group2b,73<br>
+                B11119903,Group2b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p>In order to delete any repeated (continuous) character or sequence use the <font class="bashcommand">-s</font> flag.</p>
+
+        <p><font class="example">Remove any repeated characters (<font class="bashcommand">[:alnum:]</font>) in file3.csv.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Original content of the file</th>
+                <th>Content after replacements</th>
+            </tr>
+            
+            <tr>
+                <td><font class="bashcommand">
+                $ cat file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ cat file3.csv | tr -s '[:alnum:]'<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C13812,MISING,21<br>
+                C138192,Group1,54<br>
+                B126507,Group1,68<br>
+                B126546,Group1,67<br>
+                C13812,Group1,24<br>
+                C138184,Group1,59<br>
+                C138797,Group1,2<br>
+                C138152,Group1,53<br>
+                C138150,Group1,41<br>
+                C137167,Group3,14<br>
+                C137159,Group3,13<br>
+                C137167,Group3,16<br>
+                C137159,Group3,13<br>
+                C131039,Group2 b,67<br>
+                C1356,Group2 b,73<br>
+                B1903,Group2 b,83<br>
+                C13754,Group1,21<br>
+                C13743,Group3,1<br>
+                C137123,Group2 b,69<br>
+                C137439,Group3,79<br>
+                C137439,Group3,15<br>
+                C1310,Group1,23<br>
+                D14030,Group3,13<br>
+                B10839,Group1,23<br>
+                B108326,Group1,59<br>
+                B1909,Group2 b,61<br>
+                B10893,Group1,28
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+</html>

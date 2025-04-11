@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <h3>8.4. Other frequently used commands for file manipulation</h3>
+				<h4>cp command</h4>
+				Syntax: <font class="bashcommand">cp source target</font>
+		    		
+				<p>
+				<font class="example">Copy the file /Users/MyUser/Desktop/test.txt into folder /Volumes/MyExternalDrive</font>
+				<font class="bashcommand">$ cp /Users/MyUser/Desktop/test.txt /Volumes/MyExternalDrive</font>
+				</p>
+
+				<p>
+				<font class="example">Copy file /Users/MyUser/Desktop/test.txt into folder /Volumes/MyExternalDrive, but save it with a different name in the new directory (i.e. test2.txt instead of test1.txt)</font>
+				<font class="bashcommand">$ cp /Users/MyUser/Desktop/test.txt /Volumes/MyExternalDrive/test2.txt</font>
+				</p>
+
+				<p>
+				As you can observe in the previous two examples, if you specify a folder as a target in the <font class="bashcommand">cp</font> command, then it will copy the file with the same name. If you specify a regular file as a target, then it will rename the file in the destination (not in the source, the source file will stay untouched). The source file need not have the same extension. For example, the following command will copy the file <font class="bashcommand">/Users/MyUser/Desktop/subjectFolder/534534.bvals</font> into the folder <font class="bashcommand">/Volumes/MyExternalDrive</font>, will rename it and delete the extension (now it has no extension).<br>
+				<font class="bashcommand">$ cp /Users/MyUser/Desktop/subjectFolder/534534.bvals /Volumes/MyExternalDrive/bvals</font>
+				</p>
+
+				<p>
+				Caution! If a file with the same name exists in the source, it will be re-written and this action cannot be undone. For example, if you run the following command:<br>
+				<font class="bashcommand">$ cp /Users/MyUser/Desktop/test.txt /Volumes/MyExternalDrive/test2.txt</font>
+				</p>
+
+				<p>And a file with the same source path (<font class="bashcommand">/Volumes/MyExternalDrive/test2.txt</font>) already existed, then that file will be replaced by test.txt. You will not be able to recover the replaced file.</p>
+
+				<h4>mv command</h4>
+				Syntax: <font class="bashcommand">mv source target</font>
+
+				<p>The <font class="bashcommand">mv</font> command works the same way was the <font class="bashcommand">cp</font> command. The difference is that the source file is moved instead of copied.</p>
+
+				<font class="example">Renaming a file</font>
+				Rename file <font class="bashcommand">test1.txt</font> to <font class="bashcommand">test2.txt</font> in the current directory.
+
+				<p><font class="bashcommand">
+				$ ls<br>
+				<font class="bashcommand-result">
+				Applications<br> 
+				Library<br>
+				Volumes<br> 
+				bin<br>
+				test1.txt<br>
+				</font>
+				$ mv test1.txt test2.txt<br>
+				$ ls<br>
+				<font class="bashcommand-result">
+				Applications<br>
+				Library<br>
+				Volumes<br> 
+				bin<br>
+				test2.txt 
+				</font>
+				</font></p>
+
+				<font class="example">Moving a file from one directory to another</font>
+				Move <font class="bashcommand">test1.txt</font> from directory <font class="bashcommand">/Users/MyUser/</font> to directory <font class="bashcommand">/Volumes/MyExternalDrive</font>.
+
+				<p><font class="bashcommand">
+				$ ls /Volumes/MyDrive<br>
+ 				<br>
+				$ mv /Users/MyUser/Desktop/test1.txt /Volumes/MyDrive <br>
+				$ ls /Volumes/MyDrive<br>
+				<font class="bashcommand-result">test1.txt</font>
+				</font></p>
+</html>

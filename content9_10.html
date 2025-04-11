@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.10. Examples: Reading specific columns from multiple files and concatenating them horizontally (in different columns).</h3>
+
+        <p>
+        <font class="example">Print the first column of file2.txt followed (horizontally) by the second column of file4.txt.</font>
+        As we learned in previous examples, the command <font class="bashcommand">awk '{print $1}' file2.txt</font> will read and print the first column of file2.txt. Conversely, <font class="bashcommand">awk '{print $2}' file4.txt</font> will read and print the second column of file4.txt.<br>
+        You must use the following syntax to concatenate these two results horizontally:
+        </p>
+
+        <p><font class="bashcommand">
+        $ paste <(awk '{print $1}' file2.txt) <(awk '{print $2}' file4.txt)<br>
+        <font class="bashcommand-result">
+        "AnonymizedID"&emsp;SubjectGroup<br>
+        "B11130912"&emsp;Group1<br>
+        "B11137244"&emsp;Group1<br>
+        "B11154534"&emsp;Group2<br>
+        "B11144100"&emsp;Group3<br>
+        "B11137244"&emsp;Group3<br>
+        "B12226566"&emsp;Group2<br>
+        "B11134987"&emsp;Group2<br>
+        "B11144345"&emsp;Group1<br>
+        "C11137159"&emsp;Group2<br>
+        "B11156453"&emsp;Group3<br>
+        "B11110676"&emsp;Group3<br>
+        "C11138929"&emsp;Group3<br>
+        "B11154532"&emsp;Group3<br>
+        "B11155267"&emsp;Group3<br>
+        "B11137120"&emsp;Group3<br>
+        "B33191224"&emsp;Group3<br>
+        "B11155267"&emsp;Group1<br>
+        "C11138999"&emsp;Group2<br>
+        "B11131605"&emsp;Group1<br>
+        "B11137784"&emsp;Group1<br>
+        "B11156098"&emsp;Group1<br>
+        "B11133232"&emsp;Group1<br>
+        "B11135292"&emsp;Group1<br>
+        "C11138912"&emsp;MISSING<br>
+        "B11150911"&emsp;Group1<br>
+        "B11152577"&emsp;Group1<br>
+        "B11156098"&emsp;Group1<br>
+        "B11133232" 	
+        </font>
+        </font></p>
+
+        <p>
+        <font class="example">Print the first column of file1.csv followed (horizontally) by the second column of file3.csv. Separate the columns with a comma.</font>
+        In this example, we use the same syntax as the example before, but remember that files file1.csv and file3.csv use comma as the column separator and you have to use the <font class="bashcommand">-F','</font> flag in the <font class="bashcommand">awk</font> commands. Additionally, remember to use the flag <font class="bashcommand">-d ','</font> for the paste command in order to separate the pasted columns with a comma.
+        </p>
+
+        <p><font class="bashcommand">
+        $ paste -d ',' <(awk -F',' '{print $1}' file1.csv) <(awk -F',' '{print $2}' file3.csv)<br>
+        <font class="bashcommand-result">
+        "Anonymized ID",Subject Group<br>
+        "B33199522",MISSING<br>
+        "B33199603",Group1<br>
+        "B11137879",Group1<br>
+        "B11144410",Group1<br>
+        "B11110455",Group1<br>
+        "B11135291",Group1<br>
+        "B11153927",Group1<br>
+        "B11177579",Group1<br>
+        "B11177806",Group1<br>
+        "B11157958",Group3<br>
+        "B11110690",Group3<br>
+        "B11152799",Group3<br>
+        "B11154358",Group3<br>
+        "B11110925",Group2 b<br>
+        "B11135291",Group2 b<br>
+        "B11135072",Group2 b<br>
+        "B33199603",Group1<br>
+        "B11137879",Group3<br>
+        "B11110603",Group2 b<br>
+        "B11110927",Group3<br>
+        "B11147712",Group3<br>
+        "B33191224",Group1<br>
+        "B11131290",Group3<br>
+        "B11157974",Group1<br>
+        "B33191224",Group1<br>
+        "B11141503",Group2 b<br>
+        "C11137159",Group1<br>
+        "B33199522",
+        </font>
+        </font></p>
+</html>

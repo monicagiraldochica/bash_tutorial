@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>content3</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">3. Variables</h1>
+
+<h2 id="toc_1">3.1. Utility, declaration and accessing variables</h2>
+
+<p>A very important aspect of programming (in bash or any other language) is the ability to use a label (called variable) to indicate some other quantity (a number, character, string or command). For example, I can use the variable <code>${desktop}</code> to represent the string &quot;/Users/monica/Desktop&quot;. Or the variable <code>${year}</code> to represent the number 2020 (after correctly declaring these variables). Variables can be used for many purposes, including making the code more readable, short and organized and to prevent typing errors. They are also very useful in cases in which the actual value of a variable is not known before executing the program, or when you need to save the output of one command to use as input for another command. For example, when reading the contents of a file you can read line by line in an iterative manner (which you will learn later), saving each line in a variable and then doing something with it (depending the purpose of the program).</p>
+
+<p>The easy thing about declaring variables in bash is that you don&#39;t have to specify data types. However, if the value that you are assigning is a string of characters, you should use quotation marks (<code>&quot;</code>) between the beginning and the end of your string (especially if the string contains spaces). You must also be careful to not include any white space between the variable name, the equals sign, and the value. Additionally, be aware that the quotation marks used in bash are <code>&quot;</code> , which is different than those used in Microsoft Word. They look very similar, but bash won&#39;t recognize the later ones. So, if you copy-paste from Microsoft Word a command that includes quotation marks, you will probably get an error.</p>
+
+<h3 id="toc_2">Declaring variables</h3>
+
+<p>of different data types In the following commands, I will assign a number to the variable <code>YEAR</code>, a String to the variables <code>MONTH</code> and <code>NAME</code>, and a character to the variable <code>GENDER</code>. As you can observe, numbers, strings and characters should be declared in a different manner.</p>
+
+<div><pre><code class="language-bash">YEAR=2018
+MONTH=&quot;August&quot;
+NAME=&quot;Monica Keith&quot;
+GENDER=&#39;F&#39;</code></pre></div>
+
+<h3 id="toc_3">Common mistakes when declaring variables</h3>
+
+<p>The following commands will produce errors because there is a white space before and/or after the equal sign (<code>=</code>), or because the quotation marks (<code>&quot;</code>) are missing when declaring a string that contains a space. Bellow each erroneous command you can see the error that Bash produces.</p>
+
+<div><pre><code class="language-bash">$ NAME =&quot;Monica Keith&quot;
+-bash: NAME: command not found
+$ NAME= &quot;Monica Keith&quot;
+-bash: Monica Keith: command not found
+$ NAME = &quot;Monica Keith&quot;
+-bash: NAME: command not found
+$ NAME=Monica Keith
+-bash: Keith: command not found</code></pre></div>
+
+<p>Once you assign a value to a variable, you can reference it with a dollar sign, located immediately before the variable name. You can also reference a variable by including curly brackets (<code>{}</code>) at the beginning and the end of the variable name. It is better (but not mandatory) to always reference variables using brackets. This will prevent errors in your code (specially when referencing strings that have spaces or special characters).</p>
+
+<h3 id="toc_4">Referencing variables</h3>
+
+<p>In the following example, I will declare variable <code>VAR1</code> with value 2, and variable <code>VAR2</code> with value &quot;Subject&quot;. Then, I will use the function echo to print in the command line the value of the two variables.</p>
+
+<div><pre><code class="language-bash">$ VAR1=2
+$ VAR2=&quot;Subject&quot;
+$ echo ${VAR1}
+2
+$ echo ${VAR2}
+Subject</code></pre></div>
+
+<h3 id="toc_5">Common mistakes when referencing variables</h3>
+
+<p>When referencing a variable, be careful not to include any space before or after the brackets. The following examples will produce an error because of the inclusion of a space around the brackets:</p>
+
+<div><pre><code class="language-bash">$ echo ${ VAR2}
+-bash: ${ VAR2}: bad substitution
+$ echo ${VAR2 }
+-bash: ${VAR2 }: bad substitution
+$ echo ${ VAR2 }
+-bash: ${ VAR2 }: bad substitution</code></pre></div>
+
+<p>The following erroneous reference (with a space between the dollar sign and the first bracket) will not cause an error but will <strong>not</strong> substitute <code>${VAR2}</code> for the correct value. It will just print <code>$ {VAR2}</code> instead of Subject.</p>
+
+<div><pre><code class="language-bash">$ echo $ {VAR2}
+{VAR2}</code></pre></div>
+
+<h3 id="toc_6">Concatenating variables</h3>
+
+<p>You can concatenate different variables and characters to form new strings. To do this, you will need to reference the variables using the curly brackets and use quotation marks at the beginning and the end of your final string. For example, if you want to use the previously declared variables <code>VAR1</code> and <code>VAR2</code> to generate the String Subject_02, you can concatenate them the following way:</p>
+
+<div><pre><code class="language-bash">$ echo ${VAR2}
+Subject
+$ echo ${VAR1}
+2
+$ echo &quot;${VAR2}_0${VAR1}&quot;
+Subject_02</code></pre></div>
+
+<p>Here are a few more examples on how to declare and concatenate variables:</p>
+
+<div><pre><code class="language-bash">$ ID=&quot;Subject_202&quot;
+$ VOLUME=20
+$ MEASURE=&quot;mm&quot;
+$ echo &quot;${ID}: ${VOLUME}${MEASURE}&quot;
+Subject_202: 20mm
+
+$ VAR1=&quot;MacOS&quot;
+$ VAR2=&quot;Linux&quot;
+$ VAR3=&quot;Windows&quot;
+$ echo &quot;(${VAR1},${VAR2},${VAR3})&quot;
+(MacOS,Linux,Windows)</code></pre></div>
+
+<h3 id="toc_7">Common mistakes when concatenating variables</h3>
+
+<p>It is very common when you are referencing many variables or concatenating variables to create a long string to forget the closing quotation mark. For example, writing <code>$ echo &quot;(${VAR1},${VAR2},${VAR3})</code> instead of <code>$ echo &quot;(${VAR1},${VAR2},${VAR3})&quot;</code></p>
+
+<p>When that happens and you click enter in the keyboard, the command line won&#39;t allow you to enter any more commands. You will see the symbol <code>&gt;</code> and if you continue pressing enter it will do nothing. This is because the command line is waiting for you to close the open String. To close the string just add the missing quotation mark or cancel and ignore what you have written so far in the current line by pressing CTR+C.</p>
+
+<h2 id="toc_8">3.2. Rules for assigning variable names</h2>
+
+<p>You can assign any value to a variable. However, a variable cannot have just any name. There are a few rules for assigning variable names.</p>
+
+<ol>
+<li>A variable name should not be a number: this type of variable is only used to read arguments on a shell script. For example, <code>$1</code> refers to the first argument of a script, <code>$2</code> to the second argument, etc. Later you will learn the meaning and use of script arguments.</li>
+<li>Variable names must start with an alphabetical letter or an underscore: variable names can contain any number, but it should not be located at the beginning.</li>
+<li>Do <strong>not</strong> use <code>$</code> or <code>${}</code> to declare a variable: these characters are used only to reference variables (not to declare).</li>
+<li>Do <strong>not</strong> assign the name <code>PATH</code> to any variable: if you do so, you won&#39;t get any error right away. But it will mess up the execution of other programs. <code>PATH</code> is a system variable that specifies a set of directories where executable programs are located. For example, when you install a software that runs in the command line, the path to the executable of that program will be included in the system variable <code>PATH</code>. So, if you rename that variable, you won&#39;t be able to execute the program again in the current terminal. If you forget about this rule and mistakenly re-write the value of this variable, close the current terminal and open a new one. Every time you open a new terminal, this system variable will be re-set to the correct value (which is stored in the bash_profile, we will talk about this file in a later chapter). At any moment you can know the value of your <code>PATH</code> by typing echo <code>${PATH}</code>. You will see something like this, although this significantly varies between computers depending on which programs you have installed and referenced in the bash profile file.</li>
+</ol>
+
+<div><pre><code class="language-bash">$ echo ${PATH}
+/usr/local/fsl/bin:/Applications/freesurfer/bin:/Applications/freesurfer/fsfast/bin:/Applications/freesurfer/tktools:/usr/local/fsl/bin:/Applications/freesurfer/mni/bin:/Users/bunbury/bin:/Applications/MATLAB_R2018a.app/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</code></pre></div>
+
+<p>Another Unix reserved name that you should not use is <code>BASH</code>. There is a long list of Unix reserved words that I will not include here but you will learn as you get more experienced.</p>
+
+<ol>
+<li>Avoid using the following reserved characters from appearing in variable names: <code>/</code> <code>&gt;</code> <code>&lt;</code> <code>|</code> <code>:</code> <code>&amp;</code> <code>.</code> <code>*</code>.</li>
+</ol>
+
+<p>Here are some examples of valid and invalid variable names:</p>
+
+<table>
+<thead>
+<tr>
+<th>Valid</th>
+<th>Invalid</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>V</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>VAR</code></td>
+<td><code>1VAR</code></td>
+</tr>
+<tr>
+<td><code>VAR1</code></td>
+<td><code>2_VAR</code></td>
+</tr>
+<tr>
+<td><code>VAR_1</code></td>
+<td><code>.VAR</code></td>
+</tr>
+<tr>
+<td><code>_VAR1</code></td>
+<td><code>$VAR</code></td>
+</tr>
+<tr>
+<td><code>_1VAR</code></td>
+<td><code>${VAR}</code></td>
+</tr>
+<tr>
+<td><code>VARIABLE_NAME</code></td>
+<td><code>{VAR}</code></td>
+</tr>
+<tr>
+<td><code>PATH1</code></td>
+<td><code>PATH</code></td>
+</tr>
+<tr>
+<td><code>BASH1</code></td>
+<td><code>BASH</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>Variable names can be in lower and/or upper case. However, they are case sensitive. If you declare a variable as <code>VAR1</code>, but you reference it as <code>${var1}</code>, bash will not recognize the value. You must reference it as <code>${VAR1}</code>.</p>
+
+<h2 id="toc_9">3.3. Reading user input into a variable</h2>
+
+<p>The command <code>read</code> is the counterpart of <code>echo</code>. Instead of printing things in the terminal the way echo does, <code>read</code> reads input from the user and saves it in the specified variable (in the example below <code>VAR</code>). The command <code>read</code> is followed by the name of the variable where you want to save the information. In the following example, I am going to read the input from the user and save it in the variable <code>VAR</code>. Generally, Bash will read everything that is written until the user presses the Enter key and save all the information in the corresponding variable.</p>
+
+<p>Saving user input into a new variables:</p>
+
+<div><pre><code class="language-bash">$ echo &quot;Username:&quot;
+Username:
+$ read VAR
+Noemi
+$ echo &quot;You typed: ${VAR}&quot;
+You typed: Noemi</code></pre></div>
+
+<p>There are some flags (options) that can be added to the command read to change the way in which information is displayed or captured:</p>
+
+<table>
+<thead>
+<tr>
+<th>Valid</th>
+<th>Invalid</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>-s</code></td>
+<td>Silent mode: the characters that the user inputs are not displayed (used specially when asking the user to input a password).</td>
+</tr>
+<tr>
+<td><code>-p &quot;MESSAGE&quot;</code></td>
+<td>Displays <code>MESSAGE</code> where the user must write the input. Generally with instructions about what the user must input.</td>
+</tr>
+<tr>
+<td><code>-n NUM_CHARS</code></td>
+<td>The input line ends after reading <code>NUM_CHARS</code> characters, rather than waiting for the user to press Enter in the keyboard.</td>
+</tr>
+<tr>
+<td><code>-d &#39;CHAR_NEW_LINE&#39;</code></td>
+<td><code>CHAR_NEW_LINE</code> is used to determine the end of the input line (if different than Enter).</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>Backslash does not act as an escape character but instead is part of the line.</td>
+</tr>
+<tr>
+<td><code>-t NSECONDS</code></td>
+<td>Bash will stop reading the user input after <code>NSECONDS</code>. Whatever was entered in that time is captured as the input line.</td>
+</tr>
+<tr>
+<td><code>-a ARRAY_NAME</code></td>
+<td>The words that the user inputs are assigned to sequential indices of the array <code>ARRAY_NAME</code>. The array is emptied before assigning the values if it already exists.</td>
+</tr>
+<tr>
+<td><code>-u FILEDESCRIPTOR</code></td>
+<td>Read input from <code>FILEDESCRIPTOR</code>.</td>
+</tr>
+</tbody>
+</table>
+
+<p>The following examples will show how to use the flags mentioned in the previous table. Be aware on how the variable name is always written at the end of the command. In this section, I will not explain the use of flags <code>-a</code> and <code>-u</code> because we haven&#39;t learned yet about arrays or file manipulation. These will be explained in chapters 5 and 8 respectively. Some of the examples will also show common mistakes that will make bash show an error.</p>
+
+<h3 id="toc_10">Usage of <code>read -s</code></h3>
+
+<p>In the following example, the flag <code>-s</code> causes the user input to be silenced, so when the user writes the password, it is not shown in the screen. If the user input is ThisIsMyPassword, then that string is saved in the variable <code>PASSWORD</code>. While the user is writing its password and until it presses Enter, you will see the following symbol underneath <code>$ read -s PASSWORD</code>: <img src="./pwd.png" alt="image1">. Afterwards, the symbol will disappear.</p>
+
+<p>In the example below of a wrong syntax, the mistake is that the variable <code>PASSWORD</code> is written before the flag <code>-s</code>. The variable must go at the end of the command independently of which flags are used. As a result, bash is not silencing the user input, is giving the invalid identifier error, and is not saving any string in the variable.</p>
+
+<p>Correct syntax:</p>
+
+<div><pre><code class="language-bash">$ read -s PASSWORD
+
+$ echo ${PASSWORD}
+ThisIsMyPassword</code></pre></div>
+
+<p>Wrong syntax:</p>
+
+<div><pre><code class="language-bash">$ read PASSWORD -s
+ThisIsMyPassword
+-bash: read: `-s&#39;: not a valid identifier</code></pre></div>
+
+<h3 id="toc_11">Usage of <code>read -p</code></h3>
+
+<p>The <code>flag -p</code> is useful if you want to prompt a message so that the user knows what the input should be. The examples in the following table combine the flags <code>-p</code> and <code>-s</code> to indicate the user to input a password and hide the password while its being typed. The prompt message should go right after the flag <code>-p</code>.</p>
+
+<p>The following table shows some examples of commands written using a wrong syntax (as well as the correct way to write them). In the first example, the error is that the prompt message is not located right after the flag <code>-p</code> (instead, it is located after the flag <code>-s</code>). In the second example, the error is that the variable <code>PASSWORD</code> is not located at the end of the command. In the third example, the problem is that the prompt message (Please input your password) is not surrounded by quotation marks. So, for bash only the first word of that sentence (Please) is the prompt message, and the next word (input) is read as the variable name. The rest of the command (your password) is ignored. That is why when reading <code>${PASSWORD}</code>, nothing is echoed, the variable is empty because nothing was saved with that variable name. Instead, the input was saved in <code>${input}</code>. This is the reason why the prompt message should always be surrounded by quotation marks.</p>
+
+<p>Correct syntax:</p>
+
+<div><pre><code class="language-bash">$ read -p &quot;Please input your password: &quot; -s PASSWORD
+Please input your password: 
+$ echo ${PASSWORD}
+ThisIsMyPassword</code></pre></div>
+
+<p>Wrong syntax:</p>
+
+<div><pre><code class="language-bash">$ read -p -s &quot;Please input your password&quot; PASSWORD
+-s
+-bash: read: `Please input your password&#39;: not a valid identifier</code></pre></div>
+
+<div><pre><code class="language-bash">$ read PASSWORD -s -p &quot;Please input your password&quot;
+ThisIsMyPassword
+-bash: read: `-s&#39;: not a valid identifier</code></pre></div>
+
+<div><pre><code class="language-bash">$ read -s -p Please input your password
+ThisIsMyPassword
+$ echo $PASSWORD
+
+$ echo ${input}
+ThisIsMyPassword</code></pre></div>
+
+<h3 id="toc_12">Usage of <code>read -n</code></h3>
+
+<p>In the following example, <code>-n</code> 1 forces bash to accept only one character in the input. So, the terminal will finish reading after one character. Here we are combining flags <code>-n</code> and <code>-p</code> to also prompt a message to the user.</p>
+
+<p>In the wrong syntax, 1 (the number of characters to be accepted) and the prompt message are located in the wrong place. The number of characters accepted should always go after <code>-n</code> and the prompt message should always go after <code>-p</code>.</p>
+
+<p>Correct syntax:</p>
+
+<div><pre><code class="language-bash">$ read -n 1 -p &quot;Do you wish to continue? (y/n)&quot; VAR
+Do you wish to continue? (y/n)y
+$ echo $VAR
+y
+$ read -p &quot;Do you wish to continue? (y/n)&quot; -n 1 VAR
+Do you wish to continue? (y/n)y
+$ echo $VAR
+y</code></pre></div>
+
+<p>Wrong syntax:</p>
+
+<div><pre><code class="language-bash">$ read -n -p 1 &quot;Do you wish to continue? (y/n)&quot; VAR
+-bash: read: -p: invalid number</code></pre></div>
+
+<h3 id="toc_13">Usage of <code>read -d</code></h3>
+
+<p>In the following example the end of the line is determined by the character <code>#</code> instead of Enter (using the flag <code>-d</code>). As soon as the user types <code>#</code>, bash finishes reading and saves the input in the variable <code>VAR</code>.</p>
+
+<p>In the wrong syntax, the command is missing the apostrophes (<code>&#39;</code>) around the character <code>#</code>.</p>
+
+<p>Correct syntax:</p>
+
+<div><pre><code class="language-bash">$ read -d &#39;#&#39; VAR
+
+$ echo $VAR
+SomeText</code></pre></div>
+
+<p>Wrong syntax:</p>
+
+<div><pre><code class="language-bash">$ read -d # VAR
+-bash: read: -d: option requires an argument
+read: usage: read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars] [-d delim] [name ...]</code></pre></div>
+
+<h3 id="toc_14">The backslash</h3>
+
+<p>In bash, certain characters have special meanings. For example, the dollar sign (`<code>$</code>) is used to reference a variable. When you type <code>${VAR}</code> bash will print the value of <code>VAR</code>, instead of the actual string &quot;${VAR}&quot;. The backslash (<code>\</code>) is used to remove those special meanings from the character followed by it.</p>
+
+<div><pre><code class="language-bash">$ VAR=&quot;Some text&quot;
+$ echo ${VAR}
+Some text
+$ echo \${VAR}
+${VAR}</code></pre></div>
+
+<p>When using the flag <code>-r</code>, the backslash is part of the line instead of being used as an escape character. The following table shows examples in which the user inputs the same string but it is read differently because in one case the flag is used but not in the other.</p>
+
+<p>Examples using flag <code>-r</code>:</p>
+
+<div><pre><code class="language-bash">$ read -r VAR
+C:\Documents\Newsletters\Summer2018.pdf
+$ echo ${VAR}
+C:\Documents\Newsletters\Summer2018.pdf
+$ read -r MESSAGE
+In HTML \n is used to indicate a new line
+$ echo ${MESSAGE}
+In HTML \n is used to indicate a new line</code></pre></div>
+
+<p>Examples without the flag <code>-r</code>:</p>
+
+<div><pre><code class="language-bash">$ read VAR
+C:\Documents\Newsletters\Summer2018.pdf
+$ echo ${VAR}
+C:DocumentsNewslettersSummer2018.pdf
+$ read MESSAGE
+In HTML \n is used to indicate a new line
+$ echo ${MESSAGE}
+In HTML n is used to indicate a new line</code></pre></div>
+
+<h2 id="toc_15">3.4. Reading input from a different source</h2>
+
+<p>So far, we have used the command <code>read</code> to save the user input into a variable. This command can also be used to read from other sources (i.e. other variables or files).</p>
+
+<h3 id="toc_16">Reading content from a variable</h3>
+
+<p>In the following example, read reads the content of the variable VAR, but only keeps the first character (because it is using the <code>-n 1</code> flag):</p>
+
+<div><pre><code class="language-bash">$ VAR=yes
+$ read -n 1 R &lt;&lt;&lt; ${VAR}
+$ echo ${R}
+y</code></pre></div>
+
+<h3 id="toc_17">Reading and saving the output of a function</h3>
+
+<p><code>read</code> also allows you to read the output of a function and save it in a variable. In this example, we are saving the output of the <code>pwd</code> function into the variable <code>CURRENT_DIR</code>. <code>pwd</code> is a function that prints the current folder in which you are located in the command line.</p>
+
+<div><pre><code class="language-bash">$ pwd
+/Users/myUserName
+$ read CURRENT_DIR &lt;&lt;&lt; $(pwd)
+$ echo ${CURRENT_DIR}
+/Users/myUserName</code></pre></div>
+
+
+
+
+</body>
+
+</html>

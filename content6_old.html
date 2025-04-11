@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Bash condition testing">
+	<meta name="keywords" content="bash, tutorial, if command">
+	<meta name="author" content="Monica Keith">
+	
+	<link rel="stylesheet" type="text/css" href="styles2.css">
+	<script src="functions.js"></script>
+	<noscript>Sorry, your browser does not support JavaScript. This page needs to have JavaScript enabled.</noscript>
+</head>
+	
+    <body>
+    	<section>
+		<nav>
+			<a onclick="showContent(1);">Checking files</a>  
+			<a onclick="showContent(2);">String comparison</a> 
+			<a onclick="showContent(3);">Comparing numbers</a> 
+			<a onclick="showContent(4);">Comparing arrays</a> 
+			<a onclick="showContent(5);">Combining expressions</a> 
+		</nav>
+		
+		<article>
+			<br>
+        		<h2>6. Condition-testing</h2>
+		    
+		    	<div id="prev">
+			    	<p>Variables can be used to test if a certain condition is true or false, and therefore be able to take a 
+				different course of action depending on the result of the test. For example, you might want to evaluate 
+				if a file exists to decide if you can copy it into a different folder or not. For condition-testing you 
+				will use the if-command. This command has the following syntax:</p>
+					
+				<p>
+				if [ CONDITION_TO_EVALUATE ]<br>
+				then<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;INSTRUCTIONS THAT WILL RUN IF THE CONDITION IS TRUE&gt;<br>
+				elif [ OTHER_CONDITION_TO_EVALUATE_IF_1ST_CONDITION_IS_FALSE ]<br>
+				then<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;INSTRUCTIONS THAT WILL RUN IF FIRST CONDITION IS FALSE BUT SECOND IS TRUE&gt;<br>
+				else<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;INSTRUCTIONS THAT WILL RUN IF ALL THE PREVIOUS CONDITIONS ARE FALSE&gt;<br>
+				fi
+				</p>
+					
+				<p>The CONDITION_TO_EVALUATE is an expression that follows a specific syntax depending on what you want to 
+				test (checking files, string comparison, comparing numbers, or combining different expressions). Lets 
+				look at the different syntaxes used in each of these situations and at some examples that will help you 
+				understand this seemingly confusing subject.</p>
+			</div>
+			
+			<div id="content1">
+				<iframe src="content6_1.html" style="border: 0"></iframe>
+			</div>
+					
+			<div id="content2" class="hidden">
+				<iframe src="content6_2.html" style="border: 0"></iframe>
+			</div>
+					
+			<div id="content3" class="hidden">
+				<iframe src="content6_3.html" style="border: 0"></iframe>
+			</div>
+					
+			<div id="content4" class="hidden">
+				<iframe src="content6_4.html" style="border: 0"></iframe>
+			</div>
+					
+			<div id="content5" class="hidden">
+				<iframe src="content6_5.html" style="border: 0"></iframe>
+			</div>
+		</article>
+	</section>			
+    </body>
+</html>

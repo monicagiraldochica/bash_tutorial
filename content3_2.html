@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<h3>3.2. Rules for assigning variable names</h3>
+					<p>You can assign any value to a variable. However, a variable cannot have just any name. There are a few 
+					rules for assigning variable names.</p>
+					
+					<ol>
+						<li>
+							A variable name should not be a number.<br>
+							This type of variable is only used to read arguments on a shell script. For example, 
+							<font class="bashcommand">$1</font> refers to the first argument of a script, 
+							<font class="bashcommand">$2</font> to the second argument, etc. Later you will learn the meaning and use 
+							of script arguments.
+						</li><br>
+						
+						<li>
+							Variable names must start with an alphabetical letter or an underscore.<br>
+							Variable names can contain any number, but it should not be located at the beginning.
+						</li><br>
+						
+						<li>
+							Do not use <font class="bashcommand">$</font> or <font class="bashcommand">${}</font> to declare a 
+							variable. These characters are used only to reference variables (not to declare).
+						</li><br>
+						
+						<li>
+							Do <u>NOT</u> assign the name <font class="bashcommand">PATH</font> to any variable.<br>
+							If you do so, you won't get any error right away. But it will mess up the execution of other programs. 
+							<font class="bashcommand">PATH</font> is a system variable that specifies a set of directories where 
+							executable programs are located. For example, when you install a software that runs in the command line 
+							(i.e. FSL), the path to the executable of that program will be included in the system variable 
+							<font class="bashcommand">PATH</font>. So, if you rename that variable, you won't be able to execute the 
+							program again in the current terminal. If you forget about this rule and mistakenly re-write the value 
+							of this variable, close the current terminal and open a new one. Every time you open a new terminal, 
+							this system variable will be re-set to the correct value (which is stored in the bash_profile, we will 
+							talk about this file in a later chapter). At any moment you can know the value of your 
+							<font class="bashcommand">PATH</font> by typing <font class="bashcommand">echo ${PATH}</font>. You will 
+							see something like this (although this will significantly varies between one computer and the other 
+							depending which programs you have installed and referenced in the bash_profile):<br><br>
+							
+							<font class="bashcommand">
+							$ echo ${PATH}<br>
+							<font class="bashcommand-result">/usr/local/fsl/bin:/Applications/freesurfer/bin:/Applications/freesurfer/fsfast/bin:/Applications/freesurfer/tktools:/usr/local/fsl/bin:/Applications/freesurfer/mni/bin:/Users/bunbury/bin:/Applications/MATLAB_R2018a.app/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</font>
+							</font><br><br>
+							
+							Another Unix reserved name that you should not use is <font class="bashcommand">BASH</font>. There is a long list 
+							of Unix reserved words that I will not include here but you will learn as you get more experienced.
+						</li><br>
+						
+						<li>
+							Avoid using the following reserved characters from appearing in variable names:
+							<font class="bashcommand">/ &gt; &lt; | : &amp; . *</font>	
+						</li><br><br>
+						
+						<font class="example">Some valid and invalid variable names</font><br>
+						<table>
+							<caption>Valid and invalid variable names</caption>
+							<tr>
+								<th style="width:50%"><b>Valid variable names</b></th>
+								<th style="width:50%"><b>Invalid variable names</b></th>
+							</tr>
+							<tr>
+								<td>V</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>VAR</td>
+								<td>1VAR</td>
+							</tr>
+							<tr>
+								<td>VAR1</td>
+								<td>2_VAR</td>
+							</tr>
+							<tr>
+								<td>VAR_1</td>
+								<td>.VAR</td>
+							</tr>
+							<tr>
+								<td>_VAR1</td>
+								<td>$VAR</td>
+							</tr>
+							<tr>
+								<td>_1VAR</td>
+								<td>${VAR}</td>
+							</tr>
+							<tr>
+								<td>VARIABLE_NAME</td>
+								<td>{VAR}</td>
+							</tr>
+							<tr>
+								<td>PATH1</td>
+								<td>PATH</td>
+							</tr>
+							<tr>
+								<td>BASH1</td>
+								<td>BASH</td>
+							</tr>
+						</table>
+						
+						<p>
+							Variable names can be in lower and/or upper case. However, they are case sensitive. If you declare a 
+							variable as <font class="bashcommand">VAR1</font>, but you reference it as 
+							<font class="bashcommand">${var1}</font>, bash will not recognize the value. You must reference it as 
+							<font class="bashcommand">${VAR1}</font>.
+						</p>
+					</ol>
+</body>
+
+</html>

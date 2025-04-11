@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>7.2. From for to while</h3>
+		    		<p>Every loop that you write using the for command, can also be written using the while command. The results will be the same but sometimes one of them will be more efficient and easier to code than the other. In general, the for command is a lot easier to use and understand. However:</p>
+
+					<ul>
+					  <li>You should use the <b>for</b> command when you want to iterate through <b>all the elements</b> of an array.</li>
+					  <li>You should use the <b>while</b> command when you want to iterate through <b>a limited number of elements within the array.</b></li>
+					  <li>You should use the <b>while</b> command when you want to <b>iterate through more than one array</b> or while <b>several conditions should be met</b>.</li>
+					</ul>
+					
+					<p>The following example shows how a for loop can be converted into a while loop. The objective of this piece of code is to print the elements of an array.</p>
+		    		
+					<p>
+						<font class="example">From for to while</font>
+						<font class="bashcommand">$ declare -a ARRAY=('SUBJ0' 'SUBJ9' 'SUBJ3' 'SUBJ4' 'SUBJ3')</font>
+					</p>
+					
+					<table>
+						<tr>
+							<th><b>Using a for loop</b></th>
+							<th><b>Using a while loop</b></th>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ for E in ${ARRAY[@]}<br>
+									&gt;  do<br>
+									&gt;  echo ${E}<br>
+									&gt;  done<br>
+									<font class="bashcommand-result"> 
+									SUBJ0<br>
+									SUBJ9<br>
+									SUBJ3<br>
+									SUBJ4<br>
+									SUBJ3  
+									</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ SIZE=${#ARRAY[@]} <br>
+									$ i=0 <br>
+									$ while [ ${i} -lt ${SIZE} ] <br>
+									&gt;  do <br>
+									&gt;  echo ${ARRAY[${i}]} <br>
+									&gt;  ((i++)) <br>
+									&gt;  done <br>
+									<font class="bashcommand-result">
+									SUBJ0 <br>
+									SUBJ9 <br>
+									SUBJ3 <br>
+									SUBJ4 <br>
+									SUBJ3 
+									</font>
+								</font>
+							</td>
+						</tr>
+					</table>
+					
+					<p>In the previous example, both loops (the one in the left using a <b>for</b> and the one in the right using a <b>while</b>) iterate through the elements of an array and echoes them in the terminal window. However, there are some important differences:</p>
+					
+					<ul>
+						<li>The <u>for loop</u> automatically stops when iteration reaches the end of the array. The <u>while loop</u> stops when the condition (<font class="bashcommand">[ ${i} -lt ${SIZE} ]</font>) evaluates false. This means that it will iterate as long as variable <font class="bashcommand">i</font> is less (<font class="bashcommand">-lt</font>) <font class="bashcommand">SIZE</font>. In the while loop, variable <font class="bashcommand">i</font> contains the index of each item during the iteration and variable <font class="bashcommand">SIZE</font> contains the size of the array. For this reason, <font class="bashcommand">((i++))</font> is included inside the while loop. <font class="bashcommand">((i++))</font> increments the value of <font class="bashcommand">i</font> in 1 on each iteration. If you didn't include this, bash would iterate forever, because you wouldn't be increasing the value of <font class="bashcommand">i</font> and it would always equal zero. Hence, it would never be less than the size of the array, so the condition that the while evaluates will never be false. Since while iterates as long as that condition is true, it would iterate forever.</li>
+						<li>In the <u>for loop</u> each element of the array is saved in variable <font class="bashcommand">E</font>. However, you don't have to assign each value to the variable, it is done automatically. In the <u>while loop</u> the element in the position <font class="bashcommand">i</font> is being referenced with <font class="bashcommand">${ARRAY[${i}]}</font>.</li>
+						<li>Off course, in this case as we want to iterate through all the elements of <font class="bashcommand">ARRAY</font>, it makes no sense to use the while loop. It requires more lines of code; it is easier to make mistakes and it is harder to understand. But this is a good example to show how it works. </li>
+					</ul>
+					
+					<p>
+						<font class="example">Printing the elements of an array and their position within the array</font>
+						<font class="bashcommand">$ declare -a ARRAY=('SUBJ0' 'SUBJ9' 'SUBJ3' 'SUBJ4' 'SUBJ3')</font>
+					</p>
+					
+					<table>
+						<tr>
+							<th><b>Using a for loop</b></th>
+							<th><b>Using a while loop</b></th>
+						</tr>
+						
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ i=0 <br>
+									$ for ID in ${ARRAY[@]} <br>
+									&gt;  do <br>
+									&gt;  echo "Subject number ${i} is ${ID}" <br>
+									&gt;  ((i++)) <br>
+									&gt;  done <br>
+									<font class="bashcommand-result"> 
+									Subject number 0 is SUBJ0 <br>
+									Subject number 1 is SUBJ9 <br>
+									Subject number 2 is SUBJ3 <br>
+									Subject number 3 is SUBJ4 <br>
+									Subject number 4 is SUBJ3 
+									</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ SIZE=${#ARRAY[@]} <br>
+									$ i=0 <br>
+									$ while [ ${i} -lt ${SIZE} ] <br>
+									&gt;  do <br>
+									&gt;  echo "Subject number ${i} is ${ARRAY[$i]}" <br>
+									&gt;  ((i++)) <br>
+									&gt;  done <br>
+									<font class="bashcommand-result">
+									Subject number 0 is SUBJ0 <br>
+									Subject number 1 is SUBJ9 <br>
+									Subject number 2 is SUBJ3 <br>
+									Subject number 3 is SUBJ4 <br>
+									Subject number 4 is SUBJ3 
+									</font>
+								</font>
+							</td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">Printing the first five files in the current directory</font>
+						Previously we learned that the following loop would echo the path of all the files in the current directory: 
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+						$ for f in $( ls ) <br>
+						&gt; do <br>
+						&gt; echo "Do something with this file: ${f}" <br>
+						&gt; done 
+						</font>
+					</p>
+					
+					<p>In this case, it makes no sense to use the while loop. However, if instead of echoing all the files inside the current directory you wanted to echo only the first five files, then you must use the while loop.</p>
+					
+					<table>
+						<tr>
+							<th><b>Preferably use a for loop</b></th>
+							<th><b>Preferably use a while loop</b></th>
+						</tr>
+						
+						<tr>
+							<td>
+								<p>This loop will print <b>all</b> the files in the current directory:</p>
+								<p>
+									<font class="bashcommand">
+										$ for f in $( ls ) <br>
+										&gt; do <br>
+										&gt; echo ${f} <br>
+										&gt; done <br>
+										<font class="bashcommand-result">
+										Applications <br>
+										Library <br>
+										Network <br>
+										System <br>
+										Users <br>
+										Volumes <br>
+										cores <br>
+										dev <br>
+										net <br>
+										opt <br>
+										bin <br>
+										tmp 
+										</font>
+									</font>
+								</p>
+							</td>
+							<td>
+								<p>This loop will print <b>the first five</b> files in the current directory:</p>
+								<p>
+									<font class="bashcommand">
+										$ i=0 <br>
+										$ ARRAY=($( ls )) <br>
+										$ while [ ${i} -le 4 ] <br>
+										&gt; do <br>
+										&gt; echo ${ARRAY[${i}]} <br>
+										&gt; ((i++)) <br>
+										&gt; done <br>
+										<font class="bashcommand-result">
+										Applications <br>
+										Library <br>
+										Network <br>
+										System <br>
+										Users 
+										</font>
+									</font>
+								</p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<p>This loop will rename <b>all</b> the files in the current directory that end in .nii.gz. Before and after the loop I am printing the content of the folder to visualize the change. Command ls prints the content of the current directory:  </p>
+								<p>
+									<font class="bashcommand">
+										$ ls <br>
+										<font class="bashcommand-result">
+										10132423423.nii.gz <br> 
+										25675756756.nii.gz <br>
+										36787686767.nii.gz <br>
+										37456456456.nii.gz <br>
+										39756756756.nii.gz <br>
+										41786786677.nii.gz <br>
+										</font>
+										$ i=1 <br>
+										$ for f in ./*.nii.gz <br>
+										&gt; do <br>
+										&gt; mv ${f} Subject_${i}.nii.gz <br>
+										&gt; ((i++)) <br>
+										&gt; done <br>
+										$ ls <br>
+										<font class="bashcommand-result">
+										Subject_1.nii.gz <br>
+										Subject_2.nii.gz <br>
+										Subject_3.nii.gz <br>
+										Subject_4.nii.gz <br>
+										Subject_5.nii.gz <br>
+										Subject_6.nii.gz 
+										</font>
+									</font>
+								</p>
+							</td>
+							<td>
+								<p>This loop will rename <b>the first three</b> files in the current directory that end in .nii.gz. Before and after the loop I am printing the content of the folder to visualize the change. Command ls prints the content of the current directory:</p>
+								<p>
+									<font class="bashcommand">
+										$ ls 
+										<font class="bashcommand-result">
+										10132423423.nii.gz <br>
+										25675756756.nii.gz <br>
+										36787686767.nii.gz <br>
+										37456456456.nii.gz <br>
+										39756756756.nii.gz <br>
+										41786786677.nii.gz <br>
+										</font>
+										$ i=0 <br>
+										$ ARRAY=($( ls ./*.nii.gz )) <br>
+										$ while [ ${i} -le 2 ] <br>
+										&gt; do <br>
+										&gt; mv ${ARRAY[${i}]} ./Subject_$((++i)).nii.gz <br>
+										&gt; done <br>
+										$ ls <br>
+										<font class="bashcommand-result">
+										Subject_1.nii.gz <br>
+										Subject_2.nii.gz <br>
+										Subject_3.nii.gz <br>
+										37456456456.nii.gz <br>
+										39756756756.nii.gz <br>
+										41786786677.nii.gz 
+										</font>
+									</font>
+								</p>
+							</td>
+						</tr>
+					</table>
+</body>
+</html>

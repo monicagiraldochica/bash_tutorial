@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h3>6.3. Condition-testing to compare numbers</h3>
+					<p>The spaces after <font class="bashcommand">[</font> and before <font class="bashcommand">]</font> are very important. If those spaces are missing, bash will give an error.</p>
+					<table>
+						<tr>
+							<th><b>Condition</b></th>
+							<th><b>Meaning</b></th>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ NUM1 -eq NUM2 ]</font></td>
+							<td>Tests if <font class="bashcommand">NUM1</font> is equal to <font class="bashcommand">NUM2</font></td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ NUM1 -ne NUM2 ]</font></td>
+							<td>Tests if <font class="bashcommand">NUM1</font> is not equal to <font class="bashcommand">NUM2</font>.</td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ NUM1 -lt NUM2 ]</font></td>
+							<td>Tests if <font class="bashcommand">NUM1</font> is less than <font class="bashcommand">NUM2</font>.</td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ NUM1 -le NUM2 ]</font></td>
+							<td>Tests if <font class="bashcommand">NUM1</font> is less than or equal to <font class="bashcommand">NUM2</font>.</td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ NUM1 -gt NUM2 ]</font></td>
+							<td>Tests if <font class="bashcommand">NUM1</font> is greater than <font class="bashcommand">NUM2</font>.</td>
+						</tr>
+						
+						<tr>
+							<td><font class="bashcommand">[ NUM1 -ge NUM2 ]</font></td>
+							<td>Tests if <font class="bashcommand">NUM1</font> is greater than or equal to <font class="bashcommand">NUM2</font>.</td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">[ NUM1 -eq NUM2 ]:</font>
+						<font class="bashcommand">
+							$ if [ 3 -eq 3 ]<br>
+							&gt; then<br>		
+							&gt; echo "This makes sense, 3 equals 3."<br>					
+							&gt; fi<br>			
+							<font class="bashcommand-result">This makes sense, 3 equals 3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ 3 -eq 3 ] &gt;&gt; echo "This makes sense, 3 equals 3."<br>
+							<font class="bashcommand-result">This makes sense, 3 equals 3.</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ A=3<br>
+							$ if [ "${A}" -eq "3" ]<br>
+							&gt; then<br> 
+							&gt; echo "This makes sense, ${A} equals 3."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">This makes sense, 3 equals 3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${A}" -eq "3" ] &gt;&gt; echo "This makes sense, ${A} equals 3."<br>
+							<font class="bashcommand-result">This makes sense, 3 equals 3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ NUM1 -ne NUM2 ]:</font>
+						<font class="bashcommand">
+							$ A=3<br>
+							$ if [ "${A}" -ne "3" ]<br>
+							&gt; then<br>
+							&gt; echo "Variable A is not equal to 3"<br> 
+							&gt; else<br>
+							&gt; echo "Variable A equals 3."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Variable A equals 3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${A}" -ne "3" ] &gt;&gt; echo "Variable A is not equal to 3" || echo "Variable A equals 3."<br>
+							<font class="bashcommand-result">Variable A equals 3.</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ NUM1 -lt NUM2 ]:</font>
+						<font class="bashcommand">
+							$ A=3<br>
+							$ if [ "${A}" -lt "3" ]<br>
+							&gt; then<br>
+							&gt; echo "Variable A is less than 3"<br> 
+							&gt; else<br>
+							&gt; echo "Variable A not less than 3."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Variable A is not less than 3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${A}" -lt "3" ] &gt;&gt; echo "Variable A is less than 3" || echo "Variable A not less than 3."<br>
+							<font class="bashcommand-result">Variable A is not less than 3.</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ NUM1 -le NUM2 ]:</font>
+						<font class="bashcommand">
+							$ A=3<br> 
+							$ if [ "${A}" -le "3" ]<br>
+							&gt; then<br>
+							&gt; echo "Variable A is less or equal to 3"<br>
+							&gt; else<br>
+							&gt; echo "Variable A greater than 3."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Variable A is less or equal to 3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${A}" -le "3" ] &gt;&gt; echo "Variable A is less or equal to 3" || echo "Variable A greater than 3."<br>
+							<font class="bashcommand-result">Variable A is less or equal to 3.</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">[ NUM1 -gt NUM2 ]:</font>
+						<font class="bashcommand">
+							$ A=3<br>
+							$ if [ "${A}" -gt "3" ]<br>
+							&gt; then<br>
+							&gt; echo "Variable A is greater than 3."<br>
+							&gt; else<br>
+							&gt; echo "Variable A not greater than 3."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Variable A is not greater than 3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${A}" -gt "3" ] &gt;&gt; echo "Variable A is greater than 3." || echo "Variable A not greater than 3."<br>
+							<font class="bashcommand-result">Variable A is not greater than 3.</font>
+						</font>	
+					</p>
+					
+					<p>
+						<font class="example">[ NUM1 -ge NUM2 ]:</font>
+						<font class="bashcommand">
+							$ A=3<br>
+							$ if [ "${A}" -ge "3" ]<br>
+							&gt; then<br>
+							&gt; echo "Variable A is greater or equal to 3"<br>
+							&gt; else<br>
+							&gt; echo "Variable A less than 3."<br>
+							&gt; fi<br>
+							<font class="bashcommand-result">Variable A is greater or equal to 3.</font> 
+						</font>
+					</p>
+					
+					<p>
+						The previous expression can be written using a shorter syntax: [ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:<br>
+						<font class="bashcommand">
+							$ [ "${A}" -ge "3" ] &gt;&gt; echo "Variable A is greater or equal to 3" || echo "Variable A less than 3."<br>
+							<font class="bashcommand-result">Variable A is greater or equal to 3.</font>
+						</font>
+					</p>
+</body>
+</html>

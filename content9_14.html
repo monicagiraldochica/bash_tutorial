@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.14. Examples: Reading the lines of a file that contain a pattern (instead of a specific word).</h3>
+
+        <p>
+        <font class="example">Print the line(s) of file3.csv that start with B.</font>
+        <font class="bashcommand">
+        $ grep '^B' file3.csv<br>
+        <font class="bashcommand-result">
+        B12226507,Group1,68<br>
+        B12226546,Group1,67<br>
+        B11119903,Group2 b,83<br>
+        B11108399,Group1,23<br>
+        B11108326,Group1,59<br>
+        B11119909,Group2 b,61<br>
+        B11110893,Group1,28 
+        </font>
+        </font>
+        </p>
+        
+        <p>
+        <font class="example">Print the line(s) of test7.csv that end with 13.</font>
+        <font class="bashcommand">
+        $ grep '13$' file3.csv<br>
+        <font class="bashcommand-result">
+        C11137159,Group3,13<br>
+        C11137159,Group3,13<br>
+        D11144030,Group3,13 
+        </font>
+        </font>
+        </p>
+        
+        <p>
+        <font class="example">Print the line(s) of test7.csv that end with 13 (when this pattern is stored in a file called patterns2.txt).</font>
+        <font class="bashcommand">
+        $ cat patterns2.txt<br>
+        <font class="bashcommand-result">
+        13$ 
+        </font>
+        </font>
+        </p>
+
+        <p>
+        <font class="bashcommand">
+        $ grep -f patterns2.txt file3.csv<br>
+        <font class="bashcommand-result">
+        C11137159,Group3,13<br>
+        C11137159,Group3,13<br>
+        D11144030,Group3,13 
+        </font>
+        </font>
+        </p>
+
+        <p><font class="example">Print all the non-empty lines (lines with more than 0 fields NF > 0) in file3.csv and file4.txt.</font></p>
+
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk 'NF > 0' file4.txt<br>
+                <font class="bashcommand-result">
+                AnonymizedID SubjectGroup AGE<br>
+                B11108326 Group1 59<br>
+                B11108399 Group1 23<br>
+                B11110893 Group1 28<br>
+                B11119909 Group2 61<br>
+                D11144030 Group3 11<br>
+                D11144030 Group3 13<br>
+                B11119903 Group2 84<br>
+                C11131039 Group2 67<br>
+                C11133100 Group1 23<br>
+                C11135566 Group2 72<br>
+                C11137159 Group3 11<br>
+                C11137159 Group3 12<br>
+                C11137167 Group3 14<br>
+                C11137167 Group3 16<br>
+                C11137439 Group3 15<br>
+                C11137439 Group3 79<br>
+                C11137443 Group3 15<br>
+                C11137544 Group1 22<br>
+                C11137123 Group2 68<br>
+                C11138150 Group1 44<br>
+                C11138152 Group1 10<br>
+                C11138797 Group1 24<br>
+                C11138184 Group1 57<br>
+                C11138122 Group1 23<br>
+                C11138122 MISSING 25<br>
+                C11138192 Group1 45<br>
+                B12226507 Group1 26<br>
+                B12226546 Group1 55 
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ awk -F',' 'NF > 0' file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+
+        <p><font class="example">Print all the lines that have more than two fields (NF > 2) in file3.csv and file4.txt.</font></p>
+    
+        <p><table>
+            <tr>
+                <th>Space-separated file</th>
+                <th>Comma-separated file</th>
+            </tr>
+            <tr>
+                <td><font class="bashcommand">
+                $ awk 'NF > 2' file4.txt<br>
+                <font class="bashcommand-result">
+                AnonymizedID SubjectGroup AGE<br>
+                B11108326 Group1 59<br>
+                B11108399 Group1 23<br>
+                B11110893 Group1 28<br>
+                B11119909 Group2 61<br>
+                D11144030 Group3 11<br>
+                D11144030 Group3 13<br>
+                B11119903 Group2 84<br>
+                C11131039 Group2 67<br>
+                C11133100 Group1 23<br>
+                C11135566 Group2 72<br>
+                C11137159 Group3 11<br>
+                C11137159 Group3 12<br>
+                C11137167 Group3 14<br>
+                C11137167 Group3 16<br>
+                C11137439 Group3 15<br>
+                C11137439 Group3 79<br>
+                C11137443 Group3 15<br>
+                C11137544 Group1 22<br>
+                C11137123 Group2 68<br>
+                C11138150 Group1 44<br>
+                C11138152 Group1 10<br>
+                C11138797 Group1 24<br>
+                C11138184 Group1 57<br>
+                C11138122 Group1 23<br>
+                C11138122 MISSING 25<br>
+                C11138192 Group1 45<br>
+                B12226507 Group1 26<br>
+                B12226546 Group1 55 
+                </font>
+                </font></td>
+                
+                <td><font class="bashcommand">
+                $ awk -F',' 'NF > 2' file3.csv<br>
+                <font class="bashcommand-result">
+                Anonymized ID,Subject Group,AGE<br>
+                C11138122,MISSING,21<br>
+                C11138192,Group1,54<br>
+                B12226507,Group1,68<br>
+                B12226546,Group1,67<br>
+                C11138122,Group1,24<br>
+                C11138184,Group1,59<br>
+                C11138797,Group1,22<br>
+                C11138152,Group1,53<br>
+                C11138150,Group1,41<br>
+                C11137167,Group3,14<br>
+                C11137159,Group3,13<br>
+                C11137167,Group3,16<br>
+                C11137159,Group3,13<br>
+                C11131039,Group2 b,67<br>
+                C11135566,Group2 b,73<br>
+                B11119903,Group2 b,83<br>
+                C11137544,Group1,21<br>
+                C11137443,Group3,11<br>
+                C11137123,Group2 b,69<br>
+                C11137439,Group3,79<br>
+                C11137439,Group3,15<br>
+                C11133100,Group1,23<br>
+                D11144030,Group3,13<br>
+                B11108399,Group1,23<br>
+                B11108326,Group1,59<br>
+                B11119909,Group2 b,61<br>
+                B11110893,Group1,28 
+                </font>
+                </font></td>
+            </tr>
+        </table></p>
+</html>

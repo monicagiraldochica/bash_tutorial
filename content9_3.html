@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <h3>9.3. Using the read command for more complex csv files</h3>
+        <p>So far, we have learned that using the <font class="bashcommand">for</font> loop and the cat utility you can read each line of a file and separate it into different fields using a separator. However, csv files can become very difficult to separate into fields if some of them contain a comma (the same character that is being used as a separator), a space, or both. </p>
+        
+        <p>
+        <font class="example">Example: Obtain the last field of <font class="bashcommand">$line</font> using the concepts learned before.</font>
+        <font class="bashcommand">
+        $ line="SUBJ20"," Age 22-30","VISIT1","1","DIAGN: Major Depressive Disorder, Single Episode, In Full Remission"<br>
+        $ IFS=',' read -a ARRAY &gt;&gt;&gt; "$line"<br>
+        $ echo "The last field of line is: "${ARRAY[4]}<br>
+        <font class="bashcommand-result">The last field of line is: DIAGN: Major Depressive Disorder</font>
+        </font>
+        </p>
+        
+        <p>However, this is not the correct result. The last field of <font class="bashcommand">$line</font> is <font class="bashcommand">"DIAGN: Major Depressive Disorder, Single Episode, In Full Remission"</font>. But because we are using a comma as a separator, bash is separating this field into separate columns. To solve this problem, you can read from the file descriptor and save each field in a separate variable using the <font class="bashcommand">read</font> utility.</p>
+        
+        <p>
+        The first step is to assign a file descriptor (which must be an integer number) to the input file:<br>
+        <font class="bashcommand">$ exec 3&lt; $INPUT_FILE</font>
+        </p>
+        
+        <p>
+        Then, to read each line of the file and save each field in a different variable:<br>
+        <font class="bashcommand">$ read -u 3 a b</font>
+        </p>
+        
+        <p>
+        The previous command will read the next line of the input file with descriptor 3 (the number following flag <font class="bashcommand">-u</font>) and save the first field in variable a and the rest of the line in variable <font class="bashcommand">b</font>.<br>
+        <font class="bashcommand">$ read -u 3 a b c</font>
+        </p>
+        
+            <p>
+        The previous command will read the next line of the input file with descriptor 3 and save the first field in variable <font class="bashcommand">a</font>, the second field in variable <font class="bashcommand">b</font>, and the rest of the line in variable <font class="bashcommand">c</font> (variable <font class="bashcommand">c</font> would be empty if there are no more fields to read). If you want to separate the fields using comma as a separator, you should use the following command instead:<br>
+        <font class="bashcommand">$ IFS=',' read -u 3 a b c d</font>
+            </p>
+        
+            <p>
+        If one of the columns contains a comma but is surrounded by quotation marks, then it will read the text inside the quotation marks as a single field. In the example before, it will read the following text as the last field: <font class="bashcommand">$ "DIAGN: Major Depressive Disorder, Single Episode, In Full Remission"</font>.<br>
+        Each time you type the command <font class="bashcommand">$ FS=',' read -u 3 a b c d</font> it will read the following line. 
+            </p>
+        
+            <p>
+        <font class="example">Read each line of a file and save the first and last fields into a new file</font>
+        Given the file example.csv with the following content:<br>
+        "SUBJ1","Age 22-30","VISIT1","DIAGN: Major Depressive Disorder, Single Episode"<br>
+        "SUBJ2","Age 22-30","VISIT1","DIAGN: Bipolar, Schizophrenia"<br>
+        "SUBJ3","Age 22-30","VISIT1","DIAGN: Major Depressive Disorder"<br>
+        "SUBJ4","Age 22-30","VISIT1","DIAGN: Autism, Dyslexia, ADHD"<br>
+        Read each line of the file and save the first and last fields into a new file called result.csv. 
+            </p>
+        
+            <p>
+        <ol>
+            <li>
+            Assign the file descriptor 3 to example.csv for input<br>
+            <font class="bashcommand">$ exec 3&lt; example.csv</font>
+            </li>
+            
+            <li>
+            Obtain the number of lines in the input file.<br>
+            <font class="bashcommand">
+            $ N=$(cat example.csv | wc -l)<br>
+            $ echo $N 
+            </font>
+            </li>
+            
+            <li>
+            Iterate through all the lines of the file saving each field in a different variable. Then, write the value of the first and last fields into the output file.<br> 
+            <font class="bashcommand">
+            $ i=0<br>
+            $ while [ $((i++)) -lt $N ]<br> 
+            &gt; do<br> 
+            &gt; IFS=',' read -u 3 f1 f2 f3 f4<br> 
+            &gt; echo  "$f1,$f4" &gt;&gt; result.csv<br> 
+            &gt; done 
+            </font>
+            </li>
+            
+            <li>
+            You must close the file descriptor using the following command (replace number 3 by the corresponding file descriptor):<br> 
+            <font class="bashcommand">
+            $ exec 3&lt;&- 
+            </font>
+            </li>
+            
+            <li>
+            Read the content of the output file.<br> 
+            <font class="bashcommand">
+            $ cat result.csv<br> 
+            <font class="bashcommand-result">
+            "SUBJ1","Age 22-30","VISIT1","DIAGN: Major Depressive Disorder, Single Episode"<br> 
+            "SUBJ2","Age 22-30","VISIT1","DIAGN: Bipolar, Schizophrenia"<br> 
+            "SUBJ3","Age 22-30","VISIT1","DIAGN: Major Depressive Disorder"<br> 
+            "SUBJ4","Age 22-30","VISIT1","DIAGN: Autism, Dyslexia, ADHD" 
+            </font>
+            </font>
+            </li>
+            </ol>
+            </p>
+</html>

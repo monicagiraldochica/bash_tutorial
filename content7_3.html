@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>7.3. The while loop</h3>
+					<h4>Using the while loop to iterate through more than one array</h4>
+					
+		    		<p>As previously mentioned, when you are iterating through more than one array you should use the while loop instead of the for loop.</p>
+		    
+					<p>
+						<font class="example">Iterating through two arrays at the same time</font>
+						In the following example there are two arrays (<font class="bashcommand">ID</font> and <font class="bashcommand">VISIT</font>), which contain a list of subject IDs and visit number respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (test.txt) using the command cat, which will be explained in detail in the following chapter (File manipulation). 
+					</p>
+					
+					<p>This while loop will run as long as the two conditions (<font class="bashcommand">[ ${i} -lt ${SIZE_ID} ]</font>, <font class="bashcommand">[ ${i} -lt ${SIZE_VISIT} ]</font>) that are being evaluated be true. This means, as long as variable <font class="bashcommand">i</font> have value less than (<font class="bashcommand">-lt</font>) the size of <font class="bashcommand">ID</font> and <font class="bashcommand">VISIT</font>. So, as soon as its value be greater than <font class="bashcommand">SIZE_ID</font> or <font class="bashcommand">SIZE_VISIT</font>, it will stop. In this case both arrays have the same size. Again, it is extremely important to not forget the line <font class="bashcommand">((i++))</font>, otherwise, it will loop forever (you can always break a loop with Control + C). </p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a ID=('SUBJ0' 'SUBJ1' 'SUBJ2' 'SUBJ3' 'SUBJ4' 'SUBJ5' 'SUBJ6') <br>
+							$ declare -a VISIT=('V1' 'V1' 'V2' 'V1' 'V2' 'V2' 'V3') <br>
+							$ SIZE_ID=${#ID[@]} <br>
+							$ SIZE_VISIT=${#VISIT[@]} <br>
+							$ i=0 <br>
+							$ while [ ${i} -lt ${SIZE_ID} ] && [ ${i} -lt ${SIZE_VISIT} ] <br>
+							&gt; do <br>
+							&gt; echo "${ID[${i}]}_${VISIT[${i}]}" &gt;&gt; test.txt <br>
+							&gt; ((i++)) <br>
+							&gt; done <br>
+							$ cat test.txt <br>
+							<font class="bashcommand-result">
+							SUBJ0_V1 <br>
+							SUBJ1_V1 <br>
+							SUBJ2_V2 <br>
+							SUBJ3_V1 <br>
+							SUBJ4_V2 <br>
+							SUBJ5_V2 <br>
+							SUBJ6_V3 
+							</font>
+						</font>
+					</p>
+					
+					<p>
+						<font class="example">Inverting an array</font>
+						In this example, initially there is only one array, but after the code is executed there will be two arrays. The second array will be the inversion of the first one. The code will iterate starting at the end of the array and finishing at the beginning. In each iteration it will copy the current value into the new array. It will start adding items at the beginning of the new array (in the index 0). For this purpose, there will be two variables. Variable <font class="bashcommand">i</font>, which will be initialized with value <font class="bashcommand">$(( ${#ARRAY[@]} – 1 ))</font> (the size of the initial array minus one) and will represent the position in which the loop is iterating in the original array. In each loop <font class="bashcommand">i</font> will decrease its value in 1 until it reaches 0. And variable <font class="bashcommand">j</font>, which will be initialized with value 0 and will represent the position in which the loop is iterating in the inverted array. In each loop <font class="bashcommand">j</font> will increase its value until it reaches the size of the original array (when all the values would have finished being copied). So, the while will loop as long as variable <font class="bashcommand">i</font> have value greater or equal (<font class="bashcommand">-ge</font>) to 0. 
+					</p>
+					
+					<p>Variable <font class="bashcommand">i</font> is initialized with value equal to the size of the array minus one instead of the size of the array because remember that the first index of an array is 0, so the last one is the size minus one.</p>
+					
+					<p>
+						Order of values in the original array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.<br>
+						Order of values in the inverted array: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1. 
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a ARRAY=('1' '2' '3' '4' '5' '6' '7' '8' '9' '10') <br>
+							$ i=$(( ${#ARRAY[@]} - 1 )) <br>
+							$ j=0 <br>
+							$ while [ ${i} -ge 0 ] <br>
+							&gt; do <br>
+							&gt; echo "Copying element in position ${i} from the original array into position ${j} of the new array..." <br>
+							&gt; INV_ARRAY[$((j++))]=${ARRAY[$((i--))]} <br>
+							&gt; done <br>
+							<font class="bashcommand-result">
+							Copying element in position 9 from the original array into position 0 of the new array... <br>
+							Copying element in position 8 from the original array into position 1 of the new array... <br>
+							Copying element in position 7 from the original array into position 2 of the new array... <br>
+							Copying element in position 6 from the original array into position 3 of the new array... <br>
+							Copying element in position 5 from the original array into position 4 of the new array... <br>
+							Copying element in position 4 from the original array into position 5 of the new array... <br>
+							Copying element in position 3 from the original array into position 6 of the new array... <br>
+							Copying element in position 2 from the original array into position 7 of the new array... <br>
+							Copying element in position 1 from the original array into position 8 of the new array... <br>
+							Copying element in position 0 from the original array into position 9 of the new array... <br>
+							</font>
+							$ echo ${INV_ARRAY[@]} <br>
+							<font class="bashcommand-result">
+							10 9 8 7 6 5 4 3 2 1 
+							</font>
+						</font>
+					</p>
+					
+					<p>The command <font class="bashcommand">INV_ARRAY[$((j++))]=ARRAY[$((i--))]</font> is doing three things: assigning the element of <font class="bashcommand">ARRAY</font> in position <font class="bashcommand">i</font> to <font class="bashcommand">INV_ARRAY</font> in position <font class="bashcommand">j</font>, incrementing <font class="bashcommand">j</font> in one, and decreasing <font class="bashcommand">i</font> in one. It is equivalent to this set of instructions:</p>
+					
+					<p>
+						<font class="bashcommand">
+							INV_ARRAY[${j}]=ARRAY[${i}] <br>
+							((j++)) <br>
+							((i--)) 
+						</font>
+					</p>
+					
+					<h4>Using the while loop to iterate when several conditions should be met</h4>
+					
+					<p>In the following example there is an array of subject IDs (<font class="bashcommand">SUBJECTS</font>). Some of those subjects are controls and their ID starts with the letter C, other subjects are patients and their ID starts with the letter P. The array is organized so that the controls go before the patients. The loop will copy only the controls into a new array (<font class="bashcommand">CONTROLS</font>). So, there are two conditions to be met so that the loop continues to run: the index variable <font class="bashcommand">i</font> be less than the size of <font class="bashcommand">SUBJECTS</font> (<font class="bashcommand">${#SUBJECTS[@]}</font>), and the current element (<font class="bashcommand">SUBJECTS[${i}]</font>) start with the letter C. To get the first letter of the current element you must use the previously learned syntax to extract a sub-string: <font class="bashcommand">${STRING:START:NUM}</font>.</p>
+					
+					<p>
+						The first condition (iterate while <font class="bashcommand">i</font> less than the size of the array <font class="bashcommand">SUBJECTS</font>) is written like this:<br>
+						<font class="bashcommand">[ ${i} -lt ${#SUBJECTS[@]} ]</font>.
+					</p>
+					
+					<p>
+						The second condition (iterate while the current element in the loop starts with the letter C) is written like this:<br>
+						<font class="bashcommand">
+							$ declare -a SUBJECTS=('C01' 'C02' 'C03' 'C04' 'C05' 'C06' 'P07' 'P08' 'P09' 'P10') <br>
+							$ i=0 <br>
+							$ while [ ${i} -lt ${#SUBJECTS[@]} ] && [ "${SUBJECTS[${i}]:0:1}" == "C" ] <br>
+							&gt; do <br>
+							&gt; CONTROLS[${i}]=${SUBJECTS[$((i++))]} <br>
+							&gt; done <br>
+							$ echo ${CONTROLS[@]} <br>
+							<font class="bashcommand-result">C01 C02 C03 C04 C05 C06</font>
+						</font>
+					</p>
+</body>
+</html>

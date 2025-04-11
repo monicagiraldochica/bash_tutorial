@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<h3>3.3. Reading user input into a variable</h3>
+					<p>
+						The command <font class="bashcommand">read</font> is the counterpart of <font class="bashcommand">echo</font>. 
+						Instead of printing things in the terminal the way <font class="bashcommand">echo</font> does, 
+						<font class="bashcommand">read</font> reads input from the user and saves it in the specified variable (in 
+						this case <font class="bashcommand">VAR</font>). The word read is followed by the name of the variable where 
+						you want to save the information. In the following example, I am going to read the input from the user and 
+						save it in the variable <font class="bashcommand">VAR</font>. Generally, Bash will read everything that is 
+						written until the user presses the Enter key and save all the information in the corresponding variable.
+					</p>
+					
+					<p>
+						<font class="example">Saving user input into a new variable</font>
+						<font class="bashcommand">
+						$ echo "Username:"<br>
+						<font class="bashcommand-result">Username:</font><br>
+						$ read VAR<br>
+						<font class="bashcommand-result">Noemi</font><br>
+						$ echo "You typed: ${VAR}"<br>
+						<font class="bashcommand-result">You typed: Noemi</font>
+						</font>
+					</p>
+					
+					<p>
+						There are some flags (options) that can be added to the command read to change the way in which information is 
+						displayed or captured:
+					</p>
+					
+					<table>
+						<caption>Options for reading user input</caption>
+						<tr>
+							<th style="width:30%"><b>Flag</b></th>
+							<th style="width:70%"><b>Usage</b></th>
+						</tr>
+						<tr>
+							<td><font class="bashcommand">-s</font></td>
+							<td>
+							Silent mode. The characters that the user inputs are not displayed (used specially when asking the user to 
+							input a password).
+							</td>
+						</tr>
+						<tr>
+							<td><font class="bashcommand">-p "MESSAGE"</font></td>
+							<td>
+								Displays the <font class="bashcommand">MESSAGE</font> where the user must write the input.
+							</td>
+						</tr>
+						<tr>
+							<td><font class="bashcommand">-n NUM_CHARS</font></td>
+							<td>
+							The input line ends after reading <font class="bashcommand">NUM_CHARS</font> characters, rather than waiting for the 
+							user to press Enter in the keyboard.
+							</td>
+						</tr>
+						<tr>
+							<td><font class="bashcommand">-d 'CHAR_NEW_LINE'</font></td>
+							<td>
+							<font class="bashcommand">CHAR_NEW_LINE</font> is used to determine the end of the input line (if different than Enter).
+							</td>
+						</tr>
+						<tr>
+							<td><font class="bashcommand">-r</font></td>
+							<td>
+								Backslash does not act as an escape character but instead is part of the line.
+							</td>
+						</tr>
+						<tr>
+							<td><font class="bashcommand">-t NSECONDS</font></td>
+							<td>
+							Bash will stop reading the user input after <font class="bashcommand">NSECONDS</font>. Whatever was entered in that 
+							time is captured as the input line.
+							</td>
+						</tr>
+						<tr>
+							<td><font class="bashcommand">-a ARRAY_NAME</font></td>
+							<td>
+							The words that the user inputs are assigned to sequential indices of the array 
+							<font class="bashcommand">ARRAY_NAME</font>. The array is emptied before assigning the values if it 
+							already exists.
+							</td>
+						</tr>
+						<tr>
+							<td><font class="bashcommand">-u FILEDESCRIPTOR</font></td>
+							<td>
+							Read input from <font class="bashcommand">FILEDESCRIPTOR</font>.
+							</td>
+						</tr>
+					</table>
+					
+					<p>
+						The following examples will show how to use the flags mentioned in the previous table. Be aware on how the 
+						variable name is always written at the end of the command. In this section, I will not explain the use of 
+						flags <font class="bashcommand">-a</font> and <font class="bashcommand">-u</font> because we haven't learned 
+						yet about arrays or file manipulation. Some of the examples will also show common mistakes that will make bash 
+						show an error.
+					</p>
+					
+					<p>
+						<font class="example">read -s</font>
+						In the following example, the flag <font class="bashcommand">-s</font> causes the user input to be silenced, 
+						so when the user writes the password, it is not shown in the screen. If the user input is 
+						<font class="bashcommand">ThisIsMyPassword</font>, then that string is saved in the variable 
+						<font class="bashcommand">PASSWORD</font>. While the user is writing its password and until it presses Enter, 
+						you will see the following symbol underneath <font class="bashcommand">$ read -s PASSWORD </font>:
+						<img src="pwd.png"/>. Afterwards, the symbol will disappear.
+					</p>
+					
+					<p>
+						In the example of a wrong syntax, the mistake is that the variable <font class="bashcommand">PASSWORD</font> 
+						is written before the flag <font class="bashcommand">-s</font>. The variable must go at the end of the command 
+						independently of which flags are used. As a result, bash is not silencing the user input, is giving the invalid 
+						identifier error, and is not saving any string in the variable.
+					</p>
+					
+					<table>
+						<tr>
+							<th style="width:50%"><b>Correct syntax:</b></th>
+							<th style="width:50%"><b>Wrong syntax:</b></th>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">
+								$ read -s PASSWORD<br>
+								<img src="pwd.png"/><br>
+								$ echo ${PASSWORD}</br>
+								<font class="bashcommand-result">ThisIsMyPassword</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+								$ read PASSWORD -s<br>
+								ThisIsMyPassword<br>
+								<font class="bashcommand-result">-bash: read: `-s': not a valid identifier</font>
+								</font>
+							</td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">read -p</font>
+						The flag <font class="bashcommand">-p</font> is useful if you want to prompt a message so that the user 
+						knows what the input should be. The examples in the following table combine the flags 
+						<font class="bashcommand">-p</font> and <font class="bashcommand">-s</font> to indicate the user to input a 
+						password and hide the password while its being typed. The prompt message should go right after the flag 
+						<font class="bashcommand">-p</font>.
+					</p>
+					
+					<p>
+						The following table shows some examples of commands written using a wrong syntax (as well as the correct way 
+						to write them). In the first example, the error is that the prompt message is not located right after the flag 
+						<font class="bashcommand">-p</font> (instead, it is located after the flag <font class="bashcommand">-s</font>). 
+						In the second example, the error is that the variable <font class="bashcommand">PASSWORD</font> is not located 
+						at the end of the command. In the third example, the problem is that the prompt message 
+						(<font class="bashcommand">Please input your password</font>) is not surrounded by quotation marks. So, for 
+						bash only the first word of that sentence (<font class="bashcommand">Please</font>) is the prompt message, and 
+						the next word (<font class="bashcommand">input</font>) is read as the variable name. The rest of the command 
+						(<font class="bashcommand">your password</font>) is ignored. That is why when reading 
+						<font class="bashcommand">${PASSWORD}</font>, nothing is echoed, the variable is empty because nothing was 
+						saved with that variable name. Instead, the input was saved in <font class="bashcommand">${input}</font>. This 
+						is the reason why the prompt message should always be surrounded by quotation marks.
+					</p>
+					
+					<table>
+						<tr>
+							<th style="width:50%"><b>Correct syntax:</b></th>
+							<th style="width:50%"><b>Wrong syntax:</b></th>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ read -p "Please input your password" -s PASSWORD<br>
+									<font class="bashcommand-result">Please input your password</font> <img src="pwd.png"/><br>
+									$ echo ${PASSWORD}<br> 
+									<font class="bashcommand-result">ThisIsMyPassword</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ read -p -s "Please input your password" PASSWORD<br>
+									<font class="bashcommand-result">-s</font><br>
+									<font class="bashcommand-result">-bash: read: `Please input your password': not a valid identifier</font>
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ read -p "Please input your password" -s PASSWORD<br>
+									<font class="bashcommand-result">Please input your password</font> <img src="pwd.png"/><br>
+									$ echo ${PASSWORD}<br> 
+									<font class="bashcommand-result">ThisIsMyPassword</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ read PASSWORD -s -p "Please input your password"<br>
+									ThisIsMyPassword<br>
+									<font class="bashcommand-result">-bash: read: `-s': not a valid identifier</font>
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ read -s -p Please input your password<br>
+									ThisIsMyPassword<br>
+									$ echo $PASSWORD<br>
+									<br>
+									$ echo ${input}<br>
+									<font class="bashcommand-result">ThisIsMyPassword</font>
+								</font>
+							</td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">read -n</font>
+						In the following example, <font class="bashcommand">-n 1</font> forces bash to accept only one character in the 
+						input. So, the terminal will finish reading after one character. Here we are combining flags 
+						<font class="bashcommand">-n</font> and <font class="bashcommand">-p</font> to also prompt a message to the 
+						user.
+					</p>
+					
+					<p>
+						In the wrong syntax, <font class="bashcommand">1</font> (the number of characters to be accepted) and the 
+						prompt message are located in the wrong place. The number of characters accepted should always go after 
+						<font class="bashcommand">-n</font> and the prompt message should always go after 
+						<font class="bashcommand">-p</font>. 
+					</p>
+					
+					<table>
+						<tr>
+							<th style="width:50%"><b>Correct syntax:</b></th>
+							<th style="width:50%"><b>Wrong syntax:</b></th>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ read -n 1 -p "Do you wish to continue? (y/n)" VAR<br>
+									<font class="bashcommand-result">Do you wish to continue? (y/n)y</font><br>
+									$ echo $VAR<br>
+									<font class="bashcommand-result">y</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ read -n -p 1 "Do you wish to continue? (y/n)" VAR<br>
+									<font class="bashcommand-result">-bash: read: -p: invalid number</font>
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ read -p "Do you wish to continue? (y/n)" -n 1 VAR<br>
+									<font class="bashcommand-result">Do you wish to continue? (y/n)y</font><br>
+									$ echo $VAR<br>
+									<font class="bashcommand-result">y</font>					
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+								</font>
+							</td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">read -d</font>
+						In the following example the end of the line is determined by the character <font class="bashcommand">#</font> 
+						instead of Enter (using the flag <font class="bashcommand">-d</font>). As soon as the user types 
+						<font class="bashcommand">#</font>, bash finishes reading and saves the input in the variable 
+						<font class="bashcommand">VAR</font>.
+					</p>
+					
+					<p>
+						In the wrong syntax, the command is missing the apostrophes (<font class="bashcommand">'</font>) around the 
+						character <font class="bashcommand">#</font>.
+					</p>
+					
+					<table>
+						<tr>
+							<th style="width:50%"><b>Correct syntax:</b></th>
+							<th style="width:50%"><b>Wrong syntax:</b></th>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ read -d '#' VAR<br>
+									$ echo $VAR<br>
+									<font class="bashcommand-result">SomeText</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ read -d # VAR<br>
+									<font class="bashcommand-result">-bash: read: -d: option requires an argument</font><br>
+									<font class="bashcommand-result">read: usage: read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars] [-d delim] [name ...]</font>
+								</font>
+							</td>
+						</tr>
+					</table>
+					
+					<p>
+						<font class="example">The backslash</font>
+						In bash, certain characters have special meanings. For example, the dollar sign 
+						(<font class="bashcommand">$</font>) is used to reference a variable. When you type 
+						<font class="bashcommand">${VAR}</font>, it will print the value of 
+						<font class="bashcommand">VAR</font> instead of the actual string 
+						"<font class="bashcommand">${VAR}</font>". The backslash (<font class="bashcommand">\</font>) is used to remove 
+						those special meanings from the character followed by it. 
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ VAR="Some text"<br>
+							$ echo ${VAR}<br>
+							<font class="bashcommand-result">Some text</font><br>
+							$ echo \${VAR}<br>
+							${VAR}
+						</font>
+					</p>
+					
+					<p>
+						When using the flag <font class="bashcommand">-r</font>, the backslash is part of the line instead of being 
+						used as an escape character. The following table shows examples in which the user inputs the same string but it 
+						is read differently because in one case the flag is used (first column) but not in the other (second column).
+					</p>
+					
+					<table>
+						<tr>
+							<th style="width:50%"><b>Examples using flag -r</b></th>
+							<th style="width:50%"><b>Examples without the flag -r</b></th>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ read -r VAR<br>
+									<font class="bashcommand-result">C:\Documents\Newsletters\Summer2018.pdf</font><br>
+									$ echo ${VAR}<br>
+									<font class="bashcommand-result">C:\Documents\Newsletters\Summer2018.pdf</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ read VAR<br>
+									<font class="bashcommand-result">C:\Documents\Newsletters\Summer2018.pdf</font><br>
+									$ echo ${VAR}<br>
+									<font class="bashcommand-result">C:DocumentsNewslettersSummer2018.pdf</font>
+									</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<font class="bashcommand">
+									$ read -r MESSAGE<br>
+									<font class="bashcommand-result">In HTML \n is used to indicate a new line</font><br>
+									$ echo ${MESSAGE}<br>
+									<font class="bashcommand-result">In HTML \n is used to indicate a new line</font>
+								</font>
+							</td>
+							<td>
+								<font class="bashcommand">
+									$ read MESSAGE<br>
+									<font class="bashcommand-result">In HTML \n is used to indicate a new line</font><br>
+									$ echo ${MESSAGE}<br>
+									<font class="bashcommand-result">In HTML n is used to indicate a new line</font>
+								</font>
+							</td>
+						</tr>
+					</table>
+</body>
+
+</html>

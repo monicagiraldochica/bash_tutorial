@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>content7</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">7. Iteration</h1>
+
+<p>In the following section we will learn how to use loops to iterate through the content of arrays or through a list of files. However, we will leave the part of iterating through the content of a file for the next section (<a href="content8.html">File manipulation</a>). Iteration is basically the repetition of a process or group of commands on a list of items. For example, you might use iteration to repeat the same processing steps on a list of subjects, or to manipulate in the same way a list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 subjects, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.</p>
+
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Use</th>
+<th>Syntax</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>for</code></td>
+<td>For iterating over a series of items within a list (array)</td>
+<td><code>for item in list; do; commands; done</code></td>
+</tr>
+<tr>
+<td><code>for</code></td>
+<td>For iterating through an index</td>
+<td><code>for ((i=1; i&lt;=64; i+=1)); do; commands; done</code></td>
+</tr>
+<tr>
+<td><code>while</code></td>
+<td>For iterating while a control expression (condition) is true</td>
+<td><code>while condition; do; commands; done</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_1">7.1. The <code>for</code> loop</h2>
+
+<h3 id="toc_2">Iterating through an array of words</h3>
+
+<p>In the following example we have an array with a list of subjects:</p>
+
+<div><pre><code class="language-bash">declare -a ARRAY=(&#39;SUBJ0&#39; &#39;SUBJ9&#39; &#39;SUBJ3&#39; &#39;SUBJ4&#39; &#39;SUBJ3&#39;)</code></pre></div>
+
+<p>If we wanted to print the ID of each subject within the list without using a loop, we would have to type 5 different commands (imagine if you have 800 subjects?):</p>
+
+<div><pre><code class="language-bash">$ echo ${ARRAY[0]}
+SUBJ0
+$ echo ${ARRAY[1]}
+SUBJ9
+$ echo ${ARRAY[2]}
+SUBJ3
+$ echo ${ARRAY[3]}
+SUBJ4
+$ echo ${ARRAY[4]}
+SUBJ3</code></pre></div>
+
+<p>If we use a loop, you will just need to write the command one time. In this example, with only five subjects it doesn’t save too many lines of code. But normally you will be working with many more items than five.</p>
+
+<div><pre><code class="language-bash">$ for ID in ${ARRAY[@]}
+&gt; do
+&gt; echo ${ID}
+&gt; done
+SUBJ0
+SUBJ9
+SUBJ3
+SUBJ4
+SUBJ3</code></pre></div>
+
+<p>The previous <code>for</code> loop iterates through every item in <code>${ARRAY[@]}</code> (the items that would be listed if you typed <code>echo ${ARRAY[@]})</code>) and assign each item to the variable <code>ID</code> during the corresponding loop. So, the loop will run 5 times. The first time it runs it will assign the value <code>SUBJ0</code> to variable <code>ID</code>, the second loop will assign value <code>SUBJ9</code> to variable <code>ID</code>, etc.</p>
+
+<div><pre><code class="language-bash">$ num=0
+$ for ID in ${ARRAY[@]}
+&gt; do
+&gt; echo &quot;Subject number ${num} is ${ID}&quot;
+&gt; ((num++))
+&gt; done
+Subject number 0 is SUBJ0
+Subject number 1 is SUBJ9
+Subject number 2 is SUBJ3
+Subject number 3 is SUBJ4
+Subject number 4 is SUBJ3</code></pre></div>
+
+<h3 id="toc_3">Iterating through files using patterns</h3>
+
+<p>As we learned in the <a href="content5.html">arrays section</a>, you can use patterns to create arrays. You can also use patterns to list files with a very similar path except for a few words.</p>
+
+<p>For example, if you have a folder located in the following path:
+/Users/MyUserName/Desktop/MyProjectFolder</p>
+
+<p>And inside this folder you have 100 files named very similarly: DTI_SUBJ1.nii.gz, DTI_SUBJ2.nii.gz, DTI_SUBJ3.nii.gz, DTI_SUBJ4.nii.gz, DTI_SUBJ5.nii.gz, ..., DTI_SUBJ100.nii.gz</p>
+
+<p>Then, you could print the list of all those files by simply typing: <code>echo /Users/MyUserName/Desktop/MyProjectFolder/DTI_SUBJ*.nii.gz</code>. This command matches all the file paths that contain any characters in the position where the asterisk is located.</p>
+
+<p>Let&#39;s look at another example. Suppose that you have your subject&#39;s information organized the following way:</p>
+
+<ul>
+<li>Your main subjects is folder located in this path:
+/Users/MyUserName/Desktop/MyProjectFolder</li>
+<li>Inside that folder you have one folder per subject: /Users/MyUserName/Desktop/MyProjectFolder/Subject1, /Users/MyUserName/Desktop/MyProjectFolder/Subject2, /Users/MyUserName/Desktop/MyProjectFolder/Subject3, /Users/MyUserName/Desktop/MyProjectFolder/Subject4, ..., /Users/MyUserName/Desktop/MyProjectFolder/Subject100</li>
+<li>Inside each subject folder, you have the following files: DTI.nii.gz, ANAT.nii.gz, LGN.nii.gz</li>
+</ul>
+
+<p>If you wanted to obtain the list of paths for the DTI.nii.gz files of all subjects, you could type: <code>echo /Users/MyUserName/Desktop/MyProjectFolder/Subject*/DTI.nii.gz</code>. Because the path of these files is the same except for the subject number, you can create the pattern by substituting the part that changes by an asterisk.</p>
+
+<p>When using the asterisk, it will select all files that contain any amount of characters in that position. But if you want to restrict the search to a specific amount of characters, you could also use the interrogation character.</p>
+
+<p>For example, let&#39;s suppose you have a main folder located in the following path:
+/MyComputer/MyUser/MyDocuments/MyFolder</p>
+
+<p>And inside that folder you have 100 files named: myFile001.txt, myFile002.txt, ..., myFile099.txt, myFile100.txt</p>
+
+<p>You want to iterate through the files myFile001.txt to myFile009.txt. All those files have the exact same path and name except for exactly one character. So, you can replace that character by an interrogation:</p>
+
+<div><pre><code class="language-bash">$ for f in /MyComputer/MyUser/MyDocuments/MyFolder/myFile00?.txt
+&gt; do
+&gt; echo $f
+&gt; done
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile001.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile002.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile003.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile004.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile005.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile006.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile007.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile008.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile009.txt</code></pre></div>
+
+<p>You could choose to print the results into a file instead of the command prompt. This can be easily achieved using the symbol <code>&gt;&gt;</code>. After running the following loop, you will not see any output in the command line, the path of the nine files will be saved to output.txt:
+The command <code>cat ${maindir}output.txt</code> prints the content of this output file.</p>
+
+<div><pre><code class="language-bash">$ maindir=/MyComputer/MyUser/MyDocuments/MyFolder/
+$ for f in ${maindir}myFile00?.txt
+&gt; do
+&gt; echo $f &gt;&gt; ${maindir}output.txt
+&gt; done
+$ cat ${maindir}output.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile001.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile002.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile003.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile004.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile005.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile006.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile007.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile008.txt
+/MyComputer/MyUser/MyDocuments/MyFolder/myFile009.txt</code></pre></div>
+
+<h3 id="toc_4">Iterating through files in your current directory</h3>
+
+<p>To know the current directory in which you are located in the command line, type <code>pwd</code>. In the following example we want to we want to perform some action on all the files inside the current directory. To get the list of those files we use the command <code>ls</code>.</p>
+
+<div><pre><code class="language-bash">$ pwd
+/path/to/my/current/directory
+$ for f in $( ls )
+&gt; do
+&gt; echo &quot;Do something with this file: ${f}&quot;
+&gt; done</code></pre></div>
+
+<h2 id="toc_5">7.2. From <code>for</code> to <code>while</code></h2>
+
+<p>Every loop that you write using the <code>for</code> command can also be written with the <code>while</code> command. The results will be the same, but sometimes one of them will be more efficient and easier to code than the other.</p>
+
+<ul>
+<li>You should use the <strong>for</strong> command when you want to iterate through <strong>all the elements</strong> of an array.</li>
+<li>You should use the <strong>for</strong> command when iterating through <strong>the indices</strong> of an array (either all or a subset of them).</li>
+<li>You should use the <strong>while</strong> command when you want to iterate through <strong>a limited number of elements</strong> within the array.</li>
+<li>You should use the <strong>while</strong> command when you want to iterate through <strong>more than one array</strong> or while <strong>several conditions should be met</strong>.</li>
+</ul>
+
+<p>The following example shows how a <code>for</code> loop can be converted into a <code>while</code> loop. The objective of this piece of code is to print the elements of an array.</p>
+
+<p>Using <code>for</code>:</p>
+
+<div><pre><code class="language-bash">declare -a ARRAY=(&#39;SUBJ0&#39; &#39;SUBJ9&#39; &#39;SUBJ3&#39; &#39;SUBJ4&#39; &#39;SUBJ3&#39;)
+$ for E in ${ARRAY[@]}
+&gt; do
+&gt; echo ${E}
+&gt; done
+SUBJ0
+SUBJ9
+SUBJ3
+SUBJ4
+SUBJ3</code></pre></div>
+
+<p>Using <code>while</code>:</p>
+
+<div><pre><code class="language-bash">$ SIZE=${#ARRAY[@]}
+$ i=0
+$ while [ ${i} -lt ${SIZE} ]
+&gt; do
+&gt; echo ${ARRAY[${i}]}
+&gt; ((i++))
+&gt; done
+SUBJ0
+SUBJ9
+SUBJ3
+SUBJ4
+SUBJ3</code></pre></div>
+
+<p>OR:</p>
+
+<div><pre><code class="language-bash">$ SIZE=${#ARRAY[@]}
+$ i=0
+$ while [ ${i} -lt ${SIZE} ]
+&gt; do
+&gt; echo ${ARRAY[$((i++))]}
+&gt; done
+SUBJ0
+SUBJ9
+SUBJ3
+SUBJ4
+SUBJ3</code></pre></div>
+
+<p>In the previous example both loops iterate through the elements of an array and print them in the terminal. However, there are some important differences:</p>
+
+<ul>
+<li>The <code>for</code> loop automatically stops when iteration reaches the end of the array. The <code>while</code> loop stops when the condition (<code>[ ${i} -lt ${SIZE} ]</code>) evaluates <code>false</code>. This means that it will iterate as long as variable <code>i</code> is less than (<code>-lt</code>) <code>SIZE</code>. In the <code>while</code> loop, variable <code>i</code> contains the index of each item during the iteration and variable <code>SIZE</code> contains the size of the array. For this reason, <code>((i++))</code> is included inside the while loop. <code>((i++))</code> increments the value of <code>i</code> in 1 on each iteration. If you didn&#39;t include this, bash would iterate forever, because you wouldn&#39;t be increasing the value of <code>i</code> and it would always equal zero. Hence, it would never be less than the size of the array. So, the condition that the while evaluates will never be <code>false</code>. Since <code>while</code> iterates as long as that condition is <code>true</code>, it would iterate forever.</li>
+<li>In the <code>for</code> loop each element of the array is saved in variable <code>E</code>. However, you don&#39;t have to assign each value to the variable, it is done automatically. In the <code>while</code> loop the element in the position <code>i</code> is referenced with <code>${ARRAY[${i}]}</code>.</li>
+<li>In this case we want to iterate through all the elements of <code>ARRAY</code>. So, it makes more sense to use the <code>for</code> loop. But this is a good example to show how it works.</li>
+</ul>
+
+<h3 id="toc_6">Printing the elements of an array and their position within the array using <code>for</code> and <code>while</code></h3>
+
+<p>Using <code>for</code>:</p>
+
+<div><pre><code class="language-bash">$ declare -a ARRAY=(&#39;SUBJ0&#39; &#39;SUBJ9&#39; &#39;SUBJ3&#39; &#39;SUBJ4&#39; &#39;SUBJ3&#39;)
+$ i=0
+$ for ID in ${ARRAY[@]}
+&gt; do
+&gt; echo &quot;Subject number ${i} is ${ID}&quot;
+&gt; ((i++))
+&gt; done
+Subject number 0 is SUBJ0
+Subject number 1 is SUBJ9
+Subject number 2 is SUBJ3
+Subject number 3 is SUBJ4
+Subject number 4 is SUBJ3</code></pre></div>
+
+<p>Using <code>while</code>:</p>
+
+<div><pre><code class="language-bash">$ SIZE=${#ARRAY[@]}
+$ i=0
+$ while [ ${i} -lt ${SIZE} ]
+&gt; do
+&gt; echo &quot;Subject number ${i} is ${ARRAY[$i]}&quot;
+&gt; ((i++))
+&gt; done
+Subject number 0 is SUBJ0
+Subject number 1 is SUBJ9
+Subject number 2 is SUBJ3
+Subject number 3 is SUBJ4
+Subject number 4 is SUBJ3</code></pre></div>
+
+<h3 id="toc_7">Printing <em>the first five</em> files in the current directory</h3>
+
+<p>Previously we learned that the following loop would echo the path of all the files in the current directory:</p>
+
+<div><pre><code class="language-bash">$ for f in $( ls )
+&gt; do
+&gt; echo &quot;Do something with this file: ${f}&quot;
+&gt; done</code></pre></div>
+
+<p>In this case, it makes more sense to use the <code>for</code> loop. However, if instead of echoing all the files inside the current directory you wanted to echo only the first five files, then you should use the <code>while</code> loop:</p>
+
+<div><pre><code class="language-bash">$ i=0
+$ ARRAY=($( ls ))
+$ while [ ${i} -le 4 ]
+&gt; do
+&gt; echo ${ARRAY[${i}]}
+&gt; ((i++))
+&gt; done</code></pre></div>
+
+<h3 id="toc_8">Rename <em>all</em> the files in the current directory that end in .nii.gz</h3>
+
+<p>Before and after the loop I am printing the content of the folder to visualize the change. Command <code>ls</code> prints the content of the current directory:</p>
+
+<div><pre><code class="language-bash">$ ls
+10132423423.nii.gz
+25675756756.nii.gz
+36787686767.nii.gz
+37456456456.nii.gz
+39756756756.nii.gz
+41786786677.nii.gz
+$ i=1
+$ for f in ./*.nii.gz
+&gt; do
+&gt; mv ${f} Subject_${i}.nii.gz
+&gt; ((i++))
+&gt; done
+$ ls
+Subject_1.nii.gz
+Subject_2.nii.gz
+Subject_3.nii.gz
+Subject_4.nii.gz
+Subject_5.nii.gz
+Subject_6.nii.gz</code></pre></div>
+
+<h3 id="toc_9">Rename <em>the first three</em> files in the current directory that end in .nii.gz</h3>
+
+<p>Before and after the loop I am printing the content of the folder to visualize the change. Command ls prints the content of the current directory:</p>
+
+<div><pre><code class="language-bash">$ ls 10132423423.nii.gz
+25675756756.nii.gz
+36787686767.nii.gz
+37456456456.nii.gz
+39756756756.nii.gz
+41786786677.nii.gz
+$ i=0
+$ ARRAY=($( ls ./*.nii.gz ))
+$ while [ ${i} -le 2 ]
+&gt; do
+&gt; mv ${ARRAY[${i}]} ./Subject_$((++i)).nii.gz
+&gt; done
+$ ls
+Subject_1.nii.gz
+Subject_2.nii.gz
+Subject_3.nii.gz
+37456456456.nii.gz
+39756756756.nii.gz
+41786786677.nii.gz</code></pre></div>
+
+<h2 id="toc_10">7.3. The <code>while</code> loop</h2>
+
+<h3 id="toc_11">Using the <code>while</code> loop to iterate through more than one array</h3>
+
+<p>As previously mentioned, when you are iterating through more than one array you should use <code>while</code> instead of <code>for</code>.</p>
+
+<h3 id="toc_12">Iterating through two arrays at the same time</h3>
+
+<p>In the following example there are two arrays (<code>ID</code> and <code>VISIT</code>), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (test.txt) using the command <code>cat</code>, which will be explained in detail in the following chapter (<a href="content8.html">File manipulation</a>).</p>
+
+<p>This <code>while</code> loop will run as long as the two conditions (<code>[ ${i} -lt ${SIZE_ID} ]</code> and <code>[ ${i} -lt ${SIZE_VISIT} ]</code>) that are being evaluated be <code>true</code>. So, as soon as its value be greater than <code>SIZE_ID</code> or <code>SIZE_VISIT</code>, it will stop. It is extremely important to not forget the line <code>((i++))</code>. Otherwise, it will loop forever (you can always break a loop with Control + C).</p>
+
+<div><pre><code class="language-bash">$ declare -a ID=(&#39;SUBJ0&#39; &#39;SUBJ1&#39; &#39;SUBJ2&#39; &#39;SUBJ3&#39; &#39;SUBJ4&#39; &#39;SUBJ5&#39; &#39;SUBJ6&#39;)
+$ declare -a VISIT=(&#39;V1&#39; &#39;V1&#39; &#39;V2&#39; &#39;V1&#39; &#39;V2&#39; &#39;V2&#39; &#39;V3&#39;)
+$ SIZE_ID=${#ID[@]}
+$ SIZE_VISIT=${#VISIT[@]}
+$ i=0
+$ while [ ${i} -lt ${SIZE_ID} ] &amp;&amp; [ ${i} -lt ${SIZE_VISIT} ]
+&gt; do
+&gt; echo &quot;${ID[${i}]}_${VISIT[${i}]}&quot; &gt;&gt; test.txt
+&gt; ((i++))
+&gt; done
+$ cat test.txt
+SUBJ0_V1
+SUBJ1_V1
+SUBJ2_V2
+SUBJ3_V1
+SUBJ4_V2
+SUBJ5_V2
+SUBJ6_V3</code></pre></div>
+
+<h3 id="toc_13">Inverting an array</h3>
+
+<p>In this example initially there is only one array, but after the code is executed there will be two arrays. The second array will be the inversion of the first one. The code will iterate starting at the end of the array and finishing at the beginning. In each iteration it will copy the current value into the new array. It will start adding items at the beginning of the new array (in the index 0).</p>
+
+<p>For this purpose, there will be two variables:</p>
+
+<p>Variable <code>i</code> will be initialized with value <code>$(( ${#ARRAY[@]} – 1 ))</code> (the size of the initial array minus one). It will represent the position in which the loop is iterating in the original array. In each loop, <code>i</code> will decrease its value in 1 until it reaches 0. It is initialized with value equal to the size of the array minus one instead of the size of the array because remember that the first index of an array is 0, so the last one is the size of the array minus one.</p>
+
+<p>And variable <code>j</code> will be initialized with value 0. It will represent the position in which the loop is iterating in the inverted array. In each loop, <code>j</code> will increase its value until it reaches the size of the original array (when all the values would have finished being copied). So, it will loop as long as variable <code>i</code> have value greater or equal (<code>-ge</code>) to 0.</p>
+
+<p>Order of values in the original array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+Order of values in the inverted array: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1.</p>
+
+<div><pre><code class="language-bash">$ declare -a ARRAY=(&#39;1&#39; &#39;2&#39; &#39;3&#39; &#39;4&#39; &#39;5&#39; &#39;6&#39; &#39;7&#39; &#39;8&#39; &#39;9&#39; &#39;10&#39;)
+$ i=$(( ${#ARRAY[@]} - 1 ))
+$ j=0
+$ while [ ${i} -ge 0 ]
+&gt; do
+&gt; echo &quot;Copying element in position ${i} from the original array into position ${j} of the new array...&quot;
+&gt; INV_ARRAY[$((j++))]=${ARRAY[$((i--))]}
+&gt; done
+Copying element in position 9 from the original array into position 0 of the new array...
+Copying element in position 8 from the original array into position 1 of the new array...
+Copying element in position 7 from the original array into position 2 of the new array...
+Copying element in position 6 from the original array into position 3 of the new array...
+Copying element in position 5 from the original array into position 4 of the new array...
+Copying element in position 4 from the original array into position 5 of the new array...
+Copying element in position 3 from the original array into position 6 of the new array...
+Copying element in position 2 from the original array into position 7 of the new array...
+Copying element in position 1 from the original array into position 8 of the new array...
+Copying element in position 0 from the original array into position 9 of the new array...
+$ echo ${INV_ARRAY[@]}
+10 9 8 7 6 5 4 3 2 1</code></pre></div>
+
+<p>The command <code>INV_ARRAY[$((j++))]=ARRAY[$((i--))]</code> is doing three things:</p>
+
+<ul>
+<li>Assigning the element of <code>ARRAY</code> in position <code>i</code> to <code>INV_ARRAY</code> in position <code>j</code></li>
+<li>Incrementing <code>j</code> in one</li>
+<li>And decreasing <code>i</code> in one</li>
+</ul>
+
+<p>It is equivalent to this set of instructions:</p>
+
+<div><pre><code class="language-bash">INV_ARRAY[${j}]=ARRAY[${i}]
+((j++))
+((i--))</code></pre></div>
+
+<h3 id="toc_14">Using the <code>while</code> loop to iterate when several conditions should be met</h3>
+
+<p>In the following example there is an array called <code>SUBJECTS</code>. Some of those subjects are controls and their ID starts with the letter C, other subjects are patients and their ID starts with the letter P. The array is organized so that the controls go before the patients. The loop will copy only the controls into a new array (<code>CONTROLS</code>).</p>
+
+<p>So, there are two conditions to be met so that the loop continues to run:</p>
+
+<ul>
+<li>The index variable <code>i</code> is less than the size of <code>SUBJECTS</code> (<code>${#SUBJECTS[@]}</code>). This condition is written like this: <code>[ ${i} -lt ${#SUBJECTS[@]} ]</code>.</li>
+<li>The current element (<code>SUBJECTS[${i}]</code>) starts with the letter <code>C</code>. To get the first letter of the current element you must use the previously learned syntax to extract a sub-string: <code>${STRING:START:NUM}</code>. So, this condition is written like this: <code>[ &quot;${SUBJECTS[${i}]:0:1}&quot; == &quot;C&quot; ]</code>.</li>
+</ul>
+
+<div><pre><code class="language-bash">$ declare -a SUBJECTS=(&#39;C01&#39; &#39;C02&#39; &#39;C03&#39; &#39;C04&#39; &#39;C05&#39; &#39;C06&#39; &#39;P07&#39; &#39;P08&#39; &#39;P09&#39; &#39;P10&#39;)
+$ i=0
+$ while [ ${i} -lt ${#SUBJECTS[@]} ] &amp;&amp; [ &quot;${SUBJECTS[${i}]:0:1}&quot; == &quot;C&quot; ]
+&gt; do
+&gt; CONTROLS[${i}]=${SUBJECTS[$((i++))]}
+&gt; done
+$ echo ${CONTROLS[@]}
+C01 C02 C03 C04 C05 C06</code></pre></div>
+
+
+
+
+</body>
+
+</html>

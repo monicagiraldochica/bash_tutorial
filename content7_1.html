@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>7.1. The for loop</h3>
+					<h4>Iterating through an array of words</h4>
+		    		
+					<p>
+						In the following example we have an array with a list of subjects ID:<br>
+						<font class="bashcommand">
+						$ declare -a ARRAY=('SUBJ0' 'SUBJ9' 'SUBJ3' 'SUBJ4' 'SUBJ3') 
+						</font>
+					</p>
+					
+					<p>If we wanted to print the ID of each subject within the list without using a loop, we would have to type 5 different commands (imagine if you have 800 subjects?):</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ echo ${ARRAY[0]}<br> 
+							<font class="bashcommand-result">SUBJ0</font><br>
+							$ echo ${ARRAY[1]}<br>
+							<font class="bashcommand-result">SUBJ9</font><br>
+							$ echo ${ARRAY[2]}<br>
+							<font class="bashcommand-result">SUBJ3</font><br>
+							$ echo ${ARRAY[3]}<br>
+							<font class="bashcommand-result">SUBJ4</font><br>
+							$ echo ${ARRAY[4]}<br>
+							<font class="bashcommand-result">SUBJ3</font> 
+						</font>
+					</p>
+					
+					<p>If we use a loop, you will just need to write the command one time. In this example, with only five subjects it doesn’t save too much lines of code. But normally you will be working with many more subjects than five.</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ for ID in ${ARRAY[@]}<br>
+							&gt;  do<br>
+							&gt;  echo ${ID}<br>
+							&gt;  done<br>
+							<font class="bashcommand-result">
+							SUBJ0<br>
+							SUBJ9<br>
+							SUBJ3<br>
+							SUBJ4<br>
+							SUBJ3  
+							</font>
+						</font>
+					</p>
+		    		
+					<p>What this for loop does is iterate through every item in <font class="bashcommand">${ARRAY[@]}</font> (the items that would be listed if you typed echo <font class="bashcommand">${ARRAY[@]}</font>) and assign each item to the variable <font class="bashcommand">ID</font> during the corresponding loop. So, the loop will run 5 times. The first time it runs it will assign subject <font class="bashcommand">'SUBJ0'</font> to variable <font class="bashcommand">ID</font>, the second time subject <font class="bashcommand">'SUBJ9'</font>, etc.</p>
+
+					<p>
+						<font class="bashcommand">
+							$ num=0<br>
+							$ for ID in ${ARRAY[@]}<br>
+							&gt;  do<br>
+							&gt;  echo "Subject number ${num} is ${ID}"<br>
+							&gt;  ((num++))<br>
+							&gt;  done<br>
+							<font class="bashcommand-result">
+							Subject number 0 is SUBJ0<br>
+							Subject number 1 is SUBJ9<br>
+							Subject number 2 is SUBJ3<br>
+							Subject number 3 is SUBJ4<br>
+							Subject number 4 is SUBJ3 
+							</font>
+						</font>
+					</p>
+					
+					<h4>Iterating through files using patterns</h4>
+					<p>
+						As we learned in the Arrays section, you can use patterns to create arrays. You can also use patterns to list files which path is very similar except for a few words. For example, if you have a folder located in the following path:<br>  
+						/Users/MyUserName/Desktop/MyProjectFolder<br>
+						And inside this folder you have 100 files named very similarly (only vary in one character):<br>
+						DTI_SUBJ1.nii.gz<br>
+						DTI_SUBJ2.nii.gz<br>
+						DTI_SUBJ3.nii.gz<br>
+						DTI_SUBJ4.nii.gz<br>
+						DTI_SUBJ5.nii.gz<br> 
+						...<br>
+						DTI_SUBJ100.nii.gz<br>
+						Then, you could echo the list of all those files by simply typing:<br>
+						<font class="bashcommand">$ echo /Users/MyUserName/Desktop/MyProjectFolder/DTI_SUBJ*.nii.gz</font><br>
+						The previous command matches all the file paths that contain any characters in the position where the asterisk is located.
+					</p>
+					
+					<p>
+						Or let's suppose that you have your subject's information organized in the following way:<br>
+						You have your main subjects folder located in this path:<br>
+						/Users/MyUserName/Desktop/MyProjectFolder<br>
+						Then, inside that folder you have one folder per subject:<br>
+						/Users/MyUserName/Desktop/MyProjectFolder/Subject1<br>
+						/Users/MyUserName/Desktop/MyProjectFolder/Subject2<br>
+						/Users/MyUserName/Desktop/MyProjectFolder/Subject3<br>
+						/Users/MyUserName/Desktop/MyProjectFolder/Subject4<br>
+						...<br>
+						/Users/MyUserName/Desktop/MyProjectFolder/Subject100<br>
+						And inside each subject folder, you have the following files:<br>
+						DTI.nii.gz<br>
+						ANAT.nii.gz<br>
+						LGN.nii.gz 
+					</p>
+					
+					<p>
+						So, if you wanted to obtain the list of the DTI.nii.gz files for all subjects, you could type:<br> 
+						<font class="bashcommand">echo /Users/MyUserName/Desktop/MyProjectFolder/Subject*/DTI.nii.gz</font><br>
+						Because the path of the DTI of all subjects is the same except for the subject number, then you create the pattern by substituting the part that changes by an asterisk <font class="bashcommand">*</font>. 
+					</p>
+					
+					<p>
+						When using the asterisk, it will select all files that contain any amount of characters in that position. But if you want to restrict the search to a specific amount of characters, you could also use the interrogation character.
+					</p>
+					
+					<p>
+						For example, let's supose you have a main folder located in the folowing path:<br>
+						/MyComputer/MyUser/MyDocuments/MyFolder<br>
+						And inside that folder you have 100 files named:<br>
+						myFile001.txt<br>
+						myFile002.txt<br>
+						...<br>
+						myFile099.txt<br>
+						myFile100.txt
+					</p>
+					
+					<p>You want to iterate through the files myFile001.txt to myFile009.txt. All those files have the exact same path and name except for exactly one character. So, you can replace that character by an interrogration:</p>
+					
+					<p>	
+						<font class="bashcommand">
+							$ for f in /MyComputer/MyUser/MyDocuments/MyFolder/myFile00?.txt<br>
+							&gt;  do<br>
+							&gt;  echo $f<br>
+							&gt;  done<br>
+							<font class="bashcommand-result">
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile001.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile002.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile003.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile004.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile005.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile006.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile007.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile008.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile009.txt
+							</font>
+						</font>
+					</p>
+					
+					<p>
+						You could choose to print the results into a file instead of the command prompt. This can be easily achieved using the symbol <font class="bashcommand">&gt;&gt;</font>. After running the following loop, you will not see any output in the command line, the path of the nine files will be saved in output.txt:<br>
+						The command <font class="bashcommand">cat ${maindir}output.txt</font> prints the content of this output file.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ maindir=/MyComputer/MyUser/MyDocuments/MyFolder/<br>
+							$ for f in ${maindir}myFile00?.txt<br>
+							&gt;  do<br>
+							&gt;  echo $f &gt;&gt; ${maindir}output.txt<br>
+							&gt;  done<br>
+							$ cat ${maindir}output.txt<br>
+							<font class="bashcommand-result">
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile001.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile002.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile003.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile004.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile005.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile006.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile007.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile008.txt<br>
+							/MyComputer/MyUser/MyDocuments/MyFolder/myFile009.txt
+							</font>
+						</font>
+					</p>
+					
+					<h4>Iterating through files in your current directory</h4>
+					<p>To know the current directory in which you are located in the command line, type <font class="bashcommand">pwd</font>. In the following example we want to we want to perform some action on all the files inside the current directory. To get the list of those files we use the command <font class="bashcommand">ls</font>.</p>
+					
+					<p>
+						<font class="bashcommand">
+						$ pwd<br>
+						<font class="bashcommand-result">/path/to/my/current/directory</font><br>
+						$ for f in $( ls )<br>
+						&gt;  do<br>
+						&gt;  echo "Do something with this file: ${f}"<br>
+						&gt;  done
+						</font>
+					</p>
+</body>
+</html>

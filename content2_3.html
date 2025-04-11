@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h3>2.3. Tips for writing scripts</h3>
+					<ol>
+						<li>
+						Albeit not mandatory, the first line of any bash script should be the shebang 
+						(<font class="bashcommand">#!/bin/bash</font>). This line indicates that the script is written in bash 
+						(instead of tcsh, for example) and that the bash interpreter should execute it.<br><br>
+						</li>
+						
+						<li>
+						Be organized when writing scripts. As you start writing longer and more complicated programs, this 
+						will become more important. Try to comment as often as possible so that other people can understand what 
+						your script is doing, which parameters are needed and what they mean or to understand the output. 
+						Commenting will also help you fix errors or keep track of the version, changes, authorship, etc, or to 
+						remember what your script does if you don't use it for a while. To insert a comment, you simply start the 
+						line with a hash (<font class="bashcommand">#</font>). Any line that starts with this symbol will not be 
+						executed (except for the shebang). Also try to use indentation to know where pieces of code start and end 
+						(for example when doing loops). If you don't indentate, understanding your own code will be very 
+						difficult. Part of being organized is also using appropriate variable names. Use names that are associated 
+						to the structure you're using (for example, if you're creating an array, naming it 
+						<font class="bashcommand">array</font> will help you remember that this variable is an array and not a 
+						string or a number) and try to use short names (for example, instead of naming a variable 
+						<font class="bashcommand">myListOfSubjects</font>, you can call it 
+						<font class="bashcommand">subjList</font>).</br><br>
+						</li>
+						
+						<li>
+						It is also a good idea to use the following commands at the beginning of any script:</br>
+						<font class="bashcommand">set -e</font>: This will make the program exit as soon as it encounters an error. 
+						If you don't use this, then even if there's an error your code will continue to execute.<br> 
+						<font class="bashcommand">set -u</font>: This will make the program exit when using undeclared variables. 
+						It will prevent the program from executing the wrong commands if you misspell a variable name.<br><br>
+						</li>
+						
+						<li>
+						Use double quotes (<font class="bashcommand">"</font>) when declaring a string, single quotes 
+						(<font class="bashcommand">'</font>) when declaring a character, and no quotes when declaring numbers. 
+						This will prevent word splitting (when declaring a string that has spaces) and other errors in your 
+						code.<br><br>
+						</li>
+						
+						<li>
+						Use functions. This topic will be covered in chapter X. Using functions will make your code more readable, 
+						reusable, and will allow you to run only parts of the code without having to comment all the lines. This 
+						is especially useful when debugging or re-running a script.<br><br>
+						</li>
+						
+						<li>
+						If you are declaring a variable that the value should never change, then use the word 
+						<font class="bashcommand">readonly</font> before the variable name.<br> 
+						For example, if I want to declare a variable called <font class="bashcommand">age</font> with value 
+						<font class="bashcommand">30</font> and this value should never be replaced, then you should declare it 
+						like this:<br>
+						<font class="bashcommand">$ readonly age=30</font><br>
+						Instead of:<br>
+						<font class="bashcommand">$ age=30</font><br><br>
+						
+						If at some point in the script you try to replace the value of that variable, you will get an error message:
+						<br>
+						<font class="bashcommand">$ readonly age=30</font><br>
+						<font class="bashcommand">$ age=29</font><br>
+						<font class="bashcommand bashcommand-result">-bash: age: readonly variable</font>
+						</li>
+					</ol>
+</body>
+
+</html>

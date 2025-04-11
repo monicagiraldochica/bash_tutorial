@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<h3>5.2. Array operations</h3>
+					<p>Once you have initialized an array, you can do the following operations with it:</p>
+					
+					<table>
+					<tr>
+						<th style="width:30%"><b>Syntax</b></th>
+						<th style="width:70%"><b>Usage</b></th>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">${ARRAY[INDEX]}</font>
+						</td>
+						<td>
+							Returns the element in position <font class="bashcommand">INDEX</font> inside 
+							<font class="bashcommand">ARRAY</font>. The first index is 0, then 1, etc.<br>
+							See the examples section of creating sub-strings 
+							(<font class="bashcommand">${STRING:START:NUM}</font>) to know how to obtain a character in a 
+							specific position inside a string instead of an array.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">${#ARRAY[@]}</font><br>
+							or<br>
+							<font class="bashcommand">${#STRING}</font>
+						</td>
+						<td>
+							Returns the size of <font class="bashcommand">ARRAY</font> (number of non-empty elements) or the 
+							number of characters in <font class="bashcommand">STRING</font>.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">${#ARRAY[INDEX]}</font>
+						</td>
+						<td>
+							Returns the size of the element located in the position <font class="bashcommand">INDEX</font> 
+							(number of characters).
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">${ARRAY[@]}</font>
+						</td>
+						<td>
+							Returns all the elements of <font class="bashcommand">ARRAY</font>.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">${ARRAY[@]/OLD_ITEM/NEW_ITEM}</font>
+						</td>
+						<td>
+							Replaces <b>all occurrences</b> of <font class="bashcommand">OLD_ITEM</font> by 
+							<font class="bashcommand">NEW_ITEM</font>. You could use the symbols 
+							<font class="bashcommand">*</font>, <font class="bashcommand">#</font> and 
+							<font class="bashcommand">%</font> inside <font class="bashcommand">OLD_ITEM</font> to replace 
+							all elements that follow a specific pattern (<a href="#ex5">see examples</a>).
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">${STRING/OLD_ITEM/NEW_ITEM}</font>
+						</td>
+						<td>
+							Replaces the <b>first occurrence</b> of <font class="bashcommand">OLD_ITEM</font> by 
+							<font class="bashcommand">NEW_ITEM</font> in <font class="bashcommand">STRING</font> (a string 
+							is an array of characters). You could use the symbols <font class="bashcommand">*</font>, 
+							<font class="bashcommand">#</font> and <font class="bashcommand">%</font> inside 
+							<font class="bashcommand">OLD_ITEM</font> to replace all elements that follow a specific pattern 
+							(<a href="#ex6">see examples</a>).
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">${STRING//OLD_ITEM/NEW_ITEM}</font>
+						</td>
+						<td>
+							Replaces <b>all occurrences</b> of <font class="bashcommand">OLD_ITEM</font> by 
+							<font class="bashcommand">NEW_ITEM</font> in <font class="bashcommand">STRING</font>. You could use 
+							the symbols <font class="bashcommand">*</font>, <font class="bashcommand">#</font> and 
+							<font class="bashcommand">%</font> inside <font class="bashcommand">OLD_ITEM</font> to replace all 
+							elements that follow a specific pattern (<a href="#ex7">see examples</a>).
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">NEWARRAY=("${ARRAY[@]}")</font>
+						</td>
+						<td>
+							Copy the elements of <font class="bashcommand">ARRAY</font> into 
+							<font class="bashcommand">NEWARRAY</font>.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">NEWARRAY=("${ARRAY1[@]}" "${ARRAY2[@]}" "${ARRAY3[@]}" ...)</font>
+						</td>
+						<td>
+							Concatenates arrays <font class="bashcommand">ARRAY1</font>, 
+							<font class="bashcommand">ARRAY2</font>, and <font class="bashcommand">ARRAY3</font> into one 
+							single array called <font class="bashcommand">NEWARRAY</font>. You can concatenate as many 
+							arrays as you want.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">unset ARRAY</font>
+						</td>
+						<td>
+							Deletes <font class="bashcommand">ARRAY</font> from memory.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">${ARRAY[@]:START:NUM}</font><br>
+							or<br>
+							<font class="bashcommand">${STRING:START:NUM}</font>
+						</td>
+						<td>
+							Creates a sub-array from <font class="bashcommand">ARRAY</font> (or a sub-string from 
+							<font class="bashcommand">STRING</font>). Beginning with the element in the position 
+							<font class="bashcommand">START</font> and containing <font class="bashcommand">NUM</font> 
+							number of elements.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">IFS=$'\n' sorted=($(sort &lt;&lt;&lt;"${array[*]}"))</font>
+						</td>
+						<td>
+							Sorts in alphabetical order array and saves the result in sorted.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">IFS='+' sum=$(echo "scale=1;${array[*]}"|bc)</font>
+						</td>
+						<td>
+							Adds all elements in array and saves the result in variable <font class="bashcommand">sum</font>.
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<font class="bashcommand">IFS='+' avg=$(echo "scale=1;(${array[*]})/${#array[@]}"|bc)</font>
+						</td>
+						<td>
+							Calculates the average of elements in <font class="bashcommand">array</font> and saves the 
+							result in variable <font class="bashcommand">avg</font>.
+						</td>
+					</tr>
+				</table>
+				
+				<div id="ex1">
+					<p><font class="example">${ARRAY[INDEX]}</font></p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a array=('Colombia' 'United States' 'Spain' 'Canada')<br>
+							$ echo "The element of the array in position 0 is: ${array[0]}"<br>
+							<font class="bashcommand-result">The element of the array in position 0 is: Colombia</font><br>
+							$ echo "The element of the array in position 1 is: ${array[1]}"<br>
+							<font class="bashcommand-result">The element of the array in position 1 is: United States</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex2">
+					<p><font class="example">${#ARRAY[@]}</font></p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a array=('Colombia' 'United States' 'Spain' 'Canada')<br>
+							$ echo "The number of elements in the array is ${#array[@]}"<br>
+							<font class="bashcommand-result">The number of elements in the array is 4</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex3">
+					<p>
+						<font class="example">${#ARRAY[INDEX]}</font>
+						<font class="bashcommand">${#ARRAY[INDEX]}</font> will return the number of characters of the element of 
+						the array located in the specified index. <font class="bashcommand">Colombia</font> is in index 0, 
+						<font class="bashcommand">United States</font> in index 1, <font class="bashcommand">Spain</font> in 
+						index 2. <font class="bashcommand">Spain</font> has six characters, so 
+						<font class="bashcommand">${#ARRAY[2]}=6</font>.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a array=('Colombia' 'United States' 'Spain' 'Canada')<br>
+							$ echo "The element in position 2 is ${array[2]}, and its size is ${#array[2]}"<br>
+							<font class="bashcommand-result">The element in position 2 is Spain, and its size is 5</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex4">
+					<p><font class="example">${ARRAY[@]}</font></p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a array=('Colombia' 'United States' 'Spain' 'Canada')<br>
+							$ echo ${array[@]}<br>
+							<font class="bashcommand-result">Colombia United States Spain Canada</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex5">
+					<p>
+						<font class="example">${ARRAY[@]/OLD_ITEM/NEW_ITEM}</font>
+						Substitute all the instances of <font class="bashcommand">Colombia</font> 
+						(<font class="bashcommand">OLD_ITEM</font>) by Spain (<font class="bashcommand">NEW_ITEM</font>) in 
+						the array.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a array=('Colombia' 'United States' 'Colombia' 'Canada')<br>
+							$ echo ${array[@]/Colombia/Spain}<br>
+							<font class="bashcommand-result">Spain United States Spain Canada</font>
+						</font>
+					</p>
+					
+					<p>To remove an item, you simply substitute it by nothing (leave <font class="bashcommand">NEW_ITEM</font> 
+					empty).</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a array=('Subject01' 'Subject01' 'Subject03' 'Subject04')<br>
+							$ echo ${array[@]/Subject01/}<br>
+							<font class="bashcommand-result">Subject03 Subject04</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex6">
+					<p>
+						<font class="bashcommand">${STRING/OLD_ITEM/NEW_ITEM}</font>
+						A string is an array of characters. So, you can replace parts of a string the same way that you do 
+						with an array (without the <font class="bashcommand">[@]</font>).
+					</p>
+					
+					<font class="bashcommand">
+						<p>
+							$ P="/Users/Neuro/Desktop"<br>
+							$ echo ${P/Neuro/Research}<br>
+							<font class="bashcommand-result">/Users/Research/Desktop</font>
+						</p>
+						
+						<p>
+							$ P="/Users/Neuro/Desktop"<br>
+							$ echo ${P/Desktop/}<br>
+							<font class="bashcommand-result">/Users/Neuro/</font>
+						</p>
+					</font>
+					
+					<p>
+						You can use patterns to remove a group of elements from an array. For example, in the following 
+						array you have three items that start by <font class="bashcommand">AA</font>, so you use as 
+						<font class="bashcommand">ITEM_TO_REPLACE: AA*</font>. As you can see, the three items that start 
+						with <font class="bashcommand">AA</font> are deleted.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a ARRAY=('AA123' 'AB345' 'AA987' 'BB098' 'AA456')<br>
+							$ echo ${ARRAY[@]/AA*/}<br>
+							<font class="bashcommand-result">AB345 BB098</font>
+						</font>
+					</p>
+					
+					<p>
+						Below are a few more examples on how to use patterns to remove a group of items from an array:
+					</p>
+					
+					<p>
+						Delete all items that end with the letter Z (<font class="bashcommand">'HGTZ'</font> and 
+						<font class="bashcommand">'ZZZZ'</font>):<br>
+						<font class="bashcommand">
+							$ declare -a ARRAY=('QWER' 'HGTZ' 'QRJD' 'ZZZZ' 'JHGF')<br>
+							$ echo ${ARRAY[@]/*Z/}<br>
+							<font class="bashcommand-result">QWER QRJD JHGF</font>
+						</font>
+					</p>
+					
+					<p>
+						Delete all items that have an <font class="bashcommand">A</font> at the beginning and a 
+						<font class="bashcommand">Z</font> at the end (<font class="bashcommand">'ASDFZ'</font>). Observe 
+						that either <font class="bashcommand">'RFGHJZ'</font> nor <font class="bashcommand">'ZZZZ'</font> get 
+						deleted because even though they end with a <font class="bashcommand">Z</font>, they don't start 
+						with an <font class="bashcommand">A</font>, so those two strings don't follow the 
+						<font class="bashcommand">A*Z</font> pattern: <br>
+						<font class="bashcommand">
+							$ declare -a ARRAY=('ASDFZ' 'RFGHJZ' 'QRJD' 'ZZZZ' 'JHGF')<br>
+							$ echo ${ARRAY[@]/A*Z/}<br>
+							<font class="bashcommand-result">RFGHJZ QRJD ZZZZ JHGF</font>
+						</font>
+					</p>
+					
+					<p>
+						To replace the front-end occurrences of a substring within an array, you can use the following 
+						syntax: <font class="bashcommand">${ARRAY[@]/#SUBSTRING_TO_REPLACE/NEW_SUBSTRING}:</font><br>
+						<font class="bashcommand">
+							$ declare -a ARRAY=('SUBJ0' 'SUBJ9' 'SUBJ3' 'SUBJ4' 'SUBJ3')<br>
+							$ echo ${ARRAY[@]/#SUBJ/SUBJECT}<br>
+							<font class="bashcommand-result">SUBJECT0 SUBJECT9 SUBJECT3 SUBJECT4 SUBJECT3</font>
+						</font>
+					</p>
+					
+					<p>
+						To replace the back end occurrences of a substring within an array, use the symbol 
+						<font class="bashcommand">%</font> instead of <font class="bashcommand">#</font> and the same syntax 
+						as before:<br>
+						<font class="bashcommand">
+							$ declare -a ARRAY=('ID_001' 'AGE_001' 'GENDER_001' 'QC_001')<br>
+							$ echo ${ARRAY[@]/%001/125}<br>
+							<font class="bashcommand-result">ID_125 AGE_125 GENDER_125 QC_125</font>
+						</font> 
+					</p>
+				</div>
+				
+				<div id="ex7">
+					<p>
+						<font class="example">${STRING//OLD_ITEM/NEW_ITEM}</font>
+						With strings, contrary to how it happens with arrays, using the previous syntax will only replace the 
+						first occurrence of <font class="bashcommand">OLD_ITEM</font>.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ P="/Users/Neuro/Desktop/Neuro"<br>
+							$ echo ${P/Neuro/Research}<br>
+							<font class="bashcommand-result">/Users/Research/Desktop/Neuro</font>
+						</font>
+					</p>
+					
+					<p>In order to replace all occurrences of <font class="bashcommand">OLD_ITEM</font> you must use double 
+					slash:</p>
+					
+					<font class="bashcommand">
+						<p>
+							$ P="/Users/Neuro/Desktop/Neuro"<br>
+							$ echo ${P//Neuro/Research}<br>
+							<font class="bashcommand-result">/Users/Research/Desktop/Research</font>
+						</p>
+						
+						<p>
+							$ P="/Users/Neuro/Desktop"<br>
+							$ echo ${P//e/}<br>
+							<font class="bashcommand-result">/Usrs/Nuro/Dsktop</font>
+						</p>
+					</font>
+				</div>
+				
+				<div id="ex8">
+					<p>
+						<font class="example">NEWARRAY=("${ARRAY[@]}")</font>
+						This syntax is used to copy all the elements of one array into a new one.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a ARRAY=('ASDFZ' 'RFGHJZ' 'QRJD' 'ZZZZ' 'JHGF')<br>
+							$ NEWARRAY=("${ARRAY[@]}")<br>
+							$ echo ${NEWARRAY[@]}<br>
+							<font class="bashcommand-result">ASDFZ RFGHJZ QRJD ZZZZ JHGF</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex9">
+					<p>
+						<font class="example">NEWARRAY=("${ ARRAY1[@]}" "${ARRAY2[@]}" "${ ARRAY3[@]}" ...)</font>
+						Concatenating arrays is very similar to copying arrays. If you want to concatenate array 
+						<font class="bashcommand">A</font> and <font class="bashcommand">B</font>, and save the result in 
+						<font class="bashcommand">C</font>. You just copy <font class="bashcommand">A</font> after 
+						<font class="bashcommand">B</font> (using the previous syntax) and assign it to 
+						<font class="bashcommand">C</font>.
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a A=('ASDFZ' 'RFGHJZ' 'QRJD' 'ZZZZ' 'JHGF')<br>
+							$ declare -a B=('3333' '2222' '1111')<br>
+							$ C=("${A[@]}" "${B[@]}")<br>
+							$ echo ${C[@]}<br>
+							<font class="bashcommand-result">ASDFZ RFGHJZ QRJD ZZZZ JHGF 3333 2222 1111</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex10">
+					<p>
+						<font class="example">unset ARRAY</font>
+						If your script creates very big temporary arrays that won't be used again, you might want to delete them 
+						to free some memory. For that you use the command unset. You might want to use unset also if you want to 
+						make sure that the array is empty before you start adding elements.
+					</p>
+					
+					<p>
+						In this example, after deleting array A and echoing it again, nothing will be printed as the array is now 
+						empty:
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a A=('ASDFZ' 'RFGHJZ' 'QRJD' 'ZZZZ' 'JHGF')<br>
+							$ echo ${A[@]}<br>
+							<font class="bashcommand-result">ASDFZ RFGHJZ QRJD ZZZZ JHGF</font><br>
+							$ unset A<br>
+							$ echo ${A[@]}
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex11">
+					<p>
+						<font class="example">${ARRAY[@]:START:NUM}</font>
+						By using <font class="bashcommand">${ARRAY[@]:START:N}</font>, you can create a sub-array that 
+						contains <font class="bashcommand">N</font> elements from the original array, starting from the 
+						index <font class="bashcommand">START</font>. Remember, the index of the first item is 0. So, in the 
+						following example the index of <font class="bashcommand">'Element1'</font> is 0 and the index of 
+						<font class="bashcommand">'Element2'</font> is 1.
+					</p>
+					
+					<p>
+						Extract 2 items from <font class="bashcommand">ARRAY</font> starting in index 0 (items 
+						<font class="bashcommand">'Element1'</font> and <font class="bashcommand">'Element2'</font>):
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a ARRAY=( 'Element1' 'Element2' 'Element3' 'Element4' 'Element5')<br>
+							$ echo ${ARRAY[@]:0:2}<br>
+							<font class="bashcommand-result">Element1 Element2</font>
+						</font>
+					</p>
+					
+					<p>
+						Extract 3 items from <font class="bashcommand">ARRAY</font> starting in index 2 (items 
+						<font class="bashcommand">'Element3'</font>, <font class="bashcommand">'Element4'</font> and 
+						<font class="bashcommand">'Element5'</font>):
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a ARRAY=( 'Element1' 'Element2' 'Element3' 'Element4' 'Element5')<br>
+							$ echo ${ARRAY[@]:2:3}<br>
+							<font class="bashcommand-result">Element3 Element4 Element5</font>
+						</font>
+					</p>
+					
+					<p>
+						Extract 4 items from <font class="bashcommand">ARRAY</font> starting in index 2. There are only 
+						three elements from the item in index 2 until the end of the array. So, bash will only extract 3 
+						items (there's no 4th item to extract).
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ declare -a ARRAY=( 'Element1' 'Element2' 'Element3' 'Element4' 'Element5')<br>
+							$ echo ${ARRAY[@]:2:4}<br>
+							<font class="bashcommand-result">Element3 Element4 Element5</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex12">
+					<p>
+						<font class="example">${STRING:START:NUM}</font>
+						Extract characters from a string. Remember, a string is also an array (an array of characters).
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ S="Colombia"<br>
+							$ echo "The first character in ${S} is ${S:0:1}"<br>
+							<font class="bashcommand-result">The first character in Colombia is C</font><br>
+							$ echo "The third character in ${S} is ${S:2:1}"<br>
+							<font class="bashcommand-result">The third character in Colombia is l</font><br>
+							$ SIZE=${#S}<br>
+							$ echo $SIZE<br>
+							<font class="bashcommand-result">8</font><br>
+							$ echo "The last two characters in ${S} are ${S:$(( ${SIZE} - 2 )):2}"<br>
+							<font class="bashcommand-result">The last two characters in Colombia are ia</font>
+						</font>
+					</p>
+				</div>
+				
+				<div id="ex13">
+					<p>
+						<font class="example">IFS=$'\n' sorted=($(sort <<<"${array[*]}"))</font>
+						Sort <font class="bashcommand">array</font> and save the output in sorted (array stays the same):
+					</p>
+					
+					<p>
+						<font class="bashcommand">
+							$ array=(ewrwr dfgfgdf asda yrtytr)<br>
+							$ echo ${array[@]}<br>
+							<font class="bashcommand-result">ewrwr dfgfgdf asda yrtytr</font><br>
+							$ IFS=$'\n' sorted=($(sort &lt;&lt;&lt;"${array[*]}"))<br>
+							${sorted[@]}<br>
+							<font class="bashcommand-result">asda dfgfgdf ewrwr yrtytr</font><br>
+							$ echo ${array[@]}<br>
+							<font class="bashcommand-result">ewrwr dfgfgdf asda yrtytr</font>
+						</font>
+					</p>
+				</div>  
+</body>
+
+</html>
