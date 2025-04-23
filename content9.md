@@ -110,7 +110,7 @@ CB,CB0384399
 CC,CC0384433
 DD,DD0385444
 
-### Doing statistics on the numerical values of a column in a text file
+### Statistics on a column
 
 This is the content of `infoFile.txt`:
 
@@ -254,7 +254,7 @@ fi
 done
 ```
 
-### Reading lines of a text file which contain spaces
+### Reading lines with spaces
 
 In the previous example we read line by line a file using a `for` loop and the `cat` utility. This works most of the times. However, if you try to read this way a file in which one or more of the lines contain a space, bash will read each word separated by a space as a separate line.
 
@@ -299,7 +299,7 @@ $ for line in $(cat test.txt)
 4 i j
 ```
 
-### Load the content of a file into an array and access a specific line separately
+### Loading into an array
 
 ```bash
 $ ARRAY=($(cat test.txt))
@@ -315,7 +315,7 @@ $ echo ${ARRAY[4]}
 i j
 ```
 
-## 9.3. Using the `read` command for more complex csv files
+## 9.3. Using the `read` command
 
 So far, we have learned that using the `for` loop and the `cat` utility you can read each line of a file and separate it into different fields using a separator. However, csv files can become very difficult to separate into fields if some of them contain a comma (the same character that is being used as a separator), a space, or both.
 
@@ -363,8 +363,6 @@ $ cat result.csv
 "SUBJ4","DIAGN: Autism, Dyslexia, ADHD"
 ```
 
-## 9.4. Reading comma-separated CSV files using the read utility but no file descriptor
-
 In the following example we are going to read the same csv file from above called `example.csv`. The file has four columns. We are going to use the `while` loop to iterate through each line of the file and save the fields in variables `f1`, `f2`, `f3`, `f4`. Before starting to iterate, we have to tell bash that comma will be the separator in each line with `IFS=','`.
 
 ```bash
@@ -400,7 +398,7 @@ Field 3: "VISIT1"
 Field 4: "DIAGN: Autism, Dyslexia, ADHD"
 ```
 
-## 9.5. The `awk` and `grep` commands
+## 9.4. The `awk` and `grep` commands
 
 ### `awk`
 
@@ -599,9 +597,9 @@ C11138192 Group1 45
 B12226507 Group1 26
 B12226546 Group1 55
 
-#### Examples: Reading specific columns from a file or a list of files
+#### Reading specific columns from a file or a list of files
 
-##### Example 1: Print the first column of each file.
+**Example 1:** Print the first column of each file
 
 In order to print the first column of these files, we will use `awk` utility. As it was shown before, the command for this utility consists on some optional flags followed by an action statement, and then the list of files. In this case, the action statement is `'{print $1}'`, because we want to print only the first column (`$1`). Files `file2.txt` and `file4.txt` use a space as a column separator (which is the separator for default). So, to access the first column of these files we don't need the `-F` flag. However, files `file1.csv` and `file3.csv` use a comma as a separator. So, in order for `awk` to distinguish the different columns, we have to use the `-F` flag. In this case, the parameter of the `-F` flag is a comma (`-F','`). If you are trying to read a file which has the columns separated by a different character, then use that character instead of `','`.
 
@@ -803,6 +801,7 @@ $ awk '{print NR, $1}' file4.txt
 ```
 
 Comma-separated files:
+
 ```bash
 $ awk -F',' '{print NR, $1}' file1.csv
 1 "Anonymized ID"
@@ -866,7 +865,7 @@ $ awk -F',' '{print NR, $1}' file3.csv
 28 B11110893
 ```
 
-##### Example 2: Print the first column of `file1.csv` and `file2.txt` in reverse order
+**Example 2:** Print the first column of `file1.csv` and `file2.txt` in reverse order
 
 In order to print from the last line to the first line, you can use the command `tail` with the flag `-r` (for reverse) after the command `awk`. The command line will first execute the `awk` command, which is written before the `|` symbol, and then it will run the `tail` command, which inverts the order of the previous output. Remember that for `file1.csv` you need to use `-F','` to indicate that the columns are separated by commas and not spaces.
 
@@ -1012,7 +1011,7 @@ $ awk -F',' '{print NR, $1}' file1.csv | tail -r
 1 "Anonymized ID"
 ```
 
-##### Example 3: Print the second and third columns of `file2.txt`
+**Example 3:** Print the second and third columns of `file2.txt`
 
 In the previous examples we used the action statement `'{print $1}'` to print the first column. Since we now want to print the second and third columns instead of the first one, we replace `$1` by `$2,$3`. If you wanted to print columns 4 and 5 instead, you would simply use `$4,$5`, etc.
 
@@ -1084,7 +1083,7 @@ $ awk '{print NR,$2,$3}' file2.txt
 29 "Group1" "456"
 ```
 
-##### Example 4: Print the second and third columns of `file1.csv` in reverse orfer
+**Example 4:** Print the second and third columns of `file1.csv` in reverse orfer
 
 In order to print the output in reverse order for `file1.csv`, use the `tail -r` command after the `awk`.
 
@@ -1156,14 +1155,14 @@ $ awk -F',' '{print NR,$2,$3}' file1.csv | tail -r
 1 "Subject Group" "HASCONDITION"
 ```
 
-##### Example 5: Print all the columns of `file1.csv` showing the lines in reverse order.
+**Example 5:** Print all the columns of `file1.csv` showing the lines in reverse order.
 
 To print all the columns of a file using `awk`, use `$0` (instead of a column number). Or use the command `cat`.
 
 Using `awk`: `awk -F',' '{print $0}' file1.csv | tail -r`
 Using `cat`: `cat file1.csv | tail -r`
 
-##### Example 6: Print all the columns of `file1.csv` in reversed order (first the third column, then the second and finally the first one), and save the re-ordered columns in a new file called file1_reordered.csv
+**Example 6:** Print all the columns of `file1.csv` in reversed order (first the third column, then the second and finally the first one), and save the re-ordered columns in a new file called file1_reordered.csv
 
 If you were going to print the columns one to three in normal order, you would use `'{print $1,$2,$3}'`. To print them in reverse order, you just reverse the order of the columns in print, like so: `'{print $3,$2,$1}'`.
 
@@ -1174,7 +1173,7 @@ Remember to use the `-F','` flag to indicate that the columns are separated by c
 awk -F',' '{print $3,$2,$1}' file1.csv >> file1_reordered.csv
 ```
 
-##### Example 7: Print the columns and lines of `file1.csv` in reverse order
+**Example 7:** Print the columns and lines of `file1.csv` in reverse order
 
 Use the same command as before, adding `| tail -r` at the end to invert also the lines.
 
@@ -1182,7 +1181,7 @@ Use the same command as before, adding `| tail -r` at the end to invert also the
 awk -F',' '{print $3,$2,$1}' file1.csv | tail -r
 ```
 
-##### Example 8: Read the second column of `file1.csv` and save it into an array
+**Example 8:** Read the second column of `file1.csv` and save it into an array
 
 When saving a column of a file into an array, you must specify that the elements of the array are separated by new lines (`'\n'`). You do this using the command `IFS=$'\n'`.
 
@@ -1203,7 +1202,7 @@ $ echo ${#ARRAY[@]}
 29
 ```
 
-##### Example 9: Print the first column of `file2.txt` followed by the first column of `file4.txt`
+**Example 9** Print the first column of `file2.txt` followed by the first column of `file4.txt`
 
 To print a specific column for more than one file, you use the same command, adding the list of files you want to print after the first one. However, all the files in the list must use the same column separator (in this case it's a space). Since the column separator for this list of files is a space (the default), you don't need to use the `-F` flag.
 
@@ -1211,7 +1210,7 @@ To print a specific column for more than one file, you use the same command, add
 awk '{print $1}' file2.txt file4.txt
 ```
 
-##### Example 10: Print the first column of `file3.csv` followed by the first column of `file1.csv`.
+**Example 10** Print the first column of `file3.csv` followed by the first column of `file1.csv`.
 
 Since the column separator for this list of files is a comma, you need to use the `-F','` flag.
 
