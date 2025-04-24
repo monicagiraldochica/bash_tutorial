@@ -31,31 +31,83 @@ Using the vi editor for the first time Open the vi editor, create a script that 
 
 Open the vi editor
 
-![image1](./vi_1.png)
+```bash
+vi helloword.sh
+```
 
 ### Step 2
 
 Type a to start editing the file. You will see that an **--Insert--** message in the bottom of the terminal appears. This means that now you are in typing mode.
 
-![image2](./vi_2.png)
+```bash
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-- INSERT --
+```
 
 ### Step3
 
 Start typing commands. The simplest command, to print a message such as "Hello World" (or any other) is echo. The syntax of this command is the word ```echo``` followed by the message you want to print out between quotation marks (in this case "Hello World!").
 
-![image3](./vi_3.png)
+```bash
+echo "Hello World!"
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-- INSERT --
+```
 
 ### Step4
 
 Once you finish your script, press the esc key to enter command mode. You will see that the **--Insert--** message at the bottom of the terminal disappears (this means that now you are in command mode).
 
-![image4](./vi_4.png)
+```bash
+echo "Hello World!"
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+```
 
 ### Step5
 
 Save changes and exit the vi editor. In order to do this, type ```:wq``` (to write (w) and quit (q) at the same time). The table below will show you the most commonly used commands for vi.
 
-![image5](./vi_5.png)
+```bash
+echo "Hello World!"
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+:wq
+```
 
 The following table shows a **list of vi commands** that can be used in command mode and the action that will happen in each case. In general, a number preceding any vi command will tell vi to repeat the command that number of times. For example, ```p``` is the command for pasting. If you write (in command mode) ```2p```, then vi will paste whatever you copied two times where the cursor is currently located.
 

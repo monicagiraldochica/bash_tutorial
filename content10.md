@@ -7,6 +7,7 @@ Usage: `sips [flags] inputFile [--out outputFile]`
 Image modification flags:
 
 | Flag | Meaning |
+| --- | --- |
 | -s key value | Set the value for a key (see tables below for the available profile property keys and acceptable values for each key). |
 | -r degreesCW | Rotate an image several degrees clockwise. |
 | -f option | Flip the image using one of the following two options: horizontal or vertical. |
@@ -20,6 +21,7 @@ Image modification flags:
 If you want to modify one image to match the properties of another image (for example have one image match the height of another image), you can use the flag --getProperty with one of the following properties (which can also be used as parameters for some of the flags described above):
 
 | Profile property keys | Usage |
+| --- | --- |
 | dpiHeight | Height in dpi (printer dots per inch). |
 | dpiWidth | Width in dpi (printer dots per inch). |
 | pixelHeight | Height in number of pixels. |

@@ -4,23 +4,19 @@
 
 ### The absolute path of a file
 
-The absolute or full path of a file specifies its unique location in the file system, its name and extension. The absolute path of every file is different and constant. It will always be the same regardless of the current directory in which you are working (unless you move the file). This path follows a hierarchy of directories where the file is located, separating each directory with the delimiting character, which is the slash for Macintosh and Linux and the backslash for Windows. For example, a text file named file.txt located in the Desktop of a Mac computer, will commonly have an absolute path similar to this:
-/Users/user_name/Desktop/file.txt
+The absolute or full path of a file specifies its unique location in the file system, its name and extension. The absolute path of every file is different and constant. It will always be the same regardless of the current directory in which you are working (unless you move the file). This path follows a hierarchy of directories where the file is located, separating each directory with the delimiting character, which is the slash for Macintosh and Linux and the backslash for Windows. For example, a text file named file.txt located in the Desktop of a Mac computer, will commonly have an absolute path similar to this: `/Users/user_name/Desktop/file.txt`.
+
 To find the absolute path of a file you can drag and drop it into the Terminal.
 
-For example, if this is the absolute path of a file:
-/Users/user_name/Desktop/SomeFolder/Subfolder/file.txt
-It means that in the user Desktop there is a folder called SomeFolder, inside SomeFolder there is another folder called Subfolder, and inside Subfolder is located the corresponding file, with name file and extension txt. Inside a directory there can be two files with the same name but in this case, they must have a different extension. There cannot be two files with both the same name and same extension inside the same folder.
+For example, if this is the absolute path of a file: `/Users/user_name/Desktop/SomeFolder/Subfolder/file.txt`. It means that in the user Desktop there is a folder called SomeFolder, inside SomeFolder there is another folder called Subfolder, and inside Subfolder is located the corresponding file, with name file and extension txt. Inside a directory there can be two files with the same name but in this case, they must have a different extension. There cannot be two files with both the same name and same extension inside the same folder.
 
 ### The relative path of a file
 
 The relative path of a file starts from the current working directory and represents the location of a specific file relative to this directory. It is always changing as it depends on what directory you are located in the terminal, but is a lot shorter than the absolute path.
 
-If the absolute path of a file is the following, meaning the file is located in the Desktop:
-/Users/user_name/Desktop/file.txt
-And the user current working directory is the desktop, then the relative path of the file is:
-file.txt or ./file.txt
-Since the file is located in the current directory, the user can use just the name and extension for the relative path. Adding ./ doesn't do anything because ./ represents the current directory.
+If the absolute path of a file is the following, meaning the file is located in the Desktop: `/Users/user_name/Desktop/file.txt` and the user current working directory is the desktop, then the relative path of the file is: `file.txt` or `./file.txt`.
+
+Since the file is located in the current directory, the user can use just the name and extension for the relative path. Adding `./` doesn't do anything because `./` represents the current directory.
 
 The following relative paths represent files that are located in the current working directory:
 File1.txt

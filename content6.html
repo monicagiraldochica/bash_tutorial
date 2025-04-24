@@ -331,7 +331,7 @@ kbd {
 
 <body>
 
-<h1 id="toc_0">6. Condition-testing</h1>
+<h1 id="toc_0">Condition-testing</h1>
 
 <p>Variables can be used to test if a certain condition is true or false, and therefore be able to take a different course of action depending on the result of the test. For example, you might want to evaluate if a file exists to decide if you can copy it into a different folder or not. For condition-testing you will use the <code>if</code> command. This command has the following syntax:</p>
 
@@ -347,7 +347,7 @@ fi</code></pre></div>
 
 <p>The <code>CONDITION TO EVALUATE</code> is an expression that follows a specific syntax depending on what you want to test (checking files, string comparison, comparing numbers, or combining different expressions). Lets look at the different syntaxes used in each of these situations and at some examples that will help you understand this seemingly confusing subject.</p>
 
-<h2 id="toc_1">6.1. Condition-testing to check files</h2>
+<h2 id="toc_1">Condition-testing to check files</h2>
 
 <p>In the following table, <code>FILE</code> refers to the path of the file or to the variable that contains the path of the file. The spaces after [ and before ] are very important. If those spaces are missing, bash will give an error.</p>
 
@@ -529,7 +529,7 @@ $ if [ -a &quot;${FILE}&quot; ]
 &gt; echo &quot;Either the file doesn&#39;t exist, or it hasn&#39;t been modified.&quot;
 &gt; fi</code></pre></div>
 
-<h2 id="toc_6">6.2. Condition-testing to compare/evaluate strings</h2>
+<h2 id="toc_6">Condition-testing to compare/evaluate strings</h2>
 
 <p>When comparing strings, it is mandatory to use the quotation marks. The spaces after <code>[</code> and before <code>]</code> are very important. If those spaces are missing, bash will give an error.</p>
 
@@ -654,7 +654,7 @@ Canada</code></pre></div>
 <div><pre><code class="language-bash">$ [ &quot;${VAR1}&quot; \&gt; &quot;${VAR2}&quot; ] &gt;&gt; echo ${VAR2} || echo ${VAR1}
 Canada</code></pre></div>
 
-<h2 id="toc_13">6.3. Condition-testing to compare numbers</h2>
+<h2 id="toc_13">Condition-testing to compare numbers</h2>
 
 <p>The spaces after <code>[</code> and before <code>]</code> are very important. If those spaces are missing, bash will give an error.</p>
 
@@ -799,7 +799,7 @@ Variable A is greater or equal to 3.</code></pre></div>
 <div><pre><code class="language-bash">$ [ &quot;${A}&quot; -ge &quot;3&quot; ] &gt;&gt; echo &quot;Variable A is greater or equal to 3&quot; || echo &quot;Variable A less than 3.&quot;
 Variable A is greater or equal to 3.</code></pre></div>
 
-<h2 id="toc_20">6.4. Condition-testing to compare arrays</h2>
+<h2 id="toc_20">Condition-testing to compare arrays</h2>
 
 <table>
 <thead>
@@ -865,7 +865,7 @@ different</code></pre></div>
 <div><pre><code class="language-bash">$ [ &quot;${arr1[*]}&quot; != &quot;${arr2[*]}&quot; ] &gt;&gt; echo &quot;different&quot; || echo &quot;equal&quot;
 different</code></pre></div>
 
-<h2 id="toc_22">6.5. Combining different expressions for condition-testing</h2>
+<h2 id="toc_22">Combining different expressions for condition-testing</h2>
 
 <table>
 <thead>

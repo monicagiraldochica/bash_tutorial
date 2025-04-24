@@ -331,9 +331,9 @@ kbd {
 
 <body>
 
-<h1 id="toc_0">3. Variables</h1>
+<h1 id="toc_0">Variables</h1>
 
-<h2 id="toc_1">3.1. Utility, declaration and accessing variables</h2>
+<h2 id="toc_1">Utility, declaration and accessing variables</h2>
 
 <p>A very important aspect of programming (in bash or any other language) is the ability to use a label (called variable) to indicate some other quantity (a number, character, string or command). For example, I can use the variable <code>${desktop}</code> to represent the string &quot;/Users/monica/Desktop&quot;. Or the variable <code>${year}</code> to represent the number 2020 (after correctly declaring these variables). Variables can be used for many purposes, including making the code more readable, short and organized and to prevent typing errors. They are also very useful in cases in which the actual value of a variable is not known before executing the program, or when you need to save the output of one command to use as input for another command. For example, when reading the contents of a file you can read line by line in an iterative manner (which you will learn later), saving each line in a variable and then doing something with it (depending the purpose of the program).</p>
 
@@ -421,7 +421,7 @@ $ echo &quot;(${VAR1},${VAR2},${VAR3})&quot;
 
 <p>When that happens and you click enter in the keyboard, the command line won&#39;t allow you to enter any more commands. You will see the symbol <code>&gt;</code> and if you continue pressing enter it will do nothing. This is because the command line is waiting for you to close the open String. To close the string just add the missing quotation mark or cancel and ignore what you have written so far in the current line by pressing CTR+C.</p>
 
-<h2 id="toc_8">3.2. Rules for assigning variable names</h2>
+<h2 id="toc_8">Rules for assigning variable names</h2>
 
 <p>You can assign any value to a variable. However, a variable cannot have just any name. There are a few rules for assigning variable names.</p>
 
@@ -493,7 +493,7 @@ $ echo &quot;(${VAR1},${VAR2},${VAR3})&quot;
 
 <p>Variable names can be in lower and/or upper case. However, they are case sensitive. If you declare a variable as <code>VAR1</code>, but you reference it as <code>${var1}</code>, bash will not recognize the value. You must reference it as <code>${VAR1}</code>.</p>
 
-<h2 id="toc_9">3.3. Reading user input into a variable</h2>
+<h2 id="toc_9">Reading user input into a variable</h2>
 
 <p>The command <code>read</code> is the counterpart of <code>echo</code>. Instead of printing things in the terminal the way echo does, <code>read</code> reads input from the user and saves it in the specified variable (in the example below <code>VAR</code>). The command <code>read</code> is followed by the name of the variable where you want to save the information. In the following example, I am going to read the input from the user and save it in the variable <code>VAR</code>. Generally, Bash will read everything that is written until the user presses the Enter key and save all the information in the corresponding variable.</p>
 
@@ -678,7 +678,7 @@ In HTML \n is used to indicate a new line
 $ echo ${MESSAGE}
 In HTML n is used to indicate a new line</code></pre></div>
 
-<h2 id="toc_15">3.4. Reading input from a different source</h2>
+<h2 id="toc_15">Reading input from a different source</h2>
 
 <p>So far, we have used the command <code>read</code> to save the user input into a variable. This command can also be used to read from other sources (i.e. other variables or files).</p>
 

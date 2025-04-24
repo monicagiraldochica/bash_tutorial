@@ -331,9 +331,9 @@ kbd {
 
 <body>
 
-<h1 id="toc_0">2. Creating simple bash scripts</h1>
+<h1 id="toc_0">Creating simple bash scripts</h1>
 
-<h2 id="toc_1">2.1. The vi editor</h2>
+<h2 id="toc_1">The vi editor</h2>
 
 <p>There are an unlimited number of editors available for writing shell scripts in Linux and Mac. A few are installed by default; some are used through the terminal and some others use a graphical interface (GUI). They all have pros and cons and the decision to use one or another is totally personal. In this section I will explain how to use the editor vi, which is installed by default in both Linux and MacOS and can be accessed and used through the terminal window.</p>
 
@@ -368,31 +368,73 @@ kbd {
 
 <p>Open the vi editor</p>
 
-<p><img src="./vi_1.png" alt="image1"></p>
+<div><pre><code class="language-bash">vi helloword.sh</code></pre></div>
 
 <h3 id="toc_3">Step 2</h3>
 
 <p>Type a to start editing the file. You will see that an <strong>--Insert--</strong> message in the bottom of the terminal appears. This means that now you are in typing mode.</p>
 
-<p><img src="./vi_2.png" alt="image2"></p>
+<div><pre><code class="language-bash">-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-- INSERT --</code></pre></div>
 
 <h3 id="toc_4">Step3</h3>
 
 <p>Start typing commands. The simplest command, to print a message such as &quot;Hello World&quot; (or any other) is echo. The syntax of this command is the word <code>echo</code> followed by the message you want to print out between quotation marks (in this case &quot;Hello World!&quot;).</p>
 
-<p><img src="./vi_3.png" alt="image3"></p>
+<div><pre><code class="language-bash">echo &quot;Hello World!&quot;
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-- INSERT --</code></pre></div>
 
 <h3 id="toc_5">Step4</h3>
 
 <p>Once you finish your script, press the esc key to enter command mode. You will see that the <strong>--Insert--</strong> message at the bottom of the terminal disappears (this means that now you are in command mode).</p>
 
-<p><img src="./vi_4.png" alt="image4"></p>
+<div><pre><code class="language-bash">echo &quot;Hello World!&quot;
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-</code></pre></div>
 
 <h3 id="toc_6">Step5</h3>
 
 <p>Save changes and exit the vi editor. In order to do this, type <code>:wq</code> (to write (w) and quit (q) at the same time). The table below will show you the most commonly used commands for vi.</p>
 
-<p><img src="./vi_5.png" alt="image5"></p>
+<div><pre><code class="language-bash">echo &quot;Hello World!&quot;
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+:wq</code></pre></div>
 
 <p>The following table shows a <strong>list of vi commands</strong> that can be used in command mode and the action that will happen in each case. In general, a number preceding any vi command will tell vi to repeat the command that number of times. For example, <code>p</code> is the command for pasting. If you write (in command mode) <code>2p</code>, then vi will paste whatever you copied two times where the cursor is currently located.</p>
 
@@ -600,11 +642,11 @@ kbd {
 </tbody>
 </table>
 
-<h2 id="toc_7">2.2. Other editors</h2>
+<h2 id="toc_7">Other editors</h2>
 
-<p>As I previously mentioned, there is an unlimited number of editors and the choice of which to use is totally personal. The following editors are available for both Linux and MacOS: <a href="https://www.vim.org/" target="_blank">vim</a>, <a href="https://www.gnu.org/software/emacs/" target="_blank">emacs</a>, <a href="https://help.gnome.org/users/gedit/stable/" target="_blank">gedit</a> (which is also installed by default in Linux and uses a GUI, great for beginners), and <a href="https://eclipseide.org/" target="_blank">Eclipse</a> (among many others). Eclipse is a lot more than an editor; it is a development environment used for programming in many other languages and for software development and modeling. The following are editors available only for MacOS: <a href="https://developer.apple.com/xcode/" target="_blank">Xcode</a>, <a href="https://macromates.com/" target="_blank">TextMate</a>, among many others.</p>
+<p>As I previously mentioned, there is an unlimited number of editors and the choice of which to use is totally personal. The following editors are available for both Linux and MacOS: <a href="https://www.vim.org/">vim</a>, <a href="https://www.gnu.org/software/emacs/">emacs</a>, <a href="https://help.gnome.org/users/gedit/stable/">gedit</a> (which is also installed by default in Linux and uses a GUI, great for beginners), and <a href="https://eclipseide.org/">Eclipse</a> (among many others). Eclipse is a lot more than an editor; it is a development environment used for programming in many other languages and for software development and modeling. The following are editors available only for MacOS: <a href="https://developer.apple.com/xcode/">Xcode</a>, <a href="https://macromates.com/">TextMate</a>, among many others.</p>
 
-<h2 id="toc_8">2.3. Tips for writing scripts</h2>
+<h2 id="toc_8">Tips for writing scripts</h2>
 
 <ol>
 <li>Albeit not mandatory, the first line of any bash script should be the shebang (<code>#!/bin/bash</code>). This line indicates that the script is written in bash (instead of tcsh, for example) and that the bash interpreter should execute it.</li>
@@ -620,7 +662,7 @@ kbd {
 <li>If you are declaring a variable that the value should never change, then use the word <code>readonly</code> before the variable name. For example, if I want to declare a variable called age with value 30 and this value should never be replaced, then you should declare <code>readonly age=30</code> instead of <code>age=30</code>. If at some point in the script you try to replace the value of that variable, you will get an error message: <code>-bash: age: readonly variable</code>.</li>
 </ol>
 
-<h2 id="toc_9">2.4. Running a script</h2>
+<h2 id="toc_9">Running a script</h2>
 
 <p>Running a shell script is easy. You only type the path and name of the file in the command line and then press enter. For example, if your script is located in the Desktop and is called helloWord.sh, then to execute it you should type <code>~/Desktop/helloWord.sh</code> in the command line. If you get a Permission Denied error, this means that you must change its permissions to make it runnable. The topic of permissions is a bit complicated and will be explained in detail in chapter 8. But for now, you only need to know that the following command will allow you to execute the script if it&#39;s not runnable: <code>chmod 775 &lt;script_path_and_name&gt;</code>.</p>
 

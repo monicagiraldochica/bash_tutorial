@@ -331,29 +331,25 @@ kbd {
 
 <body>
 
-<h1 id="toc_0">8. General file manipulation</h1>
+<h1 id="toc_0">General file manipulation</h1>
 
-<h2 id="toc_1">8.1. Basic concepts and simple commands</h2>
+<h2 id="toc_1">Basic concepts and simple commands</h2>
 
 <h3 id="toc_2">The absolute path of a file</h3>
 
-<p>The absolute or full path of a file specifies its unique location in the file system, its name and extension. The absolute path of every file is different and constant. It will always be the same regardless of the current directory in which you are working (unless you move the file). This path follows a hierarchy of directories where the file is located, separating each directory with the delimiting character, which is the slash for Macintosh and Linux and the backslash for Windows. For example, a text file named file.txt located in the Desktop of a Mac computer, will commonly have an absolute path similar to this:
-/Users/user_name/Desktop/file.txt
-To find the absolute path of a file you can drag and drop it into the Terminal.</p>
+<p>The absolute or full path of a file specifies its unique location in the file system, its name and extension. The absolute path of every file is different and constant. It will always be the same regardless of the current directory in which you are working (unless you move the file). This path follows a hierarchy of directories where the file is located, separating each directory with the delimiting character, which is the slash for Macintosh and Linux and the backslash for Windows. For example, a text file named file.txt located in the Desktop of a Mac computer, will commonly have an absolute path similar to this: <code>/Users/user_name/Desktop/file.txt</code>.</p>
 
-<p>For example, if this is the absolute path of a file:
-/Users/user_name/Desktop/SomeFolder/Subfolder/file.txt
-It means that in the user Desktop there is a folder called SomeFolder, inside SomeFolder there is another folder called Subfolder, and inside Subfolder is located the corresponding file, with name file and extension txt. Inside a directory there can be two files with the same name but in this case, they must have a different extension. There cannot be two files with both the same name and same extension inside the same folder.</p>
+<p>To find the absolute path of a file you can drag and drop it into the Terminal.</p>
+
+<p>For example, if this is the absolute path of a file: <code>/Users/user_name/Desktop/SomeFolder/Subfolder/file.txt</code>. It means that in the user Desktop there is a folder called SomeFolder, inside SomeFolder there is another folder called Subfolder, and inside Subfolder is located the corresponding file, with name file and extension txt. Inside a directory there can be two files with the same name but in this case, they must have a different extension. There cannot be two files with both the same name and same extension inside the same folder.</p>
 
 <h3 id="toc_3">The relative path of a file</h3>
 
 <p>The relative path of a file starts from the current working directory and represents the location of a specific file relative to this directory. It is always changing as it depends on what directory you are located in the terminal, but is a lot shorter than the absolute path.</p>
 
-<p>If the absolute path of a file is the following, meaning the file is located in the Desktop:
-/Users/user_name/Desktop/file.txt
-And the user current working directory is the desktop, then the relative path of the file is:
-file.txt or ./file.txt
-Since the file is located in the current directory, the user can use just the name and extension for the relative path. Adding ./ doesn&#39;t do anything because ./ represents the current directory.</p>
+<p>If the absolute path of a file is the following, meaning the file is located in the Desktop: <code>/Users/user_name/Desktop/file.txt</code> and the user current working directory is the desktop, then the relative path of the file is: <code>file.txt</code> or <code>./file.txt</code>.</p>
+
+<p>Since the file is located in the current directory, the user can use just the name and extension for the relative path. Adding <code>./</code> doesn&#39;t do anything because <code>./</code> represents the current directory.</p>
 
 <p>The following relative paths represent files that are located in the current working directory:
 File1.txt
@@ -885,7 +881,7 @@ drwxr-xr-x  28  myUser  952B    Sep 10  09:05   MRIdata
 -rw-r--r--@ 1   myUser  50K Jan 14  2017    CV.docx
 drwxr-xr-x  22  myUser  714B    Sep 4   11:40   Articles</code></pre></div>
 
-<h2 id="toc_12">8.2. Listing files using patterns</h2>
+<h2 id="toc_12">Listing files using patterns</h2>
 
 <p>You can print information about a group of files based on patterns using wildcards.</p>
 
@@ -1024,7 +1020,7 @@ drwxr-xr-x  22  myUser  714B    Sep 4   11:40   Articles</code></pre></div>
 <div><pre><code class="language-bash">$ ls /Volumes/MyExternalDrive/Shared/Articles/[pr]????????.pdf
 /Volumes/MyExternalDrive/Shared/Articles/precuneus.pdf</code></pre></div>
 
-<h2 id="toc_13">8.3. Changing the working directory</h2>
+<h2 id="toc_13">Changing the working directory</h2>
 
 <h3 id="toc_14">The <code>cd</code> command</h3>
 
@@ -1126,7 +1122,7 @@ $ cd -
 $ pwd
 /Volumes/Shared</code></pre></div>
 
-<h2 id="toc_15">8.4. Other frequently used commands for file manipulation</h2>
+<h2 id="toc_15">Other frequently used commands for file manipulation</h2>
 
 <h3 id="toc_16">The <code>cp</code> command</h3>
 
@@ -1285,9 +1281,9 @@ $ ls /Users/MyUser/Desktop</code></pre></div>
 
 <p>Examples:</p>
 
-<p>Use <a href="https://linux.die.net/man/1/file" target="_blank"><code>file</code></a> on the output files of <code>find</code>: <code>find /Path/to/start/search/ -name &quot;*.txt&quot; -exec file {} \;</code>. You could use any shell command instead of <code>file</code>.</p>
+<p>Use <a href="https://linux.die.net/man/1/file"><code>file</code></a> on the output files of <code>find</code>: <code>find /Path/to/start/search/ -name &quot;*.txt&quot; -exec file {} \;</code>. You could use any shell command instead of <code>file</code>.</p>
 
-<p>Use <a href="https://linux.die.net/man/1/basename" target="_blank"><code>basename</code></a> on the output files of <code>find</code>: <code>find /Path/to/start/search/ -name &quot;*.txt&quot; -exec file {} \;</code>. You could use any shell command instead of <code>basename</code>.</p>
+<p>Use <a href="https://linux.die.net/man/1/basename"><code>basename</code></a> on the output files of <code>find</code>: <code>find /Path/to/start/search/ -name &quot;*.txt&quot; -exec file {} \;</code>. You could use any shell command instead of <code>basename</code>.</p>
 
 <p>Use grep to process the output of <code>find</code>: <code>find /Path/to/start/search/ -name &quot;*.txt&quot; -exec grep grep_flags {} \;</code></p>
 
