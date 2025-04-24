@@ -1,6 +1,6 @@
-# 3. Variables
+# Variables
 
-## 3.1. Utility, declaration and accessing variables
+## Utility, declaration and accessing variables
 
 A very important aspect of programming (in bash or any other language) is the ability to use a label (called variable) to indicate some other quantity (a number, character, string or command). For example, I can use the variable `${desktop}` to represent the string "/Users/monica/Desktop". Or the variable `${year}` to represent the number 2020 (after correctly declaring these variables). Variables can be used for many purposes, including making the code more readable, short and organized and to prevent typing errors. They are also very useful in cases in which the actual value of a variable is not known before executing the program, or when you need to save the output of one command to use as input for another command. For example, when reading the contents of a file you can read line by line in an iterative manner (which you will learn later), saving each line in a variable and then doing something with it (depending the purpose of the program).
 
@@ -102,7 +102,7 @@ It is very common when you are referencing many variables or concatenating varia
 
 When that happens and you click enter in the keyboard, the command line won't allow you to enter any more commands. You will see the symbol `>` and if you continue pressing enter it will do nothing. This is because the command line is waiting for you to close the open String. To close the string just add the missing quotation mark or cancel and ignore what you have written so far in the current line by pressing CTR+C.
 
-## 3.2. Rules for assigning variable names
+## Rules for assigning variable names
 
 You can assign any value to a variable. However, a variable cannot have just any name. There are a few rules for assigning variable names.
 
@@ -136,7 +136,7 @@ Here are some examples of valid and invalid variable names:
 
 Variable names can be in lower and/or upper case. However, they are case sensitive. If you declare a variable as `VAR1`, but you reference it as `${var1}`, bash will not recognize the value. You must reference it as `${VAR1}`.
 
-## 3.3. Reading user input into a variable
+## Reading user input into a variable
 
 The command `read` is the counterpart of `echo`. Instead of printing things in the terminal the way echo does, `read` reads input from the user and saves it in the specified variable (in the example below `VAR`). The command `read` is followed by the name of the variable where you want to save the information. In the following example, I am going to read the input from the user and save it in the variable ```VAR```. Generally, Bash will read everything that is written until the user presses the Enter key and save all the information in the corresponding variable.
 
@@ -316,7 +316,7 @@ $ echo ${MESSAGE}
 In HTML n is used to indicate a new line
 ```
 
-## 3.4. Reading input from a different source
+## Reading input from a different source
 
 So far, we have used the command `read` to save the user input into a variable. This command can also be used to read from other sources (i.e. other variables or files).
 

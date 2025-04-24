@@ -1,4 +1,4 @@
-# 6. Condition-testing
+# Condition-testing
 
 Variables can be used to test if a certain condition is true or false, and therefore be able to take a different course of action depending on the result of the test. For example, you might want to evaluate if a file exists to decide if you can copy it into a different folder or not. For condition-testing you will use the `if` command. This command has the following syntax:
 
@@ -16,7 +16,7 @@ fi
 
 The `CONDITION TO EVALUATE` is an expression that follows a specific syntax depending on what you want to test (checking files, string comparison, comparing numbers, or combining different expressions). Lets look at the different syntaxes used in each of these situations and at some examples that will help you understand this seemingly confusing subject.
 
-## 6.1. Condition-testing to check files
+## Condition-testing to check files
 
 In the following table, `FILE` refers to the path of the file or to the variable that contains the path of the file. The spaces after [ and before ] are very important. If those spaces are missing, bash will give an error.
 
@@ -135,7 +135,7 @@ $ if [ -N "/Users/MyUser/Desktop/someFile.txt" ]
 > fi
 ```
 
-## 6.2. Condition-testing to compare/evaluate strings
+## Condition-testing to compare/evaluate strings
 
 When comparing strings, it is mandatory to use the quotation marks. The spaces after `[` and before `]` are very important. If those spaces are missing, bash will give an error.
 
@@ -251,7 +251,7 @@ $ [ "${VAR1}" \> "${VAR2}" ] >> echo ${VAR2} || echo ${VAR1}
 Canada
 ```
 
-## 6.3. Condition-testing to compare numbers
+## Condition-testing to compare numbers
 
 The spaces after `[` and before `]` are very important. If those spaces are missing, bash will give an error.
 
@@ -397,7 +397,7 @@ $ [ "${A}" -ge "3" ] >> echo "Variable A is greater or equal to 3" || echo "Vari
 Variable A is greater or equal to 3.
 ```
 
-## 6.4. Condition-testing to compare arrays
+## Condition-testing to compare arrays
 
 | Condition | Meaning |
 |-----------| ------- |
@@ -460,7 +460,7 @@ $ [ "${arr1[*]}" != "${arr2[*]}" ] >> echo "different" || echo "equal"
 different
 ```
 
-## 6.5. Combining different expressions for condition-testing
+## Combining different expressions for condition-testing
 
 | Condition | Meaning |
 |-----------| ------- |

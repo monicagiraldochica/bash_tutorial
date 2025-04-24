@@ -1,6 +1,6 @@
-# 8. General file manipulation
+# General file manipulation
 
-## 8.1. Basic concepts and simple commands
+## Basic concepts and simple commands
 
 ### The absolute path of a file
 
@@ -285,7 +285,7 @@ drwxr-xr-x	28	myUser	952B	Sep 10	09:05	MRIdata
 drwxr-xr-x	22	myUser	714B	Sep 4	11:40	Articles
 ```
 
-## 8.2. Listing files using patterns
+## Listing files using patterns
 
 You can print information about a group of files based on patterns using wildcards.
 
@@ -376,7 +376,7 @@ $ ls /Volumes/MyExternalDrive/Shared/Articles/[pr]????????.pdf
 /Volumes/MyExternalDrive/Shared/Articles/precuneus.pdf
 ```
 
-## 8.3. Changing the working directory
+## Changing the working directory
 
 ### The `cd` command
 
@@ -463,7 +463,7 @@ $ pwd
 /Volumes/Shared
 ```
 
-## 8.4. Other frequently used commands for file manipulation
+## Other frequently used commands for file manipulation
 
 ### The `cp` command
 

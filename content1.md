@@ -1,6 +1,6 @@
-# 1. Introduction to shell scripting
+# Introduction to shell scripting
 
-## Shell (bash) scripting, its benefits and dangers (and how to protect from them)
+## Benefits and dangers of Bash
 
 Shell is a program that users employ to run commands for the operating system to execute. These can be very simple instructions such as copying or moving files, or long scripts that contain hundreds of commands. Users typically interact with a shell using a terminal window (also referred to as command line), which can be run from the same or a remote machine. There are different types of shells, but I will refer in this tutorial only to the Bourne-Again shell, which is the most commonly used. The Bourne-Again shell (or simply shell, as most people call it) is installed by default in any Linux or MacOS. The programming language used to write commands and scripts in shell is called bash.
 

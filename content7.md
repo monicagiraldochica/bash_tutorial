@@ -1,4 +1,4 @@
-# 7. Iteration
+# Iteration
 
 In the following section we will learn how to use loops to iterate through the content of arrays or through a list of files. However, we will leave the part of iterating through the content of a file for the next section ([File manipulation](content8.html)). Iteration is basically the repetition of a process or group of commands on a list of items. For example, you might use iteration to repeat the same processing steps on a list of subjects, or to manipulate in the same way a list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 subjects, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.
 
@@ -8,7 +8,7 @@ In the following section we will learn how to use loops to iterate through the c
 | `for` | For iterating through an index | `for ((i=1; i<=64; i+=1)); do; commands; done` |
 | `while` | For iterating while a control expression (condition) is true | `while condition; do; commands; done` |
 
-## 7.1. The `for` loop
+## The `for` loop
 
 ### Iterating through an array of words
 
@@ -142,7 +142,7 @@ $ for f in $( ls )
 > done
 ```
 
-## 7.2. From `for` to `while`
+## From `for` to `while`
 
 Every loop that you write using the `for` command can also be written with the `while` command. The results will be the same, but sometimes one of them will be more efficient and easier to code than the other.
 
@@ -319,7 +319,7 @@ Subject_3.nii.gz
 41786786677.nii.gz
 ```
 
-## 7.3. The `while` loop
+## The `while` loop
 
 ### Using the `while` loop to iterate through more than one array
 

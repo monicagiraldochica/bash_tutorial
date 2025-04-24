@@ -1,6 +1,6 @@
-# 9. Manipulating text and csv files
+# Manipulating text and csv files
 
-## 9.1. Writing files
+## Writing files
 
 ### The `echo` command
 
@@ -63,7 +63,7 @@ $ echo $FLOAT
 234.567000
 ```
 
-## 9.2. Reading files
+## Reading files
 
 ### Reading a file line by line
 
@@ -315,7 +315,7 @@ $ echo ${ARRAY[4]}
 i j
 ```
 
-## 9.3. Using the `read` command
+## Using the `read` command
 
 So far, we have learned that using the `for` loop and the `cat` utility you can read each line of a file and separate it into different fields using a separator. However, csv files can become very difficult to separate into fields if some of them contain a comma (the same character that is being used as a separator), a space, or both.
 
@@ -398,7 +398,7 @@ Field 3: "VISIT1"
 Field 4: "DIAGN: Autism, Dyslexia, ADHD"
 ```
 
-## 9.4. The `awk` and `grep` commands
+## The `awk` and `grep` commands
 
 ### `awk`
 
@@ -475,6 +475,8 @@ Syntax: `grep [flag] [pattern] [file(s)]`
 The following examples will show how to read and manipulate files using different command line tools. Each example will read one or more of the following files. `file1.csv` and `file3.csv` use comma as the separator between columns. On the other hand, `file2.txt` and file `file4.txt` use a space as the separator between columns.
 
 Content of `file1.csv`:
+
+```txt
 "Anonymized ID","Subject Group","HASCONDITION","CONDITION"
 "B33199522","Group1","0",""
 "B33199603","Group3","0",""
@@ -504,8 +506,11 @@ Content of `file1.csv`:
 "B11141503","Group3","0",""
 "C11137159","Group3","9","mTBI"
 "B33199522","Group1","0",""
+```
 
 Content of `file2.txt`:
+
+```txt
 "AnonymizedID" "SubjectGroup" "TEST1" "TEST2"
 "B11130912" "Group2b" "900" "MissingData"
 "B11137244" "Group1" "450" "555"
@@ -535,8 +540,11 @@ Content of `file2.txt`:
 "B11152577" "Group1" "900" "756"
 "B11156098" "Group1" "456" "886"
 "B11133232" "Group1" "456" "MissingData"
+```
 
 Content of `file3.csv`:
+
+```txt
 Anonymized ID,Subject Group,AGE
 C11138122,MISSING,21
 C11138192,Group1,54
@@ -565,8 +573,11 @@ B11108399,Group1,23
 B11108326,Group1,59
 B11119909,Group2 b,61
 B11110893,Group1,28
+```
 
 Content of `file4.txt`:
+
+```txt
 AnonymizedID SubjectGroup AGE
 B11108326 Group1 59
 B11108399 Group1 23
@@ -596,10 +607,11 @@ C11138122 MISSING 25
 C11138192 Group1 45
 B12226507 Group1 26
 B12226546 Group1 55
+```
 
-#### Reading specific columns from a file or a list of files
+#### Reading specific columns
 
-**Example 1:** Print the first column of each file
+**Example 1:** Print the first column of each file.
 
 In order to print the first column of these files, we will use `awk` utility. As it was shown before, the command for this utility consists on some optional flags followed by an action statement, and then the list of files. In this case, the action statement is `'{print $1}'`, because we want to print only the first column (`$1`). Files `file2.txt` and `file4.txt` use a space as a column separator (which is the separator for default). So, to access the first column of these files we don't need the `-F` flag. However, files `file1.csv` and `file3.csv` use a comma as a separator. So, in order for `awk` to distinguish the different columns, we have to use the `-F` flag. In this case, the parameter of the `-F` flag is a comma (`-F','`). If you are trying to read a file which has the columns separated by a different character, then use that character instead of `','`.
 
@@ -865,7 +877,7 @@ $ awk -F',' '{print NR, $1}' file3.csv
 28 B11110893
 ```
 
-**Example 2:** Print the first column of `file1.csv` and `file2.txt` in reverse order
+**Example 2:** Print the first column of `file1.csv` and `file2.txt` **in reverse order**.
 
 In order to print from the last line to the first line, you can use the command `tail` with the flag `-r` (for reverse) after the command `awk`. The command line will first execute the `awk` command, which is written before the `|` symbol, and then it will run the `tail` command, which inverts the order of the previous output. Remember that for `file1.csv` you need to use `-F','` to indicate that the columns are separated by commas and not spaces.
 
@@ -1011,7 +1023,7 @@ $ awk -F',' '{print NR, $1}' file1.csv | tail -r
 1 "Anonymized ID"
 ```
 
-**Example 3:** Print the second and third columns of `file2.txt`
+**Example 3:** Print the second and third columns of `file2.txt`.
 
 In the previous examples we used the action statement `'{print $1}'` to print the first column. Since we now want to print the second and third columns instead of the first one, we replace `$1` by `$2,$3`. If you wanted to print columns 4 and 5 instead, you would simply use `$4,$5`, etc.
 
@@ -1083,7 +1095,7 @@ $ awk '{print NR,$2,$3}' file2.txt
 29 "Group1" "456"
 ```
 
-**Example 4:** Print the second and third columns of `file1.csv` in reverse orfer
+**Example 4:** Print the second and third columns of `file1.csv` **in reverse order**.
 
 In order to print the output in reverse order for `file1.csv`, use the `tail -r` command after the `awk`.
 
@@ -1164,10 +1176,7 @@ Using `cat`: `cat file1.csv | tail -r`
 
 **Example 6:** Print all the columns of `file1.csv` in reversed order (first the third column, then the second and finally the first one), and save the re-ordered columns in a new file called file1_reordered.csv
 
-If you were going to print the columns one to three in normal order, you would use `'{print $1,$2,$3}'`. To print them in reverse order, you just reverse the order of the columns in print, like so: `'{print $3,$2,$1}'`.
-
-To save the output to a file instead of showing it in the terminal, use `>>` file as explained in previous sections.
-Remember to use the `-F','` flag to indicate that the columns are separated by commas, and not the default space.
+If you were going to print the columns one to three in normal order, you would use `'{print $1,$2,$3}'`. To print them in reverse order, you just reverse the order of the columns in print, like so: `'{print $3,$2,$1}'`. To save the output to a file instead of showing it in the terminal, use `>>` file as explained in previous sections. Remember to use the `-F','` flag to indicate that the columns are separated by commas, and not the default space.
 
 ```bash
 awk -F',' '{print $3,$2,$1}' file1.csv >> file1_reordered.csv
@@ -1181,7 +1190,7 @@ Use the same command as before, adding `| tail -r` at the end to invert also the
 awk -F',' '{print $3,$2,$1}' file1.csv | tail -r
 ```
 
-**Example 8:** Read the second column of `file1.csv` and save it into an array
+**Example 8:** Read the second column of `file1.csv` and save it into an array.
 
 When saving a column of a file into an array, you must specify that the elements of the array are separated by new lines (`'\n'`). You do this using the command `IFS=$'\n'`.
 
@@ -1202,7 +1211,7 @@ $ echo ${#ARRAY[@]}
 29
 ```
 
-**Example 9** Print the first column of `file2.txt` followed by the first column of `file4.txt`
+**Example 9:** Print the first column of `file2.txt` followed by the first column of `file4.txt`
 
 To print a specific column for more than one file, you use the same command, adding the list of files you want to print after the first one. However, all the files in the list must use the same column separator (in this case it's a space). Since the column separator for this list of files is a space (the default), you don't need to use the `-F` flag.
 
@@ -1210,10 +1219,2569 @@ To print a specific column for more than one file, you use the same command, add
 awk '{print $1}' file2.txt file4.txt
 ```
 
-**Example 10** Print the first column of `file3.csv` followed by the first column of `file1.csv`.
+**Example 10:** Print the first column of `file3.csv` followed by the first column of `file1.csv`.
 
 Since the column separator for this list of files is a comma, you need to use the `-F','` flag.
 
 ```bash
 awk -F',' '{print $1}' file3.csv file1.csv
 ```
+
+#### sorting columns
+
+**Example 1:** Print the first column of `file1.csv` and `file2.txt` in **alphabetical order**.
+
+First, use `awk` to print the desired column. Then, use `sort` to sort it in alphabetical order.
+
+Space-separated file:
+
+```bash
+$ awk '{print $1}' file2.txt | sort
+"AnonymizedID"
+"B11110676"
+"B11130912"
+"B11131605"
+"B11133232"
+"B11133232"
+"B11134987"
+"B11135292"
+"B11137120"
+"B11137244"
+"B11137244"
+"B11137784"
+"B11144100"
+"B11144345"
+"B11150911"
+"B11152577"
+"B11154532"
+"B11154534"
+"B11155267"
+"B11155267"
+"B11156098"
+"B11156098"
+"B11156453"
+"B12226566"
+"B33191224"
+"C11137159"
+"C11138912"
+"C11138929"
+"C11138999"
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F ',' '{print $1}' file1.csv | sort
+"Anonymized ID"
+"B11110455"
+"B11110603"
+"B11110690"
+"B11110925"
+"B11110927"
+"B11131290"
+"B11135072"
+"B11135291"
+"B11135291"
+"B11137879"
+"B11137879"
+"B11141503"
+"B11144410"
+"B11147712"
+"B11152799"
+"B11153927"
+"B11154358"
+"B11157958"
+"B11157974"
+"B11177579"
+"B11177806"
+"B33191224"
+"B33191224"
+"B33199522"
+"B33199522"
+"B33199603"
+"B33199603"
+"C11137159"
+```
+
+**Example2:** Print the first column of file1.csv and file2.txt **in alphabetical removing any duplicate values**.
+
+In order to do this, you remove the duplicates after printing and sorting the first column. First, use awk to print the desired column, followed by sort | uniq to sort and remove the duplicates on the result.
+
+Space-separated file:
+
+```bash
+$ awk '{print $1}' file2.txt | sort | uniq
+"AnonymizedID"
+"B11130912"
+"B11137244"
+"B11154534"
+"B11144100"
+"B11137244"
+"B12226566"
+"B11134987"
+"B11144345"
+"C11137159"
+"B11156453"
+"B11110676"
+"C11138929"
+"B11154532"
+"B11155267"
+"B11137120"
+"B33191224"
+"B11155267"
+"C11138999"
+"B11131605"
+"B11137784"
+"B11156098"
+"B11133232"
+"B11135292"
+"C11138912"
+"B11150911"
+"B11152577"
+"B11156098"
+"B11133232"
+```
+
+Comma-separated file
+
+```bash
+$ awk -F ',' '{print $1}' file1.csv | sort | uniq
+"Anonymized ID"
+"B33199522"
+"B33199603"
+"B11137879"
+"B11144410"
+"B11110455"
+"B11135291"
+"B11153927"
+"B11177579"
+"B11177806"
+"B11157958"
+"B11110690"
+"B11152799"
+"B11154358"
+"B11110925"
+"B11135291"
+"B11135072"
+"B33199603"
+"B11137879"
+"B11110603"
+"B11110927"
+"B11147712"
+"B33191224"
+"B11131290"
+"B11157974"
+"B33191224"
+"B11141503"
+"C11137159"
+"B33199522"
+```
+
+**Example 4:** Print the first column of `file1.csv` and `file3.csv` combined, in alphabetical order and with no duplicates.
+
+As explained in a previous example, to print the first column of `file1.csv` and `file3.csv` combined just use the command `awk` with the list of files to be read (`file1.csv file3.csv`) at the end of the command. Then, use `| sort` to organize the output in alphabetical order, and finally use `| uniq` to remove the duplicates.
+
+In this case, because the strings in `file1.csv` all start by colons, while the values in `file3.csv` don't, then all the values of `file1.csv` will be printed before those of `file3.csv`, because alphabetically, special characters such as `"` go before any letter (including A). So, for bash `"B11110455"` goes before `Anonymized ID`.
+
+```bash
+$ awk -F ',' '{print $1}' file1.csv file3.csv | sort | uniq
+"Anonymized ID"
+"B11110455"
+"B11110603"
+"B11110690"
+"B11110925"
+"B11110927"
+"B11131290"
+"B11135072"
+"B11135291"
+"B11137879"
+"B11141503"
+"B11144410"
+"B11147712"
+"B11152799"
+"B11153927"
+"B11154358"
+"B11157958"
+"B11157974"
+"B11177579"
+"B11177806"
+"B33191224"
+"B33199522"
+"B33199603"
+"C11137159"
+Anonymized ID
+B11108326
+B11108399
+B11110893
+B11119903
+B11119909
+B12226507
+B12226546
+C11131039
+C11133100
+C11135566
+C11137123
+C11137159
+C11137167
+C11137439
+C11137443
+C11137544
+C11138122
+C11138150
+C11138152
+C11138184
+C11138192
+C11138797
+D11144030
+```
+
+## The `paste` command
+
+### Horizontal concatenation of files
+
+**Example1:** Concatenate all the columns of `file2.txt` and `file4.txt` horizontally, using a space as separator between the columns of one file and the other.
+
+```bash
+$ paste -d ' ' file2.txt file4.txt
+"AnonymizedID" "SubjectGroup" "TEST1" "TEST2" AnonymizedID SubjectGroup AGE
+B11108399 Group1 23b" "900" "MissingData" B11108326 Group1 59
+"B11137244" "Group1" "450" "555" B11110893 Group1 28
+"B11154534" "Group1" "456" "456" B11119909 Group2 61
+"B11144100" "Group1" "450" "886" D11144030 Group3 11
+"B11137244" "Group1" "450" "456" D11144030 Group3 13
+"B12226566" "Group2b" "450" "MissingData" B11119903 Group2 84
+"B11134987" "Group1" "900" "MissingData" C11131039 Group2 67
+"B11144345" "Group1" "900" "776" C11133100 Group1 23
+"C11137159" "Group3" "MissingData" "MissingData" C11135566 Group2 72
+"B11156453" "Group4" "456" "2" C11137159 Group3 11
+"B11110676" "Group1" "900" "10" C11137159 Group3 12
+"C11138929" "Group2b" "2" "MissingData" C11137167 Group3 14
+"B11154532" "Group1" "456" "886" C11137167 Group3 16
+"B11155267" "Group3" "900" "10" C11137439 Group3 15
+"B11137120" "Group2b" "450" "456" C11137439 Group3 79
+"B33191224" "Group2b" "450" "776" C11137443 Group3 15
+"B11155267" "Group3" "900" "10" C11137544 Group1 22
+"C11138999" "Group2b" "900" "MissingData" C11137123 Group2 68
+"B11131605" "Group1" "456" "MissingData" C11138150 Group1 44
+"B11137784" "Group1" "900" "436" C11138152 Group1 10
+"B11156098" "Group1" "500" "886" C11138797 Group1 24
+"B11133232" "Group1" "500" "MissingData" C11138184 Group1 57
+"B11135292" "Group3" "MissingData" "MissingData" C11138122 Group1 23
+"C11138912" "Group2b" "900" "MissingData" C11138122 MISSING 25
+"B11150911" "Group2b" "900" "117" C11138192 Group1 45
+"B11152577" "Group1" "900" "756" B12226507 Group1 26
+"B11156098" "Group1" "456" "886" B12226546 Group1 55
+"B11133232" "Group1" "456" "MissingData"
+```
+
+**Example 2:** Concatenate all the columns of `file2.txt` and `file4.txt` horizontally using a semicolon as separator between the columns of one file and the other.
+
+```bash
+$ paste -d ';' file2.txt file4.txt
+"AnonymizedID" "SubjectGroup" "TEST1" "TEST2";AnonymizedID SubjectGroup AGE
+B11108399 Group1 23b" "900" "MissingData";B11108326 Group1 59
+"B11137244" "Group1" "450" "555";B11110893 Group1 28
+"B11154534" "Group1" "456" "456";B11119909 Group2 61
+"B11144100" "Group1" "450" "886";D11144030 Group3 11
+"B11137244" "Group1" "450" "456";D11144030 Group3 13
+"B12226566" "Group2b" "450" "MissingData";B11119903 Group2 84
+"B11134987" "Group1" "900" "MissingData";C11131039 Group2 67
+"B11144345" "Group1" "900" "776";C11133100 Group1 23
+"C11137159" "Group3" "MissingData" "MissingData";C11135566 Group2 72
+"B11156453" "Group4" "456" "2";C11137159 Group3 11
+"B11110676" "Group1" "900" "10";C11137159 Group3 12
+"C11138929" "Group2b" "2" "MissingData";C11137167 Group3 14
+"B11154532" "Group1" "456" "886";C11137167 Group3 16
+"B11155267" "Group3" "900" "10";C11137439 Group3 15
+"B11137120" "Group2b" "450" "456";C11137439 Group3 79
+"B33191224" "Group2b" "450" "776";C11137443 Group3 15
+"B11155267" "Group3" "900" "10";C11137544 Group1 22
+"C11138999" "Group2b" "900" "MissingData";C11137123 Group2 68
+"B11131605" "Group1" "456" "MissingData";C11138150 Group1 44
+"B11137784" "Group1" "900" "436";C11138152 Group1 10
+"B11156098" "Group1" "500" "886";C11138797 Group1 24
+"B11133232" "Group1" "500" "MissingData";C11138184 Group1 57
+"B11135292" "Group3" "MissingData" "MissingData";C11138122 Group1 23
+"C11138912" "Group2b" "900" "MissingData";C11138122 MISSING 25
+"B11150911" "Group2b" "900" "117";C11138192 Group1 45
+"B11152577" "Group1" "900" "756";B12226507 Group1 26
+"B11156098" "Group1" "456" "886";B12226546 Group1 55
+"B11133232" "Group1" "456" "MissingData";
+```
+
+**Example 3:** Concatenate all the columns of file2.txt and file4.txt Use a newline character (\n) as separator between the columns of one file and the other.
+
+As a result, the two files will be interlined. In the output you will have the first line of file2.txt followed by the first line of file4.txt, followed by the second line of file2.txt, then the second line of file4.txt. etc.
+
+```bash
+$ paste -d '\n' file2.txt file4.txt
+"AnonymizedID" "SubjectGroup" "TEST1" "TEST2"
+AnonymizedID SubjectGroup AGE
+"B11130912" "Group2b" "900" "MissingData"
+B11108399 Group1 23
+"B11137244" "Group1" "450" "555"
+B11110893 Group1 28
+"B11154534" "Group1" "456" "456"
+B11119909 Group2 61
+"B11144100" "Group1" "450" "886"
+D11144030 Group3 11
+"B11137244" "Group1" "450" "456"
+D11144030 Group3 13
+"B12226566" "Group2b" "450" "MissingData"
+B11119903 Group2 84
+"B11134987" "Group1" "900" "MissingData"
+C11131039 Group2 67
+"B11144345" "Group1" "900" "776"
+C11133100 Group1 23
+"C11137159" "Group3" "MissingData" "MissingData"
+C11135566 Group2 72
+"B11156453" "Group4" "456" "2"
+C11137159 Group3 11
+"B11110676" "Group1" "900" "10"
+C11137159 Group3 12
+"C11138929" "Group2b" "2" "MissingData"
+C11137167 Group3 14
+"B11154532" "Group1" "456" "886"
+C11137167 Group3 16
+"B11155267" "Group3" "900" "10"
+C11137439 Group3 15
+"B11137120" "Group2b" "450" "456"
+C11137439 Group3 79
+"B33191224" "Group2b" "450" "776"
+C11137443 Group3 15
+"B11155267" "Group3" "900" "10"
+C11137544 Group1 22
+"C11138999" "Group2b" "900" "MissingData"
+C11137123 Group2 68
+"B11131605" "Group1" "456" "MissingData"
+C11138150 Group1 44
+"B11137784" "Group1" "900" "436"
+C11138152 Group1 10
+"B11156098" "Group1" "500" "886"
+C11138797 Group1 24
+"B11133232" "Group1" "500" "MissingData"
+C11138184 Group1 57
+"B11135292" "Group3" "MissingData" "MissingData"
+C11138122 Group1 23
+"C11138912" "Group2b" "900" "MissingData"
+C11138122 MISSING 25
+"B11150911" "Group2b" "900" "117"
+C11138192 Group1 45
+"B11152577" "Group1" "900" "756"
+B12226507 Group1 26
+"B11156098" "Group1" "456" "886"
+B12226546 Group1 55
+"B11133232" "Group1" "456" "MissingData"
+```
+
+**Example 4:** Print the first column of `file2.txt` followed (horizontally) by the second column of `file4.txt`.
+
+As we learned in previous examples, the command `awk '{print $1}' file2.txt` will read and print the first column of `file2.txt`. Conversely, `awk '{print $2}' file4.txt` will read and print the second column of `file4.txt`. You must use the following syntax to concatenate these two results horizontally:
+
+```bash
+$ paste <(awk '{print $1}' file2.txt) <(awk '{print $2}' file4.txt)
+"AnonymizedID" SubjectGroup
+"B11130912" Group1
+"B11137244" Group1
+"B11154534" Group2
+"B11144100" Group3
+"B11137244" Group3
+"B12226566" Group2
+"B11134987" Group2
+"B11144345" Group1
+"C11137159" Group2
+"B11156453" Group3
+"B11110676" Group3
+"C11138929" Group3
+"B11154532" Group3
+"B11155267" Group3
+"B11137120" Group3
+"B33191224" Group3
+"B11155267" Group1
+"C11138999" Group2
+"B11131605" Group1
+"B11137784" Group1
+"B11156098" Group1
+"B11133232" Group1
+"B11135292" Group1
+"C11138912" MISSING
+"B11150911" Group1
+"B11152577" Group1
+"B11156098" Group1
+"B11133232"
+```
+
+**Example 5:** Print the first column of `file1.csv` followed (horizontally) by the second column of `file3.csv`. Separate the columns with a comma. In this example, we use the same syntax as the example before, but remember that files `file1.csv` and `file3.csv` use comma as the column separator and you have to use the `-F','` flag in the `awk` commands. Additionally, remember to use the flag `-d ','` for the paste command in order to separate the pasted columns with a comma.
+
+```bash
+$ paste -d ',' <(awk -F',' '{print $1}' file1.csv) <(awk -F',' '{print $2}' file3.csv)
+"Anonymized ID",Subject Group
+"B33199522",MISSING
+"B33199603",Group1
+"B11137879",Group1
+"B11144410",Group1
+"B11110455",Group1
+"B11135291",Group1
+"B11153927",Group1
+"B11177579",Group1
+"B11177806",Group1
+"B11157958",Group3
+"B11110690",Group3
+"B11152799",Group3
+"B11154358",Group3
+"B11110925",Group2 b
+"B11135291",Group2 b
+"B11135072",Group2 b
+"B33199603",Group1
+"B11137879",Group3
+"B11110603",Group2 b
+"B11110927",Group3
+"B11147712",Group3
+"B33191224",Group1
+"B11131290",Group3
+"B11157974",Group1
+"B33191224",Group1
+"B11141503",Group2 b
+"C11137159",Group1
+"B33199522",
+```
+
+## Reading specific lines
+
+**Example 1:** Print the **first** line of `file1.csv`.
+
+In order to print the first line of the file, we first read it using the `cat` command, and then we select the first line from the previous output using `head -n 1`.
+
+```bash
+$ cat file1.csv | head -n 1
+"Anonymized ID","Subject Group","HASCONDITION","CONDITION"
+```
+
+**Example 2:** Print the **first two** lines of `file1.csv`.
+
+In order to print the first two lines of the file we first read it using the `cat` command, and then we select those lines from the previous output using `head -n 2`.
+
+```bash
+$ cat file1.csv | head -n 2
+"Anonymized ID","Subject Group","HASCONDITION","CONDITION"
+"B33199522","Group1","0",""
+```
+
+**Example 3:** Print the **first three** lines of `file1.csv`.
+
+```bash
+$ cat file1.csv | head -n 3
+"Anonymized ID","Subject Group","HASCONDITION","CONDITION"
+"B33199522","Group1","0",""
+"B33199603","Group3","0",""
+```
+
+**Example 4:** Print the **last** line of `file1.csv`.
+
+In order to print the last line of the file we first read it using the `cat` command, and then we select the last line from the previous output using `tail -n 1`.
+
+```bash
+$ cat file1.csv | tail -n 1
+"B33199522","Group1","0",""
+```
+
+**Example 5:** Print the **last two** lines of `file1.csv`.
+
+```bash
+$ cat file1.csv | tail -n 2
+"C11137159","Group3","9","mTBI"
+"B33199522","Group1","0",""
+```
+
+***Example 6:** Print the **last three** lines of `file1.csv` in **reverse**.
+
+As we learned previously, the flag `-r` of `tail` command can be used to print things in reversed order.
+
+```bash
+$ cat file1.csv | tail -r -n 3
+"B33199522","Group1","0",""
+"C11137159","Group3","9","mTBI"
+"B11141503","Group3","0",""
+```
+
+***Example 7:** Print **from the beginning until the second line** of `file1.csv`.
+
+```bash
+$ cat file1.csv | head -n+2
+"Anonymized ID","Subject Group","HASCONDITION","CONDITION"
+"B33199522","Group1","0",""
+```
+
+***Example 8:** Print **from the beginning until the third line** of `file1.csv`.
+
+```bash
+$ cat file1.csv | head -n+3
+"Anonymized ID","Subject Group","HASCONDITION","CONDITION"
+"B33199522","Group1","0",""
+"B33199603","Group3","0",""
+```
+
+## Searching a value
+
+In the following examples we will read specific columns or lines in a file or a list of files, that contain a searched value.
+
+***Example 1:** Print the line(s) of file3.csv that contain the string C11137439.
+
+Using awk:
+
+```bash
+$ awk '/C11137439/' file3.csv
+C11137439,Group3,79
+C11137439,Group3,15
+```
+
+Using grep:
+
+```bash
+$ grep C11137439 file3.csv
+C11137439,Group3,79
+C11137439,Group3,15
+```
+
+***Example 2:** Print the line(s) of file3.csv that contain the string AAA (which is stored in a variable) $ VAR=C11137439.
+
+Using awk:
+
+```bash
+$ awk -v var=$VAR '$0~var' file3.csv
+C11137439,Group3,79
+C11137439,Group3,15
+```
+
+Using grep:
+
+```bash
+$ grep $VAR file3.csv
+C11137439,Group3,79
+C11137439,Group3,15
+```
+
+***Example 3:** Print the line(s) of file3.csv that contain the strings C11137439 or B11119909.
+
+To search for more than one expression, add the flag -e in front of each expression.
+
+```bash
+$ grep -e "C11137439" -e "B11119909" file3.csv
+C11137439,Group3,79
+C11137439,Group3,15
+B11119909,Group2 b,61
+```
+
+***Example 4:** Print the line(s) of file3.csv that contain the strings C11137439, B11119909 or B11110893.
+
+```bash
+$ grep -e "C11137439" -e "B11119909" -e "B11110893" file3.csv
+C11137439,Group3,79
+C11137439,Group3,15
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+***Example 5:** Print the line(s) of file3.csv that contain the strings C11137439 or B11119909 (which are stored in a file called patterns.txt).
+
+```bash
+$ cat patterns.txt
+C11137439
+B11119909
+```
+
+```bash
+$ grep -f patterns.txt file3.csv
+C11137439,Group3,79
+C11137439,Group3,15
+B11119909,Group2 b,61
+```
+
+***Example 6:** Print the line(s) of file3.csv that do not contain the string C11137439.
+
+```bash
+$ grep -v "C11137439" file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+***Example 7:** Print the line(s) of any file in the current directory that contain the string C11137439.
+
+```bash
+$ awk '/C11137439/' *
+C11137439,Group3,79
+C11137439,Group3,15
+C11137439 Group3 15
+C11137439 Group3 79
+C11137439
+```
+
+```bash
+$ grep C11137439 *
+file3.csv:C11137439,Group3,79
+file3.csv:C11137439,Group3,15
+file4.txt:C11137439 Group3 15
+file4.txt:C11137439 Group3 79
+patterns.txt:C11137439
+```
+
+To omit the file names in the grep option, use the flag -h:
+
+```bash
+$ grep -h C11137439 *
+C11137439,Group3,79
+C11137439,Group3,15
+C11137439 Group3 15
+C11137439 Group3 79
+C11137439
+```
+
+If you wanted to include the line number for each match, you can add the flag -n:
+
+```bash
+$ grep -n "C11137439" *
+file3.csv:21:C11137439,Group3,79
+file3.csv:22:C11137439,Group3,15
+file4.txt:15:C11137439 Group3 15
+file4.txt:16:C11137439 Group3 79
+patterns.txt:1:C11137439
+```
+
+```bash
+$ grep -h -n "C11137439" *
+21:C11137439,Group3,79
+22:C11137439,Group3,15
+15:C11137439 Group3 15
+16:C11137439 Group3 79
+1:C11137439
+```
+
+If you want to show only the first three matches, you can add the flag -m with the parameter 3 (to print only three lines):
+
+```bash
+$ grep -m 3 "C11137439" *
+file3.csv:C11137439,Group3,79
+file3.csv:C11137439,Group3,15
+file4.txt:C11137439 Group3 15
+```
+
+```bash
+$ grep -m 3 "C11137439" * -h
+C11137439,Group3,79
+C11137439,Group3,15
+C11137439 Group3 15
+```
+
+***Example 8:** Print the number of lines in each file of the current directory that contain the string C11137439.
+
+```bash
+$ grep -c "C11137439" *
+file1.csv:0
+file1_reordered.csv:0
+file2.txt:0
+file3.csv:2
+file4.txt:2
+patterns.txt:1
+patterns2.txt:0
+```
+
+***Example 9:** Print only the name of the files in the current directory that contain the string C11137439.
+
+```bash
+$ grep -l "C11137439" *
+file3.csv
+file4.txt
+patterns.txt
+```
+
+***Example 10:** Print the line(s) of any file in the current directory that contain the string C11137439, each line followed by the next three lines in the corresponding file (if there is three or more lines after the matched one).
+
+```bash
+$ grep -A 3 "C11137439" *
+file3.csv:C11137439,Group3,79
+file3.csv:C11137439,Group3,15
+file3.csv-C11133100,Group1,23
+file3.csv-D11144030,Group3,13
+file3.csv-B11108399,Group1,23
+--
+file4.txt:C11137439 Group3 15
+file4.txt:C11137439 Group3 79
+file4.txt-C11137443 Group3 15
+file4.txt-C11137544 Group1 22
+file4.txt-C11137123 Group2 68
+--
+patterns.txt:C11137439
+patterns.txt-B11119909
+```
+
+***Example 11:** Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines in the corresponding file (if there is three or more lines before the matched one).
+
+```bash
+$ grep -B 3 "C11137439" *
+file3.csv-C11137544,Group1,21
+file3.csv-C11137443,Group3,11
+file3.csv-C11137123,Group2 b,69
+file3.csv:C11137439,Group3,79
+file3.csv:C11137439,Group3,15
+--
+file4.txt-C11137159 Group3 12
+file4.txt-C11137167 Group3 14
+file4.txt-C11137167 Group3 16
+file4.txt:C11137439 Group3 15
+file4.txt:C11137439 Group3 79
+--
+patterns.txt:C11137439
+```
+
+***Example 12:** Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines and followed by the next three lines in the corresponding file (if there is three or more lines before/after the matched one).
+
+```bash
+$ grep -C 3 "C11137439" *
+file3.csv-C11137544,Group1,21
+file3.csv-C11137443,Group3,11
+file3.csv-C11137123,Group2 b,69
+file3.csv:C11137439,Group3,79
+file3.csv:C11137439,Group3,15
+file3.csv-C11133100,Group1,23
+file3.csv-D11144030,Group3,13
+file3.csv-B11108399,Group1,23
+--
+--
+file4.txt-C11137159 Group3 12
+file4.txt-C11137167 Group3 14
+file4.txt-C11137167 Group3 16
+file4.txt:C11137439 Group3 15
+file4.txt:C11137439 Group3 79
+file4.txt-C11137443 Group3 15
+file4.txt-C11137544 Group1 22
+file4.txt-C11137123 Group2 68
+--
+--
+patterns.txt:C11137439
+patterns.txt-B11119909
+```
+
+```bash
+$ grep -A 3 -B 3 "C11137439" *
+file3.csv-C11137544,Group1,21
+file3.csv-C11137443,Group3,11
+file3.csv-C11137123,Group2 b,69
+file3.csv:C11137439,Group3,79
+file3.csv:C11137439,Group3,15
+file3.csv-C11133100,Group1,23
+file3.csv-D11144030,Group3,13
+file3.csv-B11108399,Group1,23
+--
+--
+file4.txt-C11137159 Group3 12
+file4.txt-C11137167 Group3 14
+file4.txt-C11137167 Group3 16
+file4.txt:C11137439 Group3 15
+file4.txt:C11137439 Group3 79
+file4.txt-C11137443 Group3 15
+file4.txt-C11137544 Group1 22
+file4.txt-C11137123 Group2 68
+--
+--
+patterns.txt:C11137439
+patterns.txt-B11119909
+```
+
+***Example 13:** Print the line(s) of any file in the current directory that contain the string "B11133232" (including the quotation marks ").
+
+```bash
+$ awk '/"B11133232"/' *
+"B11133232" "Group1" "500" "MissingData"
+"B11133232" "Group1" "456" "MissingData"
+```
+
+```bash
+$ grep \"B11133232\" *
+file2.txt:"B11133232" "Group1" "500" "MissingData"
+file2.txt:"B11133232" "Group1" "456" "MissingData"
+```
+
+With the `grep` command, you must include the backslash before the quotation marks (`\"`) if you want to search only those lines that contain the string that includes the quotation marks. Otherwise, it will interpret the search value as B11133232 and not "B11133232".
+
+***Example 14:** Print the line(s) of file3.csv that contain the values B11108399 or B11108326.
+
+This search has the following rules: We're looking for words that start with the following seven characters: B111083, the 8th character can be a 9 or a 2, and the last character can be a 9 or a 6. So, in the grep command, we replace the 8th character by [92] to indicate that it can have any of those two values, and the last character by [96] to indicate that it can have value 9 or 6.
+
+```bash
+$ grep B111083[92][96] file3.csv
+B11108399,Group1,23
+B11108326,Group1,59
+```
+
+***Example 15:** Print the line(s) of file3.csv that contain the values Group1 or Group2.
+
+```bash
+$ grep Group[12] file3.csv
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137123,Group2 b,69
+C11133100,Group1,23
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+With the `grep` command, you must include the backslash before the quotation marks (`\"`) if you want to search only those lines that contain the string that includes the quotation marks. Otherwise, it will interpret the search value as B11133232 and not "B11133232".
+
+***Example 16:** Print the first column of file2.txt and file3.csv for those lines that contain the values Group1 or Group2.
+
+Remember that you have to use the flag -F',' with the command awk when the columns of the file are separated by commas and not spaces.
+
+Space-separated file:
+
+```bash
+$ grep Group[12] file2.txt | awk '{print $1}'
+"B11130912"
+"B11137244"
+"B11154534"
+"B11144100"
+"B11137244"
+"B12226566"
+"B11134987"
+"B11144345"
+"B11110676"
+"C11138929"
+"B11154532"
+"B11137120"
+"B33191224"
+"C11138999"
+"B11131605"
+"B11137784"
+"B11156098"
+"B11133232"
+"C11138912"
+"B11150911"
+"B11152577"
+"B11156098"
+"B11133232"
+```
+
+Comma-separated file:
+
+```bash
+$ grep Group[12] file3.csv | awk -F',' '{print $1}'
+C11138192
+B12226507
+B12226546
+C11138122
+C11138184
+C11138797
+C11138152
+C11138150
+C11131039
+C11135566
+B11119903
+C11137544
+C11137123
+C11133100
+B11108399
+B11108326
+B11119909
+B11110893
+```
+
+***Example 17:** Print the first and second columns of file2.txt and file3.csv for those lines that contain the values Group1 or Group2.
+
+Space-separated file:
+
+```bash
+$ grep Group[12] file2.txt | awk '{print $1,$2}'
+"B11130912" "Group2b"
+"B11137244" "Group1"
+"B11154534" "Group1"
+"B11144100" "Group1"
+"B11137244" "Group1"
+"B12226566" "Group2b"
+"B11134987" "Group1"
+"B11144345" "Group1"
+"B11110676" "Group1"
+"C11138929" "Group2b"
+"B11154532" "Group1"
+"B11137120" "Group2b"
+"B33191224" "Group2b"
+"C11138999" "Group2b"
+"B11131605" "Group1"
+"B11137784" "Group1"
+"B11156098" "Group1"
+"B11133232" "Group1"
+"C11138912" "Group2b"
+"B11150911" "Group2b"
+"B11152577" "Group1"
+"B11156098" "Group1"
+"B11133232" "Group1"
+```
+
+Comma-separated file:
+
+```bash
+$ grep Group[12] file3.csv | awk -F',' '{print $1,$2}'
+C11138192 Group1
+B12226507 Group1
+B12226546 Group1
+C11138122 Group1
+C11138184 Group1
+C11138797 Group1
+C11138152 Group1
+C11138150 Group1
+C11131039 Group2 b
+C11135566 Group2 b
+B11119903 Group2 b
+C11137544 Group1
+C11137123 Group2 b
+C11133100 Group1
+B11108399 Group1
+B11108326 Group1
+B11119909 Group2 b
+B11110893 Group1
+```
+
+***Example 18:** Print the line(s) of file3.csv and file4.txt that have value 11 in the third column.
+
+Space-separated file:
+
+```bash
+$ awk '$3 == "11" {print $1,$2}' file4.txt
+D11144030 Group3
+C11137159 Group3
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' '$3 == "11" {print $1,$2}' file3.csv
+C11137443 Group3
+```
+
+***Example 19:** Print the first and second columns of those lines in file3.csv and file4.txt that have value 11 in the third column.
+
+Space-separated file:
+
+```bash
+$ awk '$3 == "11" {print $1,$2}' file4.txt
+D11144030 Group3
+C11137159 Group3
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' '$3 == "11" {print $1,$2}' file3.csv
+C11137443 Group3
+```
+
+***Example 20:** Print the line(s) of file1.csv and file2.txt that have value "Group1" (including the colons) in the second column.
+
+Space-separated file:
+
+```bash
+$ awk '$2 == "\"Group1\""' file2.txt
+"B11137244" "Group1" "450" "555"
+"B11154534" "Group1" "456" "456"
+"B11144100" "Group1" "450" "886"
+"B11137244" "Group1" "450" "456"
+"B11134987" "Group1" "900" "MissingData"
+"B11144345" "Group1" "900" "776"
+"B11110676" "Group1" "900" "10"
+"B11154532" "Group1" "456" "886"
+"B11131605" "Group1" "456" "MissingData"
+"B11137784" "Group1" "900" "436"
+"B11156098" "Group1" "500" "886"
+"B11133232" "Group1" "500" "MissingData"
+"B11152577" "Group1" "900" "756"
+"B11156098" "Group1" "456" "886"
+"B11133232" "Group1" "456" "MissingData"
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' '$2 == "\"Group1\""' file1.csv
+"B33199522","Group1","0",""
+"B11137879","Group1","0",""
+"B11153927","Group1","0",""
+"B11177806","Group1","MD",""
+"B11152799","Group1","0",""
+"B11154358","Group1","0",""
+"B11110925","Group1","0",""
+"B11137879","Group1","0",""
+"B11110603","Group1","0",""
+"B11110927","Group1","0",""
+"B11147712","Group1","0",""
+"B11157974","Group1","0",""
+"B33199522","Group1","0",""
+```
+
+***Example 21:** Print the line(s) of file1.csv and file2.txt that do not have value "Group1" (including the colons "") in the second column.
+
+Space-separated file:
+
+```bash
+$ awk '$2 != "\"Group1\""' file2.txt
+"AnonymizedID" "SubjectGroup" "TEST1" "TEST2"
+"B11130912" "Group2b" "900" "MissingData"
+"B12226566" "Group2b" "450" "MissingData"
+"C11137159" "Group3" "MissingData" "MissingData"
+"B11156453" "Group4" "456" "2"
+"C11138929" "Group2b" "2" "MissingData"
+"B11155267" "Group3" "900" "10"
+"B11137120" "Group2b" "450" "456"
+"B33191224" "Group2b" "450" "776"
+"B11155267" "Group3" "900" "10"
+"C11138999" "Group2b" "900" "MissingData"
+"B11135292" "Group3" "MissingData" "MissingData"
+"C11138912" "Group2b" "900" "MissingData"
+"B11150911" "Group2b" "900" "117"
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' '$2 != "\"Group1\""' file1.csv
+"Anonymized ID","Subject Group","HASCONDITION","CONDITION"
+"B33199603","Group3","0",""
+"B11144410","Group2 b","0",""
+"B11110455","Group2 b","0",""
+"B11135291","Group3","0",""
+"B11177579","Group2 b","0",""
+"B11157958","Group3","0",""
+"B11110690","Group3","0",""
+"B11135291","Group3","9","mTBI"
+"B11135072","MISSING","0",""
+"B33199603","Group3","0",""
+"B33191224","Group2 b","0",""
+"B11131290","Group2 b","0",""
+"B33191224","Group2 b","0",""
+"B11141503","Group3","0",""
+"C11137159","Group3","9","mTBI"
+```
+
+***Example 22:** Print the first column of those lines in file1.csv and file2.txt that do not have value "Group1" (including the colons) in the second column.
+
+Space-separated file:
+
+```bash
+$ awk '$2 != "\"Group1\"" {print $1}' file2.txt
+"AnonymizedID"
+"B11130912"
+"B12226566"
+"C11137159"
+"B11156453"
+"C11138929"
+"B11155267"
+"B11137120"
+"B33191224"
+"B11155267"
+"C11138999"
+"B11135292"
+"C11138912"
+"B11150911"
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' '$2 != "\"Group1\"" {print $1}' file1.csv
+"Anonymized ID"
+"B33199603"
+"B11144410"
+"B11110455"
+"B11135291"
+"B11177579"
+"B11157958"
+"B11110690"
+"B11135291"
+"B11135072"
+"B33199603"
+"B33191224"
+"B11131290"
+"B33191224"
+"B11141503"
+"C11137159"
+```
+
+***Example 23:** Print the ID (first column) of those subjects in file3.csv and file4.txt that have age (third column) greater than 20.
+
+Space-separated file:
+
+```bash
+$ awk '$3 > "20" {print $1}' file4.txt
+AnonymizedID
+B11108326
+B11110893
+B11119909
+B11119903
+C11131039
+C11133100
+C11135566
+C11137439
+C11137544
+C11137123
+C11138150
+C11138797
+C11138184
+C11138122
+C11138122
+C11138192
+B12226507
+B12226546
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' '$3 > "20" {print $1}' file3.csv
+Anonymized ID
+C11138122
+C11138192
+B12226507
+B12226546
+C11138122
+C11138184
+C11138797
+C11138152
+C11138150
+C11131039
+C11135566
+B11119903
+C11137544
+C11137123
+C11137439
+C11133100
+B11108399
+B11108326
+B11119909
+B11110893
+```
+
+***Example 24:** Print the ID (first column) of those subjects in file3.csv and file4.txt that have age (third column) less than 20.
+
+Space-separated file:
+
+```bash
+$ awk '$3 < "20" {print $1}' file4.txt
+D11144030
+D11144030
+C11137159
+C11137159
+C11137167
+C11137167
+C11137439
+C11137443
+C11138152
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' '$3 < "20" {print $1}' file3.csv
+C11137167
+C11137159
+C11137167
+C11137159
+C11137443
+C11137439
+D11144030
+```
+
+***Example 25:** Print the line(s) of file3.csv that have value "Group1" or "Group3" in the second column.
+
+When there is more than one rule, the easiest and more organized way to run the command is to put all the rules in a text file and call that text file using the flag -f. In the following example, patterns3.txt contains the rules to filter the lines that are to be printed ($2 == "Group1" and $2 == "Group3").
+
+```bash
+$ cat patterns3.txt
+$2 == "Group1"
+$2 == "Group3"
+```
+
+```bash
+$ awk -F',' -f patterns3.txt file3.csv
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11137544,Group1,21
+C11137443,Group3,11
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11110893,Group1,28
+```
+
+```bash
+$ cat patterns4.txt
+$2 == "Group1" || $2 == "Group3"
+
+$ awk -F',' -f test.txt file3.csv
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11137544,Group1,21
+C11137443,Group3,11
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11110893,Group1,28
+```
+
+In this example, we obtained the same result using either patterns3.txt or patterns4.txt. When you want to select any line that contains any pattern in a list of patterns, you can either put each pattern in a different line of the text file or use the or (||) symbol to concatenate all the patterns or rules.
+
+***Example 26:** Print the value of one column for those lines that have specific values in other columns Print the ID (first column) of those subjects in file3.csv that belong to "Group1" (second column), and have age (third column) greater than 60, or that belong to "Group3" (second column) and have age (third column) less than 20.
+
+In this example, we want to print any line that contains one of the following rules:
+
+- Second column equals Group1 and third greater than 60: $2 == "Group1" && $3 > 60
+- Second column equals and Group3 third less than 20: $2 == "Group3" && $3 < 20
+
+So, the content of our pattern file must be:
+
+```bash
+$ cat patterns5.txt
+$2 == "Group1" && $3 > 60
+$2 == "Group3" && $3 < 20
+```
+
+To print all the columns from the selected lines:
+
+```bash
+$ awk -F',' -f patterns5.txt file3.csv
+B12226507,Group1,68
+B12226546,Group1,67
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11137443,Group3,11
+C11137439,Group3,15
+D11144030,Group3,13
+```
+
+To print the first column:
+
+```bash
+$ awk -F',' -f patterns5.txt file3.csv | awk -F',' '{print $1}'
+B12226507
+B12226546
+C11137167
+C11137159
+C11137167
+C11137159
+C11137443
+C11137439
+D11144030
+```
+
+The following page contains a summary of other patterns that can be included in a pattern file: [https://ss64.com/bash/awk.html](https://ss64.com/bash/awk.html){:target="blank"}
+
+## Searching a pattern
+
+***Example 1:** Print the line(s) of file3.csv that start with B. $ grep '^B' file3.csv
+
+```bash
+B12226507,Group1,68
+B12226546,Group1,67
+B11119903,Group2 b,83
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+***Example 2:** Print the line(s) of test7.csv that end with 13.
+
+```bash
+$ grep '13$' file3.csv
+C11137159,Group3,13
+C11137159,Group3,13
+D11144030,Group3,13
+```
+
+***Example 3:** Print the line(s) of test7.csv that end with 13 (when this pattern is stored in a file called patterns2.txt).
+
+```bash
+$ cat patterns2.txt
+13$
+
+$ grep -f patterns2.txt file3.csv
+C11137159,Group3,13
+C11137159,Group3,13
+D11144030,Group3,13
+```
+
+***Example 4:** Print all the non-empty lines (lines with more than 0 fields NF > 0) in file3.csv and file4.txt.
+
+Space-separated file:
+
+```bash
+$ awk 'NF > 0' file4.txt
+AnonymizedID SubjectGroup AGE
+B11108326 Group1 59
+B11108399 Group1 23
+B11110893 Group1 28
+B11119909 Group2 61
+D11144030 Group3 11
+D11144030 Group3 13
+B11119903 Group2 84
+C11131039 Group2 67
+C11133100 Group1 23
+C11135566 Group2 72
+C11137159 Group3 11
+C11137159 Group3 12
+C11137167 Group3 14
+C11137167 Group3 16
+C11137439 Group3 15
+C11137439 Group3 79
+C11137443 Group3 15
+C11137544 Group1 22
+C11137123 Group2 68
+C11138150 Group1 44
+C11138152 Group1 10
+C11138797 Group1 24
+C11138184 Group1 57
+C11138122 Group1 23
+C11138122 MISSING 25
+C11138192 Group1 45
+B12226507 Group1 26
+B12226546 Group1 55
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' 'NF > 0' file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+***Example 5:** Print all the lines that have more than two fields (NF > 2) in file3.csv and file4.txt.
+
+Space-separated file:
+
+```bash
+$ awk 'NF > 2' file4.txt
+AnonymizedID SubjectGroup AGE
+B11108326 Group1 59
+B11108399 Group1 23
+B11110893 Group1 28
+B11119909 Group2 61
+D11144030 Group3 11
+D11144030 Group3 13
+B11119903 Group2 84
+C11131039 Group2 67
+C11133100 Group1 23
+C11135566 Group2 72
+C11137159 Group3 11
+C11137159 Group3 12
+C11137167 Group3 14
+C11137167 Group3 16
+C11137439 Group3 15
+C11137439 Group3 79
+C11137443 Group3 15
+C11137544 Group1 22
+C11137123 Group2 68
+C11138150 Group1 44
+C11138152 Group1 10
+C11138797 Group1 24
+C11138184 Group1 57
+C11138122 Group1 23
+C11138122 MISSING 25
+C11138192 Group1 45
+B12226507 Group1 26
+B12226546 Group1 55
+```
+
+Comma-separated file:
+
+```bash
+$ awk -F',' 'NF > 2' file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+## Find and replace text
+
+Replace all occurrences of C11137159 in file3.csv with XXXXXXXXX and save the modified content in file3_mod.csv.
+
+Command to execute the substitution:
+
+```bash
+sed 's/C11137159/XXXXXXXXX/' file3.csv > file3_mod.csv
+```
+
+Content of file3.csv before the substitution:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content of the file after the substitution:
+
+```bash
+$ cat file3_mod.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+XXXXXXXXX,Group3,13
+C11137167,Group3,16
+XXXXXXXXX,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+## Find and replace patterns
+
+In the following examples, instead of replacing a fix string as we did before, we will replace a group of characters (i.e. all upper-case characters in the file) by a single character or another group of characters (i.e. replace with lower-case characters). The groups of characters that can be used are listed in the following table:
+
+| Expression | Group of characters |
+| `[:alnum:]` | Letters and digits |
+| `[:alpha:]` | Letters |
+| `[:blank:]` | Horizontal white space |
+| `[:cntrl:]` | Control characters |
+| `[:digit:]` | Digits |
+| `[:graph:]` | Printable characters, excluding space |
+| `[:lower:]` | Lower-case letters |
+| `[:print:]` | Printable characters, including space |
+| `[:punct:]` | Punctuation characters |
+| `[:space:]` | Horizontal or vertical white space |
+| `[:upper:]` | Upper-case letters |
+| `[:xdigit:]` | Hexadecimal digits |
+
+**Example 1:** Replace all upper-case letters in file3.csv by lower-case.
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr '[:upper:]' '[:lower:]'
+anonymized id,subject group,age
+c11138122,missing,21
+c11138192,group1,54
+b12226507,group1,68
+b12226546,group1,67
+c11138122,group1,24
+c11138184,group1,59
+c11138797,group1,22
+c11138152,group1,53
+c11138150,group1,41
+c11137167,group3,14
+c11137159,group3,13
+c11137167,group3,16
+c11137159,group3,13
+c11131039,group2 b,67
+c11135566,group2 b,73
+b11119903,group2 b,83
+c11137544,group1,21
+c11137443,group3,11
+c11137123,group2 b,69
+c11137439,group3,79
+c11137439,group3,15
+c11133100,group1,23
+d11144030,group3,13
+b11108399,group1,23
+b11108326,group1,59
+b11119909,group2 b,61
+b11110893,group1,28
+```
+
+**Example 2:**  Replace all lower-case letters in file3.csv by upper-case.
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr '[:lower:]' '[:upper:]'
+ANONYMIZED ID,SUBJECT GROUP,AGE
+C11138122,MISSING,21
+C11138192,GROUP1,54
+B12226507,GROUP1,68
+B12226546,GROUP1,67
+C11138122,GROUP1,24
+C11138184,GROUP1,59
+C11138797,GROUP1,22
+C11138152,GROUP1,53
+C11138150,GROUP1,41
+C11137167,GROUP3,14
+C11137159,GROUP3,13
+C11137167,GROUP3,16
+C11137159,GROUP3,13
+C11131039,GROUP2 B,67
+C11135566,GROUP2 B,73
+B11119903,GROUP2 B,83
+C11137544,GROUP1,21
+C11137443,GROUP3,11
+C11137123,GROUP2 B,69
+C11137439,GROUP3,79
+C11137439,GROUP3,15
+C11133100,GROUP1,23
+D11144030,GROUP3,13
+B11108399,GROUP1,23
+B11108326,GROUP1,59
+B11119909,GROUP2 B,61
+B11110893,GROUP1,28
+```
+
+**Example 3:** Replace all alphabetical characters in file3.csv by the number 0.
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr '[:alpha:]' 0
+0000000000 00,0000000 00000,000
+011138122,0000000,21
+011138192,000001,54
+012226507,000001,68
+012226546,000001,67
+011138122,000001,24
+011138184,000001,59
+011138797,000001,22
+011138152,000001,53
+011138150,000001,41
+011137167,000003,14
+011137159,000003,13
+011137167,000003,16
+011137159,000003,13
+011131039,000002 0,67
+011135566,000002 0,73
+011119903,000002 0,83
+011137544,000001,21
+011137443,000003,11
+011137123,000002 0,69
+011137439,000003,79
+011137439,000003,15
+011133100,000001,23
+011144030,000003,13
+011108399,000001,23
+011108326,000001,59
+011119909,000002 0,61
+011110893,000001,28
+```
+
+**Example 4:** Replace all digits in file3.csv by the letter X.
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr '[:digit:]' X
+Anonymized ID,Subject Group,AGE
+CXXXXXXXX,MISSING,XX
+CXXXXXXXX,GroupX,XX
+BXXXXXXXX,GroupX,XX
+BXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX b,XX
+CXXXXXXXX,GroupX b,XX
+BXXXXXXXX,GroupX b,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX b,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+CXXXXXXXX,GroupX,XX
+DXXXXXXXX,GroupX,XX
+BXXXXXXXX,GroupX,XX
+BXXXXXXXX,GroupX,XX
+BXXXXXXXX,GroupX b,XX
+BXXXXXXXX,GroupX,XX
+```
+
+**Example 5:** Replace all punctuation characters in file3.csv by a space (' ')
+
+Original content of the file:
+
+```bash
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+```bash
+$ cat file3.csv | tr '[:punct:]' ' '
+Anonymized ID Subject Group AGE
+C11138122 MISSING 21
+C11138192 Group1 54
+B12226507 Group1 68
+B12226546 Group1 67
+C11138122 Group1 24
+C11138184 Group1 59
+C11138797 Group1 22
+C11138152 Group1 53
+C11138150 Group1 41
+C11137167 Group3 14
+C11137159 Group3 13
+C11137167 Group3 16
+C11137159 Group3 13
+C11131039 Group2 b 67
+C11135566 Group2 b 73
+B11119903 Group2 b 83
+C11137544 Group1 21
+C11137443 Group3 11
+C11137123 Group2 b 69
+C11137439 Group3 79
+C11137439 Group3 15
+C11133100 Group1 23
+D11144030 Group3 13
+B11108399 Group1 23
+B11108326 Group1 59
+B11119909 Group2 b 61
+B11110893 Group1 28
+```
+
+**Example 5:** Replace all white spaces in file3.csv by an underscore '_'.
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr '[:blank:]' '_'
+Anonymized_ID,Subject_Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2_b,67
+C11135566,Group2_b,73
+B11119903,Group2_b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2_b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2_b,61
+B11110893,Group1,28
+```
+
+You can also replace a range of letters or numbers:
+
+**Example 6:** Replace any A, B or C (letters in the range A-C) in file3.csv by the letter D.
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr 'A-C' 'D'
+Dnonymized ID,Subject Group,DGE
+D11138122,MISSING,21
+D11138192,Group1,54
+D12226507,Group1,68
+D12226546,Group1,67
+D11138122,Group1,24
+D11138184,Group1,59
+D11138797,Group1,22
+D11138152,Group1,53
+D11138150,Group1,41
+D11137167,Group3,14
+D11137159,Group3,13
+D11137167,Group3,16
+D11137159,Group3,13
+D11131039,Group2 b,67
+D11135566,Group2 b,73
+D11119903,Group2 b,83
+D11137544,Group1,21
+D11137443,Group3,11
+D11137123,Group2 b,69
+D11137439,Group3,79
+D11137439,Group3,15
+D11133100,Group1,23
+D11144030,Group3,13
+D11108399,Group1,23
+D11108326,Group1,59
+D11119909,Group2 b,61
+D11110893,Group1,28
+```
+
+**Example 7:** Replace A by W, B by X, C by Y, and D by Z in file3.csv (replace letters in the range A-D with letters in the range W-Z)
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr 'A-D' 'W-Z'
+Wnonymized IZ,Subject Group,WGE
+Y11138122,MISSING,21
+Y11138192,Group1,54
+X12226507,Group1,68
+X12226546,Group1,67
+Y11138122,Group1,24
+Y11138184,Group1,59
+Y11138797,Group1,22
+Y11138152,Group1,53
+Y11138150,Group1,41
+Y11137167,Group3,14
+Y11137159,Group3,13
+Y11137167,Group3,16
+Y11137159,Group3,13
+Y11131039,Group2 b,67
+Y11135566,Group2 b,73
+X11119903,Group2 b,83
+Y11137544,Group1,21
+Y11137443,Group3,11
+Y11137123,Group2 b,69
+Y11137439,Group3,79
+Y11137439,Group3,15
+Y11133100,Group1,23
+Z11144030,Group3,13
+X11108399,Group1,23
+X11108326,Group1,59
+X11119909,Group2 b,61
+X11110893,Group1,28
+```
+
+The command tr doesn't allow you to replace by an empty space in order to delete a character or a set of characters, but you can use the -d flag for deletion.
+
+**Example 8:** Remove all spaces in file3.csv.
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr -d '[:blank:]'
+AnonymizedID,SubjectGroup,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2b,67
+C11135566,Group2b,73
+B11119903,Group2b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2b,61
+B11110893,Group1,28
+```
+
+In order to delete any repeated (continuous) character or sequence use the -s flag.
+
+**Example 9:** Remove any repeated characters ([:alnum:]) in file3.csv.
+
+Original content of the file:
+
+```bash
+$ cat file3.csv
+Anonymized ID,Subject Group,AGE
+C11138122,MISSING,21
+C11138192,Group1,54
+B12226507,Group1,68
+B12226546,Group1,67
+C11138122,Group1,24
+C11138184,Group1,59
+C11138797,Group1,22
+C11138152,Group1,53
+C11138150,Group1,41
+C11137167,Group3,14
+C11137159,Group3,13
+C11137167,Group3,16
+C11137159,Group3,13
+C11131039,Group2 b,67
+C11135566,Group2 b,73
+B11119903,Group2 b,83
+C11137544,Group1,21
+C11137443,Group3,11
+C11137123,Group2 b,69
+C11137439,Group3,79
+C11137439,Group3,15
+C11133100,Group1,23
+D11144030,Group3,13
+B11108399,Group1,23
+B11108326,Group1,59
+B11119909,Group2 b,61
+B11110893,Group1,28
+```
+
+Content after replacements:
+
+```bash
+$ cat file3.csv | tr -s '[:alnum:]'
+Anonymized ID,Subject Group,AGE
+C13812,MISING,21
+C138192,Group1,54
+B126507,Group1,68
+B126546,Group1,67
+C13812,Group1,24
+C138184,Group1,59
+C138797,Group1,2
+C138152,Group1,53
+C138150,Group1,41
+C137167,Group3,14
+C137159,Group3,13
+C137167,Group3,16
+C137159,Group3,13
+C131039,Group2 b,67
+C1356,Group2 b,73
+B1903,Group2 b,83
+C13754,Group1,21
+C13743,Group3,1
+C137123,Group2 b,69
+C137439,Group3,79
+C137439,Group3,15
+C1310,Group1,23
+D14030,Group3,13
+B10839,Group1,23
+B108326,Group1,59
+B1909,Group2 b,61
+B10893,Group1,28
+```
+
+## Print information from file
+
+**Example 1:** Print the number of lines in file3.csv and file4.txt.
+
+Comma-separated file:
+
+```bash
+$ awk '{print NF}' file3.csv | wc -l
+28
+$ nlines=$(awk '{print NF}' file3.csv | wc -l)
+$ echo $nlines
+28
+```
+
+Space-separated file:
+
+```bash
+$ awk '{print NF}' file4.txt | wc -l
+29
+$ nlines=$(awk '{print NF}' file4.txt | wc -l)
+$ echo $nlines
+29
+```
+
+**Example 2:** Print the number of columns in file3.csv and file4.txt.
+
+Comma-separated file:
+
+```bash
+$ awk -F',' '{print NF}' file3.csv | sort –nu
+3
+
+$ ncols=$(awk -F',' '{print NF}' file3.csv | sort -nu)
+$ echo $ncols
+3
+```
+
+Space-separated file:
+
+```bash
+$ awk '{print NF}' file4.txt | sort -nu
+3
+
+$ ncols=$(awk '{print NF}' file4.txt | sort -nu)
+$ echo $ncols
+3
+```
+
+**Example 3:** Print the length of each line of file4.txt.
+
+To get the length of a string you can use the function length(), and pass as parameter $0 which obtains all the fields (the whole line).
+
+Print each line:
+
+```bash
+$ awk '{print $0}' file4.txt
+AnonymizedID SubjectGroup AGE
+B11108326 Group1 59
+B11108399 Group1 23
+B11110893 Group1 28
+B11119909 Group2 61
+D11144030 Group3 11
+D11144030 Group3 13
+B11119903 Group2 84
+C11131039 Group2 67
+C11133100 Group1 23
+C11135566 Group2 72
+C11137159 Group3 11
+C11137159 Group3 12
+C11137167 Group3 14
+C11137167 Group3 16
+C11137439 Group3 15
+C11137439 Group3 79
+C11137443 Group3 15
+C11137544 Group1 22
+C11137123 Group2 68
+C11138150 Group1 44
+C11138152 Group1 10
+C11138797 Group1 24
+C11138184 Group1 57
+C11138122 Group1 23
+C11138122 MISSING 25
+C11138192 Group1 45
+B12226507 Group1 26
+B12226546 Group1 55
+```
+
+Print the length of each line:
+
+```bash
+$ awk '{print length($0)}' file4.txt
+29
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+19
+20
+19
+19
+19
+```
+
+**Example 4:** Print the length of the second field (length($2)) in file3.csv and file4.txt.
+
+Comma-separated file:
+
+```bash
+$ awk '{print length($2)}' file4.txt
+12
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+7
+6
+6
+6
+```
+
+Space-separated file:
+
+```bash
+$ awk -F',' '{print length($2)}' file3.csv
+13
+7
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+8
+8
+8
+6
+6
+8
+6
+6
+6
+6
+6
+6
+8
+6
+```
+
+**Example 5:** Print all the lines of file4.txt in upper-case.
+
+To convert a string to upper-case use the function toupper() and pass as parameter $0 which contains the whole line.
+
+```bash
+$ awk '{print toupper($0)}' file4.txt
+ANONYMIZEDID SUBJECTGROUP AGE
+B11108326 GROUP1 59
+B11108399 GROUP1 23
+B11110893 GROUP1 28
+B11119909 GROUP2 61
+D11144030 GROUP3 11
+D11144030 GROUP3 13
+B11119903 GROUP2 84
+C11131039 GROUP2 67
+C11133100 GROUP1 23
+C11135566 GROUP2 72
+C11137159 GROUP3 11
+C11137159 GROUP3 12
+C11137167 GROUP3 14
+C11137167 GROUP3 16
+C11137439 GROUP3 15
+C11137439 GROUP3 79
+C11137443 GROUP3 15
+C11137544 GROUP1 22
+C11137123 GROUP2 68
+C11138150 GROUP1 44
+C11138152 GROUP1 10
+C11138797 GROUP1 24
+C11138184 GROUP1 57
+C11138122 GROUP1 23
+C11138122 MISSING 25
+C11138192 GROUP1 45
+B12226507 GROUP1 26
+B12226546 GROUP1 55
+```
+
+**Example 6:** Print all the lines of file4.txt in lower-case.
+
+To convert a string to lower-case use the function tolower() and pass as parameter $0 which contains the whole line.
+
+```bash
+$ awk '{print tolower($0)}' file4.txt
+anonymizedid subjectgroup age
+b11108326 group1 59
+b11108399 group1 23
+b11110893 group1 28
+b11119909 group2 61
+d11144030 group3 11
+d11144030 group3 13
+b11119903 group2 84
+c11131039 group2 67
+c11133100 group1 23
+c11135566 group2 72
+c11137159 group3 11
+c11137159 group3 12
+c11137167 group3 14
+c11137167 group3 16
+c11137439 group3 15
+c11137439 group3 79
+c11137443 group3 15
+c11137544 group1 22
+c11137123 group2 68
+c11138150 group1 44
+c11138152 group1 10
+c11138797 group1 24
+c11138184 group1 57
+c11138122 group1 23
+c11138122 missing 25
+c11138192 group1 45
+b12226507 group1 26
+b12226546 group1 55
+```
+
+Some other functions that can be used in addition to toupper() and tolower() can be found [here](https://www.cs.princeton.edu/courses/archive/spr08/cos333/awk.help){:target="blank"}

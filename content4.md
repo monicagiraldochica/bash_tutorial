@@ -1,6 +1,6 @@
-# 4. Arithmetic calculations
+# Arithmetic calculations
 
-## 4.1. Integer calculations
+## Integer calculations
 
 In order to compute arithmetic calculations with integers you can use one of the following syntaxes:
 
@@ -199,7 +199,7 @@ $ for i in $(seq 10)
 10 is even
 ```
 
-## 4.2. Non-integer calculations
+## Non-integer calculations
 
 When programming in bash, you will often need to do mathematical operations that involve non-integer calculations. To do this, you will need the bc utility. You can use this utility also for integer calculations, but it is normally left for advanced math.
 
