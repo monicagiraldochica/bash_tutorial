@@ -1167,14 +1167,14 @@ $ awk -F',' '{print NR,$2,$3}' file1.csv | tail -r
 1 "Subject Group" "HASCONDITION"
 ```
 
-**Example 5:** Print all the columns of `file1.csv` showing the lines in reverse order.
+**Example 5:** Print all the columns of `file1.csv` showing the lines **in reverse order**.
 
 To print all the columns of a file using `awk`, use `$0` (instead of a column number). Or use the command `cat`.
 
 Using `awk`: `awk -F',' '{print $0}' file1.csv | tail -r`
 Using `cat`: `cat file1.csv | tail -r`
 
-**Example 6:** Print all the columns of `file1.csv` in reversed order (first the third column, then the second and finally the first one), and save the re-ordered columns in a new file called file1_reordered.csv
+**Example 6:** Print all the columns of `file1.csv` **in reversed order**, and save the re-ordered columns in a new file called file1_reordered.csv
 
 If you were going to print the columns one to three in normal order, you would use `'{print $1,$2,$3}'`. To print them in reverse order, you just reverse the order of the columns in print, like so: `'{print $3,$2,$1}'`. To save the output to a file instead of showing it in the terminal, use `>>` file as explained in previous sections. Remember to use the `-F','` flag to indicate that the columns are separated by commas, and not the default space.
 
@@ -1211,7 +1211,7 @@ $ echo ${#ARRAY[@]}
 29
 ```
 
-**Example 9:** Print the first column of `file2.txt` followed by the first column of `file4.txt`
+**Example 9:** Print the first column of `file2.txt` followed by the first column of `file4.txt`.
 
 To print a specific column for more than one file, you use the same command, adding the list of files you want to print after the first one. However, all the files in the list must use the same column separator (in this case it's a space). Since the column separator for this list of files is a space (the default), you don't need to use the `-F` flag.
 
@@ -1305,7 +1305,7 @@ $ awk -F ',' '{print $1}' file1.csv | sort
 
 **Example2:** Print the first column of file1.csv and file2.txt **in alphabetical removing any duplicate values**.
 
-In order to do this, you remove the duplicates after printing and sorting the first column. First, use awk to print the desired column, followed by sort | uniq to sort and remove the duplicates on the result.
+In order to do this, you remove the duplicates after printing and sorting the first column. First, use awk to print the desired column, followed by `sort | uniq` to sort and remove the duplicates on the result.
 
 Space-separated file:
 
@@ -1509,9 +1509,9 @@ B11108399 Group1 23b" "900" "MissingData";B11108326 Group1 59
 "B11133232" "Group1" "456" "MissingData";
 ```
 
-**Example 3:** Concatenate all the columns of file2.txt and file4.txt Use a newline character (\n) as separator between the columns of one file and the other.
+**Example 3:** Concatenate all the columns of `file2.txt` and file4.txt Use a newline character as separator between the columns of one file and the other.
 
-As a result, the two files will be interlined. In the output you will have the first line of file2.txt followed by the first line of file4.txt, followed by the second line of file2.txt, then the second line of file4.txt. etc.
+As a result, the two files will be interlined. In the output you will have the first line of `file2.txt` followed by the first line of `file4.txt`, followed by the second line of `file2.txt`, then the second line of `file4.txt`, etc.
 
 ```bash
 $ paste -d '\n' file2.txt file4.txt
@@ -1611,7 +1611,9 @@ $ paste <(awk '{print $1}' file2.txt) <(awk '{print $2}' file4.txt)
 "B11133232"
 ```
 
-**Example 5:** Print the first column of `file1.csv` followed (horizontally) by the second column of `file3.csv`. Separate the columns with a comma. In this example, we use the same syntax as the example before, but remember that files `file1.csv` and `file3.csv` use comma as the column separator and you have to use the `-F','` flag in the `awk` commands. Additionally, remember to use the flag `-d ','` for the paste command in order to separate the pasted columns with a comma.
+**Example 5:** Print the first column of `file1.csv` followed (horizontally) by the second column of `file3.csv`. Separate the columns with a comma.
+
+In this example, we use the same syntax as the example before, but remember that files `file1.csv` and `file3.csv` use comma as the column separator and you have to use the `-F','` flag in the `awk` commands. Additionally, remember to use the flag `-d ','` for the paste command in order to separate the pasted columns with a comma.
 
 ```bash
 $ paste -d ',' <(awk -F',' '{print $1}' file1.csv) <(awk -F',' '{print $2}' file3.csv)
@@ -1725,7 +1727,7 @@ $ cat file1.csv | head -n+3
 
 In the following examples we will read specific columns or lines in a file or a list of files, that contain a searched value.
 
-***Example 1:** Print the line(s) of file3.csv that contain the string C11137439.
+***Example 1:** Print the line(s) of `file3.csv` that contain the string `C11137439`.
 
 Using awk:
 
@@ -1743,17 +1745,18 @@ C11137439,Group3,79
 C11137439,Group3,15
 ```
 
-***Example 2:** Print the line(s) of file3.csv that contain the string AAA (which is stored in a variable) $ VAR=C11137439.
+***Example 2:** Print the line(s) of `file3.csv` that contain the string `AAA` (which is stored in a variable).
 
-Using awk:
+Using `awk`:
 
 ```bash
+$ VAR=C11137439
 $ awk -v var=$VAR '$0~var' file3.csv
 C11137439,Group3,79
 C11137439,Group3,15
 ```
 
-Using grep:
+Using `grep`:
 
 ```bash
 $ grep $VAR file3.csv
@@ -1761,9 +1764,9 @@ C11137439,Group3,79
 C11137439,Group3,15
 ```
 
-***Example 3:** Print the line(s) of file3.csv that contain the strings C11137439 or B11119909.
+***Example 3:** Print the line(s) of `file3.csv` that contain the strings `C11137439` or `B11119909`.
 
-To search for more than one expression, add the flag -e in front of each expression.
+To search for more than one expression, add the flag `-e` in front of each expression.
 
 ```bash
 $ grep -e "C11137439" -e "B11119909" file3.csv
@@ -1772,7 +1775,7 @@ C11137439,Group3,15
 B11119909,Group2 b,61
 ```
 
-***Example 4:** Print the line(s) of file3.csv that contain the strings C11137439, B11119909 or B11110893.
+***Example 4:** Print the line(s) of `file3.csv` that contain the strings `C11137439`, `B11119909` or `B11110893`.
 
 ```bash
 $ grep -e "C11137439" -e "B11119909" -e "B11110893" file3.csv
@@ -1782,7 +1785,7 @@ B11119909,Group2 b,61
 B11110893,Group1,28
 ```
 
-***Example 5:** Print the line(s) of file3.csv that contain the strings C11137439 or B11119909 (which are stored in a file called patterns.txt).
+***Example 5:** Print the line(s) of `file3.csv` that contain the strings `C11137439` or `B11119909` (which are stored in a file called `patterns.txt`).
 
 ```bash
 $ cat patterns.txt
@@ -1797,7 +1800,7 @@ C11137439,Group3,15
 B11119909,Group2 b,61
 ```
 
-***Example 6:** Print the line(s) of file3.csv that do not contain the string C11137439.
+***Example 6:** Print the line(s) of `file3.csv` that do not contain the string `C11137439`.
 
 ```bash
 $ grep -v "C11137439" file3.csv
@@ -1829,7 +1832,7 @@ B11119909,Group2 b,61
 B11110893,Group1,28
 ```
 
-***Example 7:** Print the line(s) of any file in the current directory that contain the string C11137439.
+***Example 7:** Print the line(s) of any file in the current directory that contain the string `C11137439`.
 
 ```bash
 $ awk '/C11137439/' *
@@ -1849,7 +1852,7 @@ file4.txt:C11137439 Group3 79
 patterns.txt:C11137439
 ```
 
-To omit the file names in the grep option, use the flag -h:
+To omit the file names in the grep option, use the flag `-h`:
 
 ```bash
 $ grep -h C11137439 *
@@ -1860,7 +1863,7 @@ C11137439 Group3 79
 C11137439
 ```
 
-If you wanted to include the line number for each match, you can add the flag -n:
+If you wanted to include the line number for each match, you can add the flag `-n`:
 
 ```bash
 $ grep -n "C11137439" *
@@ -1880,7 +1883,7 @@ $ grep -h -n "C11137439" *
 1:C11137439
 ```
 
-If you want to show only the first three matches, you can add the flag -m with the parameter 3 (to print only three lines):
+If you want to show only the first three matches, you can add the flag `-m` with the parameter 3 (to print only three lines):
 
 ```bash
 $ grep -m 3 "C11137439" *
@@ -1896,7 +1899,7 @@ C11137439,Group3,15
 C11137439 Group3 15
 ```
 
-***Example 8:** Print the number of lines in each file of the current directory that contain the string C11137439.
+***Example 8:** Print the number of lines in each file of the current directory that contain the string `C11137439`.
 
 ```bash
 $ grep -c "C11137439" *
@@ -1909,7 +1912,7 @@ patterns.txt:1
 patterns2.txt:0
 ```
 
-***Example 9:** Print only the name of the files in the current directory that contain the string C11137439.
+***Example 9:** Print only the name of the files in the current directory that contain the string `C11137439`.
 
 ```bash
 $ grep -l "C11137439" *
@@ -1918,7 +1921,7 @@ file4.txt
 patterns.txt
 ```
 
-***Example 10:** Print the line(s) of any file in the current directory that contain the string C11137439, each line followed by the next three lines in the corresponding file (if there is three or more lines after the matched one).
+***Example 10:** Print the line(s) of any file in the current directory that contain the string `C11137439`, each line followed by the next three lines in the corresponding file (if there is three or more lines after the matched one).
 
 ```bash
 $ grep -A 3 "C11137439" *
