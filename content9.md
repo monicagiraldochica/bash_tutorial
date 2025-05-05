@@ -96,6 +96,8 @@ $ for line in $(cat subjectList.txt)
 ```
 
 The content of `subjectInfo.txt` after running those lines will be:
+
+```txt
 AA,AA0083277
 AA,AA0084999
 AC,AC0208933
@@ -109,6 +111,7 @@ CA,CA0381677
 CB,CB0384399
 CC,CC0384433
 DD,DD0385444
+```
 
 ### Statistics on a column
 
@@ -134,10 +137,10 @@ In this example we will calculate the minimum, maximum and average movement in t
 
 The `for` will read in each loop one line of the text file and extract the gender, group and movement values. Depending the group and gender, it will add the movement to one of the following arrays:
 
-CM: to save the movement of all male controls.
-CF: to save the movement of all female controls.
-PM: to save the movement of all male patients.
-PF: to save the movement of all female patients.
+- CM: to save the movement of all male controls.
+- CF: to save the movement of all female controls.
+- PM: to save the movement of all male patients.
+- PF: to save the movement of all female patients.
 
 In bash it is not necessary to initialize an array. Instead, you can start adding values and the first time you add a value to a non-existent array, it will be automatically initialized. When you ask bash the size of an array that hasn’t been initialized, it will return the value zero.
 
@@ -259,11 +262,14 @@ done
 In the previous example we read line by line a file using a `for` loop and the `cat` utility. This works most of the times. However, if you try to read this way a file in which one or more of the lines contain a space, bash will read each word separated by a space as a separate line.
 
 For example, if file `test.txt` has the following content:
+
+```txt
 a b
 c d
 e f
 g h
 i j
+```
 
 When you try to read each line using a file, this is the result you will get:
 
@@ -331,13 +337,15 @@ The fifth field of line is: DIAGN: Major Depressive Disorder
 However, this is not the correct result. The fifth field of `line` is `"DIAGN: Major Depressive Disorder, Single Episode, In Full Remission"`. But because we are using a comma as a separator, bash is separating this field into separate columns. To solve this problem, you can read from the file descriptor and save each field in a separate variable using the `read` utility. With `read` if one of the columns contains a comma but is surrounded by quotation marks, it will read the text inside the quotation marks as a single field.
 
 Suppose that you have a file called `example.csv` with the following content:
+
+```txt
 "SUBJ1","Age 22-30","VISIT1","DIAGN: Major Depressive Disorder, Single Episode"
 "SUBJ2","Age 22-30","VISIT1","DIAGN: Bipolar, Schizophrenia"
 "SUBJ3","Age 22-30","VISIT1","DIAGN: Major Depressive Disorder"
 "SUBJ4","Age 22-30","VISIT1","DIAGN: Autism, Dyslexia, ADHD"
-And you want to read each line of the file and save the first and last fields into a new file called `result.csv`.
+```
 
-You would accomplish that with the following code:
+You want to read each line of the file and save the first and last fields into a new file called `result.csv`. You would accomplish that with the following code:
 
 ```bash
 # Assign the file descriptor 3 (or any integer number) to example.csv
@@ -1695,7 +1703,7 @@ $ cat file1.csv | tail -n 2
 "B33199522","Group1","0",""
 ```
 
-***Example 6:** Print the **last three** lines of `file1.csv` in **reverse**.
+**Example 6:** Print the **last three** lines of `file1.csv` in **reverse**.
 
 As we learned previously, the flag `-r` of `tail` command can be used to print things in reversed order.
 
@@ -1706,7 +1714,7 @@ $ cat file1.csv | tail -r -n 3
 "B11141503","Group3","0",""
 ```
 
-***Example 7:** Print **from the beginning until the second line** of `file1.csv`.
+**Example 7:** Print **from the beginning until the second line** of `file1.csv`.
 
 ```bash
 $ cat file1.csv | head -n+2
@@ -1714,7 +1722,7 @@ $ cat file1.csv | head -n+2
 "B33199522","Group1","0",""
 ```
 
-***Example 8:** Print **from the beginning until the third line** of `file1.csv`.
+**Example 8:** Print **from the beginning until the third line** of `file1.csv`.
 
 ```bash
 $ cat file1.csv | head -n+3
@@ -1727,7 +1735,7 @@ $ cat file1.csv | head -n+3
 
 In the following examples we will read specific columns or lines in a file or a list of files, that contain a searched value.
 
-***Example 1:** Print the line(s) of `file3.csv` that contain the string `C11137439`.
+**Example 1:** Print the line(s) of `file3.csv` that contain the string `C11137439`.
 
 Using awk:
 
@@ -1745,7 +1753,7 @@ C11137439,Group3,79
 C11137439,Group3,15
 ```
 
-***Example 2:** Print the line(s) of `file3.csv` that contain the string `AAA` (which is stored in a variable).
+**Example 2:** Print the line(s) of `file3.csv` that contain the string `AAA` (which is stored in a variable).
 
 Using `awk`:
 
@@ -1764,7 +1772,7 @@ C11137439,Group3,79
 C11137439,Group3,15
 ```
 
-***Example 3:** Print the line(s) of `file3.csv` that contain the strings `C11137439` or `B11119909`.
+**Example 3:** Print the line(s) of `file3.csv` that contain the strings `C11137439` or `B11119909`.
 
 To search for more than one expression, add the flag `-e` in front of each expression.
 
@@ -1775,7 +1783,7 @@ C11137439,Group3,15
 B11119909,Group2 b,61
 ```
 
-***Example 4:** Print the line(s) of `file3.csv` that contain the strings `C11137439`, `B11119909` or `B11110893`.
+**Example 4:** Print the line(s) of `file3.csv` that contain the strings `C11137439`, `B11119909` or `B11110893`.
 
 ```bash
 $ grep -e "C11137439" -e "B11119909" -e "B11110893" file3.csv
@@ -1785,7 +1793,7 @@ B11119909,Group2 b,61
 B11110893,Group1,28
 ```
 
-***Example 5:** Print the line(s) of `file3.csv` that contain the strings `C11137439` or `B11119909` (which are stored in a file called `patterns.txt`).
+**Example 5:** Print the line(s) of `file3.csv` that contain the strings `C11137439` or `B11119909` (which are stored in a file called `patterns.txt`).
 
 ```bash
 $ cat patterns.txt
@@ -1800,7 +1808,7 @@ C11137439,Group3,15
 B11119909,Group2 b,61
 ```
 
-***Example 6:** Print the line(s) of `file3.csv` that do not contain the string `C11137439`.
+**Example 6:** Print the line(s) of `file3.csv` that do not contain the string `C11137439`.
 
 ```bash
 $ grep -v "C11137439" file3.csv
@@ -1832,7 +1840,7 @@ B11119909,Group2 b,61
 B11110893,Group1,28
 ```
 
-***Example 7:** Print the line(s) of any file in the current directory that contain the string `C11137439`.
+**Example 7:** Print the line(s) of any file in the current directory that contain the string `C11137439`.
 
 ```bash
 $ awk '/C11137439/' *
@@ -1899,7 +1907,7 @@ C11137439,Group3,15
 C11137439 Group3 15
 ```
 
-***Example 8:** Print the number of lines in each file of the current directory that contain the string `C11137439`.
+**Example 8:** Print the number of lines in each file of the current directory that contain the string `C11137439`.
 
 ```bash
 $ grep -c "C11137439" *
@@ -1912,7 +1920,7 @@ patterns.txt:1
 patterns2.txt:0
 ```
 
-***Example 9:** Print only the name of the files in the current directory that contain the string `C11137439`.
+**Example 9:** Print only the name of the files in the current directory that contain the string `C11137439`.
 
 ```bash
 $ grep -l "C11137439" *
@@ -1921,7 +1929,7 @@ file4.txt
 patterns.txt
 ```
 
-***Example 10:** Print the line(s) of any file in the current directory that contain the string `C11137439`, each line followed by the next three lines in the corresponding file (if there is three or more lines after the matched one).
+**Example 10:** Print the line(s) of any file in the current directory that contain the string `C11137439`, each line followed by the next three lines in the corresponding file (if there is three or more lines after the matched one).
 
 ```bash
 $ grep -A 3 "C11137439" *
@@ -1941,7 +1949,7 @@ patterns.txt:C11137439
 patterns.txt-B11119909
 ```
 
-***Example 11:** Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines in the corresponding file (if there is three or more lines before the matched one).
+**Example 11:** Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines in the corresponding file (if there is three or more lines before the matched one).
 
 ```bash
 $ grep -B 3 "C11137439" *
@@ -1960,7 +1968,7 @@ file4.txt:C11137439 Group3 79
 patterns.txt:C11137439
 ```
 
-***Example 12:** Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines and followed by the next three lines in the corresponding file (if there is three or more lines before/after the matched one).
+**Example 12:** Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines and followed by the next three lines in the corresponding file (if there is three or more lines before/after the matched one).
 
 ```bash
 $ grep -C 3 "C11137439" *
@@ -2014,7 +2022,7 @@ patterns.txt:C11137439
 patterns.txt-B11119909
 ```
 
-***Example 13:** Print the line(s) of any file in the current directory that contain the string "B11133232" (including the quotation marks ").
+**Example 13:** Print the line(s) of any file in the current directory that contain the string "B11133232" (including the quotation marks ").
 
 ```bash
 $ awk '/"B11133232"/' *
@@ -2028,11 +2036,11 @@ file2.txt:"B11133232" "Group1" "500" "MissingData"
 file2.txt:"B11133232" "Group1" "456" "MissingData"
 ```
 
-With the `grep` command, you must include the backslash before the quotation marks (`\"`) if you want to search only those lines that contain the string that includes the quotation marks. Otherwise, it will interpret the search value as B11133232 and not "B11133232".
+With the `grep` command, you must include the backslash before the quotation marks (`\"`) if you want to search only those lines that contain the string that includes the quotation marks. Otherwise, it will interpret the search value as `B11133232` and not `"B11133232"`.
 
-***Example 14:** Print the line(s) of file3.csv that contain the values B11108399 or B11108326.
+**Example 14:** Print the line(s) of `file3.csv` that contain the values `B11108399` or `B11108326`.
 
-This search has the following rules: We're looking for words that start with the following seven characters: B111083, the 8th character can be a 9 or a 2, and the last character can be a 9 or a 6. So, in the grep command, we replace the 8th character by [92] to indicate that it can have any of those two values, and the last character by [96] to indicate that it can have value 9 or 6.
+This search has the following rules: We're looking for words that start with the following seven characters: `B111083`, the 8th character can be a `9` or a `2`, and the last character can be a `9` or a `6`. So, in the grep command, we replace the 8th character by `[92]` to indicate that it can have any of those two values, and the last character by `[96]` to indicate that it can have value `9` or `6`.
 
 ```bash
 $ grep B111083[92][96] file3.csv
@@ -2040,7 +2048,7 @@ B11108399,Group1,23
 B11108326,Group1,59
 ```
 
-***Example 15:** Print the line(s) of file3.csv that contain the values Group1 or Group2.
+**Example 15:** Print the line(s) of `file3.csv` that contain the values `Group1` or `Group2`.
 
 ```bash
 $ grep Group[12] file3.csv
@@ -2064,11 +2072,11 @@ B11119909,Group2 b,61
 B11110893,Group1,28
 ```
 
-With the `grep` command, you must include the backslash before the quotation marks (`\"`) if you want to search only those lines that contain the string that includes the quotation marks. Otherwise, it will interpret the search value as B11133232 and not "B11133232".
+With the `grep` command, you must include the backslash before the quotation marks (`\"`) if you want to search only those lines that contain the string that includes the quotation marks. Otherwise, it will interpret the search value as `B11133232` and not `"B11133232"`.
 
-***Example 16:** Print the first column of file2.txt and file3.csv for those lines that contain the values Group1 or Group2.
+**Example 16:** Print the first column of `file2.txt` and `file3.csv` for those lines that contain the values `Group1` or `Group2`.
 
-Remember that you have to use the flag -F',' with the command awk when the columns of the file are separated by commas and not spaces.
+Remember that you have to use the flag `-F','` with the command awk when the columns of the file are separated by commas and not spaces.
 
 Space-separated file:
 
@@ -2123,7 +2131,7 @@ B11119909
 B11110893
 ```
 
-***Example 17:** Print the first and second columns of file2.txt and file3.csv for those lines that contain the values Group1 or Group2.
+**Example 17:** Print the first and second columns of `file2.txt` and `file3.csv` for those lines that contain the values `Group1` or `Group2`.
 
 Space-separated file:
 
@@ -2178,7 +2186,7 @@ B11119909 Group2 b
 B11110893 Group1
 ```
 
-***Example 18:** Print the line(s) of file3.csv and file4.txt that have value 11 in the third column.
+**Example 18:** Print the line(s) of `file3.csv` and `file4.txt` that have value `11` in the third column.
 
 Space-separated file:
 
@@ -2195,7 +2203,7 @@ $ awk -F',' '$3 == "11" {print $1,$2}' file3.csv
 C11137443 Group3
 ```
 
-***Example 19:** Print the first and second columns of those lines in file3.csv and file4.txt that have value 11 in the third column.
+**Example 19:** Print the first and second columns of those lines in `file3.csv` and `file4.txt` that have value `11` in the third column.
 
 Space-separated file:
 
@@ -2212,7 +2220,7 @@ $ awk -F',' '$3 == "11" {print $1,$2}' file3.csv
 C11137443 Group3
 ```
 
-***Example 20:** Print the line(s) of file1.csv and file2.txt that have value "Group1" (including the colons) in the second column.
+**Example 20:** Print the line(s) of `file1.csv` and `file2.txt` that have value `"Group1"` (including the colons) in the second column.
 
 Space-separated file:
 
@@ -2254,7 +2262,7 @@ $ awk -F',' '$2 == "\"Group1\""' file1.csv
 "B33199522","Group1","0",""
 ```
 
-***Example 21:** Print the line(s) of file1.csv and file2.txt that do not have value "Group1" (including the colons "") in the second column.
+**Example 21:** Print the line(s) of `file1.csv` and `file2.txt` that do not have value `"Group1"` (including the colons) in the second column.
 
 Space-separated file:
 
@@ -2298,7 +2306,7 @@ $ awk -F',' '$2 != "\"Group1\""' file1.csv
 "C11137159","Group3","9","mTBI"
 ```
 
-***Example 22:** Print the first column of those lines in file1.csv and file2.txt that do not have value "Group1" (including the colons) in the second column.
+**Example 22:** Print the first column of those lines in `file1.csv` and `file2.txt` that do not have value `"Group1"` (including the colons) in the second column.
 
 Space-separated file:
 
@@ -2342,7 +2350,7 @@ $ awk -F',' '$2 != "\"Group1\"" {print $1}' file1.csv
 "C11137159"
 ```
 
-***Example 23:** Print the ID (first column) of those subjects in file3.csv and file4.txt that have age (third column) greater than 20.
+**Example 23:** Print the ID (first column) of those subjects in `file3.csv` and `file4.txt` that have age (third column) greater than 20.
 
 Space-separated file:
 
@@ -2396,7 +2404,7 @@ B11119909
 B11110893
 ```
 
-***Example 24:** Print the ID (first column) of those subjects in file3.csv and file4.txt that have age (third column) less than 20.
+**Example 24:** Print the ID (first column) of those subjects in `file3.csv` and `file4.txt` that have age (third column) less than 20.
 
 Space-separated file:
 
@@ -2426,9 +2434,9 @@ C11137439
 D11144030
 ```
 
-***Example 25:** Print the line(s) of file3.csv that have value "Group1" or "Group3" in the second column.
+**Example 25:** Print the line(s) of `file3.csv` that have value `"Group1"` or `"Group3"` in the second column.
 
-When there is more than one rule, the easiest and more organized way to run the command is to put all the rules in a text file and call that text file using the flag -f. In the following example, patterns3.txt contains the rules to filter the lines that are to be printed ($2 == "Group1" and $2 == "Group3").
+When there is more than one rule, the easiest and more organized way to run the command is to put all the rules in a text file and call that text file using the flag `-f`. In the following example, `patterns3.txt` contains the rules to filter the lines that are to be printed (`$2 == "Group1" and $2 == "Group3"`).
 
 ```bash
 $ cat patterns3.txt
@@ -2489,14 +2497,14 @@ B11108326,Group1,59
 B11110893,Group1,28
 ```
 
-In this example, we obtained the same result using either patterns3.txt or patterns4.txt. When you want to select any line that contains any pattern in a list of patterns, you can either put each pattern in a different line of the text file or use the or (||) symbol to concatenate all the patterns or rules.
+In this example, we obtained the same result using either `patterns3.txt` or `patterns4.txt`. When you want to select any line that contains any pattern in a list of patterns, you can either put each pattern in a different line of the text file or use the or (`||`) symbol to concatenate all the patterns or rules.
 
-***Example 26:** Print the value of one column for those lines that have specific values in other columns Print the ID (first column) of those subjects in file3.csv that belong to "Group1" (second column), and have age (third column) greater than 60, or that belong to "Group3" (second column) and have age (third column) less than 20.
+**Example 26:** Print the value of one column for those lines that have specific values in other columns Print the ID (first column) of those subjects in `file3.csv` that belong to `"Group1"` (second column), and have age (third column) greater than 60, or that belong to `"Group3"` (second column) and have age (third column) less than 20.
 
 In this example, we want to print any line that contains one of the following rules:
 
-- Second column equals Group1 and third greater than 60: $2 == "Group1" && $3 > 60
-- Second column equals and Group3 third less than 20: $2 == "Group3" && $3 < 20
+- Second column equals Group1 and third greater than 60: `$2 == "Group1" && $3 > 60`
+- Second column equals and Group3 third less than 20: `$2 == "Group3" && $3 < 20`
 
 So, the content of our pattern file must be:
 
@@ -2540,9 +2548,10 @@ The following page contains a summary of other patterns that can be included in 
 
 ## Searching a pattern
 
-***Example 1:** Print the line(s) of file3.csv that start with B. $ grep '^B' file3.csv
+**Example 1:** Print the line(s) of `file3.csv` that start with `B`.
 
 ```bash
+$ grep '^B' file3.csv
 B12226507,Group1,68
 B12226546,Group1,67
 B11119903,Group2 b,83
@@ -2552,7 +2561,7 @@ B11119909,Group2 b,61
 B11110893,Group1,28
 ```
 
-***Example 2:** Print the line(s) of test7.csv that end with 13.
+**Example 2:** Print the line(s) of `test7.csv` that end with `13`.
 
 ```bash
 $ grep '13$' file3.csv
@@ -2561,7 +2570,7 @@ C11137159,Group3,13
 D11144030,Group3,13
 ```
 
-***Example 3:** Print the line(s) of test7.csv that end with 13 (when this pattern is stored in a file called patterns2.txt).
+**Example 3:** Print the line(s) of `test7.csv` that end with `13` (when this pattern is stored in a file called `patterns2.txt`).
 
 ```bash
 $ cat patterns2.txt
@@ -2573,7 +2582,7 @@ C11137159,Group3,13
 D11144030,Group3,13
 ```
 
-***Example 4:** Print all the non-empty lines (lines with more than 0 fields NF > 0) in file3.csv and file4.txt.
+**Example 4:** Print all the non-empty lines (lines with more than 0 fields `NF > 0`) in `file3.csv` and `file4.txt`.
 
 Space-separated file:
 
@@ -2644,7 +2653,7 @@ B11119909,Group2 b,61
 B11110893,Group1,28
 ```
 
-***Example 5:** Print all the lines that have more than two fields (NF > 2) in file3.csv and file4.txt.
+**Example 5:** Print all the lines that have more than two fields (`NF > 2`) in `file3.csv` and `file4.txt`.
 
 Space-separated file:
 
@@ -2717,7 +2726,7 @@ B11110893,Group1,28
 
 ## Find and replace text
 
-Replace all occurrences of C11137159 in file3.csv with XXXXXXXXX and save the modified content in file3_mod.csv.
+Replace all occurrences of `C11137159` in `file3.csv` with `XXXXXXXXX` and save the modified content in `file3_mod.csv`.
 
 Command to execute the substitution:
 
@@ -2811,7 +2820,7 @@ In the following examples, instead of replacing a fix string as we did before, w
 | `[:upper:]` | Upper-case letters |
 | `[:xdigit:]` | Hexadecimal digits |
 
-**Example 1:** Replace all upper-case letters in file3.csv by lower-case.
+**Example 1:** Replace all upper-case letters in `file3.csv` by lower-case.
 
 Original content of the file:
 
@@ -2881,7 +2890,7 @@ b11119909,group2 b,61
 b11110893,group1,28
 ```
 
-**Example 2:**  Replace all lower-case letters in file3.csv by upper-case.
+**Example 2:**  Replace all lower-case letters in `file3.csv` by upper-case.
 
 Original content of the file:
 
@@ -2951,7 +2960,7 @@ B11119909,GROUP2 B,61
 B11110893,GROUP1,28
 ```
 
-**Example 3:** Replace all alphabetical characters in file3.csv by the number 0.
+**Example 3:** Replace all alphabetical characters in `file3.csv` by the number 0.
 
 Original content of the file:
 
@@ -3021,7 +3030,7 @@ $ cat file3.csv | tr '[:alpha:]' 0
 011110893,000001,28
 ```
 
-**Example 4:** Replace all digits in file3.csv by the letter X.
+**Example 4:** Replace all digits in `file3.csv` by the letter `X`.
 
 Original content of the file:
 
@@ -3091,7 +3100,7 @@ BXXXXXXXX,GroupX b,XX
 BXXXXXXXX,GroupX,XX
 ```
 
-**Example 5:** Replace all punctuation characters in file3.csv by a space (' ')
+**Example 5:** Replace all punctuation characters in `file3.csv` by a space (`' '`)
 
 Original content of the file:
 
@@ -3164,7 +3173,7 @@ B11119909 Group2 b 61
 B11110893 Group1 28
 ```
 
-**Example 5:** Replace all white spaces in file3.csv by an underscore '_'.
+**Example 5:** Replace all white spaces in `file3.csv` by an underscore `'_'`.
 
 Original content of the file:
 
@@ -3236,7 +3245,7 @@ B11110893,Group1,28
 
 You can also replace a range of letters or numbers:
 
-**Example 6:** Replace any A, B or C (letters in the range A-C) in file3.csv by the letter D.
+**Example 6:** Replace any `A`, `B` or `C` (letters in the range A-C) in `file3.csv` by the letter `D`.
 
 Original content of the file:
 
@@ -3306,7 +3315,7 @@ D11119909,Group2 b,61
 D11110893,Group1,28
 ```
 
-**Example 7:** Replace A by W, B by X, C by Y, and D by Z in file3.csv (replace letters in the range A-D with letters in the range W-Z)
+**Example 7:** Replace `A` by `W,` `B` by `X`, `C` by `Y`, and `D` by `Z` in `file3.csv` (replace letters in the range A-D with letters in the range W-Z)
 
 Original content of the file:
 
@@ -3376,9 +3385,9 @@ X11119909,Group2 b,61
 X11110893,Group1,28
 ```
 
-The command tr doesn't allow you to replace by an empty space in order to delete a character or a set of characters, but you can use the -d flag for deletion.
+The command tr doesn't allow you to replace by an empty space in order to delete a character or a set of characters, but you can use the `-d` flag for deletion.
 
-**Example 8:** Remove all spaces in file3.csv.
+**Example 8:** Remove all spaces in `file3.csv`.
 
 Original content of the file:
 
@@ -3450,7 +3459,7 @@ B11110893,Group1,28
 
 In order to delete any repeated (continuous) character or sequence use the -s flag.
 
-**Example 9:** Remove any repeated characters ([:alnum:]) in file3.csv.
+**Example 9:** Remove any repeated characters (`[:alnum:]`) in `file3.csv`.
 
 Original content of the file:
 
@@ -3522,7 +3531,7 @@ B10893,Group1,28
 
 ## Print information from file
 
-**Example 1:** Print the number of lines in file3.csv and file4.txt.
+**Example 1:** Print the number of lines in `file3.csv` and `file4.txt`.
 
 Comma-separated file:
 
@@ -3544,7 +3553,7 @@ $ echo $nlines
 29
 ```
 
-**Example 2:** Print the number of columns in file3.csv and file4.txt.
+**Example 2:** Print the number of columns in `file3.csv` and `file4.txt`.
 
 Comma-separated file:
 
@@ -3568,9 +3577,9 @@ $ echo $ncols
 3
 ```
 
-**Example 3:** Print the length of each line of file4.txt.
+**Example 3:** Print the length of each line of `file4.txt`.
 
-To get the length of a string you can use the function length(), and pass as parameter $0 which obtains all the fields (the whole line).
+To get the length of a string you can use the function `length()`, and pass as parameter `$0` which obtains all the fields (the whole line).
 
 Print each line:
 
@@ -3642,7 +3651,7 @@ $ awk '{print length($0)}' file4.txt
 19
 ```
 
-**Example 4:** Print the length of the second field (length($2)) in file3.csv and file4.txt.
+**Example 4:** Print the length of the second field (`length($2)`) in `file3.csv` and `file4.txt`.
 
 Comma-separated file:
 
@@ -3713,9 +3722,9 @@ $ awk -F',' '{print length($2)}' file3.csv
 6
 ```
 
-**Example 5:** Print all the lines of file4.txt in upper-case.
+**Example 5:** Print all the lines of `file4.txt` in upper-case.
 
-To convert a string to upper-case use the function toupper() and pass as parameter $0 which contains the whole line.
+To convert a string to upper-case use the function `toupper()` and pass as parameter `$0` which contains the whole line.
 
 ```bash
 $ awk '{print toupper($0)}' file4.txt
@@ -3750,9 +3759,9 @@ B12226507 GROUP1 26
 B12226546 GROUP1 55
 ```
 
-**Example 6:** Print all the lines of file4.txt in lower-case.
+**Example 6:** Print all the lines of `file4.txt` in lower-case.
 
-To convert a string to lower-case use the function tolower() and pass as parameter $0 which contains the whole line.
+To convert a string to lower-case use the function `tolower()` and pass as parameter $0 which contains the whole line.
 
 ```bash
 $ awk '{print tolower($0)}' file4.txt
@@ -3787,4 +3796,4 @@ b12226507 group1 26
 b12226546 group1 55
 ```
 
-Some other functions that can be used in addition to toupper() and tolower() can be found [here](https://www.cs.princeton.edu/courses/archive/spr08/cos333/awk.help){:target="blank"}
+Some other functions that can be used in addition to `toupper()` and `tolower()` can be found [here](https://www.cs.princeton.edu/courses/archive/spr08/cos333/awk.help){:target="blank"}
