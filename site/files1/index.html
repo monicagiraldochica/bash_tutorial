@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>File manipulation - Bash Tutorial</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "General file manipulation", url: "#_top", children: [
+              {title: "Absolute paths", url: "#absolute-paths" },
+              {title: "Relative paths", url: "#relative-paths" },
+              {title: "Tips", url: "#tips" },
+              {title: "Listing files", url: "#listing-files" },
+              {title: "Listing files using patterns", url: "#listing-files-using-patterns" },
+              {title: "Working directory", url: "#working-directory" },
+              {title: "Other commands", url: "#other-commands" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../files2/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../files2/" class="btn btn-xs btn-link">
+        Text and CSV files
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../iteration/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../iteration/" class="btn btn-xs btn-link">
+        Iteration
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="general-file-manipulation">General file manipulation</h1>
+<h2 id="absolute-paths">Absolute paths</h2>
+<p>The absolute or full path of a file specifies its unique location in the file system, its name and extension. The absolute path of every file is different and constant. It will always be the same regardless of the current directory in which you are working (unless you move the file). This path follows a hierarchy of directories where the file is located, separating each directory with the delimiting character, which is the slash for Macintosh and Linux and the backslash for Windows. For example, a text file named file.txt located in the Desktop of a Mac computer, will commonly have an absolute path similar to this: <code>/Users/user_name/Desktop/file.txt</code>.</p>
+<p>To find the absolute path of a file you can drag and drop it into the Terminal.</p>
+<p>For example, if this is the absolute path of a file: <code>/Users/user_name/Desktop/SomeFolder/Subfolder/file.txt</code>. It means that in the user Desktop there is a folder called SomeFolder, inside SomeFolder there is another folder called Subfolder, and inside Subfolder is located the corresponding file, with name file and extension txt. Inside a directory there can be two files with the same name but in this case, they must have a different extension. There cannot be two files with both the same name and same extension inside the same folder.</p>
+<h2 id="relative-paths">Relative paths</h2>
+<p>The relative path of a file starts from the current working directory and represents the location of a specific file relative to this directory. It is always changing as it depends on what directory you are located in the terminal, but is a lot shorter than the absolute path.</p>
+<p>If the absolute path of a file is the following, meaning the file is located in the Desktop: <code>/Users/user_name/Desktop/file.txt</code> and the user current working directory is the desktop, then the relative path of the file is: <code>file.txt</code> or <code>./file.txt</code>.</p>
+<p>Since the file is located in the current directory, the user can use just the name and extension for the relative path. Adding <code>./</code> doesn't do anything because <code>./</code> represents the current directory.</p>
+<p>The following relative paths represent files that are located in the current working directory:</p>
+<pre><code class="language-bash">File1.txt
+File2.nii.gz
+./File3.nii
+./File4.docx
+</code></pre>
+<p>The absolute path of these files will be something similar to this (for Mac users), if the current directory is the Desktop:</p>
+<pre><code class="language-bash">/Users/username/Desktop/File1.txt
+/Users/username/Desktop/File2.nii.gz
+/Users/username/Desktop/File3.nii
+/Users/username/Desktop/File4.docx
+</code></pre>
+<p>The same way that one dot represents the current directory in a relative path, two dots represent the parent directory. So, if the absolute path of my current working directory is <code>/Users/user_name/Desktop/SomeFolder</code>, I can refer to files located in the parent directory (Desktop) using the double dots. So, all these files are located in the Desktop (the same as <code>SomeFolder</code>):</p>
+<pre><code class="language-bash">../FileA.txt
+../FileB.txt
+../FileC.txt
+</code></pre>
+<h2 id="tips">Tips</h2>
+<p>Both the absolute and relative paths are used to reference files when doing operations with it, but I generally prefer to use the absolute path when writing scripts because that way my script will run with no issues independently of my working directory. Never the less, when doing fast operations in the Terminal (like renaming or copying a file), then it's faster to use the relative path.</p>
+<p>It is also recommended to not use spaces or any other special characters when naming a file, because it makes it harder to write the path of that file. For example, if I have a file named <code>Some File.txt</code> in my Desktop (on a Mac), <code>/Users/user_name/Desktop/Some File.txt</code> is not the absolute path. Instead, the absolute path will be <code>/Users/user_name/Desktop/Some\ File.txt</code>.</p>
+<p>The backslash is telling us to not treat the space as a special character but instead as part of the file path. This works the same way in Linux and MacOS.</p>
+<p>The same will happen with a file which name contains the dollar sign (which is a special character). For example, if in the Desktop there is a folder named <code>untitled$folder</code>, <code>/Users/user_name/Desktop/untitled$folder</code> is not the absolute path. Instead, the absolute path will be <code>/Users/user_name/Desktop/untitled\$folder</code>.</p>
+<p>Again, the backslash is indicating us to treat the special character (<code>$</code>) as part of the file name and not as the beginning of a variable name (which is the normal use of <code>$</code> in bash). If we don't use the backslash before the dollar sign, bash will try to find a variable called folder (<code>$folder</code> normally refers to the value of folder as a variable, not a string). If that variable doesn't exist, then bash will read <code>/Users/user_name/Desktop/untitled$folder</code> as <code>/Users/user_name/Desktop/untitled</code>, replacing <code>$folder</code> for an empty space.</p>
+<p>In the following sections you will learn how the absolute and relative paths are used to manipulate files <strong>in MacOS and Linux</strong>.</p>
+<h2 id="listing-files">Listing files</h2>
+<h3 id="the-ls-command">The <code>ls</code> command</h3>
+<p>Lists the files and folders inside the specified directory. If no directory is specified after <code>ls</code>, then it prints the contents of the current folder. If no flag is used, it lists the files in bare format (without any details such as modified date and time or permissions). Depending which flag is used (or a combination of flags), then specific information about the file will be displayed. The following table is taken from manual of the <code>ls</code> command as displayed in the command line.</p>
+<p><strong>List of flags that I use more often:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-a</code></td>
+<td>Include directory entries whose names begin with a dot (<code>.</code>). Typically, these are configuration files for applications or hidden files.</td>
+</tr>
+<tr>
+<td><code>-G</code></td>
+<td>Enable colorized output. This option is equivalent to defining <code>CLICOLOR</code> in the environment.</td>
+</tr>
+<tr>
+<td><code>-H</code></td>
+<td>Symbolic links on the command line are followed. This option is assumed if none of the <code>-F</code> or <code>-l</code> options are specified.</td>
+</tr>
+<tr>
+<td><code>-l</code></td>
+<td>Force output to be one entry per line. This is the default when output is not to a terminal.</td>
+</tr>
+<tr>
+<td><code>-lh</code></td>
+<td>Use unit suffixes when displaying the information in long output: Byte, Kilobyte, Megabyte, Gigabyte, Terabyte and Petabyte, in order to reduce the number of digits to three or less using base 2 for sizes.</td>
+</tr>
+<tr>
+<td><code>-ln</code></td>
+<td>Display user and group IDs numerically, rather than converting to a user or group name in a long output.</td>
+</tr>
+<tr>
+<td><code>-R</code></td>
+<td>Recursively list subdirectories encountered.</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>Sort files by size.</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>Sort by time modified (most recently modified first) before sorting the operands by lexicographical order.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-A</code></td>
+<td>List all entries except for (<code>.</code>) and (<code>..</code>). Always set for the super-user.</td>
+</tr>
+<tr>
+<td><code>-B</code></td>
+<td>Force printing of non-printable characters in file names as <code>\xxx</code>, where <code>xxx</code> is the numeric value of the character in octal.</td>
+</tr>
+<tr>
+<td><code>-b</code></td>
+<td>As <code>-B</code>, but use C escape codes whenever possible.</td>
+</tr>
+<tr>
+<td><code>-C</code></td>
+<td>Force multi-column output; this is the default when output is to a terminal.</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>Directories are listed as plain files (not searched recursively).</td>
+</tr>
+<tr>
+<td><code>-F</code></td>
+<td>Display a slash immediately after each pathname that is a directory, an asterisk after each that is executable, an at sign (<code>@</code>) after each symbolic link, an equal sign after each socket, a percent sign after each whiteout, and a vertical bar after each that is a FIFO.</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>Output is not sorted. This option turns on the <code>-a</code> option.</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>For each file, print the files file serial number (inode number). Each object in the file system is represented by an inode.</td>
+</tr>
+<tr>
+<td><code>-k</code></td>
+<td>If the <code>-s</code> option is specified, print the file size allocation in kilobytes, not blocks. This option overrides the environment variable <code>BLOCKSIZE</code>.</td>
+</tr>
+<tr>
+<td><code>-L</code></td>
+<td>Follow all symbolic links to final target and list the file or directory the link references rather than the link itself. This option cancels the <code>-P</code> option.</td>
+</tr>
+<tr>
+<td><code>-l@</code></td>
+<td>Display extended attribute keys and sizes in long output.</td>
+</tr>
+<tr>
+<td><code>-le</code></td>
+<td>Print the Access Control List (ACL) associated with the file, if present, in long output.</td>
+</tr>
+<tr>
+<td><code>-lg</code></td>
+<td>This option is only available for compatibility with POSIX; it is used to display the group name in the long format output (the owner name is suppressed).</td>
+</tr>
+<tr>
+<td><code>-lO</code></td>
+<td>Include the file flags in a long output.</td>
+</tr>
+<tr>
+<td><code>-lT</code></td>
+<td>Display complete time information for the file, including month, day, hour, minute, second, and year.</td>
+</tr>
+<tr>
+<td><code>-m</code></td>
+<td>Stream output format; list files across the page, separated by commas.</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>List in long format, but omit the group id.</td>
+</tr>
+<tr>
+<td><code>-P</code></td>
+<td>If argument is a symbolic link, list the link itself rather than the object the link references. This option cancels the <code>-H</code> and <code>-L</code> options.</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>Write a slash after each filename if that file is a directory.</td>
+</tr>
+<tr>
+<td><code>-q</code></td>
+<td>Force printing of non-graphic characters in file names as the interrogation character; this is the default when output is to a terminal.</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>Reverse the order of the sort to get reverse lexicographical order, or the oldest entries first (or largest files last, if combined with sort by size).</td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>Display the number of file system blocks actually used by each file, in units of 512 bytes, where partial units are rounded up to the next integer value. If the output is to a terminal, a total sum for all the file sizes is output on a line before the listing. The environment variable <code>BLOCKSIZE</code> overrides the unit size of 512 bytes.</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>Use time of last access, instead of last modification of the file for sorting (<code>-t</code>) or long printing (<code>0-l</code>)</td>
+</tr>
+<tr>
+<td><code>-U</code></td>
+<td>Use time of file creation, instead of last modification for sorting (<code>-t</code>) or long output (<code>-l</code>).</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>Force unedited printing of non-graphic characters; this is the default when output is not to a terminal.</td>
+</tr>
+<tr>
+<td><code>-W</code></td>
+<td>Display whiteouts when scanning directories.</td>
+</tr>
+<tr>
+<td><code>-w</code></td>
+<td>Force raw printing of non-printable characters. This is the default when output is not to a terminal.</td>
+</tr>
+<tr>
+<td><code>-x</code></td>
+<td>The same as <code>-C</code>, except that the multi-column output is produced with entries sorted across, rather than down the columns.</td>
+</tr>
+</tbody>
+</table>
+<p>The following examples show the usage of the flags presented in the previous table and details of the results that can be obtained when using the command <code>ls</code> together with those flags.</p>
+<p><strong><code>ls</code> command with no flags:</strong></p>
+<p>Show the list of the files in the working directory:</p>
+<pre><code class="language-bash">$ ls
+Applicationshome
+Libraryinstaller.failurerequests
+Networknet
+Subjectsopt
+Usersprivate
+Volumessbin
+binmp
+coresusr
+devvar
+etc
+</code></pre>
+<p>Show the list of files in a different directory using <em>the absolute path</em> of that directory:</p>
+<pre><code class="language-bash">$ ls /Volumes/MyExternalDrive
+ArticlesMRIdata SharedFolder
+</code></pre>
+<p>Show the list of files in a subfolder (Applications) using <em>the relative path</em>:</p>
+<pre><code class="language-bash">$ ls Applications/
+Calculator.app
+Calendar.app
+Chess.app
+Dashboard.app
+Dictionary.app
+EndNote X7
+EndNote X8
+FaceTime.app
+Firefox.app
+IBM
+Image Capture.app
+Launchpad.app
+MATLAB_R2014b.app
+</code></pre>
+<p><strong><code>ls -l</code>:</strong></p>
+<p>When using the flag <code>-l</code>, bash will not only show the list of files but also a description for each file. The output will be organized in columns, each one with a specific meaning that I will explain in the table below.</p>
+<pre><code class="language-bash">$ ls -l /Volumes/MyExternalDrive
+Total 0
+
+drwxr-xr-x  22  myUser  UserGroup   714 Sep 4   11:40   Articles
+-rw-r--r--@ 1   myUse   UserGroup   51620   Jan 14  2017    CV.docx
+-rw-r--r--  1   myUser  UserGroup   137195  Jan 14  2017    CV.pdf
+drwxr-xr-x  28  myUser  UserGroup   952 Sep 10  09:04   MRIdata
+drwxrwxrwx  5   myUser  UserGroup   170 Sep 4   11:15   SharedFolder
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Column number</th>
+<th>Column name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>File type + permissions</td>
+<td><a href="#file-type-and-permissions-from-the-ls--l-command">See below</a> for the explanation of the output presented in this column.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Link count</td>
+<td>Number of hard links to the file. Data is only removed from your drive when all hard links to the data have been removed.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Owner name</td>
+<td><a href="#file-type-and-permissions-from-the-ls--l-command">See below</a> for the explanation of file ownership and permissions.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Group name</td>
+<td><a href="#file-type-and-permissions-from-the-ls--l-command">See below</a> for the explanation of file ownership and permissions.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>File size</td>
+<td>Number of bytes in the file. See the flag <code>-lh</code> to output the size of the file in human-readable format.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Last modified date</td>
+<td>Abbreviated month and day-of-month when the file was last modified.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Last modified time</td>
+<td>Abbreviated hour and minute when the file was last modified in military format (24 hours). If the file was last modified more than six months before, then the year of the last modification is displayed instead of the hour and minute.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>File name</td>
+<td>Name of the file with its extension.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>File type and permissions from the <code>ls -l</code> command:</strong></p>
+<p>The first column of the output printed when using the flag <code>-l</code> shows the file type and permissions. This column has 10 characters. Each character will be a letter or a dash.</p>
+<p><strong>The first character</strong> describes the type of file and can be one of the following:</p>
+<table>
+<thead>
+<tr>
+<th>Character</th>
+<th>File type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>b</code></td>
+<td>Block special file: provide access to hardware devices.</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>Character special file: provide access to hardware devices.</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>Directory.</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>Symbolic link: a file that points to another file (a shortcut). It does not contain the data in the target file; it simply contains a pointer somewhere in the file system.</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>Socket link: file used for communication between processes.</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>FIFO: special file that can be opened by various processes for exchanging data.</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Regular file.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The second character</strong> shows if the user listed as <em>owner</em> has reading permissions. It will be an <code>r</code> if the owner can read the file, or a <code>-</code> if not.
+<strong>The third character</strong> shows if the user listed as <em>owner</em> has writing permissions. It will be a <code>w</code> if the owner can write in the file, or a <code>-</code> if not.
+<strong>The fourth character</strong> shows if the user listed as <em>owner</em> has execution permissions. It will have value <code>x</code> if the owner can execute the file, or a <code>-</code> if not.</p>
+<p><strong>The fifth character</strong> shows if the users that are part of the <strong>group</strong> have reading permissions. It will have an <code>r</code> if they can read, or a <code>-</code> if not.
+<strong>The sixth character</strong> shows if the users that are part of the <strong>group</strong> have writing permissions. It will have a <code>w</code> if they can write, or a <code>-</code> if not.
+<strong>The seventh character</strong> shows if the users that are part of the <strong>group</strong> have execution permissions. It will have a <code>x</code> if they can execute, or a <code>-</code> if not.</p>
+<p><strong>The eight character</strong> shows if <strong>other</strong> users have reading permissions. It will have an <code>r</code> if they can read, or a <code>-</code> if not.
+<strong>The ninth character</strong> shows if <strong>other</strong> users have writing permissions. It will have an <code>w</code> if they can write, or a <code>-</code> if not.
+<strong>The tenth character</strong> shows if <strong>other</strong> users have execution permissions. It will have a <code>x</code> if they can execute, or a <code>-</code> if not.</p>
+<p>To change the permissions of a file you would use the <code>chmod</code> command. This command has the following syntax: <code>chmod &lt;num_for_owner&gt;&lt;num_for_group&gt;&lt;num_for_others&gt; &lt;file&gt;</code></p>
+<p><code>&lt;num_for_owner&gt;</code> is a number to change the <strong>owner</strong> permissions.
+<code>&lt;num_for_group&gt;</code> is a number to change the <strong>group</strong> permissions.
+<code>&lt;num_for_others&gt;</code> is a number to change the permissions of other users.</p>
+<p>These numbers can be one of the following:</p>
+<table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Characters in <code>ls -l</code></th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td><code>rwx</code></td>
+<td>Give full permissions (read, write and execute)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>rw-</code></td>
+<td>Give read and write permissions, but not execute</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>r-x</code></td>
+<td>Give read and execute permissions, but not write</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>r--</code></td>
+<td>Give only read permissions</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>-wx</code></td>
+<td>Give write and execute permissions, but not read</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>-w-</code></td>
+<td>Give only write permissions</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>--x</code></td>
+<td>Give only execute permissions</td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>---</code></td>
+<td>Give no permissions</td>
+</tr>
+</tbody>
+</table>
+<p>For example if you run <code>chmod 775 myfile</code>, the owner and group will have full permissions, other users will be able to read and execute but not write.
+If you run <code>chmod 744 myfile</code>, the owner will have fill permissions, users belonging to the group and other users will only be able to read, but wont be able to write or execute it.</p>
+<p><strong>Human readable file size with <code>ls -lh</code>:</strong></p>
+<p>The information displayed in the 5th column (file size) when using <code>ls -l</code> is difficult to interpret by a human. In order to see this information in a human-readable format, it is only necessary to add an <code>h</code> to the <code>-l</code> flag.</p>
+<pre><code class="language-bash">$ ls -lh /Volumes/MyExternalDrive
+Total 0
+drwxr-xr-x  22  myUser  UserGroup   714B    Sep 4   11:40   Articles
+-rw-r--r--@ 1   myUser  UserGroup   50K Jan 14  2017    CV.docx
+-rw-r--r--  1   myUser  UserGroup   134K    Jan 14  2017    CV.pdf
+drwxr-xr-x  28  myUser  UserGroup   952B    Sep 10  09:04   MRIdata
+drwxrwxrwx  5   myUser  UserGroup   170B    Sep 4   11:15   SharedFolder
+</code></pre>
+<p>When using the <code>-lh</code> flag, the size of the file will be followed by a letter which represents the units:</p>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Unit</th>
+<th>number of bytes per unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B</td>
+<td>Bytes</td>
+<td>2^0</td>
+</tr>
+<tr>
+<td>K</td>
+<td>Kilobytes</td>
+<td>2^10</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Megabytes</td>
+<td>2^20</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Gigabytes</td>
+<td>2^30</td>
+</tr>
+<tr>
+<td>T</td>
+<td>Terabytes</td>
+<td>2^40</td>
+</tr>
+<tr>
+<td>P</td>
+<td>Perabytes</td>
+<td>2^50</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Using multiple flags:</strong></p>
+<p>Most of the flags can be combined, except for the following group of flags which override each other (either partially or fully). If used together, only the last one specified will be the format used to display the information. Or if possible they will be applied in the order specified.</p>
+<ul>
+<li><code>-1</code>, <code>-C</code>, <code>-x</code>, and <code>-l</code></li>
+<li><code>-c</code> and <code>-u</code></li>
+<li><code>-B</code>, <code>-b</code>, <code>-w</code>, and <code>-q</code></li>
+<li><code>-H</code>, <code>-L</code> and <code>-P</code></li>
+</ul>
+<p>The example below combines <code>-lh</code>, <code>-o</code>, and <code>-r</code> to print the information in long format, using human readable file sizes (<code>-lh</code>), omitting the group id (<code>-o</code>) and in reverse lexicographical order (<code>-r</code>):</p>
+<pre><code class="language-bash">$ ls -lhor /Volumes/MyExternalDrive
+Total 0
+
+drwxrwxrwx  5   myUser  170B    Sep 4   11:15   SharedFolder
+drwxr-xr-x  28  myUser  952B    Sep 10  09:05   MRIdata
+-rw-r--r--  1   myUser  134K    Jan14   2017    CV.pdf
+-rw-r--r--@ 1   myUser  50K Jan 14  2017    CV.docx
+drwxr-xr-x  22  myUser  714B    Sep 4   11:40   Articles
+</code></pre>
+<h2 id="listing-files-using-patterns">Listing files using patterns</h2>
+<p>You can print information about a group of files based on patterns using wildcards.</p>
+<table>
+<thead>
+<tr>
+<th>Wildcard</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>Matches any number of characters.</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Matches any single character.</td>
+</tr>
+<tr>
+<td><code>[character_class]</code></td>
+<td>Marches any character that is a member o the specified character class. See below for a list of Character Classes.</td>
+</tr>
+<tr>
+<td><code>[!character_class]</code></td>
+<td>Marches any character that is NOT a member of the specified character class.</td>
+</tr>
+</tbody>
+</table>
+<p>Character Classes:</p>
+<ul>
+<li><code>[alnum]</code>: alphanumeric characters</li>
+<li><code>[alpha]</code>: alphabetic characters</li>
+<li><code>[digit]</code>: numerals</li>
+<li><code>[upper]</code>: uppercase alphabetic characters</li>
+<li><code>[lower]</code>: lowercase alphabetic characters</li>
+</ul>
+<p>Examples:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>MAtches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AB*</code></td>
+<td>List all the filenames that begin with "AB"</td>
+</tr>
+<tr>
+<td><code>*AB</code></td>
+<td>List all the filenames that end with "AB"</td>
+</tr>
+<tr>
+<td><code>AB*.txt</code></td>
+<td>List all the filenames that begin with "AB" and end with ".txt"</td>
+</tr>
+<tr>
+<td><code>AB???</code></td>
+<td>List all the filenames that begin with "AB" and are followed by exactly three characters</td>
+</tr>
+<tr>
+<td><code>[aA]*</code></td>
+<td>List all the filenames that begin with "a" or "A"</td>
+</tr>
+<tr>
+<td><code>[aA]?.txt</code></td>
+<td>List all the filenames that begin with "a" or "A" and are followed by one character and ".txt"</td>
+</tr>
+<tr>
+<td><code>[[:upper:]]*</code></td>
+<td>List any filenames that begin with an uppercase letter</td>
+</tr>
+<tr>
+<td><code>[![:upper:]]*</code></td>
+<td>List any filenames that do not begin with an uppercase letter</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">$ ls /Volumes/MyDrive/MyFolder/Articles/p*
+/Volumes/MyDrive/MyFolder/Articles/patel and shen.pdf
+/Volumes/MyDrive/MyFolder/Articles/perez 2013.pdf
+/Volumes/MyDrive/MyFolder/Articles/pnas-0502843102.pdf
+/Volumes/MyDrive/MyFolder/Articles/pnas.201604898.pdf
+/Volumes/MyDrive/MyFolder/Articles/pnas01522-0696.pdf
+/Volumes/MyDrive/MyFolder/Articles/poldrack ROI analysis.pdf
+/Volumes/MyDrive/MyFolder/Articles/pone.0088419.pdf
+/Volumes/MyDrive/MyFolder/Articles/pone.0113807.pdf
+/Volumes/MyDrive/MyFolder/Articles/pq004724.pdf
+/Volumes/MyDrive/MyFolder/Articles/pq008939.pdf
+/Volumes/MyDrive/MyFolder/Articles/precuneus.pdf
+/Volumes/MyDrive/MyFolder/Articles/prefrontalCortex.pdf
+</code></pre>
+<pre><code class="language-bash">$ ls /Volumes/MyExternalDrive/Shared/Articles/[pr]*
+/Volumes/MyExternalDrive/Shared/Articles/patel and shen.pdf
+/Volumes/MyExternalDrive/Shared/Articles/perez 2013.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pnas-0502843102.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pnas.201604898.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pnas01522-0696.pdf
+/Volumes/MyExternalDrive/Shared/Articles/poldrack ROI analysis.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pone.0088419.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pone.0113807.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pq004724.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pq008939.pdf
+/Volumes/MyExternalDrive/Shared/Articles/precuneus.pdf
+/Volumes/MyExternalDrive/Shared/Articles/prefrontalCortex.pdf
+/Volumes/MyExternalDrive/Shared/Articles/raz 2004.pdf
+/Volumes/MyExternalDrive/Shared/Articles/read1_Brain-2006-Ciccarelli-1859-71.pdf
+/Volumes/MyExternalDrive/Shared/Articles/read2_6165.pdf
+</code></pre>
+<pre><code class="language-bash">$ ls /Volumes/MyExternalDrive/Shared/Articles/[pr]*.pdf
+/Volumes/MyExternalDrive/Shared/Articles/patel and shen.pdf
+/Volumes/MyExternalDrive/Shared/Articles/perez 2013.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pnas-0502843102.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pnas.201604898.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pnas01522-0696.pdf
+/Volumes/MyExternalDrive/Shared/Articles/poldrack ROI analysis.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pone.0088419.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pone.0113807.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pq004724.pdf
+/Volumes/MyExternalDrive/Shared/Articles/pq008939.pdf
+/Volumes/MyExternalDrive/Shared/Articles/precuneus.pdf
+/Volumes/MyExternalDrive/Shared/Articles/prefrontalCortex.pdf
+/Volumes/MyExternalDrive/Shared/Articles/raz 2004.pdf
+/Volumes/MyExternalDrive/Shared/Articles/read1_Brain-2006-Ciccarelli-1859-71.pdf
+/Volumes/MyExternalDrive/Shared/Articles/read2_6165.pdf
+</code></pre>
+<pre><code class="language-bash">$ ls /Volumes/MyExternalDrive/Shared/Articles/[pr]????????.pdf
+/Volumes/MyExternalDrive/Shared/Articles/precuneus.pdf
+</code></pre>
+<h2 id="working-directory">Working directory</h2>
+<h3 id="the-pwd-command">The <code>pwd</code> command</h3>
+<p>This command prints the absolute path of the current working directory.</p>
+<h3 id="the-cd-command">The <code>cd</code> command</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cd ~</code></td>
+<td>Goes to the home directory.</td>
+</tr>
+<tr>
+<td><code>cd dir</code></td>
+<td>Goes to <code>dir</code>, which is a sub directory located in the current directory.</td>
+</tr>
+<tr>
+<td><code>cd /dir</code></td>
+<td>Goes to <code>dir</code>, which is a sub directory located in the home directory.</td>
+</tr>
+<tr>
+<td><code>cd ..</code></td>
+<td>Goes to the parent directory.</td>
+</tr>
+<tr>
+<td><code>cd -</code></td>
+<td>Goes to the previous directory.</td>
+</tr>
+<tr>
+<td><code>cd ~username</code></td>
+<td>Goes to the user home directory</td>
+</tr>
+</tbody>
+</table>
+<p><code>cd</code> changes the current working directory. The syntax is <code>cd new_path</code>, where <code>new_path</code> can be the absolute or relative path of the new working directory.</p>
+<p>Absolute paths are file locations with respect to the home directory and start with <code>/</code>. Relative paths are file locations with respect to the current directory.</p>
+<p>Two points (<code>..</code>) represent the parent directory. If my current working directory is /Users/user_name/Desktop/SomeFolder, after typing <code>cd ..</code> the new working directory will be /Users/user_name/Desktop (one folder up). If you type again <code>cd ..</code>, now the working directory will be: /Users/user_name (another folder up), etc.</p>
+<pre><code class="language-bash">$ pwd
+/Users/user_name/Desktop/SomeFolder
+$ cd ..
+$ pwd
+/Users/user_name/Desktop
+$ cd ..
+$ pwd
+/Users/user_name
+$ cd ..
+$ pwd
+/Users
+$ cd ..
+$ pwd
+/
+</code></pre>
+<p><code>/</code> represents the home directory and you cannot go up any more folders.</p>
+<p>In this example, I am using the absolute path of a folder to jump from my current directory to that folder:</p>
+<pre><code class="language-bash">$ pwd
+/Users/user_name/Desktop/SomeFolder
+$ cd /Volumes/Shared
+$ pwd
+/Volumes/Shared
+</code></pre>
+<p>In this example, I go to the parent directory of my parent directory (<code>../..</code>):</p>
+<pre><code class="language-bash">$ pwd
+/Users/user_name/Desktop/SomeFolder
+$ cd ../..
+$ pwd
+/Users/user_name
+</code></pre>
+<p>If inside my current directory (/Users/user_name/Desktop/SomeFolder) there is another folder (i.e. AnotherFolder), I can go to that folder using its relative path:</p>
+<pre><code class="language-bash">$ pwd
+/Users/user_name/Desktop/SomeFolder
+$ cd AnotherFolder
+/Users/user_name/Desktop/SomeFolder/AnotherFolder
+</code></pre>
+<pre><code class="language-bash">$ pwd
+/Users/user_name/Desktop/SomeFolder
+$ cd ./AnotherFolder
+/Users/user_name/Desktop/SomeFolder/AnotherFolder
+</code></pre>
+<p>In this example, the first working directory is /Volumes/Shared, then, I jump to /Volumes/Shared/Articles using the command <code>cd</code>. Finally, I go back to the first working directory (/Volumes/Shared) using <code>cd -</code>.</p>
+<pre><code class="language-bash">$ pwd
+/Volumes/Shared
+$ cd Articles
+$ pwd
+/Volumes/Shared/Articles
+$ cd -
+$ pwd
+/Volumes/Shared
+</code></pre>
+<h2 id="other-commands">Other commands</h2>
+<h3 id="the-cp-command">The <code>cp</code> command</h3>
+<p>Syntax: <code>cp source target</code></p>
+<p>If you specify a folder as a target in the <code>cp</code> command, it will copy the file with the same name. If you specify a regular file as a target, then it will rename the file in the destination (not in the source, the source file will stay untouched). The source file need not have the same extension. For example, the following command will copy the file /Users/MyUser/Desktop/subjectFolder/534534.bvals into the folder /Volumes/MyExternalDrive, will rename it and delete the extension: <code>cp /Users/MyUser/Desktop/subjectFolder/534534.bvals /Volumes/MyExternalDrive/bvals</code>.</p>
+<p>Caution! If a file with the same name exists in the source, it will be re-written and this action cannot be undone. For example, if you run the following command: <code>cp /Users/MyUser/Desktop/test.txt /Volumes/MyExternalDrive/test2.txt</code> and a file with the same source path (/Volumes/MyExternalDrive/test2.txt) already exists, then that file will be replaced by test.txt. You will not be able to recover the replaced file.</p>
+<h3 id="the-mv-command">The <code>mv</code> command</h3>
+<p>Syntax: <code>mv source target</code></p>
+<p>The <code>mv</code> command works the same way as the <code>cp</code> command. The difference is that the source file is moved instead of copied and ceases to exist in the source location.</p>
+<p>The following example renames file1.txt to file2.txt in the current folder:</p>
+<pre><code class="language-bash">$ ls
+Applications
+Library
+Volumes
+bin 
+test1.txt
+$ mv test1.txt test2.txt
+$ ls
+Applications
+Library
+Volumes
+bin 
+test2.txt
+</code></pre>
+<p>In the following example we are moving a file (test1.txt) from one directory (/Users/MyUser/) to another (/Volumes/MyExternalDrive):</p>
+<pre><code class="language-bash">$ ls /Volumes/MyDrive
+$ ls /Users/MyUser/Desktop
+test1.txt
+$ mv /Users/MyUser/Desktop/test1.txt /Volumes/MyDrive
+$ ls /Volumes/MyDrive
+test1.txt
+$ ls /Users/MyUser/Desktop
+</code></pre>
+<h3 id="the-rm-command">The <code>rm</code> command</h3>
+<p>Syntax: <code>rm file</code> or <code>rm -r folder</code></p>
+<p>The <code>rm</code> command permanently deletes a file or a folder and all its contents. For example, to delete file text1.txt in the current directory, one would use <code>rm text1.txt</code>. And to remove the folder myfolder and all its contents, one would use <code>rm -r myfolder</code>. These are the flags that you can use:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-f</code></td>
+<td>Forces deletion without any confirmation</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>Requires confirmation before deleting each file</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>Deletes a directory and all its contents recursively</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>Removes empty directories</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-mkdir-command">The <code>mkdir</code> command</h3>
+<p>Syntax: <code>mkdir folder</code></p>
+<p>Creates a new directory if it doesn't exist. One can use a relative or an absolute path. <code>mkdir myfolder</code> will create a folder named myfolder in the current directory. <code>mkdir ~/Desktop/myfolder</code> will create a folder named myfolder in the Desktop.</p>
+<h3 id="the-touch-command">The <code>touch</code> command</h3>
+<p>Syntax: <code>touch filename</code></p>
+<p>The main use of this command is to create an empty file with the corresponding name. One can create multiple files at the same time, for example: <code>touch file1.txt file2.txt file3.txt</code> will create 3 empty text files. But it can also be used for other things depending on which flag you use:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Use</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-a</code></td>
+<td>Change the access time of a file to the current date and time.</td>
+<td><code>touch -a file1.txt</code></td>
+</tr>
+<tr>
+<td><code>-m</code></td>
+<td>Update the modification time of a file to the current date and time.</td>
+<td><code>touch -m file1.txt</code></td>
+</tr>
+<tr>
+<td><code>-d DATE</code></td>
+<td>Update the modification time of a file to <code>DATE</code></td>
+<td><code>touch -d "2025-01-20 10:33" myfile.txt</code></td>
+</tr>
+<tr>
+<td><code>-r reference_file</code></td>
+<td>Update the modification time of a file to the one of <code>reference_file</code></td>
+<td><code>touch -r myscript.sh myfile.txt</code> changes the times of <code>myfile.txt</code> to those of <code>myscript.sh</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-find-command">The <code>find</code> command</h3>
+<p>This command is used to locate files and data in the system.</p>
+<h4 id="finding-a-specific-file">Finding a specific file</h4>
+<p>In the example below <code>2&gt;/dev/null</code> silences permission errors. This search is case sensitive. It will search for a file named <code>"file.txt"</code> starting in <code>/Path/to/start/search/</code>.</p>
+<pre><code class="language-bash">find /Path/to/start/search/ -name &quot;file.txt&quot; 2&gt;/dev/null
+</code></pre>
+<p>The search in the example below is the same as the one above but with a case insensitive search, thanks to the <code>-iname</code> flag.</p>
+<pre><code class="language-bash">find /Path/to/start/search/ -iname &quot;file.txt&quot; 2&gt;/dev/null
+</code></pre>
+<h4 id="finding-a-file-using-a-pattern">Finding a file using a pattern</h4>
+<p>One could use <code>-name</code> instead of <code>-iname</code> to make it case sensitive. Here we are searching for files that contain the string <code>file</code> in their name, followed by one character and the .txt extension. They can have any or no characters before <code>file</code>.</p>
+<pre><code class="language-bash">find /Path/to/start/search/ -iname &quot;*file?.txt&quot; 2&gt;/dev/null
+</code></pre>
+<h4 id="listing-the-contents-of-a-directory-recursively">Listing the contents of a directory recursively</h4>
+<p>In the following example, we list the content of <code>/Path/to/start/search/</code> and of all directories inside it and save the info in <code>file.txt</code>.</p>
+<pre><code class="language-bash">find /Path/to/start/search/ -ls
+</code></pre>
+<h4 id="doing-something-with-the-output-of-find">Doing something with the output of <code>find</code></h4>
+<p>One could use the output of <code>find</code> to do something, for example, search if any of the files found contain certain text or execute any command on each of those files. To achieve this, we use the flag <code>-exec</code>.</p>
+<p>The expression <strong>must</strong> have a <code>\;</code> or a <code>+</code> at the end.</p>
+<p>If the expression ends with <code>\;</code>, the command or commands after <code>exec</code> will be executed of each output file of <code>find</code> separately. The semicolon is escaped because we don't want shell to interpret it.</p>
+<p>If the expression ends with <code>+</code>, all the outputs of <code>find</code> will be concatenated and passed as a whole string to the command being executed, and this command will only be run once on this string.</p>
+<p>Examples:</p>
+<p>Use <a href="https://linux.die.net/man/1/file"><code>file</code></a> on the output files of <code>find</code>: <code>find /Path/to/start/search/ -name "*.txt" -exec file {} \;</code>. You could use any shell command instead of <code>file</code>.</p>
+<p>Use <a href="https://linux.die.net/man/1/basename"><code>basename</code></a> on the output files of <code>find</code>: <code>find /Path/to/start/search/ -name "*.txt" -exec file {} \;</code>. You could use any shell command instead of <code>basename</code>.</p>
+<p>Use grep to process the output of <code>find</code>: <code>find /Path/to/start/search/ -name "*.txt" -exec grep grep_flags {} \;</code></p>
+<p>Run a function on the output files of <code>find</code>:</p>
+<pre><code class="language-bash">function my_function(){
+    commands
+}
+export -f my_function
+find /Path/to/start/search/ -name &quot;*.txt&quot; -exec bash -c &quot;my_function {}&quot; \;
+</code></pre>
+<p>If I know that some of the output files of find will have some spaces, I should change the last line of the example above to (put escaped quotation marks around the brackets):
+<code>find /Path/to/start/search/ -name "*.txt" -exec bash -c "my_function \"{}\"" \;</code></p>
+<h4 id="searching-for-files-of-a-specific-type">Searching for files of a specific type</h4>
+<p>Get the list of directories inside <code>/Path/to/start/search/</code>:</p>
+<pre><code class="language-bash">find /Path/to/start/search/ -type d
+</code></pre>
+<p>Get the list of regular files inside <code>/Path/to/start/search/</code>:</p>
+<pre><code class="language-bash">find /Path/to/start/search/ -type f
+</code></pre>
+<p>Get the list of symbolic links inside <code>/Path/to/start/search/</code>:</p>
+<pre><code class="language-bash">find /Path/to/start/search/ -type l
+</code></pre>
+<p>Get the list of files and symbolic links:</p>
+<pre><code class="language-bash">find /Path/to/start/search/ -type f,l
+</code></pre>
+<h4 id="limit-the-depth-of-the-search">Limit the depth of the search</h4>
+<p>Descend only one directory:</p>
+<pre><code class="language-bash">find -maxdepth 1 /Path/to/start/search/ -type d
+</code></pre>
+<p>Descend two directories:</p>
+<pre><code class="language-bash">find -maxdepth 2 /Path/to/start/search/ -type d
+</code></pre>
+<p>To search all the flags and options of <code>find</code>, type <code>man find</code> in your command line. Many more things can be done with this command.</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../files2/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../files2/" class="btn btn-xs btn-link">
+        Text and CSV files
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../iteration/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../iteration/" class="btn btn-xs btn-link">
+        Iteration
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+site_name: Bash Tutorial
+theme:
+  name: windmill
+nav:
+  - Home: index.md
+  - Getting started: simple_scripts.md
+  - Variables: variables.md
+  - Arithmetic calculations: math.md
+  - Arrays: arrays.md
+  - Condition testing: condition_test.md
+  - Iteration: iteration.md
+  - File manipulation: files1.md
+  - Text and CSV files: files2.md
+  - Images and videos: files3.md
+  - Advanced bash: advanced_bash.md
+  - Remote shell: remote_shell.md
+  - Cluster jobs: cluster.md
+  - Downloading files: downloads.md
+  - Backups: backups.md
+  - File permissions: permissions.md
+  - Aliases: aliases.md
+  - Report an error: errors.html
