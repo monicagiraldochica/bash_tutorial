@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Arithmetic calculations - Bash Tutorial</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Arithmetic calculations", url: "#_top", children: [
+              {title: "Integer calculations", url: "#integer-calculations" },
+              {title: "Non-integer calculations", url: "#non-integer-calculations" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../arrays/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../arrays/" class="btn btn-xs btn-link">
+        Arrays
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../variables/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../variables/" class="btn btn-xs btn-link">
+        Variables
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="arithmetic-calculations">Arithmetic calculations</h1>
+<h2 id="integer-calculations">Integer calculations</h2>
+<p>In order to compute arithmetic calculations with integers you can use one of the following syntaxes:</p>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$(( OPERATION ))</code></td>
+<td>Evaluates <code>OPERATION</code>. This can be any arithmetic operation with <strong>integer</strong> numbers. Including addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>÷</code>), square root (<code>sqrt(NUM)</code>), exponentiation (<code>NUM**EXP</code>), etc.</td>
+</tr>
+<tr>
+<td><code>((++NUM))</code></td>
+<td>Increases variable <code>NUM</code> in 1 before evaluating any expression that contains <code>++NUM</code>.</td>
+</tr>
+<tr>
+<td><code>((NUM++))</code></td>
+<td>Increases variable <code>NUM</code> in 1 after evaluating any expression that contains <code>NUM++</code>.</td>
+</tr>
+<tr>
+<td><code>((--NUM))</code></td>
+<td>Decreases variable <code>NUM</code> in 1 before evaluating any expression that contains <code>--NUM</code>.</td>
+</tr>
+<tr>
+<td><code>((NUM--))</code></td>
+<td>Decreases variable <code>NUM</code> in 1 after evaluating any expression that contains <code>NUM--</code>.</td>
+</tr>
+<tr>
+<td><code>((VAR+=NUM))</code></td>
+<td>Increases variable <code>VAR</code> in <code>NUM</code>. Equivalent to <code>VAR=$(( $VAR + $NUM ))</code>.</td>
+</tr>
+<tr>
+<td><code>((VAR-=NUM))</code></td>
+<td>Decreases variable <code>VAR</code> in <code>NUM</code>. Equivalent to <code>VAR=$(( $VAR - $NUM ))</code>.</td>
+</tr>
+<tr>
+<td><code>(( $i % 2 ))</code></td>
+<td>Returns <code>true</code> if <code>i</code> is an odd number (the division by 2 gives a remainder different than 0), <code>false</code> if <code>i</code> is even (the division by 2 gives a remainder of 0).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="usage-of-operation">Usage of <code>$(( OPERATION ))</code></h3>
+<pre><code class="language-bash">$ echo &quot;2+1=$(( 2 + 1 ))&quot;
+2+1=3
+$ A=2
+$ echo &quot;A+1=$(( ${A} + 1 ))&quot;
+A+1=3
+$ B=1
+$ echo &quot;A+B=$(( ${A} + ${B} ))&quot;
+A+B=3
+$ echo &quot;A-B=$(( ${A} - ${B} ))&quot;
+A-B=1
+$ echo &quot;AxB=$(( ${A} * ${B} ))&quot;
+AxB=2
+$ echo &quot;A/B=$(( ${A} / ${B} ))&quot;
+A/B=2
+$ echo &quot;(A+B)x(A-B)=$(( $(( ${A} + ${B} )) * $(( ${A} - ${B} )) ))&quot;
+(A+B)x(A-B)=3
+$ echo &quot;A^3=$(( ${A} ** 3 ))&quot;
+A^3=8
+$ B=4
+$ echo &quot;A^B=$(( ${A} ** ${B} ))&quot;
+A^B=16
+$ echo &quot;B/A=$(( ${B} / ${A} ))&quot;
+0
+</code></pre>
+<p>In the last example the result is zero because this syntax is used for integer numbers. So, if the result of the operation is not an integer, it will be rounded to the nearest integer. In the next section you will learn how to operate with non-integer numbers.</p>
+<h3 id="usage-of-num-and-num">Usage of <code>((++NUM))</code> and <code>((NUM++))</code></h3>
+<p>In order to increment the value of a variable by one, there are a couple of options. Some of these options will be very useful when doing iterations (which you will learn later on).</p>
+<h4 id="num-1"><code>${NUM} + 1</code></h4>
+<pre><code class="language-bash">$ NUM=1
+$ echo $(( ${NUM} + 1 ))
+2
+$ echo ${NUM}
+1
+</code></pre>
+<p>The command <code>echo $(( ${NUM} + 1 ))</code> prints the result of <code>NUM</code> plus one, but it does not modify the value of <code>NUM</code>. For that reason, when <code>NUM</code> is echoed at the end, it still has value 1 (instead of 2).</p>
+<h4 id="num"><code>((++NUM))</code></h4>
+<pre><code class="language-bash">$ NUM=1
+$ echo $((++NUM))
+2
+$ echo ${NUM}
+2
+</code></pre>
+<p>The command <code>echo $((++NUM))</code> is equivalent to this sequence of instructions:</p>
+<pre><code class="language-bash">NUM=$(( ${NUM} + 1 ))
+echo ${NUM}
+</code></pre>
+<p>First, increases the value of variable <code>NUM</code> in one, and then it echoes the result. Opposite to the example in the left, here the variable value is actually modified. And opposite to the example in the right, the variable value is modified before the other instruction (<code>echo</code>).</p>
+<h4 id="num_1"><code>((NUM++))</code></h4>
+<pre><code class="language-bash">$ NUM=1
+$ echo $((NUM++))
+1
+$ echo ${NUM}
+2
+</code></pre>
+<p>The command <code>echo $((NUM++))</code> is equivalent to this sequence of instructions:</p>
+<pre><code class="language-bash">echo ${NUM}
+NUM=$(( ${NUM} + 1 ))
+</code></pre>
+<p>First echoes the value of <code>NUM</code>. Then, it increases the value of the variable.</p>
+<h3 id="usage-of-num-and-num-">Usage of <code>((--NUM))</code> and <code>((NUM--))</code></h3>
+<p>Expressions <code>((--NUM))</code> and <code>((NUM--))</code> work in a very similar way than the previous ones, but instead of increasing the value of <code>NUM</code> by one, they decrease the value of <code>NUM</code> by one. These expressions will also be very useful once you learn iteration.</p>
+<h4 id="num-1_1"><code>${NUM} - 1</code></h4>
+<pre><code class="language-bash">$ NUM=1
+$ echo $(( ${NUM} - 1 ))
+0
+$ echo ${NUM}
+1
+</code></pre>
+<p>The command <code>echo $(( ${NUM} - 1 ))</code> prints the result of <code>NUM</code> minus one, but it does not modify the value of <code>NUM</code>. For that reason, when <code>NUM</code> is echoed at the end, it still has value 1 (instead of 0).</p>
+<h4 id="-num"><code>((--NUM))</code></h4>
+<pre><code class="language-bash">$ NUM=1
+$ echo $((--NUM))
+0
+$ echo ${NUM}
+0
+</code></pre>
+<p>The command <code>echo $((--NUM))</code> is equivalent to this sequence of instructions:</p>
+<pre><code class="language-bash">NUM=$(( ${NUM} - 1 ))
+echo ${NUM}
+</code></pre>
+<p>First, decreases the value of variable <code>$NUM</code> in one, and then it echoes the result. Opposite to the example in the left, here the variable value is actually modified. And opposite to the example in the right, the variable value is modified before the other instruction (<code>=</code>).</p>
+<h4 id="num-"><code>((NUM--))</code></h4>
+<pre><code class="language-bash">$ NUM=1
+$ echo $((NUM--))
+1
+$ echo ${NUM}
+0
+</code></pre>
+<p>The command <code>echo $((NUM--))</code> is equivalent to this sequence of instructions:</p>
+<pre><code class="language-bash">echo ${NUM}
+NUM=$(( ${NUM} - 1 ))
+</code></pre>
+<p>First, echoes the value of <code>NUM</code>. Then, it decreases the value of the variable.</p>
+<h3 id="usage-of-varnum">Usage of <code>((VAR+=NUM))</code></h3>
+<p>This expression is a compact way of writing <code>VAR=$(( ${VAR} + ${NUM} ))</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Compact expression</th>
+<th>Extended equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>((A+=2))</code></td>
+<td><code>A=$(( ${A} + 2 ))</code></td>
+</tr>
+<tr>
+<td><code>B=$((A+=2))</code></td>
+<td><code>A=$(( ${A} + 2 )); B=${A}</code></td>
+</tr>
+<tr>
+<td><code>((A+=B))</code></td>
+<td><code>A=$(( ${A} + ${B} ))</code> The value of <code>B</code> is not modified, only <code>A</code> is modified.</td>
+</tr>
+<tr>
+<td><code>B=$((A+=B))</code></td>
+<td><code>A=$(( ${A} + ${B} )); B=${A}</code> In this case the value of both <code>A</code> and <code>B</code> is modified because the result of <code>((A+=B))</code> is assigned to <code>B</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="usage-of-var-num">Usage of <code>((VAR-=NUM))</code></h3>
+<p>This expression is a compact way of writing: <code>VAR=$(( ${VAR} - ${NUM} ))</code></p>
+<table>
+<thead>
+<tr>
+<th>Compact expression</th>
+<th>Extended equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>((A-=2))</code></td>
+<td><code>A=$(( ${A} - 2 ))</code></td>
+</tr>
+<tr>
+<td><code>B=$((A-=2))</code></td>
+<td><code>A=$(( ${A} - 2 )); B=${A}</code></td>
+</tr>
+<tr>
+<td><code>((A-=B))</code></td>
+<td><code>A=$(( ${A} - ${B} ))</code> The value of <code>B</code> is not modified, only <code>A</code> is modified.</td>
+</tr>
+<tr>
+<td><code>B=$((A-=B))</code></td>
+<td><code>A=$(( ${A} - ${B} )); B=${A}</code> In this case the value of both <code>A</code> and <code>B</code> is modified because the result of <code>((A-=B))</code> is assigned to <code>B</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="usage-of-i-2">Usage of <code>(( $i % 2 ))</code></h3>
+<pre><code class="language-bash">$ for i in $(seq 10)
+&gt; do
+&gt; if (( $i % 2 ))
+&gt; then
+&gt; echo $i is odd
+&gt; else
+&gt; echo $i is even
+&gt; fi
+&gt; done
+1 is odd
+2 is even
+3 is odd
+4 is even
+5 is odd
+6 is even
+7 is odd
+8 is even
+9 is odd
+10 is even
+</code></pre>
+<h2 id="non-integer-calculations">Non-integer calculations</h2>
+<p>When programming in bash, you will often need to do mathematical operations that involve non-integer calculations. To do this, you will need the bc utility. You can use this utility also for integer calculations, but it is normally left for advanced math.</p>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>echo "OPERATION" | bc</code></td>
+<td>Evaluates <code>OPERATION</code>. This can be any arithmetic operation with integer or non-integer numbers. Including addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>/</code>), square root (<code>sqrt(NUM)</code>), exponentiation (<code>NUM**EXP</code>), etc. It will round the result to the closest integer.</td>
+</tr>
+<tr>
+<td><code>echo "OPERATION" | bc -l</code></td>
+<td>Flag <code>-l</code> will not round the result. Instead, will print it with all the decimals.</td>
+</tr>
+<tr>
+<td><code>echo "scale=NDECIMALS; OPERATION" | bc -l</code></td>
+<td>Will only print <code>NDECIMALS</code> instead of all the decimals.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="echo-operation-bc"><code>echo "OPERATION" | bc</code></h3>
+<pre><code class="language-bash">$ echo &quot;2.34 / 1.895&quot; | bc
+1
+$ echo &quot;2 / 3&quot; | bc
+0
+</code></pre>
+<h3 id="echo-operation-bc-l"><code>echo "OPERATION" | bc -l</code></h3>
+<pre><code class="language-bash">$ echo &quot;2.34 / 1.895&quot; | bc -l
+1.23482849604221635883
+$ echo &quot;2 / 3&quot; | bc -l
+.66666666666666666666
+
+$ A=$(echo &quot;2.34 / 1.895&quot; | bc)
+$ B=$(echo &quot;2.34 / 1.895&quot; | bc -l)
+$ echo ${A}
+1
+$ echo ${B}
+1.23482849604221635883
+$ echo &quot;${A} + ${B}&quot; | bc -l
+2.23482849604221635883
+$ echo &quot;${A} + ${B}&quot;
+1 + 1.23482849604221635883
+</code></pre>
+<p>Look at the difference between the last two expressions. They are almost the same except for the <code>| bc -l</code> at the end of the first expression. Yet, the results are very different. That is because in the second case we are just printing the text "\${A} + \${B}", while in the first one we are evaluating the expression written in that text, with the use of the <code>bc</code> utility. The following example may clarify this concept:</p>
+<pre><code class="language-bash">$ echo &quot;${A} + ${B}=$(echo &quot;${A} + ${B}&quot; | bc -l)&quot;
+1 + 1.23482849604221635883=2.23482849604221635883
+</code></pre>
+<p>To find the square root of a number you use the expression <code>sqrt()</code>, like in many other programming languages. So, to find the square root of 10 and save it to variable a you would use the following command:</p>
+<pre><code class="language-bash">$ A=$(echo &quot;sqrt (10)&quot; | bc -l)
+$ echo ${A}
+3.16227766016837933199
+</code></pre>
+<p>Knowing this, you can do any type of operations with non-integer numbers. Just by writing the desired expression between the quotation marks, or combine integer and non-integer calculations. Let’s look at a few more examples:</p>
+<pre><code class="language-bash">$ echo &quot;(2.34 / 1.895) + sqrt (10)&quot; | bc -l
+4.39710615621059569082
+$ echo $((2**3))
+12.397106156210595690828
+$ echo &quot;(2.34 / 1.895) + sqrt (10) + $((2**3))&quot; | bc -l
+12.39710615621059569082
+$ echo &quot;(2.34 / 1.895) + sqrt (10) + 2^3&quot; | bc -l
+12.39710615621059569082
+$ echo &quot;2 + 2&quot; | bc -l
+4
+$ echo &quot;2 + 2&quot;
+2 + 2
+$ echo &quot;2 + 2 = $(echo &quot;2 + 2&quot; | bc -l)&quot;
+2 + 2 = 4
+</code></pre>
+<pre><code class="language-bash">$ A=$(echo &quot;(2.34 / 1.895) + sqrt (10)&quot; | bc -l)
+$ echo ${A}
+4.39710615621059569082
+$ echo $(echo &quot;(2.34 / 1.895) + sqrt (10)&quot; | bc -l)
+4.39710615621059569082
+$ echo &quot;(2.34 / 1.895) + sqrt (10)= $(echo &quot;(2.34 / 1.895) + sqrt (10)&quot; | bc -l)&quot;
+(2.34 / 1.895) + sqrt (10)= 4.39710615621059569082
+</code></pre>
+<h3 id="echo-scalendecimals-operation-bc-l"><code>echo "scale=NDECIMALS; OPERATION" | bc -l</code></h3>
+<p>Clearly, some of the results of the previous examples have way too many decimals. You can cut the number of decimals using scale.</p>
+<pre><code class="language-bash">$ echo &quot;(2.34 / 1.895) + sqrt (10)&quot; | bc -l
+4.39710615621059569082
+$ echo &quot;scale=3; (2.34 / 1.895) + sqrt (10)&quot; | bc -l
+4.396
+$ echo &quot;scale=0; (2.34 / 1.895) + sqrt (10)&quot; | bc -l
+4
+</code></pre>
+<h3 id="comparing-non-integers">Comparing non-integers</h3>
+<p>In order to compare non-integers you can use the awk function. This function will be studied more in detail in later chapters as it is mainly used for processing files and strings. But as this example shows, it can also be used to deal with numbers.</p>
+<pre><code class="language-bash">$ awk 'BEGIN{ print (2.41==2.4) ? &quot;equal&quot; : &quot;not equal&quot; }'
+not equal
+$ awk 'BEGIN{ print (2.41==2.41) ? &quot;equal&quot; : &quot;not equal&quot; }'
+equal
+</code></pre>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../arrays/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../arrays/" class="btn btn-xs btn-link">
+        Arrays
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../variables/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../variables/" class="btn btn-xs btn-link">
+        Variables
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
