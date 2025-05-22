@@ -1,6 +1,6 @@
 # Iteration
 
-In the following section we will learn how to use loops to iterate through the content of arrays or through a list of files. However, we will leave the part of iterating through the content of a file for the next section ([File manipulation](content8.html)). Iteration is basically the repetition of a process or group of commands on a list of items. For example, you might use iteration to repeat the same processing steps on a list of subjects, or to manipulate in the same way a list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 subjects, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.
+In the following section we will learn how to use loops to iterate through the content of arrays or through a list of files. However, we will leave the part of iterating through the content of a file for the next section ([File manipulation](files1.md)). Iteration is basically the repetition of a process or group of commands on a list of items. For example, you might use iteration to repeat the same processing steps on a list of subjects, or to manipulate in the same way a list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 subjects, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.
 
 | Command | Use | Syntax |
 | ----------- | ------- | ------- |
@@ -65,7 +65,7 @@ Subject number 4 is SUBJ3
 
 ### Iterating through files using patterns
 
-As we learned in the [arrays section](content5.html), you can use patterns to create arrays. You can also use patterns to list files with a very similar path except for a few words.
+As we learned in the [arrays section](arrays.md), you can use patterns to create arrays. You can also use patterns to list files with a very similar path except for a few words.
 
 For example, if you have a folder located in the following path:
 /Users/MyUserName/Desktop/MyProjectFolder
@@ -327,7 +327,7 @@ As previously mentioned, when you are iterating through more than one array you 
 
 ### Iterating through two arrays at the same time
 
-In the following example there are two arrays (`ID` and `VISIT`), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (test.txt) using the command `cat`, which will be explained in detail in the following chapter ([File manipulation](content8.html)).
+In the following example there are two arrays (`ID` and `VISIT`), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (test.txt) using the command `cat`, which will be explained in detail in the following chapter ([File manipulation](files1.md)).
 
 This `while` loop will run as long as the two conditions (`[ ${i} -lt ${SIZE_ID} ]` and `[ ${i} -lt ${SIZE_VISIT} ]`) that are being evaluated be `true`. So, as soon as its value be greater than `SIZE_ID` or `SIZE_VISIT`, it will stop. It is extremely important to not forget the line `((i++))`. Otherwise, it will loop forever (you can always break a loop with Control + C).
 

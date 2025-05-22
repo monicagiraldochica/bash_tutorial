@@ -451,7 +451,7 @@ IFS=$'\n' sortedPF=($(sort &lt;&lt;&lt;&quot;${PF[*]}&quot;))
 IFS='+' avg=$(echo &quot;scale=4;(${PF[*]})/${#PF[@]}&quot;|bc)
 printf &quot;Male Controls:\nMin: %.3f\nMax: %.3f\nAve: %.3f\n&quot; ${sortedPF[0]}
 </code></pre>
-<p>The number of lines in the loop of the previous code could be reduced by simplifying the <code>if</code> expressions. The code below is equivalent to the one above (the loop), but written in less lines. In the chapter of <a href="content6.html">Condition testing</a> I explain how to simplify <code>if</code> expressions:</p>
+<p>The number of lines in the loop of the previous code could be reduced by simplifying the <code>if</code> expressions. The code below is equivalent to the one above (the loop), but written in less lines. In the chapter of <a href="../condition_test/">Condition testing</a> I explain how to simplify <code>if</code> expressions:</p>
 <pre><code class="language-bash">n=0
 for line in $(cat infoFile.csv)
 do

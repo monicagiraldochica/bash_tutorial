@@ -168,7 +168,7 @@ The following examples will show how to use the flags mentioned in the previous 
 
 **Usage of `read -s`:**
 
-In the following example, the flag `-s` causes the user input to be silenced, so when the user writes the password, it is not shown in the screen. If the user input is ThisIsMyPassword, then that string is saved in the variable `PASSWORD`. While the user is writing its password and until it presses Enter, you will see the following symbol underneath `$ read -s PASSWORD`: ![image1](./pwd.png). Afterwards, the symbol will disappear.
+In the following example, the flag `-s` causes the user input to be silenced, so when the user writes the password, it is not shown in the screen. If the user input is ThisIsMyPassword, then that string is saved in the variable `PASSWORD`. While the user is writing its password and until it presses Enter, you will see the following symbol underneath `$ read -s PASSWORD`: ![image1](img/pwd.png). Afterwards, the symbol will disappear.
 
 In the example below of a wrong syntax, the mistake is that the variable `PASSWORD` is written before the flag `-s`. The variable must go at the end of the command independently of which flags are used. As a result, bash is not silencing the user input, is giving the invalid identifier error, and is not saving any string in the variable.
 

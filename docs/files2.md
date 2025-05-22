@@ -220,7 +220,7 @@ IFS='+' avg=$(echo "scale=4;(${PF[*]})/${#PF[@]}"|bc)
 printf "Male Controls:\nMin: %.3f\nMax: %.3f\nAve: %.3f\n" ${sortedPF[0]}
 ```
 
-The number of lines in the loop of the previous code could be reduced by simplifying the `if` expressions. The code below is equivalent to the one above (the loop), but written in less lines. In the chapter of [Condition testing](content6.html) I explain how to simplify `if` expressions:
+The number of lines in the loop of the previous code could be reduced by simplifying the `if` expressions. The code below is equivalent to the one above (the loop), but written in less lines. In the chapter of [Condition testing](condition_test.md) I explain how to simplify `if` expressions:
 
 ```bash
 n=0
