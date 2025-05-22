@@ -84,7 +84,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="iteration">Iteration</h1>
-<p>In the following section we will learn how to use loops to iterate through the content of arrays or through a list of files. However, we will leave the part of iterating through the content of a file for the next section (<a href="content8.html">File manipulation</a>). Iteration is basically the repetition of a process or group of commands on a list of items. For example, you might use iteration to repeat the same processing steps on a list of subjects, or to manipulate in the same way a list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 subjects, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.</p>
+<p>In the following section we will learn how to use loops to iterate through the content of arrays or through a list of files. However, we will leave the part of iterating through the content of a file for the next section (<a href="../files1/">File manipulation</a>). Iteration is basically the repetition of a process or group of commands on a list of items. For example, you might use iteration to repeat the same processing steps on a list of subjects, or to manipulate in the same way a list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 subjects, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.</p>
 <table>
 <thead>
 <tr>
@@ -153,7 +153,7 @@ Subject number 3 is SUBJ4
 Subject number 4 is SUBJ3
 </code></pre>
 <h3 id="iterating-through-files-using-patterns">Iterating through files using patterns</h3>
-<p>As we learned in the <a href="content5.html">arrays section</a>, you can use patterns to create arrays. You can also use patterns to list files with a very similar path except for a few words.</p>
+<p>As we learned in the <a href="../arrays/">arrays section</a>, you can use patterns to create arrays. You can also use patterns to list files with a very similar path except for a few words.</p>
 <p>For example, if you have a folder located in the following path:
 /Users/MyUserName/Desktop/MyProjectFolder</p>
 <p>And inside this folder you have 100 files named very similarly: DTI_SUBJ1.nii.gz, DTI_SUBJ2.nii.gz, DTI_SUBJ3.nii.gz, DTI_SUBJ4.nii.gz, DTI_SUBJ5.nii.gz, ..., DTI_SUBJ100.nii.gz</p>
@@ -360,7 +360,7 @@ Subject_3.nii.gz
 <h3 id="using-the-while-loop-to-iterate-through-more-than-one-array">Using the <code>while</code> loop to iterate through more than one array</h3>
 <p>As previously mentioned, when you are iterating through more than one array you should use <code>while</code> instead of <code>for</code>.</p>
 <h3 id="iterating-through-two-arrays-at-the-same-time">Iterating through two arrays at the same time</h3>
-<p>In the following example there are two arrays (<code>ID</code> and <code>VISIT</code>), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (test.txt) using the command <code>cat</code>, which will be explained in detail in the following chapter (<a href="content8.html">File manipulation</a>).</p>
+<p>In the following example there are two arrays (<code>ID</code> and <code>VISIT</code>), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (test.txt) using the command <code>cat</code>, which will be explained in detail in the following chapter (<a href="../files1/">File manipulation</a>).</p>
 <p>This <code>while</code> loop will run as long as the two conditions (<code>[ ${i} -lt ${SIZE_ID} ]</code> and <code>[ ${i} -lt ${SIZE_VISIT} ]</code>) that are being evaluated be <code>true</code>. So, as soon as its value be greater than <code>SIZE_ID</code> or <code>SIZE_VISIT</code>, it will stop. It is extremely important to not forget the line <code>((i++))</code>. Otherwise, it will loop forever (you can always break a loop with Control + C).</p>
 <pre><code class="language-bash">$ declare -a ID=('SUBJ0' 'SUBJ1' 'SUBJ2' 'SUBJ3' 'SUBJ4' 'SUBJ5' 'SUBJ6')
 $ declare -a VISIT=('V1' 'V1' 'V2' 'V1' 'V2' 'V2' 'V3')
