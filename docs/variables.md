@@ -1,10 +1,10 @@
 # Variables
 
-A very important aspect of programming is the ability to use a label (variable) to indicate some other quantity (a number, character, string or command). For example, I can use the variable `desktop` to represent the string `"/Users/monica/Desktop"`. Or the variable `year` to represent the number `2025`.
+An important aspect of programming is the ability to use a variables. For example, I can use the variable `desktop` to represent the string `"/Users/myuser/Desktop"`. Or the variable `year` to represent the number `2025`.
 
-Variables make the code more readable, short and organized and prevent typing errors. They are also useful in cases in which the actual value of a variable is not known before executing the program, or when you need to save the output of one command to use as input for another command.
+Variables make the code more readable, short and organized, and prevent typing errors. They are also useful in cases in which the actual value of a variable is not known before executing the program, or when you need to save the output of one command to use as input for another command.
 
-In Bash you don't specify data types. However, if the value that you are assigning is a string of characters, you should use quotation marks (`"`) between the beginning and the end of your string (especially if the string contains spaces). Be careful not to include any white space between the variable name, the equals sign, and the value. Additionally, be aware that the quotation marks used in Bash are `"` , which is different than those used in Microsoft Word. They look very similar, but Bash won't recognize the later ones. So, if you copy-paste from Microsoft Word a command that includes quotation marks, you will get an error.
+In Bash you don't specify data types. However, if the value that you are assigning is a string, you should use quotation marks between the beginning and the end of your string, especially if the string contains spaces. Be careful not to include any white space between the variable name, the equals sign, and the value. Additionally, be aware that the quotation marks used in Bash are `"` , which is different than those used in Microsoft Word. They look similar, but Bash won't recognize the later ones. So, if you copy-paste from Microsoft Word a command that includes quotation marks, you will get an error.
 
 ## Declaring variables
 
@@ -19,7 +19,7 @@ GENDER='F'
 
 **Common mistakes when declaring variables:**
 
-The following commands will produce errors because there is a white space before and/or after the equal sign (`=`), or because the quotation marks are missing when declaring a string that contains a space. Bellow each erroneous command you can see the error that Bash produces.
+The following commands will produce errors because there is a white space before and/or after the equal sign, or because the quotation marks are missing when declaring a string that contains a space. Bellow each erroneous command you can see the error that Bash produces.
 
 ```bash
 $ NAME ="Monica Keith"
@@ -60,7 +60,7 @@ $ echo ${ VAR2 }
 -bash: ${ VAR2 }: bad substitution
 ```
 
-The following erroneous reference (with a space between the dollar sign and the first bracket) will not cause an error but will **not** substitute `${VAR2}` for the correct value. It will just print `$ {VAR2}` instead of `Subject`.
+The following erroneous reference (with a space between the dollar sign and the first bracket) will not cause an error, but will **not** substitute `${VAR2}` for the correct value. It will just print `$ {VAR2}` instead of `Subject`.
 
 ```bash
 $ echo $ {VAR2}
@@ -106,7 +106,7 @@ When that happens and you click enter in the keyboard, the command line won't al
 
 You can assign any value to a variable. However, a variable cannot have just any name. There are a few rules for assigning variable names.
 
-1. A variable name should not be a number: this type of variable is only used to read arguments on a shell script. For example, `$1` refers to the first argument of a script, `$2` to the second argument, etc. Later you will learn the [meaning and use of script arguments](./advanced_bash.md#reading-arguments).
+1. A variable name should not be a number: this type of variable is only used to read arguments on a shell script. For example, `$1` refers to the first argument of a script, `$2` to the second argument, etc. Later you will learn the [meaning and use of script arguments](advanced_bash.md#reading-arguments).
 2. Variable names must start with an alphabetical letter or an underscore: variable names can contain any number, but it should not be located at the beginning.
 3. Do **not** use `$` or `${}` to declare a variable: these characters are used only to reference variables.
 4. Do **not** assign the name `PATH` to any variable: if you do so, you won't get any error right away. But it will mess up the execution of other programs. `PATH` is a system variable that specifies a set of directories where executable programs are located. For example, when you install a software that runs in the command line, the path to the executable of that program will be included in the system variable `PATH`. So, if you rename that variable, you won't be able to execute the program again in the current terminal. If you forget about this rule and mistakenly re-write the value of this variable, close the current terminal and open a new one. Every time you open a new terminal, this system variable will be re-set to the correct value (which is stored in the bash_profile). At any moment you can know the value of your `PATH` by typing `echo ${PATH}`. You will see something like this, although this significantly varies between computers depending on which programs you have installed and referenced in the bash_profile file.
@@ -168,7 +168,7 @@ The following examples will show how to use the flags mentioned in the previous 
 
 **Usage of `read -s`:**
 
-In the following example, the flag `-s` causes the user input to be silenced, so when the user writes the password, it is not shown in the screen. If the user input is ThisIsMyPassword, then that string is saved in the variable `PASSWORD`. While the user is writing its password and until it presses Enter, you will see the following symbol underneath `$ read -s PASSWORD`: ![image1](img/pwd.png). Afterwards, the symbol will disappear.
+In the following example, the flag `-s` causes the user input to be silenced, so when the user writes the password, it is not shown in the screen. If the user input is `ThisIsMyPassword`, then that string is saved in the variable `PASSWORD`. While the user is writing its password and until it presses Enter, you will see the following symbol underneath `$ read -s PASSWORD`: ![image1](img/pwd.png). Afterwards, the symbol will disappear.
 
 In the example below of a wrong syntax, the mistake is that the variable `PASSWORD` is written before the flag `-s`. The variable must go at the end of the command independently of which flags are used. As a result, Bash is not silencing the user input, is giving the invalid identifier error, and is not saving any string in the variable.
 
@@ -278,7 +278,7 @@ read: usage: read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars]
 
 **The backslash:**
 
-In Bash, certain characters have special meanings. For example, the dollar sign (``$`) is used to reference a variable. When you type `${VAR}` Bash will print the value of `VAR`, instead of the actual string "\${VAR}". The backslash (`\`) is used to remove those special meanings from the character followed by it.
+In Bash, certain characters have special meanings. For example, the dollar sign (`$`) is used to reference a variable. When you type `${VAR}`, Bash will print the value of `VAR`, instead of the actual string "\${VAR}". The backslash is used to remove those special meanings from the character followed by it.
 
 ```bash
 $ VAR="Some text"

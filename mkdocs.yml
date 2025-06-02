@@ -1,10 +1,17 @@
+# Site information
 site_name: Bash Tutorial
 site_author: Monica Keith
 site_description: Bash programming guide that covers a broad range of topics, useful to beginners and experienced users.
+
+# Configuration
 theme:
   name: windmill
+
+# Custom
 extra:
   logo: img/favicon.ico
+
+# Page tree
 nav:
   - Home: index.md
   - Getting started: simple_scripts.md
