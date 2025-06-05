@@ -1,6 +1,6 @@
 # Condition-testing
 
-Variables can be used to test if a certain condition is true or false, and therefore be able to take a different course of action depending on the result of the test. For example, you might want to evaluate if a file exists to decide if you can copy it into a different folder or not. For condition-testing you will use the `if` command. This command has the following syntax:
+Variables can be used to test if a certain condition is `true` or `false`, and therefore be able to take a different course of action depending on the result of the test. For example, you might want to evaluate if a file exists to decide if you can copy it into a different folder or not. For condition-testing you will use the `if` command. This command has the following syntax:
 
 ```bash
 if [ CONDITION TO EVALUATE ]
@@ -18,10 +18,10 @@ The `CONDITION TO EVALUATE` is an expression that follows a specific syntax depe
 
 ## Condition-testing to check files
 
-In the following table, `FILE` refers to the path of the file or to the variable that contains the path of the file. The spaces after [ and before ] are very important. If those spaces are missing, bash will give an error.
+In the following table, `FILE` refers to the path of the file, or to the variable that contains the path of the file. The spaces after `[` and before `]` are very important. If those spaces are missing, Bash will give an error.
 
 | Condition | Meaning |
-|-----------| ------- |
+| --- | --- |
 | `[ -a FILE ]` | Tests if `FILE` exists. |
 | `[ -d FILE ]` | Tests if `FILE` exists and is a directory. |
 | `[ -e FILE ]` | Tests if `FILE` exists. |
@@ -57,7 +57,7 @@ $ if [ -a "${FILE}" ]
 > fi
 ```
 
-The following example shows a common mistake. Here, the quotation marks surrounding the file path are missing. Since the path has spaces, bash gives an error:
+The following example shows a common mistake. Here, the quotation marks surrounding the file path are missing. Since the path has spaces, Bash gives an error:
 
 ```bash
 $ if [ -a /Users/MyUser/Desktop/some file name with spaces.txt ]
@@ -87,7 +87,7 @@ $ if [ -a "${FILE}" ]
 > fi
 ```
 
-The following example shows a common mistake. Here, the spaces before and after the expression `-a "${FILE}"` are missing. So, bash will give an error:
+The following example shows a common mistake. Here, the spaces before and after the expression `-a "${FILE}"` are missing. So, Bash will give an error:
 
 ```bash
 $ FILE=/Users/MyUser/Desktop/someFile.txt
@@ -137,16 +137,16 @@ $ if [ -N "/Users/MyUser/Desktop/someFile.txt" ]
 
 ## Condition-testing to compare/evaluate strings
 
-When comparing strings, it is mandatory to use the quotation marks. The spaces after `[` and before `]` are very important. If those spaces are missing, bash will give an error.
+When comparing strings, it is mandatory to use the quotation marks. The spaces after `[` and before `]` are very important. If those spaces are missing, Bash will give an error.
 
 | Condition | Meaning |
-|-----------| ------- |
-| `[ -z "STRING" ]` | Tests if the length of `STRING` is zero |
-| `[ -n "STRING" ]` | Tests if the length of `STRING` is non-zero |
-| `[ "STRING1" == "STRING2" ]` | Tests if the strings are equal |
-| `[ "STRING1" != "STRING2" ]` | Tests if the strings are not equal |
-| `[ "STRING1" \< "STRING2" ]` | Tests if `STRING1` sorts before `STRING2` |
-| `[ "STRING1" \> "STRING2" ]` | Tests if `STRING1` sorts after `STRING2` |
+| --- | --- |
+| `[ -z "STRING" ]` | Tests if the length of `STRING` is zero. |
+| `[ -n "STRING" ]` | Tests if the length of `STRING` is non-zero. |
+| `[ "STRING1" == "STRING2" ]` | Tests if the strings are equal. |
+| `[ "STRING1" != "STRING2" ]` | Tests if the strings are not equal. |
+| `[ "STRING1" \< "STRING2" ]` | Tests if `STRING1` sorts before `STRING2`. |
+| `[ "STRING1" \> "STRING2" ]` | Tests if `STRING1` sorts after `STRING2`. |
 
 ### Usage of `[ -z "STRING" ]`
 
@@ -169,7 +169,7 @@ $ if [ -n "${VAR}" ]
 The string is not empty
 ```
 
-In this example, bash will show an error because I forgot to put the quotation marks around `${VAR}`:
+In this example, Bash will show an error because I forgot to put the quotation marks around `${VAR}`:
 
 ```bash
 $ VAR="Some text"
@@ -208,7 +208,7 @@ Image has good quality
 
 ### Usage of `[ "STRING1" \< "STRING2" ]`
 
-In the following example, I am comparing the strings "Canada" with "Colombia" and printing the one that sorts first. "Canada" will be printed because the first letter of both words is the same but the second letter in "Canada" (letter a) comes before the second letter in "Colombia" (letter o).
+In the following example, I am comparing the strings `Canada` with `Colombia` and printing the one that sorts first. `Canada` will be printed because the first letter of both words is the same, but the second letter in `Canada` comes before the second letter in `Colombia`.
 
 ```bash
 $ VAR1="Canada"
@@ -223,7 +223,10 @@ Canada
 ```
 
 The previous expression can be written using a shorter syntax:
-[ expression ] >> what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:
+
+```bash
+[ expression ] >> what_to_do_if_expression_is_true || what_to_do_if_expression_is_false
+```
 
 ```bash
 $ [ "${VAR1}" \< "${VAR2}" ] >> echo ${VAR1} || echo ${VAR2}
@@ -253,16 +256,16 @@ Canada
 
 ## Condition-testing to compare numbers
 
-The spaces after `[` and before `]` are very important. If those spaces are missing, bash will give an error.
+The spaces after `[` and before `]` are very important. If those spaces are missing, Bash will give an error.
 
 | Condition | Meaning |
-|-----------| ------- |
-| `[ NUM1 -eq NUM2 ]` | Tests if `NUM1` is equal to `NUM2` |
-| `[ NUM1 -ne NUM2 ]` | Tests if `NUM1` is not equal to `NUM2` |
-| `[ NUM1 -lt NUM2 ]` | Tests if `NUM1` is less than `NUM2` |
-| `[ NUM1 -le NUM2 ]` | Tests if `NUM1` is less than or equal to `NUM2` |
-| `[ NUM1 -gt NUM2 ]` | Tests if `NUM1` is greater than `NUM2` |
-| `[ NUM1 -ge NUM2 ]` | Tests if `NUM1` is greater than or equal to `NUM2` |
+| --- | --- |
+| `[ NUM1 -eq NUM2 ]` | Tests if `NUM1` is equal to `NUM2`. |
+| `[ NUM1 -ne NUM2 ]` | Tests if `NUM1` is not equal to `NUM2`. |
+| `[ NUM1 -lt NUM2 ]` | Tests if `NUM1` is less than `NUM2`. |
+| `[ NUM1 -le NUM2 ]` | Tests if `NUM1` is less than or equal to `NUM2`. |
+| `[ NUM1 -gt NUM2 ]` | Tests if `NUM1` is greater than `NUM2`. |
+| `[ NUM1 -ge NUM2 ]` | Tests if `NUM1` is greater than or equal to `NUM2`. |
 
 ### Usage of `[ NUM1 -eq NUM2 ]`
 
@@ -400,9 +403,9 @@ Variable A is greater or equal to 3.
 ## Condition-testing to compare arrays
 
 | Condition | Meaning |
-|-----------| ------- |
-| `[ "${array1[*]}" == "${array2[*]}" ]` | Tests if array1 equals to array2 |
-| `[ "${array1[*]}" != "${array2[*]}" ]` | Tests if array1 is different to array2 |
+| --- | --- |
+| `[ "${array1[*]}" == "${array2[*]}" ]` | Tests if `array1` equals to `array2`. |
+| `[ "${array1[*]}" != "${array2[*]}" ]` | Tests if `array1` is different to `array2`. |
 
 ### Usage of `[ "${array1[*]}" == "${array2[*]}" ]`
 
@@ -463,11 +466,11 @@ different
 ## Combining different expressions for condition-testing
 
 | Condition | Meaning |
-|-----------| ------- |
-| `[ EXPR ]` | Tests if the expression `EXPR` is `true` |
-| `[ ! EXPR ]` | Tests if the expression `EXPR` is `false` |
-| `[ EXPR1 ] || [ EXPR2 ]` | Tests if `EXPR1` or `EXPR2` are `true`. You can add as many expressions as desired |
-| `[ EXPR1 ] && [ EXPR2 ]` | Tests if `EXPR1` and `EXPR2` are `true`. You can add as many expressions as desired |
+| --- | --- |
+| `[ EXPR ]` | Tests if the expression `EXPR` is `true`. |
+| `[ ! EXPR ]` | Tests if the expression `EXPR` is `false`. |
+| `[ EXPR1 ] || [ EXPR2 ]` | Tests if `EXPR1` or `EXPR2` are `true`. You can add as many expressions as desired. |
+| `[ EXPR1 ] && [ EXPR2 ]` | Tests if `EXPR1` and `EXPR2` are `true`. You can add as many expressions as desired. |
 
 ### Usage of `[ EXPR ] vs [ ! EXPR ]`
 
@@ -505,7 +508,7 @@ $ [ ! 3 -eq 3 ] >> echo "This will be printed if it is false that 3 equals 3 (so
 This will be printed if it is not false (it's true) that 3 equals 3.
 ```
 
-We learned that the expression `-f FILE` tests if a file exists. If we want to test if a file doesn't exist, then we just need to test if `-f FILE` is false.
+We learned that the expression `-f FILE` tests if a file exists. If we want to test if a file doesn't exist, then we just need to test if `-f FILE` is `false`.
 
 ```bash
 $ FILE="SomeFileThatExists.txt"
@@ -560,7 +563,7 @@ This will be echoed if any of the two expressions are true: 2<3 OR 4<3.
 
 ### Usage of `[ EXPR1 ] && [ EXPR2 ]`
 
-The following example tests if the two expressions are true. The second expression, opposite to the previous example, has the negation (`!`). So, the second expression is not testing if 4 is less than 3, it is testing if 4 is **NOT** less than 3 (if it's equal or greater than 3). So, both of the expressions are true, because 4 is not less than 3, and 2 is less than 3.
+The following example tests if the two expressions are `true`. The second expression, opposite to the previous example, has the negation (`!`). So, the second expression is not testing if 4 is less than 3, it is testing if 4 is **NOT** less than 3 (if it's equal or greater than 3). So, both of the expressions are `true`, because 4 is not less than 3, and 2 is less than 3.
 
 ```bash
 $ if [ 2 -lt 3 ] && [ ! 4 -lt 3 ]
@@ -581,7 +584,7 @@ This will be echoed if the two expressions are true.
 
 ### Using the and (`&&`) and or (`||`) operands to test more than two conditions
 
-You can combine more than two expressions. In the following example, I am combining three. Because I am using the **AND** operator, the whole condition will test true **if and only if** all the three expressions are true. If one is false, then the whole expression will be false.
+You can combine more than two expressions. In the following example, I am combining three. Because I am using the **AND** operator, the whole condition will test `true` **if and only if** all the three expressions are `true`. If one is `false`, then the whole expression will be `false`.
 
 ```bash
 $ if [ 2 -lt 3 ] && [ ! 4 -lt 3 ] && [ 4 -lt 3 ]
@@ -593,10 +596,10 @@ $ if [ 2 -lt 3 ] && [ ! 4 -lt 3 ] && [ 4 -lt 3 ]
 This will be echoed if any of the three expressions is false.
 ```
 
-Let's take a look at why the whole expression evaluates false:
+Let's take a look at why the whole expression evaluates `false`:
 `[ 2 -lt 3 ]`: This is `true`, 2 < 3.
 `[ ! 4 -lt 3 ]`: This is `true`, 4 is not less than 3.
-`[ 4 -lt 3 ]`: This is `false`, It is false that 4 be less than 3.
+`[ 4 -lt 3 ]`: This is `false`, It is `false` that 4 be less than 3.
 `[ 2 -lt 3 ] && [ ! 4 -lt 3 ] && [ 4 -lt 3 ]`: This is `false` because one of the three expressions is `false`.
 
 Using a shorter syntax:
@@ -605,7 +608,7 @@ Using a shorter syntax:
 $ ( [ 2 -lt 3 ] && [ ! 4 -lt 3 ] && [ 4 -lt 3 ] ) && echo "This will be echoed if all the three expressions are true." || echo "This will be echoed if any of the three expressions is false."
 ```
 
-The following example is very similar than the previous one but instead of using the operator AND (`>>`), we are using the operator OR (`||`). So, the whole expression will be true if **ANY** of the three expressions is `true`. Since the first two expressions are `true`, then the result is `true`.
+The following example is very similar to the previous one, but instead of using the operator AND (`&&`), we are using the operator OR (`||`). So, the whole expression will be `true` if **ANY** of the three expressions is `true`. Since the first two expressions are `true`, then the result is `true`.
 
 ```bash
 $ if [ 2 -lt 3 ] || [ ! 4 -lt 3 ] || [ 4 -lt 3 ]
@@ -626,11 +629,11 @@ This will be echoed if ANY of the three expressions is true.
 
 ### Combining `&&` and `||` into one expression
 
-When combining both operands (`&&`, `||`), it is better to always use parenthesis to indicate the order in which you want the operations to be evaluated. In the following example we have three files. The path of the three files are saved in the variables `${FILE1}` `${FILE2}` and `${FILE3}`. Suppose files `${FILE1}` and `${FILE3}` exist, but `${FILE2}` doesn't exist. We want to evaluate the following condition: Does `${FILE3}` **and at least** one of the other two files exists?
+When combining both operands (`&&`, `||`), it is better to always use parenthesis to indicate the order in which you want the operations to be evaluated. In the following example we have three files. The path of the three files are saved in the variables `${FILE1}` `${FILE2}` and `${FILE3}`. Files `${FILE1}` and `${FILE3}` exist, but `${FILE2}` doesn't exist. We want to evaluate the following condition: Does `${FILE3}` **and at least** one of the other two files exists?
 
 `[ -f ${FILE3} ]`: This condition is true because `${FILE3}` exists.
-`[ -f ${FILE2} ] || [ -f ${FILE1} ]`: This condition is true because even though `${FILE2}` doesn't exist,`${FILE1}` does exist. And with an OR (`||`) we only need one of the expressions to be `true`.
-`( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) && [ -f ${FILE3} ]`: This is true because both of expressions are `true`.
+`[ -f ${FILE2} ] || [ -f ${FILE1} ]`: This condition is `true` because even though `${FILE2}` doesn't exist,`${FILE1}` does exist. And with an OR (`||`) we only need one of the expressions to be `true`.
+`( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) && [ -f ${FILE3} ]`: This is `true` because both of expressions are `true`.
 
 ```bash
 $ if ( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) && [ -f ${FILE3} ]

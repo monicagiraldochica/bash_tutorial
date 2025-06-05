@@ -1,12 +1,12 @@
 # Iteration
 
-In the following section we will learn how to use loops to iterate through the content of arrays or through a list of files. However, we will leave the part of iterating through the content of a file for the next section ([File manipulation](files1.md)). Iteration is basically the repetition of a process or group of commands on a list of items. For example, you might use iteration to repeat the same processing steps on a list of subjects, or to manipulate in the same way a list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 subjects, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.
+Iteration is the repetition of commands on a list of items. For example, you might use iteration to manipulate in the same way a long list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 files, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.
 
 | Command | Use | Syntax |
-| ----------- | ------- | ------- |
-| `for` | For iterating over a series of items within a list (array) | `for item in list; do; commands; done` |
-| `for` | For iterating through an index | `for ((i=1; i<=64; i+=1)); do; commands; done` |
-| `while` | For iterating while a control expression (condition) is true | `while condition; do; commands; done` |
+| --- | --- | --- |
+| `for` | For iterating over a series of items within a list (array). | `for item in list; do; commands; done` |
+| `for` | For iterating through an index. | `for ((i=1; i<=64; i+=1)); do; commands; done` |
+| `while` | For iterating while a control expression (condition) is `true`. | `while condition; do; commands; done` |
 
 ## The `for` loop
 
@@ -18,7 +18,7 @@ In the following example we have an array with a list of subjects:
 declare -a ARRAY=('SUBJ0' 'SUBJ9' 'SUBJ3' 'SUBJ4' 'SUBJ3')
 ```
 
-If we wanted to print the ID of each subject within the list without using a loop, we would have to type 5 different commands (imagine if you have 800 subjects?):
+If we want to print the ID of each subject within the list without using a loop, we would have to type 5 different commands:
 
 ```bash
 $ echo ${ARRAY[0]}
@@ -33,7 +33,7 @@ $ echo ${ARRAY[4]}
 SUBJ3
 ```
 
-If we use a loop, you will just need to write the command one time. In this example, with only five subjects it doesn’t save too many lines of code. But normally you will be working with many more items than five.
+If instead we use a loop, we just need to write the command one time. In this example, with only five subjects, so it doesn’t save too many lines of code. But normally you will be working with many more items than five.
 
 ```bash
 $ for ID in ${ARRAY[@]}
@@ -47,7 +47,7 @@ SUBJ4
 SUBJ3
 ```
 
-The previous `for` loop iterates through every item in `${ARRAY[@]}` (the items that would be listed if you typed `echo ${ARRAY[@]})`) and assign each item to the variable `ID` during the corresponding loop. So, the loop will run 5 times. The first time it runs it will assign the value `SUBJ0` to variable `ID`, the second loop will assign value `SUBJ9` to variable `ID`, etc.
+The previous `for` loop iterates through every item in `${ARRAY[@]}` (the items that would be listed if you typed `echo ${ARRAY[@]})`), and assign each item to the variable `ID` during the corresponding loop. So, the loop will run 5 times. The first time it runs it will assign the value `SUBJ0` to variable `ID`, the second loop will assign value `SUBJ9` to variable `ID`, etc.
 
 ```bash
 $ num=0
@@ -72,7 +72,7 @@ For example, if you have a folder located in the following path:
 
 And inside this folder you have 100 files named very similarly: DTI\_SUBJ1.nii.gz, DTI\_SUBJ2.nii.gz, DTI\_SUBJ3.nii.gz, DTI\_SUBJ4.nii.gz, DTI\_SUBJ5.nii.gz, ..., DTI\_SUBJ100.nii.gz
 
-Then, you could print the list of all those files by simply typing: `echo /Users/MyUserName/Desktop/MyProjectFolder/DTI_SUBJ*.nii.gz`. This command matches all the file paths that contain any characters in the position where the asterisk is located.
+Then, you could print the list of all those files by simply typing: `echo /Users/MyUserName/Desktop/MyProjectFolder/DTI_SUBJ*.nii.gz`. This command matches all the file paths that contain any number of characters in the position where the asterisk is located.
 
 Let's look at another example. Suppose that you have your subject's information organized the following way:
 
@@ -83,7 +83,7 @@ Let's look at another example. Suppose that you have your subject's information 
 
 If you wanted to obtain the list of paths for the DTI.nii.gz files of all subjects, you could type: `echo /Users/MyUserName/Desktop/MyProjectFolder/Subject*/DTI.nii.gz`. Because the path of these files is the same except for the subject number, you can create the pattern by substituting the part that changes by an asterisk.
 
-When using the asterisk, it will select all files that contain any amount of characters in that position. But if you want to restrict the search to a specific amount of characters, you could also use the interrogation character.
+When using the asterisk, it will select all files that contain any amount of characters in that position. But if you want to restrict the search to a specific amount of characters, you could also use the interrogation mark.
 
 For example, let's suppose you have a main folder located in the following path:
 /MyComputer/MyUser/MyDocuments/MyFolder
@@ -108,7 +108,7 @@ $ for f in /MyComputer/MyUser/MyDocuments/MyFolder/myFile00?.txt
 /MyComputer/MyUser/MyDocuments/MyFolder/myFile009.txt
 ```
 
-You could choose to print the results into a file instead of the command prompt. This can be easily achieved using the symbol `>>`. After running the following loop, you will not see any output in the command line, the path of the nine files will be saved to output.txt:
+You could choose to print the results into a file instead of the command prompt. This can be easily achieved using the symbol `>>`. After running the following loop, you will not see any output in the command line, the path of the nine files will be saved to `output.txt`:
 The command `cat ${maindir}output.txt` prints the content of this output file.
 
 ```bash
@@ -131,7 +131,7 @@ $ cat ${maindir}output.txt
 
 ### Iterating through files in your current directory
 
-To know the current directory in which you are located in the command line, type `pwd`. In the following example we want to we want to perform some action on all the files inside the current directory. To get the list of those files we use the command `ls`.
+To know the current directory in which you are located in the command line, type `pwd`. In the following example we want to we want to perform some action on all the files inside the current directory. To get the list of those files we use the `ls`.
 
 ```bash
 $ pwd
@@ -144,7 +144,7 @@ $ for f in $( ls )
 
 ## From `for` to `while`
 
-Every loop that you write using the `for` command can also be written with the `while` command. The results will be the same, but sometimes one of them will be more efficient and easier to code than the other.
+Every loop that you write using `for` can also be written with `while`. The results will be the same, but sometimes one of them will be more efficient and easier to code than the other.
 
 - You should use the **for** command when you want to iterate through **all the elements** of an array.
 - You should use the **for** command when iterating through **the indices** of an array (either all or a subset of them).
@@ -203,11 +203,11 @@ SUBJ3
 
 In the previous example both loops iterate through the elements of an array and print them in the terminal. However, there are some important differences:
 
-- The `for` loop automatically stops when iteration reaches the end of the array. The `while` loop stops when the condition (`[ ${i} -lt ${SIZE} ]`) evaluates `false`. This means that it will iterate as long as variable `i` is less than (`-lt`) `SIZE`. In the `while` loop, variable `i` contains the index of each item during the iteration and variable `SIZE` contains the size of the array. For this reason, `((i++))` is included inside the while loop. `((i++))` increments the value of `i` in 1 on each iteration. If you didn't include this, bash would iterate forever, because you wouldn't be increasing the value of `i` and it would always equal zero. Hence, it would never be less than the size of the array. So, the condition that the while evaluates will never be `false`. Since `while` iterates as long as that condition is `true`, it would iterate forever.
+- The `for` loop automatically stops when iteration reaches the end of the array. The `while` loop stops when the condition (`[ ${i} -lt ${SIZE} ]`) evaluates `false`. This means that it will iterate as long as variable `i` is less than (`-lt`) `SIZE`. In the `while` loop, variable `i` contains the index of each item during the iteration and variable `SIZE` contains the size of the array. For this reason, `((i++))` is included inside the while loop. `((i++))` increments the value of `i` in 1 on each iteration. If you didn't include this, Bash would iterate forever, because you wouldn't be increasing the value of `i` and it would always equal zero. Hence, it would never be less than the size of the array. So, the condition that the while evaluates will never be `false`. Since `while` iterates as long as that condition is `true`, it would iterate forever.
 - In the `for` loop each element of the array is saved in variable `E`. However, you don't have to assign each value to the variable, it is done automatically. In the `while` loop the element in the position `i` is referenced with `${ARRAY[${i}]}`.
-- In this case we want to iterate through all the elements of `ARRAY`. So, it makes more sense to use the `for` loop. But this is a good example to show how it works.
+- In this case we want to iterate through all the elements of `ARRAY`. So, it makes more sense to use the `for` loop.
 
-### Printing the elements of an array and their position within the array using `for` and `while`
+Below is another example on how to print the elements of an array and their position within the array using `for` and `while`:
 
 Using `for`:
 
@@ -243,9 +243,7 @@ Subject number 3 is SUBJ4
 Subject number 4 is SUBJ3
 ```
 
-### Printing *the first five* files in the current directory
-
-Previously we learned that the following loop would echo the path of all the files in the current directory:
+Previously we learned that the following loop would `echo` the path of all the files in the current directory:
 
 ```bash
 $ for f in $( ls )
@@ -266,9 +264,7 @@ $ while [ ${i} -le 4 ]
 > done
 ```
 
-### Rename *all* the files in the current directory that end in .nii.gz
-
-Before and after the loop I am printing the content of the folder to visualize the change. Command `ls` prints the content of the current directory:
+In the following example we rename *all* the files in the current directory that end in .nii.gz:
 
 ```bash
 $ ls
@@ -293,9 +289,7 @@ Subject_5.nii.gz
 Subject_6.nii.gz
 ```
 
-### Rename *the first three* files in the current directory that end in .nii.gz
-
-Before and after the loop I am printing the content of the folder to visualize the change. Command ls prints the content of the current directory:
+In the following example we rename *the first three* files in the current directory that end in .nii.gz:
 
 ```bash
 $ ls 10132423423.nii.gz
@@ -321,15 +315,15 @@ Subject_3.nii.gz
 
 ## The `while` loop
 
-### Using the `while` loop to iterate through more than one array
+### Iterating through multiple arrays
 
 As previously mentioned, when you are iterating through more than one array you should use `while` instead of `for`.
 
-### Iterating through two arrays at the same time
+**Iterating through two arrays at the same time:**
 
-In the following example there are two arrays (`ID` and `VISIT`), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (test.txt) using the command `cat`, which will be explained in detail in the following chapter ([File manipulation](files1.md)).
+In the following example we have two arrays (`ID` and `VISIT`), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (`test.txt`) using `cat`, which will be explained in detail in the following chapter ([File manipulation](files1.md)).
 
-This `while` loop will run as long as the two conditions (`[ ${i} -lt ${SIZE_ID} ]` and `[ ${i} -lt ${SIZE_VISIT} ]`) that are being evaluated be `true`. So, as soon as its value be greater than `SIZE_ID` or `SIZE_VISIT`, it will stop. It is extremely important to not forget the line `((i++))`. Otherwise, it will loop forever (you can always break a loop with Control + C).
+This `while` loop will run as long as the two conditions (`[ ${i} -lt ${SIZE_ID} ]` and `[ ${i} -lt ${SIZE_VISIT} ]`) are `true`. So, as soon as its value be greater than `SIZE_ID` or `SIZE_VISIT`, it will stop. It is important to **not** forget the line `((i++))`. Otherwise, it will loop forever (you can always break a loop with Control + C).
 
 ```bash
 $ declare -a ID=('SUBJ0' 'SUBJ1' 'SUBJ2' 'SUBJ3' 'SUBJ4' 'SUBJ5' 'SUBJ6')
@@ -352,7 +346,7 @@ SUBJ5_V2
 SUBJ6_V3
 ```
 
-### Inverting an array
+**Inverting an array:**
 
 In this example initially there is only one array, but after the code is executed there will be two arrays. The second array will be the inversion of the first one. The code will iterate starting at the end of the array and finishing at the beginning. In each iteration it will copy the current value into the new array. It will start adding items at the beginning of the new array (in the index 0).
 

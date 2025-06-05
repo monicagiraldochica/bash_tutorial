@@ -6,14 +6,14 @@ In order to compute arithmetic calculations with integers you can use one of the
 
 | Syntax | Usage |
 |-----------| ------- |
-| `$(( OPERATION ))` | Evaluates `OPERATION`. This can be any arithmetic operation with **integer** numbers. Including addition (`+`), subtraction (`-`), multiplication (`*`), division (`÷`), square root (`sqrt(NUM)`), exponentiation (`NUM**EXP`), etc. |
+| `$(( OPERATION ))` | Evaluates `OPERATION`. It can be any arithmetic operation with **integer** numbers. Including addition (`+`), subtraction (`-`), multiplication (`*`), division (`÷`), square root (`sqrt(NUM)`), exponentiation (`NUM**EXP`), etc. |
 | `((++NUM))` | Increases variable `NUM` in 1 before evaluating any expression that contains `++NUM`. |
 | `((NUM++))` | Increases variable `NUM` in 1 after evaluating any expression that contains `NUM++`. |
 | `((--NUM))` | Decreases variable `NUM` in 1 before evaluating any expression that contains `--NUM`. |
 | `((NUM--))` | Decreases variable `NUM` in 1 after evaluating any expression that contains `NUM--`. |
 | `((VAR+=NUM))` | Increases variable `VAR` in `NUM`. Equivalent to `VAR=$(( $VAR + $NUM ))`. |
 | `((VAR-=NUM))` | Decreases variable `VAR` in `NUM`. Equivalent to `VAR=$(( $VAR - $NUM ))`. |
-| `(( $i % 2 ))` | Returns `true` if `i` is an odd number (the division by 2 gives a remainder different than 0), `false` if `i` is even (the division by 2 gives a remainder of 0). |
+| `(( $i % 2 ))` | Returns `true` if `i` is an odd number or `false` if `i` is even. |
 
 ### Usage of `$(( OPERATION ))`
 
@@ -43,11 +43,11 @@ $ echo "B/A=$(( ${B} / ${A} ))"
 0
 ```
 
-In the last example the result is zero because this syntax is used for integer numbers. So, if the result of the operation is not an integer, it will be rounded to the nearest integer. In the next section you will learn how to operate with non-integer numbers.
+In the last example, the result is zero because this syntax is used for integer numbers. So, if the result of the operation is not an integer, it will be rounded to the nearest integer. In the next section you will learn [how to operate with non-integer numbers](#non-integer-calculations).
 
 ### Usage of `((++NUM))` and `((NUM++))`
 
-In order to increment the value of a variable by one, there are a couple of options. Some of these options will be very useful when doing iterations (which you will learn later on).
+In order to increment the value of a variable by one, there are a couple of options. Some of these options will be very useful when doing [iterations](./iteration.md) (which you will learn later on).
 
 #### `${NUM} + 1`
 
@@ -78,7 +78,7 @@ NUM=$(( ${NUM} + 1 ))
 echo ${NUM}
 ```
 
-First, increases the value of variable `NUM` in one, and then it echoes the result. Opposite to the example in the left, here the variable value is actually modified. And opposite to the example in the right, the variable value is modified before the other instruction (`echo`).
+First, increases the value of variable `NUM` in one, and then it echoes the result. Opposite to the example above, here the variable value is actually modified. And opposite to the example in the below, the variable value is modified before the other instruction (`echo`).
 
 #### `((NUM++))`
 
@@ -101,7 +101,7 @@ First echoes the value of `NUM`. Then, it increases the value of the variable.
 
 ### Usage of `((--NUM))` and `((NUM--))`
 
-Expressions `((--NUM))` and `((NUM--))` work in a very similar way than the previous ones, but instead of increasing the value of `NUM` by one, they decrease the value of `NUM` by one. These expressions will also be very useful once you learn iteration.
+Expressions `((--NUM))` and `((NUM--))` work in a very similar way than the previous ones, but instead of increasing the value of `NUM` by one, they decrease the value of `NUM` by one. These expressions will also be very useful once you learn [iteration](./iteration.md).
 
 #### `${NUM} - 1`
 
@@ -132,7 +132,7 @@ NUM=$(( ${NUM} - 1 ))
 echo ${NUM}
 ```
 
-First, decreases the value of variable `$NUM` in one, and then it echoes the result. Opposite to the example in the left, here the variable value is actually modified. And opposite to the example in the right, the variable value is modified before the other instruction (`=`).
+First, decreases the value of variable `$NUM` in one, and then it echoes the result. Opposite to the example above, here the variable value is actually modified. And opposite to the example below, the variable value is modified before the other instruction (`=`).
 
 #### `((NUM--))`
 
@@ -201,7 +201,7 @@ $ for i in $(seq 10)
 
 ## Non-integer calculations
 
-When programming in bash, you will often need to do mathematical operations that involve non-integer calculations. To do this, you will need the bc utility. You can use this utility also for integer calculations, but it is normally left for advanced math.
+When programming in Bash, you will often need to do mathematical operations that involve non-integer calculations. To do this, you will need the `bc` utility. You can use this utility also for integer calculations, but it is normally left for advanced math.
 
 | Syntax | Usage |
 |-----------| ------- |
@@ -284,7 +284,7 @@ $ echo "(2.34 / 1.895) + sqrt (10)= $(echo "(2.34 / 1.895) + sqrt (10)" | bc -l)
 
 ### `echo "scale=NDECIMALS; OPERATION" | bc -l`
 
-Clearly, some of the results of the previous examples have way too many decimals. You can cut the number of decimals using scale.
+Clearly, some of the results of the previous examples have too many decimals. You can cut the number of decimals using `scale`.
 
 ```bash
 $ echo "(2.34 / 1.895) + sqrt (10)" | bc -l
@@ -297,7 +297,7 @@ $ echo "scale=0; (2.34 / 1.895) + sqrt (10)" | bc -l
 
 ### Comparing non-integers
 
-In order to compare non-integers you can use the awk function. This function will be studied more in detail in later chapters as it is mainly used for processing files and strings. But as this example shows, it can also be used to deal with numbers.
+In order to compare non-integers you can use `awk`. This function will be studied more in detail in [later chapters](./files2.md#awk) as it is mainly used for processing files and strings. But as this example shows, it can also be used to deal with numbers.
 
 ```bash
 $ awk 'BEGIN{ print (2.41==2.4) ? "equal" : "not equal" }'

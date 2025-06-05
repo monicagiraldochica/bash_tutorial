@@ -52,7 +52,7 @@ The backslash is telling us to not treat the space as a special character but in
 
 The same will happen with a file which name contains the dollar sign (which is a special character). For example, if in the Desktop there is a folder named `untitled$folder`, `/Users/user_name/Desktop/untitled$folder` is not the absolute path. Instead, the absolute path will be `/Users/user_name/Desktop/untitled\$folder`.
 
-Again, the backslash is indicating us to treat the special character (`$`) as part of the file name and not as the beginning of a variable name (which is the normal use of `$` in bash). If we don't use the backslash before the dollar sign, bash will try to find a variable called folder (`$folder` normally refers to the value of folder as a variable, not a string). If that variable doesn't exist, then bash will read `/Users/user_name/Desktop/untitled$folder` as `/Users/user_name/Desktop/untitled`, replacing `$folder` for an empty space.
+Again, the backslash is indicating us to treat the special character (`$`) as part of the file name and not as the beginning of a variable name (which is the normal use of `$` in Bash). If we don't use the backslash before the dollar sign, Bash will try to find a variable called folder (`$folder` normally refers to the value of folder as a variable, not a string). If that variable doesn't exist, then Bash will read `/Users/user_name/Desktop/untitled$folder` as `/Users/user_name/Desktop/untitled`, replacing `$folder` for an empty space.
 
 In the following sections you will learn how the absolute and relative paths are used to manipulate files **in MacOS and Linux**.
 
@@ -157,7 +157,7 @@ MATLAB_R2014b.app
 
 **`ls -l`:**
 
-When using the flag `-l`, bash will not only show the list of files but also a description for each file. The output will be organized in columns, each one with a specific meaning that I will explain in the table below.
+When using the flag `-l`, Bash will not only show the list of files but also a description for each file. The output will be organized in columns, each one with a specific meaning that I will explain in the table below.
 
 ```bash
 $ ls -l /Volumes/MyExternalDrive

@@ -257,8 +257,6 @@ $ read -n -p 1 "Do you wish to continue? (y/n)" VAR
 
 In the following example the end of the line is determined by the character `#` instead of Enter (using the flag `-d`). As soon as the user types `#`, Bash finishes reading and saves the input in the variable `VAR`.
 
-In the wrong syntax, the command is missing the apostrophes (`'`) around the character `#`.
-
 Correct syntax:
 
 ```bash
@@ -268,7 +266,7 @@ $ echo $VAR
 SomeText
 ```
 
-Wrong syntax:
+Wrong syntax: In this example we are missing the apostrophes (`'`) around the character `#`. So, everything after `#` is being considered as comment and not as part of the command.
 
 ```bash
 $ read -d # VAR
@@ -276,9 +274,20 @@ $ read -d # VAR
 read: usage: read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars] [-d delim] [name ...]
 ```
 
+Keep in mind that Bash will convert any carriage return to spaces:
+
+```bash
+$ read -d '#' VAR
+lala
+aaaa
+#
+$ echo $VAR
+lala aaaa
+```
+
 **The backslash:**
 
-In Bash, certain characters have special meanings. For example, the dollar sign (`$`) is used to reference a variable. When you type `${VAR}`, Bash will print the value of `VAR`, instead of the actual string "\${VAR}". The backslash is used to remove those special meanings from the character followed by it.
+In Bash, certain characters have special meanings. For example, the dollar sign is used to reference a variable. When you type `${VAR}`, Bash will print the value of `VAR`, instead of the actual string "\${VAR}". The backslash is used to remove those special meanings from the character followed by it.
 
 ```bash
 $ VAR="Some text"
@@ -288,28 +297,24 @@ $ echo \${VAR}
 ${VAR}
 ```
 
-When using the flag `-r`, the backslash is part of the line instead of being used as an escape character. The following table shows examples in which the user inputs the same string but it is read differently because in one case the flag is used but not in the other.
-
-Examples using flag `-r`:
+When using the flag `-r`, the backslash is part of the line instead of being used as an escape character. The following examples show that when we use `-r` backslash is part of the input string, and when we don't, it's used as a scape character.
 
 ```bash
 $ read -r VAR
 C:\Documents\Newsletters\Summer2018.pdf
 $ echo ${VAR}
 C:\Documents\Newsletters\Summer2018.pdf
-$ read -r MESSAGE
-In HTML \n is used to indicate a new line
-$ echo ${MESSAGE}
-In HTML \n is used to indicate a new line
-```
-
-Examples without the flag `-r`:
-
-```bash
 $ read VAR
 C:\Documents\Newsletters\Summer2018.pdf
 $ echo ${VAR}
 C:DocumentsNewslettersSummer2018.pdf
+```
+
+```bash
+$ read -r MESSAGE
+In HTML \n is used to indicate a new line
+$ echo ${MESSAGE}
+In HTML \n is used to indicate a new line
 $ read MESSAGE
 In HTML \n is used to indicate a new line
 $ echo ${MESSAGE}
@@ -322,7 +327,7 @@ So far, we have used the command `read` to save the user input into a variable. 
 
 **Reading content from a variable:**
 
-In the following example, read reads the content of the variable VAR, but only keeps the first character (because it is using the `-n 1` flag):
+In the following example, read reads the content of the variable `VAR`, but only keeps the first character (because it is using the `-n 1` flag):
 
 ```bash
 $ VAR=yes
@@ -333,7 +338,7 @@ y
 
 **Reading and saving the output of a function:**
 
-`read` also allows you to read the output of a function and save it in a variable. In this example, we are saving the output of the `pwd` function into the variable `CURRENT_DIR`. `pwd` is a function that prints the current folder in which you are located in the command line.
+`read` also allows you to read the output of a function and save it into a variable. In this example, we are saving the output of the `pwd` into the variable `CURRENT_DIR`. `pwd` is a function that prints the current folder in which you are located in the command line.
 
 ```bash
 $ pwd

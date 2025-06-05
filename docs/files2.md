@@ -8,9 +8,9 @@ So far we have used echo to print text into the terminal. You can also use this 
 
 `echo "some text" >> someFile.txt` appends `some text` in a new line of `someFile.txt` and adds the new line character t=at the end. If `someFile.txt` didn't exist, the file is created.
 
-If you add the flag `-n`, bash won't print the trailing newline character: `echo -n "some text" >> someFile.txt`.
+If you add the flag `-n`, Bash won't print the trailing newline character: `echo -n "some text" >> someFile.txt`.
 
-If you add the flag `-e`, bash will interpret the character scape sequences in the text (see table below in the `printf` section for a list of scape sequences).
+If you add the flag `-e`, Bash will interpret the character scape sequences in the text (see table below in the `printf` section for a list of scape sequences).
 
 If you use `>` instead of `>>`, the previous contents of the file (if it existed) will be erased and replaced with the new text that you are echoing.
 
@@ -142,14 +142,14 @@ The `for` will read in each loop one line of the text file and extract the gende
 - PM: to save the movement of all male patients.
 - PF: to save the movement of all female patients.
 
-In bash it is not necessary to initialize an array. Instead, you can start adding values and the first time you add a value to a non-existent array, it will be automatically initialized. When you ask bash the size of an array that hasn’t been initialized, it will return the value zero.
+In Bash it is not necessary to initialize an array. Instead, you can start adding values and the first time you add a value to a non-existent array, it will be automatically initialized. When you ask Bash the size of an array that hasn’t been initialized, it will return the value zero.
 
 These are the steps to follow in order to calculate the minimum, maximum and average movement from the file:
 
 1. Create a loop that reads each line of the file (except the first one which is just a heather with column names).
 2. In each loop do the following:
     2.1. Split the line using the comma as a separator and save that in a variable called `ARRAY`.
-    2.2. Obtain the subject group, which is located in the 2nd column (position 1 of the array). Remember, bash arrays start in the position 0 (not the position 1).
+    2.2. Obtain the subject group, which is located in the 2nd column (position 1 of the array). Remember, Bash arrays start in the position 0 (not the position 1).
     2.3. Obtain the subject gender, which is located in the 3rd column (position 2 of the array).
     2.4. Obtain the subject movement, which is located in the 7th column (position 6 of the array).
     2.5. Depending on the value of the group and gender, add movement to the corresponding array:
@@ -259,7 +259,7 @@ done
 
 ### Reading lines with spaces
 
-In the previous example we read line by line a file using a `for` loop and the `cat` utility. This works most of the times. However, if you try to read this way a file in which one or more of the lines contain a space, bash will read each word separated by a space as a separate line.
+In the previous example we read line by line a file using a `for` loop and the `cat` utility. This works most of the times. However, if you try to read this way a file in which one or more of the lines contain a space, Bash will read each word separated by a space as a separate line.
 
 For example, if file `test.txt` has the following content:
 
@@ -290,7 +290,7 @@ $ for line in $(cat test.txt)
 9 j
 ```
 
-To fix this problem you have to tell bash that newline (`\n`) is the only separator. You do this by declaring the system variable `IFS=$'\n'`.
+To fix this problem you have to tell Bash that newline (`\n`) is the only separator. You do this by declaring the system variable `IFS=$'\n'`.
 
 ```bash
 $ IFS=$'\n'
@@ -334,7 +334,7 @@ $ echo "The last fifth of line is: "${ARRAY[4]}
 The fifth field of line is: DIAGN: Major Depressive Disorder
 ```
 
-However, this is not the correct result. The fifth field of `line` is `"DIAGN: Major Depressive Disorder, Single Episode, In Full Remission"`. But because we are using a comma as a separator, bash is separating this field into separate columns. To solve this problem, you can read from the file descriptor and save each field in a separate variable using the `read` utility. With `read` if one of the columns contains a comma but is surrounded by quotation marks, it will read the text inside the quotation marks as a single field.
+However, this is not the correct result. The fifth field of `line` is `"DIAGN: Major Depressive Disorder, Single Episode, In Full Remission"`. But because we are using a comma as a separator, Bash is separating this field into separate columns. To solve this problem, you can read from the file descriptor and save each field in a separate variable using the `read` utility. With `read` if one of the columns contains a comma but is surrounded by quotation marks, it will read the text inside the quotation marks as a single field.
 
 Suppose that you have a file called `example.csv` with the following content:
 
@@ -371,7 +371,7 @@ $ cat result.csv
 "SUBJ4","DIAGN: Autism, Dyslexia, ADHD"
 ```
 
-In the following example we are going to read the same csv file from above called `example.csv`. The file has four columns. We are going to use the `while` loop to iterate through each line of the file and save the fields in variables `f1`, `f2`, `f3`, `f4`. Before starting to iterate, we have to tell bash that comma will be the separator in each line with `IFS=','`.
+In the following example we are going to read the same csv file from above called `example.csv`. The file has four columns. We are going to use the `while` loop to iterate through each line of the file and save the fields in variables `f1`, `f2`, `f3`, `f4`. Before starting to iterate, we have to tell Bash that comma will be the separator in each line with `IFS=','`.
 
 ```bash
 $ IFS=','
@@ -410,7 +410,7 @@ Field 4: "DIAGN: Autism, Dyslexia, ADHD"
 
 ### `awk`
 
-`awk` is a bash program that scans files and process their content using patterns. It reads each line of a file or a group of files searching for the specified pattern and each time that it finds the pattern, performs an associated action. This tool can extract specific lines or columns from files, merge files, search the content of one file in the other, etc.
+`awk` is a Bash program that scans files and process their content using patterns. It reads each line of a file or a group of files searching for the specified pattern and each time that it finds the pattern, performs an associated action. This tool can extract specific lines or columns from files, merge files, search the content of one file in the other, etc.
 
 When reading each line of the specified files, `awk` will separate it into fields (columns) using the blank space as a separator. If your file uses a different separator (i.e. a comma), you must specify your separator using the `-F` flag (see syntax below). The different fields will be denoted `$1`, `$2`, `$3`... etc. `$0` will refer to the entire line. If the field separator (`FS`) is null, each line will be split into one field per character.
 
@@ -1389,7 +1389,7 @@ $ awk -F ',' '{print $1}' file1.csv | sort | uniq
 
 As explained in a previous example, to print the first column of `file1.csv` and `file3.csv` combined just use the command `awk` with the list of files to be read (`file1.csv file3.csv`) at the end of the command. Then, use `| sort` to organize the output in alphabetical order, and finally use `| uniq` to remove the duplicates.
 
-In this case, because the strings in `file1.csv` all start by colons, while the values in `file3.csv` don't, then all the values of `file1.csv` will be printed before those of `file3.csv`, because alphabetically, special characters such as `"` go before any letter (including A). So, for bash `"B11110455"` goes before `Anonymized ID`.
+In this case, because the strings in `file1.csv` all start by colons, while the values in `file3.csv` don't, then all the values of `file1.csv` will be printed before those of `file3.csv`, because alphabetically, special characters such as `"` go before any letter (including A). So, for Bash `"B11110455"` goes before `Anonymized ID`.
 
 ```bash
 $ awk -F ',' '{print $1}' file1.csv file3.csv | sort | uniq
@@ -1949,7 +1949,7 @@ patterns.txt:C11137439
 patterns.txt-B11119909
 ```
 
-**Example 11:** Print the line(s) of any file in the current directory that contain the string C11137439, each line preceded by the previous three lines in the corresponding file (if there is three or more lines before the matched one).
+**Example 11:** Print the line(s) of any file in the current directory that contain the string `C11137439`, each line preceded by the previous three lines in the corresponding file (if there is three or more lines before the matched one).
 
 ```bash
 $ grep -B 3 "C11137439" *
