@@ -4,9 +4,9 @@
 
 ### `echo`
 
-So far we have used echo to print text into the terminal. You can also use this utility to print text into a file (and create a new file if it doesn't exist):
+So far we have used `echo` to print text into the terminal. You can also use this utility to print text into a file (and create a new file if it doesn't exist):
 
-`echo "some text" >> someFile.txt` appends `some text` in a new line of `someFile.txt` and adds the new line character t=at the end. If `someFile.txt` didn't exist, the file is created.
+`echo "some text" >> someFile.txt` appends `some text` in a new line of `someFile.txt` and adds the new line character at the end. If `someFile.txt` didn't exist, the file is created.
 
 If you add the flag `-n`, Bash won't print the trailing newline character: `echo -n "some text" >> someFile.txt`.
 
@@ -16,19 +16,19 @@ If you use `>` instead of `>>`, the previous contents of the file (if it existed
 
 ### `printf`
 
-printf is a powerful tool that allows you to format the information before printing it in a file, the command line or another variable. For example, you can specify the format of any number that you print and the number of decimal points you want to use. You could even use this tool to change the format of a variable (i.e. from scientific notation to float) and save the result in a new variable instead of a file. You can also add tab or any character scape sequence to your text.
+`printf` is a powerful tool that allows you to format the information before printing it in a file, the command line or another variable. For example, you can specify the format of any number that you print and the number of decimal points you want to use. You could even use this tool to change the format of a variable (i.e. from scientific notation to float) and save the result in a new variable instead of a file. You can also add tab or any character scape sequence to your text.
 
 Syntax: `printf <format> <arguments>`
 
-`printf` uses the format specified in `<format>` to print the objects (strings, numbers or variables) specified in `<arguments>`. `<format>` is a string that contains alphanumerical characters, character scape sequences and format specifications, each of which causes printing of the next successive argument. In contrast with the `echo` command, `printf` does not print the text in a new line by default, in order to add a new line the following character scape sequence should be added at the end of `<format>`: `\n`.
+`printf` uses the format specified in `<format>` to print the objects (strings, numbers or variables) specified in `<arguments>`. In contrast with the `echo` command, `printf` does not print the text in a new line by default, in order to add a new line the following character scape sequence should be added at the end of `<format>`: `\n`.
 
 ### Format
 
-As explained above, `format` is the first string after `printf` and indicates the type of format that should be used to print the arguments. The following table shows the strings that can be used for formatting.
+`<format>` is a string that contains alphanumerical characters, character scape sequences and format specifications, each of which causes printing of the next successive argument. The table below shows the strings that can be used for formatting.
 
 One should specify one format per argument. For example, in the command `printf "%d %s" 10 "my_string"`, `"%d %s"` is the format, which indicates that the first argument after the format (`10`) should be printed as a decimal (`%d`). Then, there should be a space, and then the second argument (`my_string`) should be printed as a string (`%s`).
 
-In the command `printf "%d %s\n" 10 "my_string"`, `%d %s\n` is the format, which indicates that the first argument after the format (`10`) should be printed as a decimal (`%d`), followed by a space. The second argument (`string`) should be printed as a string (`%s`). It also indicates that after the second argument there should be a new-line character (`\n`). `\n` is a scape sequence. The list of [scape sequences](#scape-sequences) can be found bellow. If any of the arguments is a string with special characters, spaces or [scape sequences](#scape-sequences), make sure to always surround it with quotation marks.
+In `printf "%d %s\n" 10 "my_string"`, `%d %s\n` is the format, which indicates that the first argument after the format (`10`) should be printed as a decimal (`%d`), followed by a space. The second argument (`string`) should be printed as a string (`%s`). It also indicates that after the second argument there should be a new-line character (`\n`). `\n` is a scape sequence. The list of [scape sequences](#scape-sequences) can be found bellow. If any of the arguments is a string with special characters, spaces or [scape sequences](#scape-sequences), make sure to always surround it with quotation marks.
 
 | Format option | Meaning |
 | --- | --- |
@@ -36,7 +36,7 @@ In the command `printf "%d %s\n" 10 "my_string"`, `%d %s\n` is the format, which
 | `%b` | Prints the corresponding argument as a string. The [scape sequences](#scape-sequences) are interpreted instead of reading them as literal strings. It will stop when the number of characters specified in the precision is reached or at the end of the string if the precision is not specified (or if the string has less characters than the precision). |
 | `%c` | Prints the first character of the corresponding argument if it is a string or the first digit if it's a number. `printf "%c %c" "some string" 199` will print `s 1`. |
 | `%d` | The corresponding argument is a positive or negative integer number. If no precision is specified, it just prints the number. Otherwise, adds zeros before the integer to achieve the number of digits specified in the precision. For example, `printf "%d %.5d\n" -2 2` prints `-2 00002`. |
-| `%e` | Prints the corresponding argument, which should be a number, in scientific notation. There will be one digit before the decimal point and six digits after the decimal point if no precision is specified (or the number of digits specified in the precision). Infinity is printed as `inf` and NaN as `nan`. For example, 234.567 equals 2.34567 × 102 in scientific notation. So, if we use `printf "%e" 234.567`, the result will be `2.345670e+02`. |
+| `%e` | Prints the corresponding argument, which should be a number, in scientific notation. There will be one digit before the decimal point and six digits after the decimal point if no precision is specified (or the number of digits specified in the precision). Infinity is printed as `inf` and NaN as `nan`. For example, `234.567` equals `2.34567 × 102` in scientific notation. So, if we use `printf "%e" 234.567`, the result will be `2.345670e+02`. |
 | `%f` | Prints the corresponding argument, which should be a number, in floating-point. The number of digits after the decimal point equals the precision or six digits if no precision was specified. Infinity is printed as `inf` and NaN as `nan`. For example, `printf "%f\n" 2.34567890123` will print `2.345679` and `printf "%.3f\n" -2.34567890123` will print `-2.346`. |
 | `%s` | Prints the corresponding argument as a string. The [scape sequences](#scape-sequences) are interpreted as literal strings. So, `printf "%s,%s" "text1" "text2\ttext3"` will print `text1,text2ttext3`, no tab introduced. It will stop when the number of characters specified in the precision is reached or at the end of the string if the precision is not specified (or if the string has less characters than the precision). For example, `printf "%s" "example"` will print `example`, and `printf "%.3s" "example"` will print `exa`. |
 
@@ -48,14 +48,14 @@ In the command `printf "%d %s\n" 10 "my_string"`, `%d %s\n` is the format, which
 | `\c` | Suppresses any output after the sequence. For example, `printf "%b" "Hello\c World"` will print only `Hello`. `World` will not be printed. |
 | `\n` | Write a new-line character. For example, `printf "%b" "abc\ndef"` will print `abc` in one line, and `def` in another line. |
 | `\r` | Moves the cursor to the beginning of the current line. So, the following characters will replace the ones at the beginning of the line. For example, `printf "%b" "Happy World\rLala"` prints `Lalay World` because `Lala` is written at the beginning of the line and replaces `Happ`. |
-| `\t` | Write a tab character |
+| `\t` | Write a tab character. |
 | `\v` | Write a vertical tab. |
 | `\'` | Write a single quote character. |
 | `\\` | Write a backslash character. |
 
-### Assigning result to a variable
+### Save result to a variable
 
-You can save the output of printf into a variable instead of printing it. For example, if you have a number in scientific notation and you want to convert it to floating, you can type the following:
+You can save the output of `printf` into a variable instead of printing it. For example, if you have a number in scientific notation and you want to convert it to floating, you can type the following:
 
 ```bash
 $ FLOAT=$(printf "%f" 2.345670e+02)
@@ -65,7 +65,7 @@ $ echo $FLOAT
 
 ## Reading files
 
-### Reading a file line by line
+### Reading line by line
 
 The `cat` command, followed by the path of a file, can be used to visualize the content of the file in the command line:
 
@@ -113,7 +113,7 @@ CC,CC0384433
 DD,DD0385444
 ```
 
-### Statistics on a column
+### Doing statistics
 
 This is the content of `infoFile.txt`:
 
@@ -142,35 +142,39 @@ The `for` will read in each loop one line of the text file and extract the gende
 - PM: to save the movement of all male patients.
 - PF: to save the movement of all female patients.
 
-In Bash it is not necessary to initialize an array. Instead, you can start adding values and the first time you add a value to a non-existent array, it will be automatically initialized. When you ask Bash the size of an array that hasn’t been initialized, it will return the value zero.
+In Bash it is not necessary to initialize an array. Instead, you can start adding values. The first time that you add a value to a non-existent array, it will be automatically initialized. When you ask Bash the size of an array that hasn’t been initialized, it will return value zero.
 
 These are the steps to follow in order to calculate the minimum, maximum and average movement from the file:
 
 1. Create a loop that reads each line of the file (except the first one which is just a heather with column names).
 2. In each loop do the following:
-    2.1. Split the line using the comma as a separator and save that in a variable called `ARRAY`.
-    2.2. Obtain the subject group, which is located in the 2nd column (position 1 of the array). Remember, Bash arrays start in the position 0 (not the position 1).
-    2.3. Obtain the subject gender, which is located in the 3rd column (position 2 of the array).
-    2.4. Obtain the subject movement, which is located in the 7th column (position 6 of the array).
-    2.5. Depending on the value of the group and gender, add movement to the corresponding array:
-        - If group equals "Control" and gender equals "M" (Male): Add the movement at the end of the array `CM`. If `CM` has zero values, the new item should be added to the position 0, if `CM` has one value, the new item should be added to the position 1 (because the existent item in the array will be in the position 0), and so on. So, every new item is added to the position that is equal to the current size of the array. As a reminder, the size of an array can be obtained with `${#array[@]}`.
-        - If group equals "Control" and gender equals "F" (Female): Add the movement at the end of the array `CF`.
-        - If group equals "Patient" and gender equals "M": Add the movement at the end of the array `PM`.
-        - If group equals "Patient" and gender equals "F": Add the movement at the end of the array `PF`.
+    1. Split the line using the comma as a separator and save that in a variable called `ARRAY`.
+    2. Obtain the subject group, which is located in the 2nd column (position 1 of the array). Remember, Bash arrays start in the position 0 (not the position 1).
+    3. Obtain the subject gender, which is located in the 3rd column (position 2 of the array).
+    4. Obtain the subject movement, which is located in the 7th column (position 6 of the array).
+    5. Depending on the value of the group and gender, add movement to the corresponding array:
+        - If `group` equals `Control` and `gender` equals `M` (Male): Add the movement at the end of the array `CM`.
+            - If `CM` has zero values, the new item should be added to the position 0
+            - If `CM` has one value, the new item should be added to the position 1 (because the existent item in the array will be in the position 0).
+            - Every new item is added to the position that is equal to the current size of the array. The size of an array can be obtained with `${#array[@]}`.
+        - If `group` equals `Control` and `gender` equals `F` (Female): Add the movement at the end of the array `CF`.
+        - If `group` equals `Patient` and `gender` equals `M`: Add the movement at the end of the array `PM`.
+        - If `group` equals `Patient` and `gender` equals `F`: Add the movement at the end of the array `PF`.
 3. Sort the four arrays with the previously learned command: `IFS=$'\n' sorted=($(sort <<<"${array[*]}"))`
-4. Show the minimum, maximum and average value of each array. Use `printf` instead of `echo` in order to show only three decimals per number:
+4. Show the minimum, maximum and average value of each array:
+    - Use `printf` instead of `echo` in order to show only three decimals per number.
     - Minimum value: will be the first value in the sorted array.
     - Maximum value: will be the last value in the sorted array (in the position `SIZE_ARRAY–1`).
-    - Average value: will equal to the sum of all values divided by the size of the array. As a reminder, this is the general command used to calculate the average of an array, as shown in previous chapters: `IFS='+' avg=$(echo "scale=1;(${array[*]})/${#array[@]}"|bc)`.
+    - Average value: will equal to the sum of all values divided by the size of the array using `IFS='+' avg=$(echo "scale=1;(${array[*]})/${#array[@]}"|bc)`.
 
 Now, lets see this in actual code:
 
+First, loop through each line of the file, skipping the first row with the heathers using `if [ $((n++)) -gt 0 ]`:
+
 ```bash
-# Loop through the lines of the file
 n=0
 for line in $(cat infoFile.csv)
 do
-# Skip the first row with the heathers
 if [ $((n++)) -gt 0 ]
 then
     IFS=',' read -a ARRAY <<< "${line}"
@@ -198,29 +202,41 @@ then
     fi
 fi
 done
+```
 
-# Get the minimum, maximum and average values of the CM array (Controls, Males)
+Then, get the minimum, maximum and average values of the CM array (Controls, Males):
+
+```bash
 IFS=$'\n' sortedCM=($(sort <<<"${CM[*]}"))
 IFS='+' avg=$(echo "scale=4;(${CM[*]})/${#CM[@]}"|bc)
 printf "Male Controls:\nMin: %.3f\nMax: %.3f\nAve: %.3f\n" ${sortedCM[0]} ${sortedCM[${#sortedCM[@]} -1]} $avg
+```
 
-# Get the minimum, maximum and average values of the CF array (Controls, Females)
+Now get the minimum, maximum and average values of the CF array (Controls, Females):
+
+```bash
 IFS=$'\n' sortedCF=($(sort <<<"${CF[*]}"))
 IFS='+' avg=$(echo "scale=4;(${CF[*]})/${#CF[@]}"|bc)
 printf "Male Controls:\nMin: %.3f\nMax: %.3f\nAve: %.3f\n" ${sortedCF[0]} ${sortedCF[${#sortedCF[@]} -1]} $avg
+```
 
-# Get the minimum, maximum and average values of the PM array (Patients, Males)
+Get the minimum, maximum and average values of the PM array (Patients, Males):
+
+```bash
 IFS=$'\n' sortedPM=($(sort <<<"${PM[*]}"))
 IFS='+' avg=$(echo "scale=4;(${PM[*]})/${#PM[@]}"|bc)
 printf "Male Controls:\nMin: %.3f\nMax: %.3f\nAve: %.3f\n" ${sortedPM[0]} ${sortedPM[${#sortedPM[@]} -1]} $avg
+```
 
-# Get the minimum, maximum and average values of the PF array (Patients, Females)
+Get the minimum, maximum and average values of the PF array (Patients, Females):
+
+```bash
 IFS=$'\n' sortedPF=($(sort <<<"${PF[*]}"))
 IFS='+' avg=$(echo "scale=4;(${PF[*]})/${#PF[@]}"|bc)
 printf "Male Controls:\nMin: %.3f\nMax: %.3f\nAve: %.3f\n" ${sortedPF[0]}
 ```
 
-The number of lines in the loop of the previous code could be reduced by simplifying the `if` expressions. The code below is equivalent to the one above (the loop), but written in less lines. In the chapter of [Condition testing](condition_test.md) I explain how to simplify `if` expressions:
+The number of lines in the loop could be reduced by simplifying the `if` expressions. The code below is equivalent to loop above, but uses less lines. In the chapter of [Condition testing](condition_test.md) I explain in detail how to simplify `if` expressions:
 
 ```bash
 n=0
@@ -257,7 +273,7 @@ fi
 done
 ```
 
-### Reading lines with spaces
+### Dealing with spaces
 
 In the previous example we read line by line a file using a `for` loop and the `cat` utility. This works most of the times. However, if you try to read this way a file in which one or more of the lines contain a space, Bash will read each word separated by a space as a separate line.
 
@@ -334,7 +350,7 @@ $ echo "The last fifth of line is: "${ARRAY[4]}
 The fifth field of line is: DIAGN: Major Depressive Disorder
 ```
 
-However, this is not the correct result. The fifth field of `line` is `"DIAGN: Major Depressive Disorder, Single Episode, In Full Remission"`. But because we are using a comma as a separator, Bash is separating this field into separate columns. To solve this problem, you can read from the file descriptor and save each field in a separate variable using the `read` utility. With `read` if one of the columns contains a comma but is surrounded by quotation marks, it will read the text inside the quotation marks as a single field.
+However, this is not the correct result. The fifth field of `line` is `"DIAGN: Major Depressive Disorder, Single Episode, In Full Remission"`. But because we are using a comma as a separator, Bash is separating this field into separate columns. To solve this problem, you can read from the file descriptor and save each field in a separate variable using `read`. With `read` if one of the columns contains a comma, but is surrounded by quotation marks, it will read the text inside the quotation marks as a single field.
 
 Suppose that you have a file called `example.csv` with the following content:
 
@@ -347,23 +363,39 @@ Suppose that you have a file called `example.csv` with the following content:
 
 You want to read each line of the file and save the first and last fields into a new file called `result.csv`. You would accomplish that with the following code:
 
+Assign the file descriptor 3 (or any integer number) to example.csv:
+
 ```bash
-# Assign the file descriptor 3 (or any integer number) to example.csv
-$ exec 3< example.csv
-# Obtain the number of lines in the input file
+exec 3< example.csv
+```
+
+Obtain the number of lines in the input file:
+
+```bash
 $ N=$(cat example.csv | wc -l)
 $ echo $N
 4
-# Iterate through all the lines of the file
+```
+
+Iterate through all the lines of the file:
+
+```bash
 $ i=0
 $ while [ $((i++)) -lt $N ]
 > do
 > IFS=',' read -u 3 f1 f2 f3 f4 # Save each field in a different variable. Variable f1 will contain the 1st field, variable f2 the second field, etc.
 > echo "$f1,$f4" >> result.csv # Write the value of the first and last fields into the output file.
 > done
-# You must close the file descriptor using the following command (replace number 3 by the corresponding file descriptor)
-$ exec 3<&-
-# Read the content of the output file
+```
+
+You **must** close the file descriptor using the following command (replace number 3 by the corresponding file descriptor):
+
+```bash
+exec 3<&-
+```
+Finally, read the content of the output file
+
+```bash
 $ cat result.csv
 "SUBJ1","DIAGN: Major Depressive Disorder, Single Episode"
 "SUBJ2","DIAGN: Bipolar, Schizophrenia"
@@ -406,15 +438,13 @@ Field 3: "VISIT1"
 Field 4: "DIAGN: Autism, Dyslexia, ADHD"
 ```
 
-## `awk` and `grep`
+## `awk`
 
-### `awk`
-
-`awk` is a Bash program that scans files and process their content using patterns. It reads each line of a file or a group of files searching for the specified pattern and each time that it finds the pattern, performs an associated action. This tool can extract specific lines or columns from files, merge files, search the content of one file in the other, etc.
+`awk` is a Bash command that scans files and process their content using patterns. It reads each line of a file or a group of files searching for the specified pattern and each time that it finds the pattern, performs an associated action. This tool can extract specific lines or columns from files, merge files, search the content of one file in the other, etc.
 
 When reading each line of the specified files, `awk` will separate it into fields (columns) using the blank space as a separator. If your file uses a different separator (i.e. a comma), you must specify your separator using the `-F` flag (see syntax below). The different fields will be denoted `$1`, `$2`, `$3`... etc. `$0` will refer to the entire line. If the field separator (`FS`) is null, each line will be split into one field per character.
 
-See the examples section for a better understanding of this command.
+See the [examples section](#examples-awk-and-grep) for a better understanding of this command.
 
 Syntax: `awk [ -F fs ] [ -v var=value ] [ 'pattern {action}' ] [ files ] | [ other functions ]`
 
@@ -425,11 +455,11 @@ Syntax: `awk [ -F fs ] [ -v var=value ] [ 'pattern {action}' ] [ files ] | [ oth
 | `files` | List of files to be searched. |
 | other functions (optional) | You can apply to the output of `awk` other functions such as `head`, `tail`, `paste`, `grep`, etc. |
 
-### `grep`
+## `grep`
 
-`grep` searches a given pattern or text in a file or list of files. `grep` is is able to find simple patterns and basic regular expressions, `egrep` can perform search of extended regular expressions. `fgrep` is quicker than both tools but can only handle fixed patterns. `zgrep`, `zegrep`, and `zfgrep` act like `grep`, `egrep`, and `fgrep`, respectively, but accept compressed files as input.
+`grep` searches a given pattern or text in a file or list of files. `grep` is able to find simple patterns and basic regular expressions, `egrep` can perform search of extended regular expressions. `fgrep` is quicker than both tools, but can only handle fixed patterns. `zgrep`, `zegrep`, and `zfgrep` act like `grep`, `egrep`, and `fgrep`, respectively, but accept compressed files as input.
 
-See the examples section for a better understanding of this command.
+See the [examples section](#examples-awk-and-grep) for a better understanding of this command.
 
 Syntax: `grep [flag] [pattern] [file(s)]`
 
@@ -478,7 +508,7 @@ Syntax: `grep [flag] [pattern] [file(s)]`
 | `-Z` or `-z` | Accepts compressed input files. |
 | `--line-buffered` | Force output to be line buffered. By default, output is line buffered when standard output is a terminal and block buffered otherwise. |
 
-### Examples of `awk` and `grep`
+## Examples: `awk` and `grep`
 
 The following examples will show how to read and manipulate files using different command line tools. Each example will read one or more of the following files. `file1.csv` and `file3.csv` use comma as the separator between columns. On the other hand, `file2.txt` and file `file4.txt` use a space as the separator between columns.
 
@@ -617,11 +647,11 @@ B12226507 Group1 26
 B12226546 Group1 55
 ```
 
-#### Reading specific columns
+### Reading specific columns
 
 **Example 1:** Print the first column of each file.
 
-In order to print the first column of these files, we will use `awk` utility. As it was shown before, the command for this utility consists on some optional flags followed by an action statement, and then the list of files. In this case, the action statement is `'{print $1}'`, because we want to print only the first column (`$1`). Files `file2.txt` and `file4.txt` use a space as a column separator (which is the separator for default). So, to access the first column of these files we don't need the `-F` flag. However, files `file1.csv` and `file3.csv` use a comma as a separator. So, in order for `awk` to distinguish the different columns, we have to use the `-F` flag. In this case, the parameter of the `-F` flag is a comma (`-F','`). If you are trying to read a file which has the columns separated by a different character, then use that character instead of `','`.
+In order to print the first column of these files, we will use `awk`. As it was shown before, the command for this utility consists on some optional flags followed by an action statement, and then the list of files. In this case, the action statement is `'{print $1}'`, because we want to print only the first column (`$1`). Files `file2.txt` and `file4.txt` use a space as a column separator (which is the separator for default). So, to access the first column of these files we don't need the `-F` flag. However, files `file1.csv` and `file3.csv` use a comma as a separator. So, in order for `awk` to distinguish the different columns, we have to use the `-F` flag. In this case, the parameter of the `-F` flag is a comma (`-F','`). If you are trying to read a file which has the columns separated by a different character, then use that character instead of `','`.
 
 Space-separated files:
 
@@ -1235,7 +1265,7 @@ Since the column separator for this list of files is a comma, you need to use th
 awk -F',' '{print $1}' file3.csv file1.csv
 ```
 
-#### sorting columns
+### Sorting columns
 
 **Example 1:** Print the first column of `file1.csv` and `file2.txt` in **alphabetical order**.
 
@@ -1445,7 +1475,7 @@ D11144030
 
 ## The `paste` command
 
-### Horizontal concatenation of files
+### Concatenate files horizontally
 
 **Example1:** Concatenate all the columns of `file2.txt` and `file4.txt` horizontally, using a space as separator between the columns of one file and the other.
 

@@ -532,7 +532,7 @@ The `rm` command permanently deletes a file or a folder and all its contents. Fo
 
 Syntax: `mkdir folder`
 
-Creates a new directory if it doesn't exist. One can use a relative or an absolute path. `mkdir myfolder` will create a folder named myfolder in the current directory. `mkdir ~/Desktop/myfolder` will create a folder named myfolder in the Desktop.
+Creates a new directory if it doesn't exist. One can use a relative or an absolute path. `mkdir myfolder` will create a folder named `myfolder` in the current directory. `mkdir ~/Desktop/myfolder` will create a folder named `myfolder` in the Desktop.
 
 ### The `touch` command
 
@@ -544,8 +544,8 @@ The main use of this command is to create an empty file with the corresponding n
 | --- | --- | --- |
 | `-a` | Change the access time of a file to the current date and time. | `touch -a file1.txt` |
 | `-m` | Update the modification time of a file to the current date and time. | `touch -m file1.txt` |
-| `-d DATE` | Update the modification time of a file to `DATE` | `touch -d "2025-01-20 10:33" myfile.txt` |
-| `-r reference_file` | Update the modification time of a file to the one of `reference_file` | `touch -r myscript.sh myfile.txt` changes the times of `myfile.txt` to those of `myscript.sh` |
+| `-d DATE` | Update the modification time of a file to `DATE`. | `touch -d "2025-01-20 10:33" myfile.txt` |
+| `-r reference_file` | Update the modification time of a file to the one of `reference_file`. | `touch -r myscript.sh myfile.txt` changes the times of `myfile.txt` to those of `myscript.sh` |
 
 ### The `find` command
 
@@ -553,7 +553,7 @@ This command is used to locate files and data in the system.
 
 #### Finding a specific file
 
-In the example below `2>/dev/null` silences permission errors. This search is case sensitive. It will search for a file named `"file.txt"` starting in `/Path/to/start/search/`.
+In the example below `2>/dev/null` silences permission errors. This search is case sensitive. It will search for a file named `file.txt` starting in `/Path/to/start/search/`.
 
 ```bash
 find /Path/to/start/search/ -name "file.txt" 2>/dev/null
@@ -565,7 +565,7 @@ The search in the example below is the same as the one above but with a case ins
 find /Path/to/start/search/ -iname "file.txt" 2>/dev/null
 ```
 
-#### Finding a file using a pattern
+#### Finding a file using patterns
 
 One could use `-name` instead of `-iname` to make it case sensitive. Here we are searching for files that contain the string `file` in their name, followed by one character and the .txt extension. They can have any or no characters before `file`.
 
@@ -581,23 +581,35 @@ In the following example, we list the content of `/Path/to/start/search/` and of
 find /Path/to/start/search/ -ls
 ```
 
-#### Doing something with the output of `find`
+#### Manipulate the output of `find`
 
-One could use the output of `find` to do something, for example, search if any of the files found contain certain text or execute any command on each of those files. To achieve this, we use the flag `-exec`.
+One could use the output of `find` to do something, for example, search if any of the files contain certain text, or execute a command on each of those files. To achieve this, we use the flag `-exec`.
 
 The expression **must** have a `\;` or a `+` at the end.
 
-If the expression ends with `\;`, the command or commands after `exec` will be executed of each output file of `find` separately. The semicolon is escaped because we don't want shell to interpret it.
+If the expression ends with `\;`, the command or commands after `exec` will be executed of each output file of `find` separately. The semicolon is escaped because we don't want Bash to interpret it.
 
 If the expression ends with `+`, all the outputs of `find` will be concatenated and passed as a whole string to the command being executed, and this command will only be run once on this string.
 
 Examples:
 
-Use [`file`](https://linux.die.net/man/1/file) on the output files of `find`: `find /Path/to/start/search/ -name "*.txt" -exec file {} \;`. You could use any shell command instead of `file`.
+Use [`file`](https://linux.die.net/man/1/file) on the output files of `find`: You could use any shell command instead of `file`.
 
-Use [`basename`](https://linux.die.net/man/1/basename) on the output files of `find`: `find /Path/to/start/search/ -name "*.txt" -exec file {} \;`. You could use any shell command instead of `basename`.
+```bash
+find /Path/to/start/search/ -name "*.txt" -exec file {} \;
+```
 
-Use grep to process the output of `find`: `find /Path/to/start/search/ -name "*.txt" -exec grep grep_flags {} \;`
+Use [`basename`](https://linux.die.net/man/1/basename) on the output files of `find`:
+
+```bash
+find /Path/to/start/search/ -name "*.txt" -exec file {} \;
+```
+
+Use [`grep`](./files2.md#grep) to process the output of `find`:
+
+```bash
+find /Path/to/start/search/ -name "*.txt" -exec grep grep_flags {} \;
+```
 
 Run a function on the output files of `find`:
 
@@ -609,10 +621,13 @@ export -f my_function
 find /Path/to/start/search/ -name "*.txt" -exec bash -c "my_function {}" \;
 ```
 
-If I know that some of the output files of find will have some spaces, I should change the last line of the example above to (put escaped quotation marks around the brackets):
-`find /Path/to/start/search/ -name "*.txt" -exec bash -c "my_function \"{}\"" \;`
+If I know that some of the output files of `find` will have spaces or other special character, I should change the last line of the example above to the following (put escaped quotation marks around the brackets):
 
-#### Searching for files of a specific type
+```bash
+find /Path/to/start/search/ -name "*.txt" -exec bash -c "my_function \"{}\"" \;
+```
+
+#### Search by type
 
 Get the list of directories inside `/Path/to/start/search/`:
 

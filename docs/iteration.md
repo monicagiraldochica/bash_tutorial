@@ -312,7 +312,7 @@ Subject_3.nii.gz
 
 As previously mentioned, when you are iterating through more than one array you should use `while` instead of `for`.
 
-**Iterating through two arrays at the same time:**
+#### Iterating through two arrays
 
 In the following example we have two arrays (`ID` and `VISIT`), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (`test.txt`) using `cat`, which will be explained in detail in the following chapter ([File manipulation](files1.md)).
 
@@ -339,7 +339,7 @@ SUBJ5_V2
 SUBJ6_V3
 ```
 
-**Inverting an array:**
+#### Inverting an array
 
 In this example initially there is only one array, but after the code is executed there will be two arrays. The second array will be the inversion of the first one. The code will iterate starting at the end of the array and finishing at the beginning. In each iteration it will copy the current value into the new array. It will start adding items at the beginning of the new array (in the index 0).
 
