@@ -1,6 +1,6 @@
 # Iteration
 
-Iteration is the repetition of commands on a list of items. For example, you might use iteration to manipulate in the same way a long list of files. It saves time because instead of typing the same command 100 times to do the exact same thing on 100 files, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.
+Iteration is the repetition of commands on a list of items. For example, you might use iteration to manipulate in the same way a long list of files. It saves time because instead of typing the same command 100 times to do the same thing on 100 files, you type it just one time inside a loop. You will use loops (as well as condition-testing) in almost every script that you write.
 
 | Command | Use | Syntax |
 | --- | --- | --- |
@@ -10,7 +10,7 @@ Iteration is the repetition of commands on a list of items. For example, you mig
 
 ## The `for` loop
 
-### Iterating through an array of words
+### Array of words
 
 In the following example we have an array with a list of subjects:
 
@@ -63,34 +63,27 @@ Subject number 3 is SUBJ4
 Subject number 4 is SUBJ3
 ```
 
-### Iterating through files using patterns
+### Using patterns
 
-As we learned in the [arrays section](arrays.md), you can use patterns to create arrays. You can also use patterns to list files with a very similar path except for a few words.
+As we learned in the [arrays section](arrays.md), you can use patterns to create arrays. You can also use patterns to list files that have a similar path except for a few words or letters.
 
-For example, if you have a folder located in the following path:
-/Users/MyUserName/Desktop/MyProjectFolder
-
-And inside this folder you have 100 files named very similarly: DTI\_SUBJ1.nii.gz, DTI\_SUBJ2.nii.gz, DTI\_SUBJ3.nii.gz, DTI\_SUBJ4.nii.gz, DTI\_SUBJ5.nii.gz, ..., DTI\_SUBJ100.nii.gz
+For example, if you have a folder located in the following path: `/Users/MyUserName/Desktop/MyProjectFolder`. Inside this folder you have 100 files named very similarly: `DTI_SUBJ1.nii.gz, DTI_SUBJ2.nii.gz, DTI_SUBJ3.nii.gz, DTI_SUBJ4.nii.gz, DTI_SUBJ5.nii.gz, ..., DTI_SUBJ100.nii.gz`
 
 Then, you could print the list of all those files by simply typing: `echo /Users/MyUserName/Desktop/MyProjectFolder/DTI_SUBJ*.nii.gz`. This command matches all the file paths that contain any number of characters in the position where the asterisk is located.
 
-Let's look at another example. Suppose that you have your subject's information organized the following way:
+Let's look at another example. Suppose that you have information for a list of subjects organized the following way:
 
-- Your main subjects is folder located in this path:
-/Users/MyUserName/Desktop/MyProjectFolder
-- Inside that folder you have one folder per subject: /Users/MyUserName/Desktop/MyProjectFolder/Subject1, /Users/MyUserName/Desktop/MyProjectFolder/Subject2, /Users/MyUserName/Desktop/MyProjectFolder/Subject3, /Users/MyUserName/Desktop/MyProjectFolder/Subject4, ..., /Users/MyUserName/Desktop/MyProjectFolder/Subject100
-- Inside each subject folder, you have the following files: DTI.nii.gz, ANAT.nii.gz, LGN.nii.gz
+- Your main subjects is folder located in this path: `/Users/MyUserName/Desktop/MyProjectFolder`
+- Inside that folder you have one folder per subject: `/Users/MyUserName/Desktop/MyProjectFolder/Subject1`, `/Users/MyUserName/Desktop/MyProjectFolder/Subject2`, ..., `/Users/MyUserName/Desktop/MyProjectFolder/Subject100`
+- Inside each subject folder, you have the following files: `DTI.nii.gz`, `ANAT.nii.gz`, `LGN.nii.gz`
 
-If you wanted to obtain the list of paths for the DTI.nii.gz files of all subjects, you could type: `echo /Users/MyUserName/Desktop/MyProjectFolder/Subject*/DTI.nii.gz`. Because the path of these files is the same except for the subject number, you can create the pattern by substituting the part that changes by an asterisk.
+If you wanted to obtain the list of paths for the `DTI.nii.gz` files of all subjects, you could type: `echo /Users/MyUserName/Desktop/MyProjectFolder/Subject*/DTI.nii.gz`. Because the path of these files is the same except for the subject number, you can create the pattern by substituting the part that changes by an asterisk.
 
 When using the asterisk, it will select all files that contain any amount of characters in that position. But if you want to restrict the search to a specific amount of characters, you could also use the interrogation mark.
 
-For example, let's suppose you have a main folder located in the following path:
-/MyComputer/MyUser/MyDocuments/MyFolder
+For example, let's suppose you have a main folder located in the following path: `/MyComputer/MyUser/MyDocuments/MyFolder`. And inside that folder you have 100 files named: `myFile001.txt`, `myFile002.txt`, ..., `myFile100.txt`
 
-And inside that folder you have 100 files named: myFile001.txt, myFile002.txt, ..., myFile099.txt, myFile100.txt
-
-You want to iterate through the files myFile001.txt to myFile009.txt. All those files have the exact same path and name except for exactly one character. So, you can replace that character by an interrogation:
+You want to iterate through the files `myFile001.txt` to `myFile009.txt`. All those files have the exact same path and name except for exactly one character. So, you can replace that character by an interrogation mark:
 
 ```bash
 $ for f in /MyComputer/MyUser/MyDocuments/MyFolder/myFile00?.txt
@@ -108,7 +101,7 @@ $ for f in /MyComputer/MyUser/MyDocuments/MyFolder/myFile00?.txt
 /MyComputer/MyUser/MyDocuments/MyFolder/myFile009.txt
 ```
 
-You could choose to print the results into a file instead of the command prompt. This can be easily achieved using the symbol `>>`. After running the following loop, you will not see any output in the command line, the path of the nine files will be saved to `output.txt`:
+You could choose to print the results into a file instead of the command prompt. This can be achieved using the symbol `>>`. After running the following loop, you will not see any output in the command line, the path of the nine files will be saved to `output.txt`:
 The command `cat ${maindir}output.txt` prints the content of this output file.
 
 ```bash
@@ -129,7 +122,7 @@ $ cat ${maindir}output.txt
 /MyComputer/MyUser/MyDocuments/MyFolder/myFile009.txt
 ```
 
-### Iterating through files in your current directory
+### Iterating through files
 
 To know the current directory in which you are located in the command line, type `pwd`. In the following example we want to we want to perform some action on all the files inside the current directory. To get the list of those files we use the `ls`.
 
@@ -203,7 +196,7 @@ SUBJ3
 
 In the previous example both loops iterate through the elements of an array and print them in the terminal. However, there are some important differences:
 
-- The `for` loop automatically stops when iteration reaches the end of the array. The `while` loop stops when the condition (`[ ${i} -lt ${SIZE} ]`) evaluates `false`. This means that it will iterate as long as variable `i` is less than (`-lt`) `SIZE`. In the `while` loop, variable `i` contains the index of each item during the iteration and variable `SIZE` contains the size of the array. For this reason, `((i++))` is included inside the while loop. `((i++))` increments the value of `i` in 1 on each iteration. If you didn't include this, Bash would iterate forever, because you wouldn't be increasing the value of `i` and it would always equal zero. Hence, it would never be less than the size of the array. So, the condition that the while evaluates will never be `false`. Since `while` iterates as long as that condition is `true`, it would iterate forever.
+- The `for` loop automatically stops when iteration reaches the end of the array. The `while` loop stops when the condition (`[ ${i} -lt ${SIZE} ]`) evaluates `false`. This means that it will iterate as long as variable `i` is less than (`-lt`) `SIZE`. In the `while` loop, variable `i` contains the index of each item during the iteration and variable `SIZE` contains the size of the array. For this reason `((i++))` is included inside the `while` loop. `((i++))` increments the value of `i` in 1 on each iteration. **If you didn't include this, Bash would iterate forever**, because you wouldn't be increasing the value of `i`, and it would always equal zero. Hence, it would never be less than the size of the array. So, the condition that the `while` evaluates will never be `false`. Since `while` iterates as long as that condition is `true`, it would iterate forever.
 - In the `for` loop each element of the array is saved in variable `E`. However, you don't have to assign each value to the variable, it is done automatically. In the `while` loop the element in the position `i` is referenced with `${ARRAY[${i}]}`.
 - In this case we want to iterate through all the elements of `ARRAY`. So, it makes more sense to use the `for` loop.
 
@@ -315,7 +308,7 @@ Subject_3.nii.gz
 
 ## The `while` loop
 
-### Iterating through multiple arrays
+### Multiple arrays
 
 As previously mentioned, when you are iterating through more than one array you should use `while` instead of `for`.
 
@@ -323,7 +316,7 @@ As previously mentioned, when you are iterating through more than one array you 
 
 In the following example we have two arrays (`ID` and `VISIT`), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (`test.txt`) using `cat`, which will be explained in detail in the following chapter ([File manipulation](files1.md)).
 
-This `while` loop will run as long as the two conditions (`[ ${i} -lt ${SIZE_ID} ]` and `[ ${i} -lt ${SIZE_VISIT} ]`) are `true`. So, as soon as its value be greater than `SIZE_ID` or `SIZE_VISIT`, it will stop. It is important to **not** forget the line `((i++))`. Otherwise, it will loop forever (you can always break a loop with Control + C).
+This `while` loop will run as long as the two conditions (`[ ${i} -lt ${SIZE_ID} ]` and `[ ${i} -lt ${SIZE_VISIT} ]`) are `true`. So, as the value of `i` be greater than `SIZE_ID` or `SIZE_VISIT`, it will stop. It is important to **not** forget the line `((i++))`. Otherwise, it will loop forever (you can always break a loop with Control + C).
 
 ```bash
 $ declare -a ID=('SUBJ0' 'SUBJ1' 'SUBJ2' 'SUBJ3' 'SUBJ4' 'SUBJ5' 'SUBJ6')
@@ -352,11 +345,16 @@ In this example initially there is only one array, but after the code is execute
 
 For this purpose, there will be two variables:
 
-Variable `i` will be initialized with value `$(( ${#ARRAY[@]} – 1 ))` (the size of the initial array minus one). It will represent the position in which the loop is iterating in the original array. In each loop, `i` will decrease its value in 1 until it reaches 0. It is initialized with value equal to the size of the array minus one instead of the size of the array because remember that the first index of an array is 0, so the last one is the size of the array minus one.
+Variable `i` will be initialized with value `$(( ${#ARRAY[@]} – 1 ))` (the size of the initial array minus one). It will represent the position in which the loop is iterating in the original array. In each loop, `i` will decrease its value in 1 until it reaches 0. It is initialized with value equal to the size of the array **minus one** because the first index of an array is 0 and the last one is the size of the array minus one.
 
-And variable `j` will be initialized with value 0. It will represent the position in which the loop is iterating in the inverted array. In each loop, `j` will increase its value until it reaches the size of the original array (when all the values would have finished being copied). So, it will loop as long as variable `i` have value greater or equal (`-ge`) to 0.
+Variable `j` will be initialized with value 0. It will represent the position in which the loop is iterating in the inverted array. In each loop, `j` will increase its value until it reaches the size of the original array.
+
+Values of `i`: 9, 8, 7, 6, 5, 4, 3, 2, 1, 0.
 
 Order of values in the original array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+
+Values of `j`: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9.
+
 Order of values in the inverted array: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1.
 
 ```bash
@@ -396,7 +394,7 @@ INV_ARRAY[${j}]=ARRAY[${i}]
 ((i--))
 ```
 
-### Using the `while` loop to iterate when several conditions should be met
+### Multiple conditions
 
 In the following example there is an array called `SUBJECTS`. Some of those subjects are controls and their ID starts with the letter C, other subjects are patients and their ID starts with the letter P. The array is organized so that the controls go before the patients. The loop will copy only the controls into a new array (`CONTROLS`).
 
