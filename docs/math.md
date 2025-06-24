@@ -297,7 +297,7 @@ $ echo "scale=0; (2.34 / 1.895) + sqrt (10)" | bc -l
 
 ### Comparing non-integers
 
-In order to compare non-integers you can use `awk`. This function will be studied more in detail in [later chapters](./files2.md#awk) as it is mainly used for processing files and strings. But as this example shows, it can also be used to deal with numbers.
+In order to compare non-integers you can use `awk`. This function will be studied more in detail in [later chapters](./txt_csv.md#awk) as it is mainly used for processing files and strings. But as this example shows, it can also be used to deal with numbers.
 
 ```bash
 $ awk 'BEGIN{ print (2.41==2.4) ? "equal" : "not equal" }'

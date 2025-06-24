@@ -314,7 +314,7 @@ As previously mentioned, when you are iterating through more than one array you 
 
 #### Iterating through two arrays
 
-In the following example we have two arrays (`ID` and `VISIT`), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (`test.txt`) using `cat`, which will be explained in detail in the following chapter ([File manipulation](files1.md)).
+In the following example we have two arrays (`ID` and `VISIT`), which contain a list of subject IDs and visit numbers respectively. The loop iterates through both arrays (until it reaches the end of one or the other) and saves the information extracted from both arrays into a text file. Then, it prints the content of the text file (`test.txt`) using `cat`, which will be explained in detail in the following chapter ([File manipulation](files.md)).
 
 This `while` loop will run as long as the two conditions (`[ ${i} -lt ${SIZE_ID} ]` and `[ ${i} -lt ${SIZE_VISIT} ]`) are `true`. So, as the value of `i` be greater than `SIZE_ID` or `SIZE_VISIT`, it will stop. It is important to **not** forget the line `((i++))`. Otherwise, it will loop forever (you can always break a loop with Control + C).
 

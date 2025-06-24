@@ -164,7 +164,7 @@ There are some flags that can be added to the command `read` to change the way i
 | `-a ARRAY_NAME` | The words that the user inputs are assigned to sequential indices of the array `ARRAY_NAME`. The array is emptied before assigning the values if it already exists. |
 | `-u FILEDESCRIPTOR` | Read input from `FILEDESCRIPTOR`. |
 
-The following examples will show how to use the flags mentioned in the previous table. In this section, I will not explain the use of flags `-a` and `-u` because we haven't learned yet about [arrays](arrays.md) or [file manipulation](files2.md#the-read-command). These will be explained in the corresponding chapters. Some of the examples will also show common mistakes that will make Bash show an error.
+The following examples will show how to use the flags mentioned in the previous table. In this section, I will not explain the use of flags `-a` and `-u` because we haven't learned yet about [arrays](arrays.md) or [file manipulation](txt_csv.md#the-read-command). These will be explained in the corresponding chapters. Some of the examples will also show common mistakes that will make Bash show an error.
 
 **Usage of `read -s`:**
 

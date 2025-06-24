@@ -20,9 +20,11 @@ nav:
   - Arrays: arrays.md
   - Condition testing: condition_test.md
   - Iteration: iteration.md
-  - File manipulation: files1.md
-  - Text and CSV files: files2.md
-  - Images and videos: files3.md
+  - File manipulation: files.md
+  - Text and CSV files: txt_csv.md
+  - Image files: img_files.md
+  - Videos: videos.md
+  - PDF files: pdf.md
   - Advanced bash: advanced_bash.md
   - Remote shell: remote_shell.md
   - Cluster jobs: cluster.md

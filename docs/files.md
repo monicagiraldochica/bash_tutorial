@@ -605,7 +605,7 @@ Use [`basename`](https://linux.die.net/man/1/basename) on the output files of `f
 find /Path/to/start/search/ -name "*.txt" -exec file {} \;
 ```
 
-Use [`grep`](./files2.md#grep) to process the output of `find`:
+Use [`grep`](./txt_csv.md#grep) to process the output of `find`:
 
 ```bash
 find /Path/to/start/search/ -name "*.txt" -exec grep grep_flags {} \;

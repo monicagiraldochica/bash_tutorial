@@ -328,7 +328,7 @@ $ echo "Array2 (not specifying the step size): ${ARRAY2[@]}"
 Array2 (not specifying the step size): 15 16 17 18 19
 ```
 
-Bash has functions that return a list of elements. For example, as you will learn in the section of [file manipulation](./files1.md#listing-files), the command `ls` returns the list of files in your current working directory. In these cases, instead of manually entering a list of elements between parentheses to convert into an array, you can write the function name, and its output will be saved in the array:
+Bash has functions that return a list of elements. For example, as you will learn in the section of [file manipulation](./files.md#listing-files), the command `ls` returns the list of files in your current working directory. In these cases, instead of manually entering a list of elements between parentheses to convert into an array, you can write the function name, and its output will be saved in the array:
 
 ```bash
 $ # Array will contain the list of files in the current directory

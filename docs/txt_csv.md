@@ -653,7 +653,7 @@ B12226546 Group1 55
 
 In order to print the first column of these files, we will use `awk`. As it was shown before, this command has some optional flags followed by an action statement, and then the list of files. In this case, the action statement is `'{print $1}'`, because we want to print only the first column (`$1`). 
 
-`file2.txt` and `file4.txt` use a space as a column separator (which is the separator for default). So, to access the first column of these files we don't need the `-F` flag. However, `file1.csv` and `file3.csv` use a comma as a separator. So, in order for `awk` to distinguish the different columns, we have to use the `-F` flagwith a comma (`-F','`).
+`file2.txt` and `file4.txt` use a space as a column separator (which is the separator for default). So, to access the first column of these files we don't need the `-F` flag. However, `file1.csv` and `file3.csv` use a comma as a separator. So, in order for `awk` to distinguish the different columns, we have to use the `-F` flag with a comma (`-F','`).
 
 Space-separated files:
 
@@ -919,7 +919,7 @@ $ awk -F',' '{print NR, $1}' file3.csv
 
 **Example 2:** Print the first column of `file1.csv` and `file2.txt` **in reverse order**.
 
-In order to print starting with the last line and ending with the first line, you can use the command `tail` with the flag `-r` (for reverse) after `awk`. Bash will first execute the `awk` command, which is written before the pipepe (`|`), and then it will run `tail`, which inverts the order of the previous output. Remember that for `file1.csv` you need to use `-F','` to indicate that the columns are separated by commas and not spaces.
+In order to print starting with the last line and ending with the first line, you can use the command `tail` with the flag `-r` (for reverse) after `awk`. Bash will first execute the `awk` command, which is written before the pipe (`|`), and then it will run `tail`, which inverts the order of the previous output. Remember that for `file1.csv` you need to use `-F','` to indicate that the columns are separated by commas and not spaces.
 
 Space-separated file:
 
@@ -1236,7 +1236,7 @@ When saving a column of a file into an array, you must specify that the elements
 
 The elements of the array will be saved in the variable `ARRAY`. Remember that to access the individual elements of `ARRAY` you use `${ARRAY[index]}`. With `index` starting at 0. So, to access the first element the command is `echo ${ARRAY[0]}`. To access the second element it is `echo ${ARRAY[1]}`, etc. Type `echo ${ARRAY[@]}` to view all the elements of the array.
 
-Remember, the system variable `IFS` contains the separator that is being used to separate each feld within the lines of a file. You can change the value of this variable at any time by using `IFS='character'`, where `character` is the one separating the fields.
+Remember, the system variable `IFS` contains the separator that is being used to separate each field within the lines of a file. You can change the value of this variable at any time by using `IFS='character'`, where `character` is the one separating the fields.
 
 ```bash
 $ IFS=$'\n'
@@ -2076,7 +2076,7 @@ This search has the following rules:
 
 - We're looking for words that start with the following seven characters: `B111083`.
 - The 8th character can be a `9` or a `2`.
-- The last character can be a `9` or a `6`. 
+- The last character can be a `9` or a `6`.
 
 So, in the `grep` command, we replace the 8th character by `[92]` to indicate that it can have any of those two values, and the last character by `[96]` to indicate that it can have value `9` or `6`.
 
@@ -2535,7 +2535,7 @@ B11110893,Group1,28
 
 In this example, we obtained the same result using either `patterns3.txt` or `patterns4.txt`. When you want to select any line that contains any pattern in a list of patterns, you can either put each pattern in a different line of the text file or use the or (`||`) symbol to concatenate all the patterns or rules.
 
-**Example 26:** Print the first column of those lines in `file3.csv` that have value `"Group1"` in the second column, and value greater than 60 in the third column. *Or* that have value `"Group3"` in the second columnvalue less than 20 in the third column.
+**Example 26:** Print the first column of those lines in `file3.csv` that have value `"Group1"` in the second column, and value greater than 60 in the third column. *Or* that have value `"Group3"` in the second column value less than 20 in the third column.
 
 In this example, we want to print any line that contains one of the following rules:
 
@@ -3277,7 +3277,7 @@ B11119909,Group2_b,61
 B11110893,Group1,28
 ```
 
-You can also replace a range of letters or numbers:
+## Replace range of letters or numbers
 
 **Example 6:** Replace any `A`, `B` or `C` (letters in the range A-C) in `file3.csv` by the letter `D`.
 
@@ -3349,7 +3349,7 @@ D11119909,Group2 b,61
 D11110893,Group1,28
 ```
 
-**Example 7:** Replace `A` by `W,` `B` by `X`, `C` by `Y`, and `D` by `Z` in `file3.csv` (replace letters in the range A-D with letters in the range W-Z)
+**Example 7:** Replace `A` by `W,` `B` by `X`, `C` by `Y`, and `D` by `Z` in `file3.csv` (replace letters in the range A-D with letters in the range W-Z).
 
 Original content of the file:
 
