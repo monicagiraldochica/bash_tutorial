@@ -32,11 +32,11 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Creating simple bash scripts", url: "#_top", children: [
+          {title: "Creating simple Bash scripts", url: "#_top", children: [
               {title: "The vi editor", url: "#the-vi-editor" },
               {title: "List of vi commands", url: "#list-of-vi-commands" },
               {title: "Other editors", url: "#other-editors" },
-              {title: "Tips for writing scripts", url: "#tips-for-writing-scripts" },
+              {title: "Tips", url: "#tips" },
               {title: "Running a script", url: "#running-a-script" },
           ]},
         ];
@@ -85,25 +85,25 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="creating-simple-bash-scripts">Creating simple bash scripts</h1>
+    <h1 id="creating-simple-bash-scripts">Creating simple Bash scripts</h1>
 <h2 id="the-vi-editor">The vi editor</h2>
 <p>This editor is installed by default in both Linux and MacOS and can be accessed and used through the terminal window.</p>
 <p>These are some of the advantages of vi:</p>
 <ul>
 <li>It is available in all Unix systems and any type of terminal.</li>
-<li>It doesn't require a lot of memory to run. So, if you are running many heavy programs in your computer, vi is a good option because it won't slow down the machine anymore and will still load very fast.</li>
+<li>It doesn't require a lot of memory to run. So, if you are running heavy programs in your computer or your computer is old, vi is a good option because it won't slow down the machine anymore and will still load very fast.</li>
 <li>Even though there are a lot of commands that you must learn to become skilled in using this program, once you learn them you can use very short and fast commands to accomplish a lot of things.</li>
-<li>You can use it to code in different languages.</li>
+<li>You can use it to code in any programming language.</li>
 <li>Some editors add special characters to the text and when you run scripts written in those editors, they could fail. vi doesn't add any special characters, and if a script has any, they are visible in the editor.</li>
-<li>If you don't like using your mouse too much, or you don't have a mouse, or your mouse doesn't work properly, then vi editor is a good choice because you rarely need to use the mouse. Most things are accomplished using the keyboard.</li>
+<li>If you don't like using your mouse too much, you don't have a mouse, or your mouse doesn't work properly, this editor is a good choice because you rarely need to use the mouse. Most things are accomplished using the keyboard.</li>
 </ul>
 <p>However, there are some disadvantages too:</p>
 <ul>
-<li>The learning curve can be steep, especially for people who are new to programming and not very comfortable with computers. If you're new to bash, you not only need to learn the language, but also a whole set of commands specific to this program.</li>
+<li>The learning curve can be steep, especially for people who are new to programming and not very comfortable with computers. If you're new to Bash, you not only need to learn the language, but also a whole set of commands specific to this program.</li>
 <li>Not being able to use your mouse can end up wasting your time while you learn all the commands that are used to scroll around the file or jump from one line to another.</li>
 <li>It doesn't give you any error messages or explanation of why it's not doing what you want. If you type the wrong command, it will just do nothing (or do the wrong thing).</li>
 </ul>
-<p>To create a new file, type (on the command line) <code>vi file_path/file_name</code>. For example, if you want to create a file called test.sh in the desktop, you should type <code>vi ~/Desktop/test.sh</code>. The vi editor will open in the current terminal.</p>
+<p>To create a new file, type (on the command line) <code>vi file_path/file_name</code>. The vi editor will open in the current terminal.</p>
 <p>This program runs in two modes, the command mode and the typing mode. By default, it opens in command mode. What this means is that anything you type is not actually being registered in the file but are commands. For example, if you type <code>:q!</code> as soon as you open the file, it will quit without saving (because <code>:q!</code> is the command for ignoring any modifications and exiting). If you type <code>:w</code> it will save changes to the file (or if you haven't write anything, it will just create an empty file). To change to typing mode, type <code>a</code> (<code>a</code> is the command for entering typing mode). After you type <code>a</code>, you can start editing your file. To go back to command mode (for example to save changes), press the key esc (top left corner of the keyboard).</p>
 <p><strong>Example:</strong> Open the vi editor, create a script that prints <code>"Hello Word"</code>, and save it with the file name <code>helloword.sh</code></p>
 <p>Step 1: Open the vi editor</p>
@@ -122,7 +122,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 -
 -- INSERT --
 </code></pre>
-<p>Step 3: Start typing commands. The simplest command, to print a message such as <code>"Hello World"</code> (or any other) is <code>echo</code>.</p>
+<p>Step 3: Start typing the commands that will go in your script. The simplest command, to print a message such as <code>"Hello World"</code> (or any other) is <code>echo</code>.</p>
 <pre><code class="language-bash">echo &quot;Hello World!&quot;
 -
 -
@@ -149,7 +149,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 -
 -
 </code></pre>
-<p>Step 5: Save changes and exit the vi editor. In order to do this, type <code>:wq</code> (to write and quit at the same time). The table below will show you the most commonly used commands for vi.</p>
+<p>Step 5: Save changes and exit the vi editor. In order to do this, type <code>:wq</code> (to write and quit at the same time).</p>
 <pre><code class="language-bash">echo &quot;Hello World!&quot;
 -
 -
@@ -164,7 +164,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 :wq
 </code></pre>
 <h2 id="list-of-vi-commands">List of vi commands</h2>
-<p>In general, a number preceding any vi command will tell vi to repeat the command that number of times. For example, <code>p</code> is the command for pasting. If you write (in command mode) <code>2p</code>, vi will paste whatever you copied two times where the cursor is currently located.</p>
+<p>The table below shows the most commonly used commands for vi. In general, a number preceding any vi command will tell vi to repeat the command that number of times. For example, <code>p</code> is the command for pasting. If you write (in command mode) <code>2p</code>, vi will paste whatever you copied two times where the cursor is currently located.</p>
 <table>
 <thead>
 <tr>
@@ -179,191 +179,187 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 <tr>
 <td>[ctrl] <code>b</code></td>
-<td>Scroll backward one screen</td>
+<td>Scroll backward one screen.</td>
 </tr>
 <tr>
 <td>[ctrl] <code>d</code></td>
-<td>Scroll down half screen</td>
+<td>Scroll down half screen.</td>
 </tr>
 <tr>
 <td>[ctrl] <code>f</code></td>
-<td>Scroll forward one screen</td>
+<td>Scroll forward one screen.</td>
 </tr>
 <tr>
 <td>[ctrl] <code>f</code></td>
-<td>Scroll forward one screen</td>
+<td>Scroll forward one screen.</td>
 </tr>
 <tr>
 <td>[ctrl] <code>u</code></td>
-<td>Scroll up half screen</td>
+<td>Scroll up half screen.</td>
 </tr>
 <tr>
 <td><code>.</code></td>
-<td>Repeat last command</td>
+<td>Repeat last command.</td>
 </tr>
 <tr>
 <td><code>$</code></td>
-<td>Go to end of line</td>
+<td>Go to end of line.</td>
 </tr>
 <tr>
 <td><code>? string</code></td>
-<td>Search backward for <code>string</code></td>
+<td>Search backward for <code>string</code>.</td>
 </tr>
 <tr>
 <td><code>/ string</code></td>
-<td>Search forward for <code>string</code></td>
+<td>Search forward for <code>string</code>.</td>
 </tr>
 <tr>
 <td><code>:0</code></td>
-<td>Go to beginning of line</td>
+<td>Go to beginning of line.</td>
 </tr>
 <tr>
 <td><code>:N</code></td>
-<td>Go to line <code>N</code></td>
+<td>Go to line <code>N</code>.</td>
 </tr>
 <tr>
 <td><code>:N,Md</code></td>
-<td>Delete lines <code>N</code> to <code>M</code></td>
+<td>Delete lines <code>N</code> to <code>M</code>.</td>
 </tr>
 <tr>
 <td><code>:N,MmP</code></td>
-<td>Move lines <code>N</code> to <code>M</code> and paste them after line <code>P</code></td>
+<td>Move lines <code>N</code> to <code>M</code> and paste them after line <code>P</code>.</td>
 </tr>
 <tr>
 <td><code>:N,MmP</code></td>
-<td>Copy lines <code>N</code> to <code>M</code> and paste them after line <code>P</code></td>
+<td>Copy lines <code>N</code> to <code>M</code> and paste them after line <code>P</code>.</td>
 </tr>
 <tr>
 <td><code>:N,Mw file</code></td>
-<td>Save lines <code>N</code> to <code>M</code> to <code>file</code></td>
+<td>Save lines <code>N</code> to <code>M</code> to <code>file</code>.</td>
 </tr>
 <tr>
 <td><code>:q</code></td>
-<td>Quit (does not save any changes)</td>
+<td>Quit (does not save any changes).</td>
 </tr>
 <tr>
 <td><code>:q!</code></td>
-<td>Ignore any modifications made and quit. Searches and replaces the string old by the string new in the entire file.</td>
+<td>Ignore any modifications made and quit.</td>
 </tr>
 <tr>
 <td><code>:%s/old/new/option</code></td>
-<td>The following letters can be added in the field option: <code>c</code> to prompt for confirmation, <code>g</code> to replace all the occurrences of the string, Searches and replaces the string old by the string new in the line in which the cursor is located</td>
+<td>Searches and replaces the string <code>old</code> by the string <code>new</code> in the entire file. The following letters can be added in the field option: <code>c</code> to prompt for confirmation, <code>g</code> to replace all the occurrences of the string.</td>
 </tr>
 <tr>
 <td><code>:s/old/new/option</code></td>
-<td>The following letters can be added in the field option: <code>c</code> to prompt for confirmation, <code>g</code> to replace all the occurrences of the string</td>
+<td>Searches and replaces the string old by the string new in the line in which the cursor is located. The following letters can be added in the field option: <code>c</code> to prompt for confirmation, <code>g</code> to replace all the occurrences of the string.</td>
 </tr>
 <tr>
 <td><code>:set ignorecase</code></td>
-<td>Ignore case sensitivity during search</td>
+<td>Ignore case sensitivity during search.</td>
 </tr>
 <tr>
 <td><code>:set noignorecase</code></td>
-<td>Restore case sensitivity during search</td>
+<td>Restore case sensitivity during search.</td>
 </tr>
 <tr>
 <td><code>:set number</code></td>
-<td>Turn on line numbering</td>
+<td>Turn on line numbering.</td>
 </tr>
 <tr>
 <td><code>:set nonumber</code></td>
-<td>Turn off line numbering</td>
+<td>Turn off line numbering.</td>
 </tr>
 <tr>
 <td><code>:syntax on</code></td>
-<td>Turn on syntax colors in the text</td>
+<td>Turn on syntax colors in the text.</td>
 </tr>
 <tr>
 <td><code>:syntax off</code></td>
-<td>Turn off syntax colors in the text</td>
+<td>Turn off syntax colors in the text.</td>
 </tr>
 <tr>
 <td><code>:w</code></td>
-<td>Save changes</td>
+<td>Save changes.</td>
 </tr>
 <tr>
 <td><code>:w file</code></td>
-<td>Save changes to <code>file</code></td>
+<td>Save changes to <code>file</code>.</td>
 </tr>
 <tr>
 <td><code>:wq</code></td>
-<td>Save changes and quit</td>
+<td>Save changes and quit.</td>
 </tr>
 <tr>
 <td><code>:x</code></td>
-<td>Save changes and quit</td>
+<td>Save changes and quit.</td>
 </tr>
 <tr>
 <td><code>a</code></td>
-<td>Switch to editing mode and continue writing where the cursor is located</td>
+<td>Switch to editing mode and continue writing where the cursor is located.</td>
 </tr>
 <tr>
 <td><code>A</code></td>
-<td>Switch to editing mode and continue writing at the end of the line where the cursor is located</td>
-</tr>
-<tr>
-<td><code>i</code></td>
-<td>Switch to editing mode and continue writing where the cursor is located</td>
+<td>Switch to editing mode and continue writing at the end of the line where the cursor is located.</td>
 </tr>
 <tr>
 <td><code>I</code></td>
-<td>Switch to editing mode and continue writing at the beginning of the line where the cursor is located</td>
+<td>Switch to editing mode and continue writing at the beginning of the line where the cursor is located.</td>
 </tr>
 <tr>
 <td><code>cw</code></td>
-<td>Delete the rest of the word in which the cursor is located (keeps the characters located before the cursor)</td>
+<td>Delete the rest of the word in which the cursor is located (keeps the characters located before the cursor).</td>
 </tr>
 <tr>
 <td><code>D</code></td>
-<td>Delete the rest of the line in which the cursor is located (keeps the characters and words located before the cursor)</td>
+<td>Delete the rest of the line in which the cursor is located (keeps the characters and words located before the cursor).</td>
 </tr>
 <tr>
 <td><code>dd</code></td>
-<td>Delete the entire line where the cursor is located</td>
+<td>Delete the entire line where the cursor is located.</td>
 </tr>
 <tr>
 <td><code>dw</code></td>
-<td>Delete the whole word in which the cursor is located</td>
+<td>Delete the whole word in which the cursor is located.</td>
 </tr>
 <tr>
 <td><code>J</code></td>
-<td>Put the next line at the end of the line where the cursor is located</td>
+<td>Put the next line at the end of the line where the cursor is located.</td>
 </tr>
 <tr>
 <td><code>o</code></td>
-<td>Open line below cursor</td>
+<td>Open line below cursor.</td>
 </tr>
 <tr>
 <td><code>O</code></td>
-<td>Open line above cursor</td>
+<td>Open line above cursor.</td>
 </tr>
 <tr>
 <td><code>p</code></td>
-<td>Paste below current line</td>
+<td>Paste below current line.</td>
 </tr>
 <tr>
 <td><code>P</code></td>
-<td>Paste above current line</td>
+<td>Paste above current line.</td>
 </tr>
 <tr>
 <td><code>:u</code></td>
-<td>Undo previous command</td>
+<td>Undo previous command.</td>
 </tr>
 <tr>
 <td><code>:U</code></td>
-<td>Undo all changes to line</td>
+<td>Undo all changes to line.</td>
 </tr>
 <tr>
 <td><code>x</code></td>
-<td>Delete text at cursor</td>
+<td>Delete text at cursor.</td>
 </tr>
 <tr>
 <td><code>X</code></td>
-<td>Delete (backspace) text at cursor</td>
+<td>Delete (backspace) text at cursor.</td>
 </tr>
 <tr>
 <td><code>yy</code></td>
-<td>Copy line in which the cursor is located</td>
+<td>Copy line in which the cursor is located.</td>
 </tr>
 </tbody>
 </table>
@@ -374,18 +370,19 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li><a href="https://www.gnu.org/software/emacs/">emacs</a></li>
 <li><a href="https://help.gnome.org/users/gedit/stable/">gedit</a> (which is also installed by default in Linux and uses a GUI, great for beginners)</li>
 <li><a href="https://eclipseide.org/">Eclipse</a>: this is a lot more than an editor; it is a development environment used for programming in many other languages and for software development and modeling.</li>
+<li><a href="https://code.visualstudio.com/download">VS Code</a>: this editor has intelligent code completion and allows version control with Git. It also has support for many other programming languages.</li>
 </ul>
 <p>The following are editors available only for MacOS (among many others):</p>
 <ul>
 <li><a href="https://developer.apple.com/xcode/">Xcode</a></li>
 <li><a href="https://macromates.com/">TextMate</a></li>
 </ul>
-<h2 id="tips-for-writing-scripts">Tips for writing scripts</h2>
+<h2 id="tips">Tips</h2>
 <ol>
-<li>Albeit not mandatory, the first line of any bash script should be the shebang (<code>#!/bin/bash</code>). It indicates that the script is written in bash (instead of tcsh, for example) and that the bash interpreter should execute it.</li>
+<li>Albeit not mandatory, the first line of any Bash script should be the shebang (<code>#!/bin/bash</code>). It indicates that the script is written in Bash (instead of tcsh, for example) and that the Bash interpreter should execute it.</li>
 <li>Be organized when writing scripts. As you start writing longer and more complicated programs, this will become more important.</li>
-<li>Comment as often as possible, so that other people can understand what your script is doing, which parameters are needed and what they mean, or the output means. To insert a comment, start the line with a hash (<code>#</code>).</li>
-<li>Use indentation to know where pieces of code start and end (for example when doing loops). If you don't indent, understanding your own code will be very difficult.</li>
+<li>Comment as often as possible, so that other programmers can understand what your script is doing, which parameters are needed and what they mean, or what the output means. To insert a comment, start the line with a hash (<code>#</code>).</li>
+<li>Use indentation to know where pieces of code start and end (for example when doing loops).</li>
 <li>Use appropriate variable names. Use names that are associated to the structure you're using (for example, if you're creating an array, naming it <code>array</code> will help you remember that this variable is an array and not a string or a number).</li>
 <li>Use short variable names. For example, instead of naming a variable <code>myListOfSubjects</code>, you can call it <code>subjList</code>.</li>
 <li>Use the following commands at the beginning of any script:<ul>

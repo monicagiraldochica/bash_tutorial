@@ -1,0 +1,2764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Monica Keith">
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Image files - Bash Tutorial</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Manipulating image files", url: "#_top", children: [
+              {title: "ImageMagick (linux, Mac)", url: "#imagemagick-linux-mac" },
+              {title: "sips (Mac)", url: "#sips-mac" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../videos/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../videos/" class="btn btn-xs btn-link">
+        Videos
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../txt_csv/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../txt_csv/" class="btn btn-xs btn-link">
+        Text and CSV files
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="manipulating-image-files">Manipulating image files</h1>
+<h2 id="imagemagick-linux-mac">ImageMagick (linux, Mac)</h2>
+<h3 id="installation">Installation</h3>
+<p>Go to the <a href="https://imagemagick.org/script/download.php">ImageMagic installation page</a> for detailed instructions for different operating systems.</p>
+<h3 id="utilities">Utilities</h3>
+<p>ImageMagick has a list of utilities that can be used for different purposes. The following table presents a summary of those utilities. Then, I will show some examples for each of these utilities. These examples will help you better understand how to use them.</p>
+<p>When specifying a color in any ImageMagick command, you can use the name of any <a href="#imagemagick-color-list">recognized color</a>, the RGB value, or the Hex value.</p>
+<p>When specifying a shape to draw on an image, you can use any of the <a href="#imagemagick-shapes">valid shapes</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Utility</th>
+<th>Use</th>
+<th>Syntax</th>
+<th>Links</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>magick</code></td>
+<td>This command now replaces <code>convert</code>, which is deprecated. Change image format, blur, crop, draw on, flip, merge, resample, and more. Writes output on a new file.</td>
+<td><code>magick [input-options] input-file(s) [output-options] output-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/convert-1.html">Man page</a>, <a href="https://imagemagick.org/script/convert.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>identify</code></td>
+<td>Obtain information about an image.</td>
+<td><code>identify [options] input-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/identify-1.html">Man page</a>, <a href="http://imagemagick.org/script/identify.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>mogrify</code></td>
+<td>Resize an image, blur, crop, draw on, flip, merge, resample, and more. Re-writes original file.</td>
+<td><code>mogrify [options] input-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/mogrify-1.html">Man page</a>, <a href="http://imagemagick.org/script/mogrify.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>composite</code></td>
+<td>Overlaps one image over another.</td>
+<td><code>composite  [  options ... ] change-file base-file [ mask-file ] output-image</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/composite-1.html">Man page</a>, <a href="http://imagemagick.org/script/composite.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>montage</code></td>
+<td>Combines different images, adds border, frame, and much more.</td>
+<td><code>montage input-file[s] [options] output-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/montage-1.html">Man page</a>, <a href="http://imagemagick.org/script/montage.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>compare</code></td>
+<td>Compare two images.</td>
+<td><code>compare input-file input-file [options] output-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/compare-1.html">Man page</a>, <a href="http://imagemagick.org/script/compare.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td>Writes the pixel components of an img a row at a time into different storage formats.</td>
+<td><code>compare input-file input-file [options] output-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/stream-1.html">Man page</a>, <a href="http://imagemagick.org/script/stream.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>display</code></td>
+<td>Displays an image or image sequence.</td>
+<td><code>display [options] input-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/display-1.html">Man page</a>, <a href="http://imagemagick.org/script/display.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>animate</code></td>
+<td>Animates an image sequence.</td>
+<td><code>animate [options] input-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/animate-1.html">Man page</a>, <a href="http://imagemagick.org/script/animate.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>import</code></td>
+<td>Saves  any  visible  window as an img file. Captures a single window, the entire screen, or any rectangular portion of the screen.</td>
+<td><code>import [options] output-file</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/import-1.html">Man page</a>, <a href="http://imagemagick.org/script/import.php">Documentation</a></td>
+</tr>
+<tr>
+<td><code>conjure</code></td>
+<td>Interprets and executes scripts written in the Magick Scripting Language (MSL).</td>
+<td><code>conjure [options] script.msl</code></td>
+<td><a href="https://docs.oracle.com/cd/E88353_01/html/E37839/conjure-1.html">Man page</a>, <a href="http://imagemagick.org/script/conjure.php">Documentation</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples">Examples</h3>
+<p>In the following examples we will use this image:</p>
+<p><img alt="original" src="../img/grandma.jpg" /></p>
+<h4 id="magick"><code>magick</code></h4>
+<p>Syntax: <code>magick [input-option] input-file [output-option] output-file</code></p>
+<p><strong>Changing the color of pixels:</strong></p>
+<p>In the following example we are replacing all pixels that have a distance of at most 50%, 60% and 100% from 255 in the blue value of their RGB:</p>
+<pre><code class="language-bash">magick grandma.jpg -fuzz 50% -fill &quot;red&quot; -opaque &quot;blue&quot; grandma_50.jpg
+magick grandma.jpg -fuzz 60% -fill &quot;red&quot; -opaque &quot;blue&quot; grandma_60.jpg
+magick grandma.jpg -fuzz 100% -fill &quot;red&quot; -opaque &quot;blue&quot; grandma_100.jpg
+</code></pre>
+<p>Meaning of used options:</p>
+<ol>
+<li><code>fuzz</code>: Distance from 255 in those pixels to be matched.<ul>
+<li>50% means any pixel with blue value between 127.5 (50% of 255) and 255.</li>
+<li>60% means any pixel with blue value between 102 and 255. 60% of 255 is 153, and 255-153=102. Any pixel with blue value within this range will be at most 60% away from being 100% blue.</li>
+<li>100% means any pixel with blue value at most 100% away from being 100% blue, this includes all pixels in the image.</li>
+</ul>
+</li>
+<li><code>opaque</code>: Color to be replaced. See the list of <a href="#imagemagick-color-list">recognized colors</a>.</li>
+</ol>
+<p>Output with 50% of fuzz:</p>
+<p><img alt="50% fuzz" src="../img/grandma_50.jpg" /></p>
+<p>Output with 60% of fuzz:</p>
+<p><img alt="50% fuzz" src="../img/grandma_60.jpg" /></p>
+<p>Output with 100% of fuzz:</p>
+<p><img alt="50% fuzz" src="../img/grandma_100.jpg" /></p>
+<p>You can also change the color of pixels in a specific area:</p>
+<pre><code class="language-bash">magick grandma.jpg -fill &quot;rgb(255,250,250)&quot; -draw &quot;rectangle 0,300 200,350&quot; grandma_rect.jpg
+</code></pre>
+<p>Meaning of used options:</p>
+<ol>
+<li><code>fill</code>: Color to fill the form. See the list of <a href="#imagemagick-color-list">recognized colors</a>.</li>
+<li><code>draw</code>: Shape to draw. See list of <a href="#imagemagick-shapes">valid shapes and their parameters</a>.</li>
+</ol>
+<p>Output:</p>
+<p><img alt="rectangle" src="../img/grandma_rect.jpg" /></p>
+<p><strong>Add text over the rectangle drawn on the image above:</strong></p>
+<pre><code class="language-bash">magick grandma_rect.jpg -font helvetica -fill black -pointsize 15 -draw &quot;text 0,315 'Grandma\nand\nbaby'&quot; grandma_rect_txt.png
+</code></pre>
+<p>Meaning of used options:</p>
+<ol>
+<li><code>font</code>: Font for the text. To see the list of all available fonts type <code>magick -list font</code>.</li>
+<li><code>fill</code>: Color to fill the form, in this case the text. See the list of <a href="#imagemagick-color-list">recognized colors</a>.</li>
+<li><code>pointsize</code>: Text size.</li>
+<li><code>draw</code>: Shape to draw. See list of <a href="#imagemagick-shapes">valid shapes and their parameters</a>.</li>
+</ol>
+<p>Output:</p>
+<p><img alt="text" src="../img/grandma_rect_txt.png" /></p>
+<p><strong>Concatenate images horizontally:</strong></p>
+<p>In the following example I will concatenate some images (<code>grandma.jpg grandma_50.jpg grandma_100.jpg</code>) horizontally, add a border, and flip the image along the horizontal axis.</p>
+<pre><code class="language-bash">magick grandma.jpg grandma_50.jpg grandma_100.jpg +append -resize x300 -bordercolor black -border 10x15 -flip horizontal.png
+</code></pre>
+<p>Meaning of used options:</p>
+<ol>
+<li><code>resize</code>: Force the output file to have a <em>height</em> of 300 pixels. If the input images have different heights, then this parameter is recommended. Otherwise, the output will have the same height as the input files if this parameter is not used.</li>
+<li><code>bordercolor</code>: Color of the border. See the list of <a href="#imagemagick-color-list">recognized colors</a>.</li>
+<li><code>border</code>: Add a border with the specified thickness. In this case we are adding a border with a thickness of 10 pixels on the left and right and 15 pixels on the top and bottom.</li>
+<li><code>flip</code>: I'm flipping the <em>output</em> image along the <em>horizontal axis</em>. To flip the image along the vertical axis, use <code>-flop</code>. Make sure to insert the <code>flip</code> flag after <code>+append</code> to apply the flip to the output instead of any of the input files. See example below on how to apply <code>flip</code> or <code>flop</code> to the input instead of output files.</li>
+</ol>
+<p>Output:</p>
+<p><img alt="horizontal" src="../img/horizontal.png" /></p>
+<p><strong>Concatenate images vertically:</strong></p>
+<p>In the following example I will concatenate some images (<code>grandma.jpg</code> and <code>grandma_50.jpg</code>) horizontally. <em>Before</em> the concatenation, I will flip the first input file along the vertical axis and transform the color space to Gray.</p>
+<pre><code class="language-bash">magick grandma.jpg -colorspace Gray -flop grandma_50.jpg -append -resize 300x vertical.png
+</code></pre>
+<p>Meaning of used options:</p>
+<ol>
+<li><code>colorspace</code>: Color space to apply to the <em>input</em> image. It will apply to any input image specified before the flag, in this case <code>grandma.jpg</code>. If we wanted the whole output file to be on Gray scale, we would add the flag at the end of all input images. Available color spaces: <code>sRGB</code>, <code>RGB</code>, <code>Gray</code>, <code>HSV</code>, <code>HSB</code>, <code>HSL</code>, <code>LAB</code>, <code>LCH</code>, <code>CMYK</code>, <code>XYZ</code>, <code>YUV</code>, <code>YCbCr</code>, <code>AdobeRGB</code>, plus others.</li>
+<li><code>flop</code>: I'm flipping the <em>input</em> image (grandma.jpg) along the <em>vertical axis</em>. To flip the image along the horizontal axis, use <code>flip</code>.</li>
+<li><code>resize</code>: Force the output file to have a <em>width</em> of 300 pixels. If the input images have different widths, then this parameter is recommended. Otherwise, the output will have the same width as the input files if this parameter is not used.</li>
+</ol>
+<p>Output:</p>
+<p><img alt="vertical" src="../img/vertical.png" /></p>
+<p><strong>Detect edges:</strong></p>
+<p>In the following example I will detect edges in the image generated in the example above using two methods: the standard edge detection with the <code>-edge</code> flag, and the Canny Edge detection with smoothing using <code>-canny</code>. <code>-canny</code> is more sophisticated and allows for modifying the radius, sigma and threshold for filtering out edges.</p>
+<pre><code class="language-bash">magick vertical.png -edge 2 edges.png
+magick vertical.png -canny 0x1+10%+30% edges2.png
+</code></pre>
+<p>Meaning of used options:</p>
+<ol>
+<li><code>-edge 2</code>: Apply an edge of radius 2. To make the edges thicker, increment the value of <code>2</code>, or to make them thinner, give a value of <code>1</code>.</li>
+<li><code>-canny 0x1+10%+30%</code>: Apply Canny Edge Detection with smoothing. The arguments here set the radius to 0 (auto-determined) and sigma to 1. Increase sigma for more smoothing. 10% and 30% are the lower and upper percentage thresholds for edge detection. Play around with these values to filter out weaker edges and highlight more important ones. Increasing the upper percentage will remove more edges.</li>
+</ol>
+<p>Output using <code>-edge</code>:</p>
+<p><img alt="edge" src="../img/edges.png" /></p>
+<p>Output using <code>-canny</code>:</p>
+<p><img alt="canny" src="../img/edges2.png" /></p>
+<h4 id="identify"><code>identify</code></h4>
+<h4 id="mogrify"><code>mogrify</code></h4>
+<h4 id="composite"><code>composite</code></h4>
+<h4 id="montage"><code>montage</code></h4>
+<h4 id="compare"><code>compare</code></h4>
+<h4 id="stream"><code>stream</code></h4>
+<h4 id="display"><code>display</code></h4>
+<h4 id="animate"><code>animate</code></h4>
+<h4 id="import"><code>import</code></h4>
+<h4 id="conjure"><code>conjure</code></h4>
+<h3 id="imagemagick-shapes">ImageMagick shapes</h3>
+<table>
+<thead>
+<tr>
+<th>Shape</th>
+<th>Syntax</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Point</td>
+<td><code>point x,y</code></td>
+<td>Specified by an ordered pair of integer coordinates.</td>
+</tr>
+<tr>
+<td>Line</td>
+<td><code>line x0,y0 x1,y1</code></td>
+<td>Requires a start and end point.</td>
+</tr>
+<tr>
+<td>Rectangle</td>
+<td><code>rectangle x0,y0 x1,y1</code></td>
+<td>Specified by the pair of points at the upper left and lower right corners.</td>
+</tr>
+<tr>
+<td>Round rectangle</td>
+<td><code>roundRectangle x0,y0, x1,y1 wc,hc</code></td>
+<td>Takes same corner points as <code>rectangle</code>, followed by the width and height of the rounded corners to be removed.</td>
+</tr>
+<tr>
+<td>Arc</td>
+<td><code>arc x0,y0 x1,y1 a0,a1</code></td>
+<td>Requires two corners used to create a <code>rectangle</code>, followed by the start and end angles of the arc in degrees.</td>
+</tr>
+<tr>
+<td>Ellipse</td>
+<td><code>ellipse x0,y0 rx,ry a0,a1</code></td>
+<td>Requires the center point, the horizontal and vertical radius, and the start and end angles in degrees.</td>
+</tr>
+<tr>
+<td>Circle</td>
+<td><code>circle x0,y0 x1,y1</code></td>
+<td>Give the center and any point on the perimeter. Can make a disk (filled) or circle (unfilled).</td>
+</tr>
+<tr>
+<td>Polyline</td>
+<td><code>polyline x0,y0 ... xn,yn</code></td>
+<td>Requires three or more points to define their perimeters. This is simply a polygon in which the final point is not stroked to the start point.</td>
+</tr>
+<tr>
+<td>Polygon</td>
+<td><code>polygon x0,y0 ... xn,yn</code></td>
+<td>Requires three or more points to define their perimeters.</td>
+</tr>
+<tr>
+<td>Bezier</td>
+<td><code>bezier x0,y0 ... xn,yn</code></td>
+<td>Creates a spline curve and requires three or points to define its shape. The first and last points are the knots and these points are attained by the curve, while any intermediate coordinates are control points.</td>
+</tr>
+<tr>
+<td>Path</td>
+<td><code>path specification</code></td>
+<td>represents an outline of an object, defined in terms of <code>moveto</code> (set a new current point), <code>lineto</code> (draw a straight line), <code>curveto</code> (draw a Bezier curve), arc (elliptical or circular arc) and <code>closepath</code> (close the current shape by drawing a line to the last <code>moveto</code>) elements.</td>
+</tr>
+<tr>
+<td>Image</td>
+<td><code>image operator x0,y0 w,h filename</code></td>
+<td>Used to composite an image with another image.</td>
+</tr>
+<tr>
+<td>Text</td>
+<td><code>text x,y text_to_display</code></td>
+<td>Add text in coordinates x,y of image.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="imagemagick-color-list">ImageMagick color list</h3>
+<table>
+<thead>
+<tr>
+<th>Color name</th>
+<th>RGB</th>
+<th>Hex</th>
+<th>Sample</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>snow</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>snow1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>snow2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RosyBrown1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RosyBrown2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>snow3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightCoral</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>IndianRed1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RosyBrown3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>IndianRed2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RosyBrown</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>brown1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>firebrick1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>brown2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>IndianRed</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>IndianRed3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>firebrick2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>snow4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>brown3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>red</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>red1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RosyBrown4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>firebrick3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>red2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>firebrick</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>brown</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>red3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>IndianRed4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>brown4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>firebrick4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkRed</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>red4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>maroon</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightPink1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightPink3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightPink4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightPink2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightPink</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pink</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>crimson</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pink1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pink2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pink3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pink4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleVioletRed4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleVioletRed</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleVioletRed2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleVioletRed1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleVioletRed3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LavenderBlush</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LavenderBlush1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LavenderBlush3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LavenderBlush2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LavenderBlush4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>maroon</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HotPink3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>VioletRed3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>VioletRed1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>VioletRed2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>VioletRed4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HotPink2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HotPink1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HotPink4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HotPink</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepPink</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepPink1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepPink2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepPink3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepPink4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>maroon1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>maroon2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>maroon3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>maroon4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumVioletRed</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>VioletRed</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>orchid2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>orchid</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>orchid1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>orchid3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>orchid4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>thistle1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>thistle2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>plum1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>plum2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>thistle</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>thistle3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>plum</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>violet</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>plum3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>thistle4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>fuchsia</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>magenta</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>magenta1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>plum4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>magenta2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>magenta3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkMagenta</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>magenta4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>purple</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumOrchid</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumOrchid1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumOrchid2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumOrchid3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumOrchid4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkViolet</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOrchid</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOrchid1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOrchid3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOrchid2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOrchid4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>purple</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>indigo</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>BlueViolet</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>purple2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>purple3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>purple4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>purple1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumPurple</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumPurple1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumPurple2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumPurple3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumPurple4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSlateBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSlateBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumSlateBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GhostWhite</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>lavender</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>blue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>blue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>blue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>blue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>blue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MidnightBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>navy</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>NavyBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RoyalBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RoyalBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RoyalBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RoyalBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>RoyalBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CornflowerBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSteelBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSteelBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSteelBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSteelBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSteelBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateGray4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateGray1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateGray2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateGray3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSlateGray</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSlateGrey</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateGray</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SlateGrey</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DodgerBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DodgerBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DodgerBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DodgerBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DodgerBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>AliceBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SteelBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SteelBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SteelBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SteelBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SteelBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SkyBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SkyBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SkyBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SkyBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSkyBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSkyBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSkyBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSkyBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSkyBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SkyBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepSkyBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepSkyBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepSkyBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepSkyBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DeepSkyBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PowderBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CadetBlue1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CadetBlue2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CadetBlue3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CadetBlue4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>turquoise1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>turquoise2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>turquoise3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>turquoise4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cadet blue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CadetBlue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkTurquoise</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>azure</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>azure1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightCyan</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightCyan1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>azure2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightCyan2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleTurquoise1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleTurquoise</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleTurquoise2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSlateGray1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>azure3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightCyan3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSlateGray2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleTurquoise3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSlateGray3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>azure4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightCyan4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>aqua</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cyan</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cyan1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleTurquoise4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cyan2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSlateGray4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cyan3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cyan4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkCyan</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>teal</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSlateGray</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSlateGrey</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumTurquoise</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightSeaGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>turquoise</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>aquamarine4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>aquamarine</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>aquamarine1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>aquamarine2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>aquamarine3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumAquamarine</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumSpringGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MintCream</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SpringGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SpringGreen1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SpringGreen2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SpringGreen3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SpringGreen4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumSeaGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SeaGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SeaGreen3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SeaGreen1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SeaGreen4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SeaGreen2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumForestGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>honeydew</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>honeydew1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>honeydew2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSeaGreen1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSeaGreen2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleGreen1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>honeydew3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleGreen2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSeaGreen3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSeaGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleGreen3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>honeydew4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>green1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>lime</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LimeGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkSeaGreen4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>green2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleGreen4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>green3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ForestGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>green4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>green</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LawnGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chartreuse</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chartreuse1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chartreuse2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chartreuse3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chartreuse4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GreenYellow</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOliveGreen3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOliveGreen1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOliveGreen2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOliveGreen4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkOliveGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OliveDrab</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OliveDrab1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OliveDrab2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OliveDrab3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>YellowGreen</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OliveDrab4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ivory</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ivory1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightYellow</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightYellow1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>beige</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ivory2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightGoldenrodYellow</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightYellow2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ivory3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightYellow3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ivory4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightYellow4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>yellow</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>yellow1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>yellow2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>yellow3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>yellow4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>olive</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkKhaki</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>khaki2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LemonChiffon4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>khaki1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>khaki3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>khaki4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PaleGoldenrod</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LemonChiffon</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LemonChiffon1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>khaki</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LemonChiffon3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LemonChiffon2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MediumGoldenRod</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cornsilk4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>gold</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>gold1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>gold2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>gold3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>gold4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightGoldenrod</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightGoldenrod4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightGoldenrod1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightGoldenrod3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightGoldenrod2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cornsilk3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cornsilk2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cornsilk</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cornsilk1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>goldenrod</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>goldenrod1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>goldenrod2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>goldenrod3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>goldenrod4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkGoldenrod</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkGoldenrod1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkGoldenrod2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkGoldenrod3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DarkGoldenrod4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>FloralWhite</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>wheat2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OldLace</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>wheat</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>wheat1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>wheat3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="sips-mac">sips (Mac)</h2>
+<p>Usage: <code>sips [flags] inputFile [--out outputFile]</code></p>
+<p>Image modification flags:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-s key value</code></td>
+<td>Set the value for a <code>key</code> (see table below for the available keys and acceptable values).</td>
+</tr>
+<tr>
+<td><code>-r degreesCW</code></td>
+<td>Rotate an image several degrees clockwise.</td>
+</tr>
+<tr>
+<td><code>-f option</code></td>
+<td>Flip the image using one of the following two options: horizontal or vertical.</td>
+</tr>
+<tr>
+<td><code>-c pixelsH pixelsW</code></td>
+<td>Crop image to fit specified size. <code>pixelsH</code> indicates the new height in number of pixels, <code>pixelsW</code> indicates the new width in number of pixels.</td>
+</tr>
+<tr>
+<td><code>-z pixelsH pixelsW</code></td>
+<td>Resample image at specified size. Image aspect ratio may be altered. <code>pixelsH</code> indicate the new height in number of pixels, <code>pixelsW</code> indicate the new width in number of pixels.</td>
+</tr>
+<tr>
+<td><code>-Z pixelsWH</code></td>
+<td>Resample image so height and width aren't greater than specified.</td>
+</tr>
+<tr>
+<td><code>--resampleWidth pixelsW</code></td>
+<td>Resample image to specified width. <code>pixelsW</code> indicate the new width in number of pixels.</td>
+</tr>
+<tr>
+<td><code>--resampleHeight pixelsH</code></td>
+<td>Resample image to specified height. <code>pixelsH</code> indicate the new height in number of pixels.</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>Optimize color for sharing.</td>
+</tr>
+<tr>
+<td><code>-p pixelsH pixelsW</code></td>
+<td>Add padding to the image. Use <code>--padColor hexcolor</code> to select the padding color as hexadecimal number.</td>
+</tr>
+</tbody>
+</table>
+<p>If you want to modify one image to match the properties of another image (for example have one image match the height of another image), you can use the flag <code>-g key</code> or <code>--getProperty key</code> on the image that you want to match. Where <code>key</code> is one of the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Profile property keys</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dpiHeight</code></td>
+<td>Height in dpi (printer dots per inch).</td>
+</tr>
+<tr>
+<td><code>dpiWidth</code></td>
+<td>Width in dpi (printer dots per inch).</td>
+</tr>
+<tr>
+<td><code>pixelHeight</code></td>
+<td>Height in number of pixels.</td>
+</tr>
+<tr>
+<td><code>pixelWidth</code></td>
+<td>Width in number of pixels.</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>Image format. Acceptable values for this key: <code>jpeg</code>, <code>tiff</code>, <code>png</code>, <code>gif</code>, <code>jp2</code>, <code>pict</code>, <code>bmp</code>, <code>qtif</code>, <code>psd</code>, <code>sgi</code>, <code>tga</code>, <code>pdf</code>.</td>
+</tr>
+<tr>
+<td><code>formatOptions</code></td>
+<td>Quality of the new image. Acceptable values for this key: <code>low</code>, <code>normal</code>, <code>high</code>, <code>best</code>, or some percentage.</td>
+</tr>
+<tr>
+<td><code>samplesPerPixel</code></td>
+<td>Samples per pixel.</td>
+</tr>
+<tr>
+<td><code>bitsPerSample</code></td>
+<td>Bits per sample.</td>
+</tr>
+<tr>
+<td><code>software</code></td>
+<td>Software use to create the image.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Description.</td>
+</tr>
+<tr>
+<td><code>copyright</code></td>
+<td>Copyright.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Version.</td>
+</tr>
+<tr>
+<td><code>platform</code></td>
+<td>Platform where file was created.</td>
+</tr>
+<tr>
+<td><code>quality</code></td>
+<td>Acceptable values for this key: normal, draft, best.</td>
+</tr>
+<tr>
+<td><code>renderingIntent</code></td>
+<td>Acceptable values for this key: perceptual, relative, saturation, absolute.</td>
+</tr>
+<tr>
+<td><code>creator</code></td>
+<td>Creator of the file.</td>
+</tr>
+</tbody>
+</table>
+<p>For the examples below I will be using the following image, taken from the following article, which I published long time ago: <a href="https://pubmed.ncbi.nlm.nih.gov/29113642/">link to article</a>.</p>
+<p><img alt="original" src="../img/nihms909531f2.jpg" /></p>
+<p>Convert <code>AutismArticle1.png</code> to pdf.</p>
+<pre><code class="language-bash">$ sips -s format pdf AutismArticle1.png --out AutismArticle1.pdf
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.pdf
+</code></pre>
+<p>Rotate <code>AutismArticle1.png</code> 45 degrees clock-wise.</p>
+<pre><code class="language-bash">$ sips -r 45 AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="rotated1" src="../img/rotated1.png" /></p>
+<p>Rotate <code>AutismArticle1.png</code> 45 degrees counter-clock-wise.</p>
+<pre><code class="language-bash">$ sips -r -45 AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/test2.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="rotated2" src="../img/rotated2.png" /></p>
+<p>Flip <code>AutismArticle1.png</code> horizontally.</p>
+<pre><code class="language-bash">$ sips -f horizontal AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="flipped" src="../img/flipped.png" /></p>
+<p>Flip <code>AutismArticle1.png</code> vertically.</p>
+<pre><code class="language-bash">$ sips -f vertical AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="flipped2" src="../img/flipped2.png" /></p>
+<p>Crop <code>AutismArticle1.png</code> to fit a new size that be 1/4 of its original height and 1/4 of its original weight:</p>
+<p>The first step is to obtain the current width and height using <code>sips</code> with the flags <code>--getProperty pixelWidth</code> and <code>--getProperty pixelHeight</code>. Then, divide the two numbers by four. And finally use <code>sips</code> with the <code>-c</code> flag to crop the file.</p>
+<pre><code class="language-bash">$ sips --getProperty pixelHeight AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+  pixelHeight: 440
+$ sips --getProperty pixelWidth AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+  pixelWidth: 727
+$ echo &quot;440/4&quot; | bc -l
+110.00000000000000000000
+$ echo &quot;727/4&quot; | bc -l
+181.75000000000000000000
+$ sips -c 110 181 AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+  /Users/monica/Desktop/Backup/images_presentations/test.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="cropped" src="../img/cropped.png" /></p>
+<p>Resample image to 110x181:</p>
+<pre><code class="language-bash">$ sips -z 110 181 AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+  /Users/monica/Desktop/Backup/images_presentations/test.png
+$ sips --getProperty pixelHeight test.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+  pixelHeight: 110
+$ sips --getProperty pixelWidth test.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+  pixelWidth: 181
+</code></pre>
+<p>Result image:</p>
+<p><img alt="resampled" src="../img/resampled.png" /></p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../videos/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../videos/" class="btn btn-xs btn-link">
+        Videos
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../txt_csv/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../txt_csv/" class="btn btn-xs btn-link">
+        Text and CSV files
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

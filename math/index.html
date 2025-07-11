@@ -95,7 +95,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <tbody>
 <tr>
 <td><code>$(( OPERATION ))</code></td>
-<td>Evaluates <code>OPERATION</code>. This can be any arithmetic operation with <strong>integer</strong> numbers. Including addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>÷</code>), square root (<code>sqrt(NUM)</code>), exponentiation (<code>NUM**EXP</code>), etc.</td>
+<td>Evaluates <code>OPERATION</code>. It can be any arithmetic operation with <strong>integer</strong> numbers. Including addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>÷</code>), square root (<code>sqrt(NUM)</code>), exponentiation (<code>NUM**EXP</code>), etc.</td>
 </tr>
 <tr>
 <td><code>((++NUM))</code></td>
@@ -123,7 +123,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 <tr>
 <td><code>(( $i % 2 ))</code></td>
-<td>Returns <code>true</code> if <code>i</code> is an odd number (the division by 2 gives a remainder different than 0), <code>false</code> if <code>i</code> is even (the division by 2 gives a remainder of 0).</td>
+<td>Returns <code>true</code> if <code>i</code> is an odd number or <code>false</code> if <code>i</code> is even.</td>
 </tr>
 </tbody>
 </table>
@@ -152,9 +152,9 @@ A^B=16
 $ echo &quot;B/A=$(( ${B} / ${A} ))&quot;
 0
 </code></pre>
-<p>In the last example the result is zero because this syntax is used for integer numbers. So, if the result of the operation is not an integer, it will be rounded to the nearest integer. In the next section you will learn how to operate with non-integer numbers.</p>
+<p>In the last example, the result is zero because this syntax is used for integer numbers. So, if the result of the operation is not an integer, it will be rounded to the nearest integer. In the next section you will learn <a href="#non-integer-calculations">how to operate with non-integer numbers</a>.</p>
 <h3 id="usage-of-num-and-num">Usage of <code>((++NUM))</code> and <code>((NUM++))</code></h3>
-<p>In order to increment the value of a variable by one, there are a couple of options. Some of these options will be very useful when doing iterations (which you will learn later on).</p>
+<p>In order to increment the value of a variable by one, there are a couple of options. Some of these options will be very useful when doing <a href="../iteration/">iterations</a> (which you will learn later on).</p>
 <h4 id="num-1"><code>${NUM} + 1</code></h4>
 <pre><code class="language-bash">$ NUM=1
 $ echo $(( ${NUM} + 1 ))
@@ -174,7 +174,7 @@ $ echo ${NUM}
 <pre><code class="language-bash">NUM=$(( ${NUM} + 1 ))
 echo ${NUM}
 </code></pre>
-<p>First, increases the value of variable <code>NUM</code> in one, and then it echoes the result. Opposite to the example in the left, here the variable value is actually modified. And opposite to the example in the right, the variable value is modified before the other instruction (<code>echo</code>).</p>
+<p>First, increases the value of variable <code>NUM</code> in one, and then it echoes the result. Opposite to the example above, here the variable value is actually modified. And opposite to the example in the below, the variable value is modified before the other instruction (<code>echo</code>).</p>
 <h4 id="num_1"><code>((NUM++))</code></h4>
 <pre><code class="language-bash">$ NUM=1
 $ echo $((NUM++))
@@ -188,7 +188,7 @@ NUM=$(( ${NUM} + 1 ))
 </code></pre>
 <p>First echoes the value of <code>NUM</code>. Then, it increases the value of the variable.</p>
 <h3 id="usage-of-num-and-num-">Usage of <code>((--NUM))</code> and <code>((NUM--))</code></h3>
-<p>Expressions <code>((--NUM))</code> and <code>((NUM--))</code> work in a very similar way than the previous ones, but instead of increasing the value of <code>NUM</code> by one, they decrease the value of <code>NUM</code> by one. These expressions will also be very useful once you learn iteration.</p>
+<p>Expressions <code>((--NUM))</code> and <code>((NUM--))</code> work in a very similar way than the previous ones, but instead of increasing the value of <code>NUM</code> by one, they decrease the value of <code>NUM</code> by one. These expressions will also be very useful once you learn <a href="../iteration/">iteration</a>.</p>
 <h4 id="num-1_1"><code>${NUM} - 1</code></h4>
 <pre><code class="language-bash">$ NUM=1
 $ echo $(( ${NUM} - 1 ))
@@ -208,7 +208,7 @@ $ echo ${NUM}
 <pre><code class="language-bash">NUM=$(( ${NUM} - 1 ))
 echo ${NUM}
 </code></pre>
-<p>First, decreases the value of variable <code>$NUM</code> in one, and then it echoes the result. Opposite to the example in the left, here the variable value is actually modified. And opposite to the example in the right, the variable value is modified before the other instruction (<code>=</code>).</p>
+<p>First, decreases the value of variable <code>$NUM</code> in one, and then it echoes the result. Opposite to the example above, here the variable value is actually modified. And opposite to the example below, the variable value is modified before the other instruction (<code>=</code>).</p>
 <h4 id="num-"><code>((NUM--))</code></h4>
 <pre><code class="language-bash">$ NUM=1
 $ echo $((NUM--))
@@ -299,7 +299,7 @@ NUM=$(( ${NUM} - 1 ))
 10 is even
 </code></pre>
 <h2 id="non-integer-calculations">Non-integer calculations</h2>
-<p>When programming in bash, you will often need to do mathematical operations that involve non-integer calculations. To do this, you will need the bc utility. You can use this utility also for integer calculations, but it is normally left for advanced math.</p>
+<p>When programming in Bash, you will often need to do mathematical operations that involve non-integer calculations. To do this, you will need the <code>bc</code> utility. You can use this utility also for integer calculations, but it is normally left for advanced math.</p>
 <table>
 <thead>
 <tr>
@@ -379,7 +379,7 @@ $ echo &quot;(2.34 / 1.895) + sqrt (10)= $(echo &quot;(2.34 / 1.895) + sqrt (10)
 (2.34 / 1.895) + sqrt (10)= 4.39710615621059569082
 </code></pre>
 <h3 id="echo-scalendecimals-operation-bc-l"><code>echo "scale=NDECIMALS; OPERATION" | bc -l</code></h3>
-<p>Clearly, some of the results of the previous examples have way too many decimals. You can cut the number of decimals using scale.</p>
+<p>Clearly, some of the results of the previous examples have too many decimals. You can cut the number of decimals using <code>scale</code>.</p>
 <pre><code class="language-bash">$ echo &quot;(2.34 / 1.895) + sqrt (10)&quot; | bc -l
 4.39710615621059569082
 $ echo &quot;scale=3; (2.34 / 1.895) + sqrt (10)&quot; | bc -l
@@ -388,7 +388,7 @@ $ echo &quot;scale=0; (2.34 / 1.895) + sqrt (10)&quot; | bc -l
 4
 </code></pre>
 <h3 id="comparing-non-integers">Comparing non-integers</h3>
-<p>In order to compare non-integers you can use the awk function. This function will be studied more in detail in later chapters as it is mainly used for processing files and strings. But as this example shows, it can also be used to deal with numbers.</p>
+<p>In order to compare non-integers you can use <code>awk</code>. This function will be studied more in detail in <a href="../txt_csv/#awk">later chapters</a> as it is mainly used for processing files and strings. But as this example shows, it can also be used to deal with numbers.</p>
 <pre><code class="language-bash">$ awk 'BEGIN{ print (2.41==2.4) ? &quot;equal&quot; : &quot;not equal&quot; }'
 not equal
 $ awk 'BEGIN{ print (2.41==2.41) ? &quot;equal&quot; : &quot;not equal&quot; }'
