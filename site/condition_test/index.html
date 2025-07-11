@@ -86,7 +86,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h1 id="condition-testing">Condition-testing</h1>
-<p>Variables can be used to test if a certain condition is true or false, and therefore be able to take a different course of action depending on the result of the test. For example, you might want to evaluate if a file exists to decide if you can copy it into a different folder or not. For condition-testing you will use the <code>if</code> command. This command has the following syntax:</p>
+<p>Variables can be used to test if a certain condition is <code>true</code> or <code>false</code>, and therefore be able to take a different course of action depending on the result of the test. For example, you might want to evaluate if a file exists to decide if you can copy it into a different folder or not. For condition-testing you will use the <code>if</code> command. This command has the following syntax:</p>
 <pre><code class="language-bash">if [ CONDITION TO EVALUATE ]
 then
     INSTRUCTIONS THAT WILL RUN IF THE CONDITION IS TRUE
@@ -99,7 +99,7 @@ fi
 </code></pre>
 <p>The <code>CONDITION TO EVALUATE</code> is an expression that follows a specific syntax depending on what you want to test (checking files, string comparison, comparing numbers, or combining different expressions). Lets look at the different syntaxes used in each of these situations and at some examples that will help you understand this seemingly confusing subject.</p>
 <h2 id="condition-testing-to-check-files">Condition-testing to check files</h2>
-<p>In the following table, <code>FILE</code> refers to the path of the file or to the variable that contains the path of the file. The spaces after [ and before ] are very important. If those spaces are missing, bash will give an error.</p>
+<p>In the following table, <code>FILE</code> refers to the path of the file, or to the variable that contains the path of the file. The spaces after <code>[</code> and before <code>]</code> are very important. If those spaces are missing, Bash will give an error.</p>
 <table>
 <thead>
 <tr>
@@ -207,7 +207,7 @@ $ if [ -a &quot;${FILE}&quot; ]
 &gt; echo &quot;${FILE} doesn't exist&quot;
 &gt; fi
 </code></pre>
-<p>The following example shows a common mistake. Here, the quotation marks surrounding the file path are missing. Since the path has spaces, bash gives an error:</p>
+<p>The following example shows a common mistake. Here, the quotation marks surrounding the file path are missing. Since the path has spaces, Bash gives an error:</p>
 <pre><code class="language-bash">$ if [ -a /Users/MyUser/Desktop/some file name with spaces.txt ]
 &gt; then
 &gt; echo &quot;The file exists&quot;
@@ -231,7 +231,7 @@ $ if [ -a &quot;${FILE}&quot; ]
 &gt; echo &quot;The file doesn't exist.&quot;
 &gt; fi
 </code></pre>
-<p>The following example shows a common mistake. Here, the spaces before and after the expression <code>-a "${FILE}"</code> are missing. So, bash will give an error:</p>
+<p>The following example shows a common mistake. Here, the spaces before and after the expression <code>-a "${FILE}"</code> are missing. So, Bash will give an error:</p>
 <pre><code class="language-bash">$ FILE=/Users/MyUser/Desktop/someFile.txt
 $ if [-a &quot;${FILE}&quot;]
 &gt; then
@@ -271,7 +271,7 @@ $ if [ -a &quot;${FILE}&quot; ]
 &gt; fi
 </code></pre>
 <h2 id="condition-testing-to-compareevaluate-strings">Condition-testing to compare/evaluate strings</h2>
-<p>When comparing strings, it is mandatory to use the quotation marks. The spaces after <code>[</code> and before <code>]</code> are very important. If those spaces are missing, bash will give an error.</p>
+<p>When comparing strings, it is mandatory to use the quotation marks. The spaces after <code>[</code> and before <code>]</code> are very important. If those spaces are missing, Bash will give an error.</p>
 <table>
 <thead>
 <tr>
@@ -282,27 +282,27 @@ $ if [ -a &quot;${FILE}&quot; ]
 <tbody>
 <tr>
 <td><code>[ -z "STRING" ]</code></td>
-<td>Tests if the length of <code>STRING</code> is zero</td>
+<td>Tests if the length of <code>STRING</code> is zero.</td>
 </tr>
 <tr>
 <td><code>[ -n "STRING" ]</code></td>
-<td>Tests if the length of <code>STRING</code> is non-zero</td>
+<td>Tests if the length of <code>STRING</code> is non-zero.</td>
 </tr>
 <tr>
 <td><code>[ "STRING1" == "STRING2" ]</code></td>
-<td>Tests if the strings are equal</td>
+<td>Tests if the strings are equal.</td>
 </tr>
 <tr>
 <td><code>[ "STRING1" != "STRING2" ]</code></td>
-<td>Tests if the strings are not equal</td>
+<td>Tests if the strings are not equal.</td>
 </tr>
 <tr>
 <td><code>[ "STRING1" \&lt; "STRING2" ]</code></td>
-<td>Tests if <code>STRING1</code> sorts before <code>STRING2</code></td>
+<td>Tests if <code>STRING1</code> sorts before <code>STRING2</code>.</td>
 </tr>
 <tr>
 <td><code>[ "STRING1" \&gt; "STRING2" ]</code></td>
-<td>Tests if <code>STRING1</code> sorts after <code>STRING2</code></td>
+<td>Tests if <code>STRING1</code> sorts after <code>STRING2</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -321,7 +321,7 @@ $ if [ -n &quot;${VAR}&quot; ]
 &gt; fi
 The string is not empty
 </code></pre>
-<p>In this example, bash will show an error because I forgot to put the quotation marks around <code>${VAR}</code>:</p>
+<p>In this example, Bash will show an error because I forgot to put the quotation marks around <code>${VAR}</code>:</p>
 <pre><code class="language-bash">$ VAR=&quot;Some text&quot;
 $ if [ -n ${VAR} ]
 &gt; then
@@ -350,7 +350,7 @@ $ if [ &quot;${QC}&quot; != &quot;Good&quot; ]
 Image has good quality
 </code></pre>
 <h3 id="usage-of-string1-string2_2">Usage of <code>[ "STRING1" \&lt; "STRING2" ]</code></h3>
-<p>In the following example, I am comparing the strings "Canada" with "Colombia" and printing the one that sorts first. "Canada" will be printed because the first letter of both words is the same but the second letter in "Canada" (letter a) comes before the second letter in "Colombia" (letter o).</p>
+<p>In the following example, I am comparing the strings <code>Canada</code> with <code>Colombia</code> and printing the one that sorts first. <code>Canada</code> will be printed because the first letter of both words is the same, but the second letter in <code>Canada</code> comes before the second letter in <code>Colombia</code>.</p>
 <pre><code class="language-bash">$ VAR1=&quot;Canada&quot;
 $ VAR2=&quot;Colombia&quot;
 $ if [ &quot;${VAR1}&quot; \&lt; &quot;${VAR2}&quot; ]
@@ -361,8 +361,9 @@ $ if [ &quot;${VAR1}&quot; \&lt; &quot;${VAR2}&quot; ]
 &gt; fi
 Canada
 </code></pre>
-<p>The previous expression can be written using a shorter syntax:
-[ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false:</p>
+<p>The previous expression can be written using a shorter syntax:</p>
+<pre><code class="language-bash">[ expression ] &gt;&gt; what_to_do_if_expression_is_true || what_to_do_if_expression_is_false
+</code></pre>
 <pre><code class="language-bash">$ [ &quot;${VAR1}&quot; \&lt; &quot;${VAR2}&quot; ] &gt;&gt; echo ${VAR1} || echo ${VAR2}
 Canada
 </code></pre>
@@ -382,7 +383,7 @@ Canada
 Canada
 </code></pre>
 <h2 id="condition-testing-to-compare-numbers">Condition-testing to compare numbers</h2>
-<p>The spaces after <code>[</code> and before <code>]</code> are very important. If those spaces are missing, bash will give an error.</p>
+<p>The spaces after <code>[</code> and before <code>]</code> are very important. If those spaces are missing, Bash will give an error.</p>
 <table>
 <thead>
 <tr>
@@ -393,27 +394,27 @@ Canada
 <tbody>
 <tr>
 <td><code>[ NUM1 -eq NUM2 ]</code></td>
-<td>Tests if <code>NUM1</code> is equal to <code>NUM2</code></td>
+<td>Tests if <code>NUM1</code> is equal to <code>NUM2</code>.</td>
 </tr>
 <tr>
 <td><code>[ NUM1 -ne NUM2 ]</code></td>
-<td>Tests if <code>NUM1</code> is not equal to <code>NUM2</code></td>
+<td>Tests if <code>NUM1</code> is not equal to <code>NUM2</code>.</td>
 </tr>
 <tr>
 <td><code>[ NUM1 -lt NUM2 ]</code></td>
-<td>Tests if <code>NUM1</code> is less than <code>NUM2</code></td>
+<td>Tests if <code>NUM1</code> is less than <code>NUM2</code>.</td>
 </tr>
 <tr>
 <td><code>[ NUM1 -le NUM2 ]</code></td>
-<td>Tests if <code>NUM1</code> is less than or equal to <code>NUM2</code></td>
+<td>Tests if <code>NUM1</code> is less than or equal to <code>NUM2</code>.</td>
 </tr>
 <tr>
 <td><code>[ NUM1 -gt NUM2 ]</code></td>
-<td>Tests if <code>NUM1</code> is greater than <code>NUM2</code></td>
+<td>Tests if <code>NUM1</code> is greater than <code>NUM2</code>.</td>
 </tr>
 <tr>
 <td><code>[ NUM1 -ge NUM2 ]</code></td>
-<td>Tests if <code>NUM1</code> is greater than or equal to <code>NUM2</code></td>
+<td>Tests if <code>NUM1</code> is greater than or equal to <code>NUM2</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -520,11 +521,11 @@ Variable A is greater or equal to 3.
 <tbody>
 <tr>
 <td><code>[ "${array1[*]}" == "${array2[*]}" ]</code></td>
-<td>Tests if array1 equals to array2</td>
+<td>Tests if <code>array1</code> equals to <code>array2</code>.</td>
 </tr>
 <tr>
 <td><code>[ "${array1[*]}" != "${array2[*]}" ]</code></td>
-<td>Tests if array1 is different to array2</td>
+<td>Tests if <code>array1</code> is different to <code>array2</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -579,19 +580,19 @@ different
 <tbody>
 <tr>
 <td><code>[ EXPR ]</code></td>
-<td>Tests if the expression <code>EXPR</code> is <code>true</code></td>
+<td>Tests if the expression <code>EXPR</code> is <code>true</code>.</td>
 </tr>
 <tr>
 <td><code>[ ! EXPR ]</code></td>
-<td>Tests if the expression <code>EXPR</code> is <code>false</code></td>
+<td>Tests if the expression <code>EXPR</code> is <code>false</code>.</td>
 </tr>
 <tr>
 <td><code>[ EXPR1 ] || [ EXPR2 ]</code></td>
-<td>Tests if <code>EXPR1</code> or <code>EXPR2</code> are <code>true</code>. You can add as many expressions as desired</td>
+<td>Tests if <code>EXPR1</code> or <code>EXPR2</code> are <code>true</code>. You can add as many expressions as desired.</td>
 </tr>
 <tr>
 <td><code>[ EXPR1 ] &amp;&amp; [ EXPR2 ]</code></td>
-<td>Tests if <code>EXPR1</code> and <code>EXPR2</code> are <code>true</code>. You can add as many expressions as desired</td>
+<td>Tests if <code>EXPR1</code> and <code>EXPR2</code> are <code>true</code>. You can add as many expressions as desired.</td>
 </tr>
 </tbody>
 </table>
@@ -620,7 +621,7 @@ This will be printed if it is not false (it's true) that 3 equals 3.
 <pre><code class="language-bash">$ [ ! 3 -eq 3 ] &gt;&gt; echo &quot;This will be printed if it is false that 3 equals 3 (so, if 3 is different than 3).&quot; || echo &quot;This will be printed if it is not false (it's true) that 3 equals 3.&quot;
 This will be printed if it is not false (it's true) that 3 equals 3.
 </code></pre>
-<p>We learned that the expression <code>-f FILE</code> tests if a file exists. If we want to test if a file doesn't exist, then we just need to test if <code>-f FILE</code> is false.</p>
+<p>We learned that the expression <code>-f FILE</code> tests if a file exists. If we want to test if a file doesn't exist, then we just need to test if <code>-f FILE</code> is <code>false</code>.</p>
 <pre><code class="language-bash">$ FILE=&quot;SomeFileThatExists.txt&quot;
 $ if [ -f ${FILE} ]
 &gt; then
@@ -657,7 +658,7 @@ This will be echoed if any of the two expressions are true: 2&lt;3 OR 4&lt;3.
 This will be echoed if any of the two expressions are true: 2&lt;3 OR 4&lt;3.
 </code></pre>
 <h3 id="usage-of-expr1-expr2_1">Usage of <code>[ EXPR1 ] &amp;&amp; [ EXPR2 ]</code></h3>
-<p>The following example tests if the two expressions are true. The second expression, opposite to the previous example, has the negation (<code>!</code>). So, the second expression is not testing if 4 is less than 3, it is testing if 4 is <strong>NOT</strong> less than 3 (if it's equal or greater than 3). So, both of the expressions are true, because 4 is not less than 3, and 2 is less than 3.</p>
+<p>The following example tests if the two expressions are <code>true</code>. The second expression, opposite to the previous example, has the negation (<code>!</code>). So, the second expression is not testing if 4 is less than 3, it is testing if 4 is <strong>NOT</strong> less than 3 (if it's equal or greater than 3). So, both of the expressions are <code>true</code>, because 4 is not less than 3, and 2 is less than 3.</p>
 <pre><code class="language-bash">$ if [ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ]
 &gt; then
 &gt; echo &quot;This will be echoed if the two expressions are true.&quot;
@@ -671,7 +672,7 @@ This will be echoed if the two expressions are true.
 This will be echoed if the two expressions are true.
 </code></pre>
 <h3 id="using-the-and-and-or-operands-to-test-more-than-two-conditions">Using the and (<code>&amp;&amp;</code>) and or (<code>||</code>) operands to test more than two conditions</h3>
-<p>You can combine more than two expressions. In the following example, I am combining three. Because I am using the <strong>AND</strong> operator, the whole condition will test true <strong>if and only if</strong> all the three expressions are true. If one is false, then the whole expression will be false.</p>
+<p>You can combine more than two expressions. In the following example, I am combining three. Because I am using the <strong>AND</strong> operator, the whole condition will test <code>true</code> <strong>if and only if</strong> all the three expressions are <code>true</code>. If one is <code>false</code>, then the whole expression will be <code>false</code>.</p>
 <pre><code class="language-bash">$ if [ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ] &amp;&amp; [ 4 -lt 3 ]
 &gt; then
 &gt; echo &quot;This will be echoed if all the three expressions are true.&quot;
@@ -680,15 +681,15 @@ This will be echoed if the two expressions are true.
 &gt; fi
 This will be echoed if any of the three expressions is false.
 </code></pre>
-<p>Let's take a look at why the whole expression evaluates false:
+<p>Let's take a look at why the whole expression evaluates <code>false</code>:
 <code>[ 2 -lt 3 ]</code>: This is <code>true</code>, 2 &lt; 3.
 <code>[ ! 4 -lt 3 ]</code>: This is <code>true</code>, 4 is not less than 3.
-<code>[ 4 -lt 3 ]</code>: This is <code>false</code>, It is false that 4 be less than 3.
+<code>[ 4 -lt 3 ]</code>: This is <code>false</code>, It is <code>false</code> that 4 be less than 3.
 <code>[ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ] &amp;&amp; [ 4 -lt 3 ]</code>: This is <code>false</code> because one of the three expressions is <code>false</code>.</p>
 <p>Using a shorter syntax:</p>
 <pre><code class="language-bash">$ ( [ 2 -lt 3 ] &amp;&amp; [ ! 4 -lt 3 ] &amp;&amp; [ 4 -lt 3 ] ) &amp;&amp; echo &quot;This will be echoed if all the three expressions are true.&quot; || echo &quot;This will be echoed if any of the three expressions is false.&quot;
 </code></pre>
-<p>The following example is very similar than the previous one but instead of using the operator AND (<code>&gt;&gt;</code>), we are using the operator OR (<code>||</code>). So, the whole expression will be true if <strong>ANY</strong> of the three expressions is <code>true</code>. Since the first two expressions are <code>true</code>, then the result is <code>true</code>.</p>
+<p>The following example is very similar to the previous one, but instead of using the operator AND (<code>&amp;&amp;</code>), we are using the operator OR (<code>||</code>). So, the whole expression will be <code>true</code> if <strong>ANY</strong> of the three expressions is <code>true</code>. Since the first two expressions are <code>true</code>, then the result is <code>true</code>.</p>
 <pre><code class="language-bash">$ if [ 2 -lt 3 ] || [ ! 4 -lt 3 ] || [ 4 -lt 3 ]
 &gt; then
 &gt; echo &quot;This will be echoed if ANY of the three expressions is true.&quot;
@@ -702,10 +703,10 @@ This will be echoed if ANY of the three expressions is true.
 This will be echoed if ANY of the three expressions is true.
 </code></pre>
 <h3 id="combining-and-into-one-expression">Combining <code>&amp;&amp;</code> and <code>||</code> into one expression</h3>
-<p>When combining both operands (<code>&amp;&amp;</code>, <code>||</code>), it is better to always use parenthesis to indicate the order in which you want the operations to be evaluated. In the following example we have three files. The path of the three files are saved in the variables <code>${FILE1}</code> <code>${FILE2}</code> and <code>${FILE3}</code>. Suppose files <code>${FILE1}</code> and <code>${FILE3}</code> exist, but <code>${FILE2}</code> doesn't exist. We want to evaluate the following condition: Does <code>${FILE3}</code> <strong>and at least</strong> one of the other two files exists?</p>
+<p>When combining both operands (<code>&amp;&amp;</code>, <code>||</code>), it is better to always use parenthesis to indicate the order in which you want the operations to be evaluated. In the following example we have three files. The path of the three files are saved in the variables <code>${FILE1}</code> <code>${FILE2}</code> and <code>${FILE3}</code>. Files <code>${FILE1}</code> and <code>${FILE3}</code> exist, but <code>${FILE2}</code> doesn't exist. We want to evaluate the following condition: Does <code>${FILE3}</code> <strong>and at least</strong> one of the other two files exists?</p>
 <p><code>[ -f ${FILE3} ]</code>: This condition is true because <code>${FILE3}</code> exists.
-<code>[ -f ${FILE2} ] || [ -f ${FILE1} ]</code>: This condition is true because even though <code>${FILE2}</code> doesn't exist,<code>${FILE1}</code> does exist. And with an OR (<code>||</code>) we only need one of the expressions to be <code>true</code>.
-<code>( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) &amp;&amp; [ -f ${FILE3} ]</code>: This is true because both of expressions are <code>true</code>.</p>
+<code>[ -f ${FILE2} ] || [ -f ${FILE1} ]</code>: This condition is <code>true</code> because even though <code>${FILE2}</code> doesn't exist,<code>${FILE1}</code> does exist. And with an OR (<code>||</code>) we only need one of the expressions to be <code>true</code>.
+<code>( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) &amp;&amp; [ -f ${FILE3} ]</code>: This is <code>true</code> because both of expressions are <code>true</code>.</p>
 <pre><code class="language-bash">$ if ( [ -f ${FILE1} ] || [ -f ${FILE2} ] ) &amp;&amp; [ -f ${FILE3} ]
 &gt; then
 &gt; echo &quot;The condition is true&quot;

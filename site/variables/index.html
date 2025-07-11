@@ -286,7 +286,7 @@ You typed: Noemi
 </tr>
 </tbody>
 </table>
-<p>The following examples will show how to use the flags mentioned in the previous table. In this section, I will not explain the use of flags <code>-a</code> and <code>-u</code> because we haven't learned yet about <a href="../arrays/">arrays</a> or <a href="../files2/#the-read-command">file manipulation</a>. These will be explained in the corresponding chapters. Some of the examples will also show common mistakes that will make Bash show an error.</p>
+<p>The following examples will show how to use the flags mentioned in the previous table. In this section, I will not explain the use of flags <code>-a</code> and <code>-u</code> because we haven't learned yet about <a href="../arrays/">arrays</a> or <a href="../txt_csv/#the-read-command">file manipulation</a>. These will be explained in the corresponding chapters. Some of the examples will also show common mistakes that will make Bash show an error.</p>
 <p><strong>Usage of <code>read -s</code>:</strong></p>
 <p>In the following example, the flag <code>-s</code> causes the user input to be silenced, so when the user writes the password, it is not shown in the screen. If the user input is <code>ThisIsMyPassword</code>, then that string is saved in the variable <code>PASSWORD</code>. While the user is writing its password and until it presses Enter, you will see the following symbol underneath <code>$ read -s PASSWORD</code>: <img alt="image1" src="../img/pwd.png" />. Afterwards, the symbol will disappear.</p>
 <p>In the example below of a wrong syntax, the mistake is that the variable <code>PASSWORD</code> is written before the flag <code>-s</code>. The variable must go at the end of the command independently of which flags are used. As a result, Bash is not silencing the user input, is giving the invalid identifier error, and is not saving any string in the variable.</p>
@@ -301,51 +301,6 @@ ThisIsMyPassword
 ThisIsMyPassword
 -bash: read: `-s': not a valid identifier
 </code></pre>
-<!-- markdownlint-disable MD046 -->
-<p>=== "py-venv.slurm"
-    ```txt
-    #!/bin/bash
-    #SBATCH --job-name=Python
-    #SBATCH --ntasks=1
-    #SBATCH --mem-per-cpu=1gb
-    #SBATCH --time=00:01:00
-    #SBATCH --output=%x-%j.out</p>
-<pre><code>module load python/3.9.1
-source pythonEnv/bin/activate
-python script.py
-```
-</code></pre>
-<p>=== "conda-venv.slurm"
-    ```txt
-    #!/bin/bash
-    #SBATCH --job-name=Miniconda
-    #SBATCH --ntasks=1
-    #SBATCH --mem-per-cpu=1gb
-    #SBATCH --time=00:01:00
-    #SBATCH --output=%x-%j.out</p>
-<pre><code>module load miniconda3
-conda activate myenv
-python myPythonScript.py
-```
-</code></pre>
-<!-- markdownlint-enable MD046 -->
-
-<!-- markdownlint-disable MD046 -->
-<p>=== "py-venv.slurm"
-    ```txt
-    #!/bin/bash
-    #SBATCH --job-name=Python
-    #SBATCH --ntasks=1
-    #SBATCH --mem-per-cpu=1gb
-    #SBATCH --time=00:01:00
-    #SBATCH --output=%x-%j.out</p>
-<pre><code>module load python/3.9.1
-source pythonEnv/bin/activate
-python script.py
-```
-</code></pre>
-<!-- markdownlint-enable MD046 -->
-
 <p><strong>Usage of <code>read -p</code>:</strong></p>
 <p>The <code>flag -p</code> is useful if you want to prompt a message so that the user knows what the input should be. The examples in the following table combine the flags <code>-p</code> and <code>-s</code> to indicate the user to input a password and hide the password while its being typed. The prompt message should go right after the flag <code>-p</code>.</p>
 <p>The following table shows some examples of commands written using a wrong syntax (as well as the correct way to write them). In the first example, the error is that the prompt message is not located right after the flag <code>-p</code> (instead, it is located after the flag <code>-s</code>). In the second example, the error is that the variable <code>PASSWORD</code> is not located at the end of the command. In the third example, the problem is that the prompt message (Please input your password) is not surrounded by quotation marks. So, for Bash only the first word of that sentence (Please) is the prompt message, and the next word (input) is read as the variable name. The rest of the command (your password) is ignored. That is why when reading <code>${PASSWORD}</code>, nothing is echoed, the variable is empty because nothing was saved with that variable name. Instead, the input was saved in <code>${input}</code>. This is the reason why the prompt message should always be surrounded by quotation marks.</p>
@@ -390,42 +345,47 @@ y
 </code></pre>
 <p><strong>Usage of <code>read -d</code>:</strong></p>
 <p>In the following example the end of the line is determined by the character <code>#</code> instead of Enter (using the flag <code>-d</code>). As soon as the user types <code>#</code>, Bash finishes reading and saves the input in the variable <code>VAR</code>.</p>
-<p>In the wrong syntax, the command is missing the apostrophes (<code>'</code>) around the character <code>#</code>.</p>
 <p>Correct syntax:</p>
 <pre><code class="language-bash">$ read -d '#' VAR
 
 $ echo $VAR
 SomeText
 </code></pre>
-<p>Wrong syntax:</p>
+<p>Wrong syntax: In this example we are missing the apostrophes (<code>'</code>) around the character <code>#</code>. So, everything after <code>#</code> is being considered as comment and not as part of the command.</p>
 <pre><code class="language-bash">$ read -d # VAR
 -bash: read: -d: option requires an argument
 read: usage: read [-ers] [-u fd] [-t timeout] [-p prompt] [-a array] [-n nchars] [-d delim] [name ...]
 </code></pre>
+<p>Keep in mind that Bash will convert any carriage return to spaces:</p>
+<pre><code class="language-bash">$ read -d '#' VAR
+lala
+aaaa
+#
+$ echo $VAR
+lala aaaa
+</code></pre>
 <p><strong>The backslash:</strong></p>
-<p>In Bash, certain characters have special meanings. For example, the dollar sign (<code>$</code>) is used to reference a variable. When you type <code>${VAR}</code>, Bash will print the value of <code>VAR</code>, instead of the actual string "\${VAR}". The backslash is used to remove those special meanings from the character followed by it.</p>
+<p>In Bash, certain characters have special meanings. For example, the dollar sign is used to reference a variable. When you type <code>${VAR}</code>, Bash will print the value of <code>VAR</code>, instead of the actual string "\${VAR}". The backslash is used to remove those special meanings from the character followed by it.</p>
 <pre><code class="language-bash">$ VAR=&quot;Some text&quot;
 $ echo ${VAR}
 Some text
 $ echo \${VAR}
 ${VAR}
 </code></pre>
-<p>When using the flag <code>-r</code>, the backslash is part of the line instead of being used as an escape character. The following table shows examples in which the user inputs the same string but it is read differently because in one case the flag is used but not in the other.</p>
-<p>Examples using flag <code>-r</code>:</p>
+<p>When using the flag <code>-r</code>, the backslash is part of the line instead of being used as an escape character. The following examples show that when we use <code>-r</code> backslash is part of the input string, and when we don't, it's used as a scape character.</p>
 <pre><code class="language-bash">$ read -r VAR
 C:\Documents\Newsletters\Summer2018.pdf
 $ echo ${VAR}
 C:\Documents\Newsletters\Summer2018.pdf
-$ read -r MESSAGE
-In HTML \n is used to indicate a new line
-$ echo ${MESSAGE}
-In HTML \n is used to indicate a new line
-</code></pre>
-<p>Examples without the flag <code>-r</code>:</p>
-<pre><code class="language-bash">$ read VAR
+$ read VAR
 C:\Documents\Newsletters\Summer2018.pdf
 $ echo ${VAR}
 C:DocumentsNewslettersSummer2018.pdf
+</code></pre>
+<pre><code class="language-bash">$ read -r MESSAGE
+In HTML \n is used to indicate a new line
+$ echo ${MESSAGE}
+In HTML \n is used to indicate a new line
 $ read MESSAGE
 In HTML \n is used to indicate a new line
 $ echo ${MESSAGE}
@@ -434,14 +394,14 @@ In HTML n is used to indicate a new line
 <h2 id="reading-from-other-sources">Reading from other sources</h2>
 <p>So far, we have used the command <code>read</code> to save the user input into a variable. This command can also be used to read from other sources (i.e. other variables or files).</p>
 <p><strong>Reading content from a variable:</strong></p>
-<p>In the following example, read reads the content of the variable VAR, but only keeps the first character (because it is using the <code>-n 1</code> flag):</p>
+<p>In the following example, read reads the content of the variable <code>VAR</code>, but only keeps the first character (because it is using the <code>-n 1</code> flag):</p>
 <pre><code class="language-bash">$ VAR=yes
 $ read -n 1 R &lt;&lt;&lt; ${VAR}
 $ echo ${R}
 y
 </code></pre>
 <p><strong>Reading and saving the output of a function:</strong></p>
-<p><code>read</code> also allows you to read the output of a function and save it in a variable. In this example, we are saving the output of the <code>pwd</code> function into the variable <code>CURRENT_DIR</code>. <code>pwd</code> is a function that prints the current folder in which you are located in the command line.</p>
+<p><code>read</code> also allows you to read the output of a function and save it into a variable. In this example, we are saving the output of the <code>pwd</code> into the variable <code>CURRENT_DIR</code>. <code>pwd</code> is a function that prints the current folder in which you are located in the command line.</p>
 <pre><code class="language-bash">$ pwd
 /Users/myUserName
 $ read CURRENT_DIR &lt;&lt;&lt; $(pwd)

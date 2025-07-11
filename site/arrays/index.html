@@ -83,7 +83,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     <h1 id="arrays">Arrays</h1>
 <h2 id="declaring-and-assigning-values">Declaring and assigning values</h2>
-<p>An array is a data structure that stores a group of elements and allows you to access each element individually or all elements sequentially. Unlike in other programming languages, in bash you don't need to specify the type of elements that the array will contain and you can mix different types of elements in one array. For example, an array can contain strings and numbers. You can create and add elements to an array in different ways:</p>
+<p>An array is a data structure that stores a group of elements. Unlike in other programming languages, in Bash you don't need to specify the type of elements that the array will contain, and you can mix different types of elements in the same array. For example, an array can contain strings and numbers. You can create and add elements to an array in different ways:</p>
+<p>Keep in mind that in Bash the first element of an array is always in <code>INDEX</code>=0, instead of <code>INDEX</code>=1.</p>
 <table>
 <thead>
 <tr>
@@ -94,11 +95,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <tbody>
 <tr>
 <td><code>ARRAY[INDEX]=VAL</code></td>
-<td>If <code>ARRAY</code> has not been initialized, it will create the array and put element <code>VAL</code> in the position <code>INDEX</code>. The first element of an array is always in <code>INDEX</code>=0, instead of <code>INDEX</code>=1. If <code>ARRAY</code> already exists, it will replace <code>ARRAY</code> in the position <code>INDEX</code> with the new value <code>VAL</code>.</td>
+<td>If <code>ARRAY</code> has not been initialized, it will create the array and put element <code>VAL</code> in the position <code>INDEX</code>. If <code>ARRAY</code> already exists, it will replace <code>ARRAY</code> in the position <code>INDEX</code> with the new value <code>VAL</code>.</td>
 </tr>
 <tr>
 <td><code>declare -a ARRAY=('VAL1' 'VAL2' 'VAL3' ...)</code></td>
-<td>Initializes <code>ARRAY</code> and puts the values inside the parenthesis into the array, respecting the same order. You can specify any number of values. The array is emptied before assigning the values if it already exists.</td>
+<td>Initializes <code>ARRAY</code> and puts the values inside the parenthesis into the array, respecting the same order. The array is emptied before assigning the values if it already exists.</td>
 </tr>
 <tr>
 <td><code>read -a ARRAY</code></td>
@@ -118,11 +119,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 <tr>
 <td><code>ARRAY=$(count -digits N FIRST LAST)</code></td>
-<td>Creates an array of numbers, each with <code>N</code> number of digits, starting with <code>FIRST</code> and ending with <code>LAST</code>. If the number has less digits, it will add zeros in front (i.e. if using two digits, number 1 will be saved as 01 in the array).</td>
+<td>Creates an array of numbers, each with <code>N</code> number of digits, starting with <code>FIRST</code> and ending with <code>LAST</code>. If the number has less digits, it will add zeros in front (i.e. if using two digits, number <code>1</code> will be saved as <code>01</code> in the array).</td>
 </tr>
 <tr>
 <td><code>ARRAY=$(seq N)</code></td>
-<td>Creates an array of sequential numbers, starting with 1 and ending with <code>N</code>.</td>
+<td>Creates an array of sequential numbers, starting with <code>1</code> and ending with <code>N</code>.</td>
 </tr>
 <tr>
 <td><code>ARRAY=(ELEMENT1 ELEMENT3 ...)</code></td>
@@ -132,47 +133,50 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </table>
 <h3 id="usage-of-arrayindex">Usage of <code>${ARRAY[INDEX]}</code></h3>
 <p>The following examples will use the syntax <code>${ARRAY[INDEX]}</code> to access the element located in the position <code>INDEX</code> inside <code>ARRAY</code>.</p>
-<p>Remember that the first item in an array has index 0, the second item has index 1, etc. This is because in bash, arrays start in the position 0 instead of position 1.</p>
 <p>After assigning all the values to my array, I can print its contents using the expression <code>echo ${ARRAY[@]}</code>. I can also check the size of my array using <code>echo ${#ARRAY[@]}</code>.</p>
-<p>If I add an element to a position where the array already contains an element, then the old value will be replaced by the new value. In the example below, 59 was initially added to the position 0 of the array age. When another element (72) is added to the position 0, the previous value (59) is replaced.</p>
-<pre><code class="language-bash">$ # Create an array called age and add 5 elements to it
-$ age[0]=59
-$ age[1]=63
-$ age[2]=21
-$ age[3]=15
-$ age[4]=94
-$ # Print the content of the array
-$ echo &quot;Array: ${age[@]}&quot;
+<p>If I add an element to a position where the array already contains an element, then the old value will be replaced by the new value. In the example below, <code>59</code> was initially added to the position 0 of the array <code>age</code>. When another element (<code>72</code>) is added to the position 0, the previous value (<code>59</code>) is replaced.</p>
+<p>Create an array called age and add 5 elements to it:</p>
+<pre><code class="language-bash">age[0]=59
+age[1]=63
+age[2]=21
+age[3]=15
+age[4]=94
+</code></pre>
+<p>Print the content of the array:</p>
+<pre><code class="language-bash">$ echo &quot;Array: ${age[@]}&quot;
 Array: 59 63 21 15 94
-$ # Get the array size
-$ echo &quot;Array size: ${#age[@]}&quot;
+</code></pre>
+<p>Get the array size:</p>
+<pre><code class="language-bash">$ echo &quot;Array size: ${#age[@]}&quot;
 Array size: 5
-$ # Get the first element of the array
-$ echo &quot;First element: ${age[0]}&quot;
+</code></pre>
+<p>Get the first, second, last and penultimate elements of the array:</p>
+<pre><code class="language-bash">$ echo &quot;First element: ${age[0]}&quot;
 First element: 59
-$ # Get the second element of the array
 $ echo &quot;Second element: ${age[1]}&quot;
 Second element: 63
-$ # Get the last element of the array
 $ size=${#age[@]}
 $ echo &quot;Last element: ${age[size-1]}&quot;
 Last element: 94
-$ # Get the penultimate element
 $ echo &quot;Penultimate element: ${age[size-2]}&quot;
 Penultimate element: 15
-$ # Replace the first value of the array for 72
-$ age[0]=72
+</code></pre>
+<p>Replace the first value of the array for 72:</p>
+<pre><code class="language-bash">$ age[0]=72
 $ echo &quot;New array: ${age[@]}&quot;
 New array: 72 63 21 15 94
 </code></pre>
-<p>In the following example I will start assigning values to the array in the position 1 (instead of 0). That is not a problem, but the first position of my array (index=0) will remain empty, and my array will have only 4 values. If I echo the item in position 0 (<code>echo ${ARRAY[0]}</code>), I will get an empty string.</p>
-<p>Since I had previously created an array with the same name (<code>age</code>), I should first unset that variable (delete it). It is a good idea to do it if you're not sure if you already used that variable name before and you want to make sure you're creating a variable from zero.</p>
-<pre><code class="language-bash">$ # Delete the variable (empty array)
+<p>In the following example I will start assigning values to the array in the position 1 (instead of 0). That is not a problem, but the first position of my array (<code>index=0</code>) will remain empty, and my array will have only 4 values. If I <code>echo</code> the item in position 0 (<code>echo ${ARRAY[0]}</code>), I will get an empty string.</p>
+<p>Since I had previously created an array with the same name (<code>age</code>), I should first <code>unset</code> that variable (delete it). It is a good idea to do it if you're not sure if you already used that variable name before and you want to make sure you're creating a variable from zero.</p>
+<p>Delete the variable (empty array):</p>
+<pre><code class="language-bash">$ echo &quot;Array: ${age[@]}&quot;
+Array: 72 63 21 15 94
 $ unset age
 $ echo &quot;Array: ${age[@]}&quot;
 Array:
-$ # Create a new array with new elements, staring in the position 1 instead of 0
-$ age[1]=63
+</code></pre>
+<p>Create a new array with new elements, staring in the position 1 instead of 0:</p>
+<pre><code class="language-bash">$ age[1]=63
 $ age[2]=21
 $ age[3]=15
 $ age[4]=94
@@ -187,10 +191,11 @@ age[1]: 63
 </code></pre>
 <h3 id="usage-of-declare-a-arrayval1-val2-val3">Usage of <code>declare -a ARRAY=('VAL1' 'VAL2' 'VAL3' ...)</code></h3>
 <p>It is also possible to initiate an array and assign all the values at the same time. After you declare an array with some elements, it doesn't need to stay static. You can keep adding items.</p>
-<pre><code class="language-bash">$ # Initiate the array with some values
-$ declare -a array=('France' 'Italy' 'Germany' 'Spain' 'Canada')
-$ # Read the different elements of the array
-$ echo &quot;The element in position 0 is: ${array[0]}&quot;
+<p>To initiate the array with some values:</p>
+<pre><code class="language-bash">declare -a array=('France' 'Italy' 'Germany' 'Spain' 'Canada')
+</code></pre>
+<p>To read the different elements of the array:</p>
+<pre><code class="language-bash">$ echo &quot;The element in position 0 is: ${array[0]}&quot;
 The element in position 0 is: France
 $ echo &quot;The element in position 1 is: ${array[1]}&quot;
 The element in position 1 is: Italy
@@ -202,25 +207,22 @@ $ echo &quot;The element in position 4 is: ${array[4]}&quot;
 The element in position 4 is: Canada
 $ echo &quot;List of elements in the array: ${array[@]}&quot;
 List of elements in the array: France Italy Germany Spain Canada
-$ echo &quot;The number of elements in the array is ${#array[@]}&quot;
+</code></pre>
+<p>To get the number of elements in the array:</p>
+<pre><code class="language-bash">$ echo &quot;The number of elements in the array is ${#array[@]}&quot;
 The number of elements in the array is 5
-$ # Add more items to the array
-$ array[5]=&quot;Argentina&quot;
-$ array[6]=&quot;Mexico&quot;
+</code></pre>
+<p>To add more items into the array:</p>
+<pre><code class="language-bash">$ array[5]=&quot;Argentina&quot;
+$ array[6]=&quot;Finland&quot;
 $ echo &quot;List of elements in the array: ${array[@]}&quot;
 List of elements in the array: France Italy Germany Spain Canada Argentina Mexico
 $ n=${#array[@]}
 $ echo &quot;The number of elements in the array is ${n}&quot;
 The number of elements in the array is 7
-$ # Add an element at the end of the array (in the position n, where n is the size of the array)
-$ array[n]=&quot;Portugal&quot;
-$ echo &quot;List of elements in the array: ${array[@]}&quot;
-List of elements in the array: France Italy Germany Spain Canada Argentina Mexico Portugal
-$ echo &quot;The number of elements in the array is ${#array[@]}&quot;
-The number of elements in the array is 8
 </code></pre>
 <h3 id="usage-of-read-a-array">Usage of <code>read -a ARRAY</code></h3>
-<p>Another way of creating and initializing an array is by reading a user input. The command <code>read</code> captures the user input and saves it in a variable. By using the flag <code>-a</code>, the user can input more than one word (separated by a space) and bash will assign each word to sequential indexes of the array, starting at 0.</p>
+<p>Another way of creating and initializing an array is by reading a user input. The command <code>read</code> captures the user input and saves it in a variable. By using the flag <code>-a</code>, the user can input more than one word (separated by a space) and Bash will assign each word to sequential indexes of the array, starting at 0.</p>
 <pre><code class="language-bash">$ read -a ARRAY
 Element1 Element2 Element3
 $ echo &quot;${ARRAY[0]}&quot;
@@ -248,8 +250,9 @@ $ echo &quot;${ARRAY[1]}&quot;
 Element2
 $ echo &quot;${ARRAY[2]}&quot;
 Element3
-$ # If the wrong delimiter is used, the array wont be split correctly
-$ IFS='/' read -a ARRAY
+</code></pre>
+<p>If the wrong delimiter is used, the array wont be split correctly:</p>
+<pre><code class="language-bash">$ IFS='/' read -a ARRAY
 Element1.Element2.Element3
 $ echo &quot;${ARRAY[0]}&quot;
 Element1.Element2.Element3
@@ -259,20 +262,17 @@ $ echo &quot;${ARRAY[2]}&quot;
 
 </code></pre>
 <h3 id="usage-of-ifsdel-read-a-array-string">Usage of <code>IFS='DEL' read -a ARRAY &lt;&lt;&lt; STRING</code></h3>
-<p>The same way as you can split a user input into elements of an array using a specific delimiter, you can also split elements of a string. This is very useful when trying to access parts of a file path.</p>
-<p>In the second example the delimiter is a slash (<code>/</code>). However, there are no characters before the first slash. So, the first element of the array will be empty. That empty value will still be counted when asking for the array size and will be located in the position 0. So home will be located in position 1 of the array instead of position 0.</p>
-<p>In the third example there are no characters after the last slash. If the last character of the input string is the delimiter, it will not add to the end of the array an empty character. So, the size of the array will be the same as if you exclude that last delimiter. As you can see in the examples below, the third array has the same size as the second array.</p>
-<p>However, if there is more than one repetition of the delimiter at the end of the string (see example 4 below), then the empty space between the two delimiters is counted as an element in the array.</p>
-<pre><code class="language-bash">$ # Convert a string into an array using the slash delimiter
-$ IFS='/' read -a ARRAY &lt;&lt;&lt; &quot;Element1/Element2/Element3&quot;
+<p>You can also split elements of a string. This is very useful when trying to access parts of a file path:</p>
+<pre><code class="language-bash">$ IFS='/' read -a ARRAY &lt;&lt;&lt; &quot;Element1/Element2/Element3&quot;
 $ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
 ARRAY[0]: Element1
 $ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
 ARRAY[1]: Element2
 $ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
 ARRAY[2]: Element3
-$ # Convert a string into an array using the slash delimiter
-$ my_string=&quot;/home/myuser/Documents/folder/subfolder&quot;
+</code></pre>
+<p>In the following example the delimiter is a slash (<code>/</code>). However, there are no characters before the first slash. So, the first element of the array will be empty. That empty value will still be counted when asking for the array size, and will be located in the position 0. So, <code>home</code> will be located in position 1 of the array instead of position 0.</p>
+<pre><code class="language-bash">$ my_string=&quot;/home/myuser/Documents/folder/subfolder&quot;
 $ echo &quot;String: ${my_string}&quot;
 String: /home/myuser/Documents/folder/subfolder
 $ IFS='/' read -a ARRAY &lt;&lt;&lt; &quot;${my_string}&quot;
@@ -292,20 +292,22 @@ $ echo &quot;Array elements: ${ARRAY[@]}&quot;
 Array elements:  home myuser Documents folder subfolder
 $ echo &quot;Array size: ${#ARRAY[@]}&quot;
 Array size: 6
-$ # Convert a string into an array using the slash delimiter
-$ my_string=&quot;/home/myuser/Documents/folder/subfolder/&quot;
+</code></pre>
+<p>In the third example there are no characters after the last slash. If the last character of the input string is the same as the delimiter, it will not add an empty character to the end of the array. So, the size of the array will be the same as if you exclude that last delimiter.</p>
+<pre><code class="language-bash">$ my_string=&quot;/home/myuser/Documents/folder/subfolder/&quot;
 $ echo &quot;String: ${my_string}&quot;
 String: /home/myuser/Documents/folder/subfolder/
 $ IFS='/' read -a ARRAY &lt;&lt;&lt; &quot;${my_string}&quot;
 $ echo &quot;Array size: ${#ARRAY[@]}&quot;
 Array size: 6
-$ # Convert a string into an array using the slash delimiter
-$ my_string=&quot;/home/myuser/Documents/folder/subfolder//&quot;
+</code></pre>
+<p>However, if there is more than one repetition of the delimiter at the end of the string, then the empty space between the two delimiters is counted as an element in the array:</p>
+<pre><code class="language-bash">$ my_string=&quot;/home/myuser/Documents/folder/subfolder//&quot;
 $ IFS='/' read -a ARRAY &lt;&lt;&lt; &quot;${my_string}&quot;
 $ echo &quot;Array size: ${#ARRAY[@]}&quot;
 Array size: 7
-$ # Convert a string into an array using the slash delimiter
-$ my_string=&quot;/home/myuser/Documents/folder/subfolder//file.txt&quot;
+</code></pre>
+<pre><code class="language-bash">$ my_string=&quot;/home/myuser/Documents/folder/subfolder//file.txt&quot;
 $ IFS='/' read -a ARRAY &lt;&lt;&lt; &quot;${my_string}&quot;
 $ echo &quot;Array size: ${#ARRAY[@]}&quot;
 Array size: 8
@@ -315,55 +317,11 @@ $ echo &quot;ARRAY[6]: ${ARRAY[6]}&quot;
 ARRAY[6]:
 $ echo &quot;ARRAY[7]: ${ARRAY[7]}&quot;
 ARRAY[7]: file.txt
-$ # Convert a string into an array using the slash delimiter
-$ string=&quot;./Folder/Subfolder/file.txt&quot;
-$ IFS='/' read -a ARRAY &lt;&lt;&lt; &quot;${string}&quot;
-$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
-ARRAY[0]: .
-$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
-ARRAY[1]: Folder
-$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
-ARRAY[2]: Subfolder
-$ echo &quot;ARRAY[3]: ${ARRAY[3]}&quot;
-ARRAY[3]: file.txt
-$ echo &quot;Array size: ${#ARRAY[@]}&quot;
-Array size: 4
-$ # Convert a string into an array using dot as delimiter
-$ string=&quot;./Folder/Subfolder/file.txt&quot;
-$ IFS='.' read -a ARRAY &lt;&lt;&lt; &quot;${string}&quot;
-$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
-ARRAY[0]: 
-$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
-ARRAY[1]: /Folder/Subfolder/file
-$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
-ARRAY[2]: txt
-$ echo &quot;Array size: ${#ARRAY[@]}&quot;
-Array size: 3
-$ # Convert a string into an array using dot as delimiter
-$ string=&quot;1.2.3&quot;
-$ IFS='.' read -a ARRAY &lt;&lt;&lt; &quot;${string}&quot;
-$ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
-ARRAY[0]: 1
-$ echo &quot;ARRAY[1]: ${ARRAY[1]}&quot;
-ARRAY[1]: 2
-$ echo &quot;ARRAY[2]: ${ARRAY[2]}&quot;
-ARRAY[2]: 3
-$ echo &quot;Array size: ${#ARRAY[@]}&quot;
-Array size: 3
-$ # Convert a string into an array using dot as delimiter
-$ string=&quot;23.485&quot;
-$ IFS='.' read -a ARRAY &lt;&lt;&lt; &quot;${string}&quot;
-$ echo &quot;The integer part of ${string} is ${ARRAY[0]}, and the decimal part is .${ARRAY[1]}&quot;
-The integer part of 23.485 is 23, and the decimal part is .485
-$ echo &quot;Array size: ${#ARRAY[@]}&quot;
-Array size: 2
 </code></pre>
 <h3 id="usage-of-arrayseq-first-step-size">Usage of <code>ARRAY=($(seq FIRST STEP SIZE))</code></h3>
-<p>You can also create an array of equally spaced or consecutive numbers using the command <code>seq</code>. In the following examples, I will create an array of numbers that go from 15 to 19. The distance between each number (<code>STEP</code>) will vary in each example.</p>
-<p>When the step between numbers is 1, it doesn't need to be specified.</p>
-<pre><code class="language-bash">$ # Array of equally spaced numbers (step size 0.5) from 15 to 19
-$ ARRAY=($(seq 15 0.5 19))
-$ # Print each element of the array
+<p>To create an array of equally spaced or consecutive numbers, use <code>seq</code>. In the following examples, I will create an array of numbers that goes from 15 to 19. The distance between each number (<code>STEP</code>) will vary in each example. When the step between numbers is 1, it doesn't need to be specified.</p>
+<p>Array of equally spaced numbers (step size 0.5) from 15 to 19:</p>
+<pre><code class="language-bash">$ ARRAY=($(seq 15 0.5 19))
 $ echo &quot;Array of equally spaced numbers (step size 0.5) from 15 to 19: ${ARRAY[@]}&quot;
 Array of equally spaced numbers (step size 0.5) from 15 to 19: 15 15.5 16 16.5 17 17.5 18 18.5 19
 $ echo &quot;ARRAY[0]: ${ARRAY[0]}&quot;
@@ -386,15 +344,17 @@ $ echo &quot;ARRAY[8]: ${ARRAY[8]}&quot;
 ARRAY[8]: 19
 $ echo &quot;Array size: ${#ARRAY[@]}&quot;
 Array size: 9
-$ # Array of equally spaced numbers (step size 2) from 1 to 10
-$ ARRAY=($(seq 1 2 10))
+</code></pre>
+<p>Array of equally spaced numbers (step size 2) from 1 to 10:</p>
+<pre><code class="language-bash">$ ARRAY=($(seq 1 2 10))
 $ # Print array
 $ echo &quot;Array of equally spaced numbers (step size 2) from 1 to 10: ${ARRAY[@]}&quot;
 Array of equally spaced numbers (step size 2) from 1 to 10: 1 3 5 7 9
 $ echo &quot;Array size: ${#ARRAY[@]}&quot;
 Array size: 5
-$ # Array of equally spaced numbers (step size 1) from 15 to 19
-$ echo &quot;Array of equally spaced numbers (step size 1) from 15 to 19:&quot;
+</code></pre>
+<p>Array of equally spaced numbers (step size 1) from 15 to 19:</p>
+<pre><code class="language-bash">$ echo &quot;Array of equally spaced numbers (step size 1) from 15 to 19:&quot;
 Array of equally spaced numbers (step size 1) from 15 to 19:
 $ ARRAY1=($(seq 15 1 19))
 $ echo &quot;Array1 (specifying the step size): ${ARRAY1[@]}&quot;
@@ -403,7 +363,7 @@ $ ARRAY2=($(seq 15 19))
 $ echo &quot;Array2 (not specifying the step size): ${ARRAY2[@]}&quot;
 Array2 (not specifying the step size): 15 16 17 18 19
 </code></pre>
-<p>Bash has functions that return a list of elements. For example, as you will learn in the section of file manipulation, the command <code>ls</code> returns the list of files in your current working directory. In these cases, instead of manually entering a list of elements between parentheses to convert into an array, you can write the function name, and its output will be saved in the array:</p>
+<p>Bash has functions that return a list of elements. For example, as you will learn in the section of <a href="../files/#listing-files">file manipulation</a>, the command <code>ls</code> returns the list of files in your current working directory. In these cases, instead of manually entering a list of elements between parentheses to convert into an array, you can write the function name, and its output will be saved in the array:</p>
 <pre><code class="language-bash">$ # Array will contain the list of files in the current directory
 $ array=($(ls))
 $ echo &quot;Array: ${array[@]}&quot;
