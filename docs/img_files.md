@@ -8,7 +8,7 @@ Go to the [ImageMagic installation page](https://imagemagick.org/script/download
 
 ### Utilities
 
-ImageMagick has a list of utilities that can be used for different purposes. The following table presents a summary of those utilities. Then, I will show some examples for each of these utilities. These examples will help you better understand how to use them.
+ImageMagick has a list of utilities that can be used for different purposes. The following table presents a summary of those. Then, I will show some examples for each of these utilities. These examples will help you better understand how to use them.
 
 When specifying a color in any ImageMagick command, you can use the name of any [recognized color](#imagemagick-color-list), the RGB value, or the Hex value.
 
