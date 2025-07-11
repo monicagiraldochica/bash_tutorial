@@ -6,7 +6,7 @@ In order to compute arithmetic calculations with integers you can use one of the
 
 | Syntax | Usage |
 |-----------| ------- |
-| `$(( OPERATION ))` | Evaluates `OPERATION`. It can be any arithmetic operation with **integer** numbers. Including addition (`+`), subtraction (`-`), multiplication (`*`), division (`÷`), square root (`sqrt(NUM)`), exponentiation (`NUM**EXP`), etc. |
+| `$(( OPERATION ))` | Evaluates `OPERATION`. It can be any arithmetic operation with **integer** numbers. Including addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`), square root (`sqrt(NUM)`), exponentiation (`NUM**EXP`), etc. |
 | `((++NUM))` | Increases variable `NUM` in 1 before evaluating any expression that contains `++NUM`. |
 | `((NUM++))` | Increases variable `NUM` in 1 after evaluating any expression that contains `NUM++`. |
 | `((--NUM))` | Decreases variable `NUM` in 1 before evaluating any expression that contains `--NUM`. |
