@@ -1747,21 +1747,38 @@ $ cat file1.csv | tail -r -n 3
 "B11141503","Group3","0",""
 ```
 
-**Example 7:** Print **from the beginning until the second line** of `file1.csv`.
+**Example 7:** Print **from the second line until the end of the file** for `file1.csv` (omit the first line).
 
 ```bash
 $ cat file1.csv | head -n+2
-"Anonymized ID","Subject Group","HASCONDITION","CONDITION"
-"B33199522","Group1","0",""
-```
-
-**Example 8:** Print **from the beginning until the third line** of `file1.csv`.
-
-```bash
-$ cat file1.csv | head -n+3
-"Anonymized ID","Subject Group","HASCONDITION","CONDITION"
 "B33199522","Group1","0",""
 "B33199603","Group3","0",""
+"B11137879","Group1","0",""
+"B11144410","Group2 b","0",""
+"B11110455","Group2 b","0",""
+"B11135291","Group3","0",""
+"B11153927","Group1","0",""
+"B11177579","Group2 b","0",""
+"B11177806","Group1","MD",""
+"B11157958","Group3","0",""
+"B11110690","Group3","0",""
+"B11152799","Group1","0",""
+"B11154358","Group1","0",""
+"B11110925","Group1","0",""
+"B11135291","Group3","9","mTBI"
+"B11135072","MISSING","0",""
+"B33199603","Group3","0",""
+"B11137879","Group1","0",""
+"B11110603","Group1","0",""
+"B11110927","Group1","0",""
+"B11147712","Group1","0",""
+"B33191224","Group2 b","0",""
+"B11131290","Group2 b","0",""
+"B11157974","Group1","0",""
+"B33191224","Group2 b","0",""
+"B11141503","Group3","0",""
+"C11137159","Group3","9","mTBI"
+"B33199522","Group1","0",""
 ```
 
 ## Searching a value
