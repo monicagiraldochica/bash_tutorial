@@ -1212,6 +1212,7 @@ $ awk -F',' '{print NR,$2,$3}' file1.csv | tail -r
 To print all the columns of a file using `awk`, use `$0` (instead of a column number). Or use the command `cat`.
 
 Using `awk`: `awk -F',' '{print $0}' file1.csv | tail -r`
+
 Using `cat`: `cat file1.csv | tail -r`
 
 **Example 6:** Print all the columns of `file1.csv` **in reversed order**, and save the re-ordered columns in a new file called `file1_reordered.csv`.
