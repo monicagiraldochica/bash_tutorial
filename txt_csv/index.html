@@ -1917,16 +1917,36 @@ B12226546 Group1 55
 &quot;C11137159&quot;,&quot;Group3&quot;,&quot;9&quot;,&quot;mTBI&quot;
 &quot;B11141503&quot;,&quot;Group3&quot;,&quot;0&quot;,&quot;&quot;
 </code></pre>
-<p><strong>Example 7:</strong> Print <strong>from the beginning until the second line</strong> of <code>file1.csv</code>.</p>
+<p><strong>Example 7:</strong> Print <strong>from the second line until the end of the file</strong> for <code>file1.csv</code> (omit the first line).</p>
 <pre><code class="language-bash">$ cat file1.csv | head -n+2
-&quot;Anonymized ID&quot;,&quot;Subject Group&quot;,&quot;HASCONDITION&quot;,&quot;CONDITION&quot;
-&quot;B33199522&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
-</code></pre>
-<p><strong>Example 8:</strong> Print <strong>from the beginning until the third line</strong> of <code>file1.csv</code>.</p>
-<pre><code class="language-bash">$ cat file1.csv | head -n+3
-&quot;Anonymized ID&quot;,&quot;Subject Group&quot;,&quot;HASCONDITION&quot;,&quot;CONDITION&quot;
 &quot;B33199522&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
 &quot;B33199603&quot;,&quot;Group3&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11137879&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11144410&quot;,&quot;Group2 b&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11110455&quot;,&quot;Group2 b&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11135291&quot;,&quot;Group3&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11153927&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11177579&quot;,&quot;Group2 b&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11177806&quot;,&quot;Group1&quot;,&quot;MD&quot;,&quot;&quot;
+&quot;B11157958&quot;,&quot;Group3&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11110690&quot;,&quot;Group3&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11152799&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11154358&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11110925&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11135291&quot;,&quot;Group3&quot;,&quot;9&quot;,&quot;mTBI&quot;
+&quot;B11135072&quot;,&quot;MISSING&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B33199603&quot;,&quot;Group3&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11137879&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11110603&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11110927&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11147712&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B33191224&quot;,&quot;Group2 b&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11131290&quot;,&quot;Group2 b&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11157974&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B33191224&quot;,&quot;Group2 b&quot;,&quot;0&quot;,&quot;&quot;
+&quot;B11141503&quot;,&quot;Group3&quot;,&quot;0&quot;,&quot;&quot;
+&quot;C11137159&quot;,&quot;Group3&quot;,&quot;9&quot;,&quot;mTBI&quot;
+&quot;B33199522&quot;,&quot;Group1&quot;,&quot;0&quot;,&quot;&quot;
 </code></pre>
 <h2 id="searching-a-value">Searching a value</h2>
 <p>In the following examples we will read specific columns or lines in a file or a list of files, that contain a searched value.</p>
