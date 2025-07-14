@@ -1470,8 +1470,8 @@ $ awk -F',' '{print NR, $1}' file3.csv
 </code></pre>
 <p><strong>Example 5:</strong> Print all the columns of <code>file1.csv</code> showing the lines <strong>in reverse order</strong>.</p>
 <p>To print all the columns of a file using <code>awk</code>, use <code>$0</code> (instead of a column number). Or use the command <code>cat</code>.</p>
-<p>Using <code>awk</code>: <code>awk -F',' '{print $0}' file1.csv | tail -r</code>
-Using <code>cat</code>: <code>cat file1.csv | tail -r</code></p>
+<p>Using <code>awk</code>: <code>awk -F',' '{print $0}' file1.csv | tail -r</code></p>
+<p>Using <code>cat</code>: <code>cat file1.csv | tail -r</code></p>
 <p><strong>Example 6:</strong> Print all the columns of <code>file1.csv</code> <strong>in reversed order</strong>, and save the re-ordered columns in a new file called <code>file1_reordered.csv</code>.</p>
 <p>If you were going to print the columns one to three in normal order, you would use <code>'{print $1,$2,$3}'</code>. To print them in reverse order, you just reverse the order of the columns in <code>print</code>, like so: <code>'{print $3,$2,$1}'</code>. To save the output to a file instead of showing it in the terminal, use <code>&gt;&gt; file_name</code>, as explained in previous sections. Remember to use the <code>-F','</code> flag to indicate that the columns are separated by commas, and not the default space.</p>
 <pre><code class="language-bash">awk -F',' '{print $3,$2,$1}' file1.csv &gt;&gt; file1_reordered.csv
