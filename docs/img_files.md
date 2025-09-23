@@ -161,6 +161,47 @@ Output using `-canny`:
 
 #### `identify`
 
+Syntax: `identify [options] input_file`
+
+The following table shows the formats that you can use:
+
+| Format | Description |
+| --- | --- |
+| `%w` | Image width in pixels |
+| `%h` | Image height in pixels |
+| `%m` | Image format (i.e. PNG) |
+| `%b` | File size (i.e. 123KB) |
+| `%f` | File name |
+| `%t` | File name without extension |
+| `%e` | File name extension |
+| `%[EXIF:tag]` | Image metadata. [This](#imagemagick-exif-tags) is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string. |
+| `%x` | Horizontal resolution (pixels per unit) |
+| `%y` | Vertical resolution (pixels per unit) |
+| `%z` | Depth (bits per channel) |
+| `%c` | Image class and colorspace |
+| `%[colorspace]` | Colorspace |
+| `%[channels]` | List of channels |
+| `%[mean]` | Mean pixel intensity |
+| `%[standard-deviation]` | Standard deviation of pixel intensity |
+| `%[fx:expression]` | Custom expression |
+
+Examples:
+
+```bash
+# To specify the width and height of a 2D image:
+identify -format "%w %h\n" grandma.jpg
+# To specify the width and height of an image with multiple frames:
+identify -format "%wx%h\n" "grandma.gif[0]"
+identify -format "%w-%h\n" "grandma.pdf[0]"
+# Get the date and time when a picture was taken
+datetime=$(identify -format "%[EXIF:DateTimeOriginal]" "grandma.jpg")
+if [ -z "$datetime" ]; then
+  echo "$file has no DateTimeOriginal"
+else
+  echo "$file taken at $datetime"
+fi
+```
+
 #### `mogrify`
 
 #### `composite`
@@ -178,6 +219,32 @@ Output using `-canny`:
 #### `import`
 
 #### `conjure`
+
+### ImageMagick EXIF tags
+
+| EXIF Tag | Description |
+| --- | --- |
+| `DateTime` | Date and time of image modification |
+| `DateTimeOriginal` | Original date and time the photo was taken |
+| `DateTimeDigitized` | Date and time the image was digitized |
+| `Make` | Camera manufacturer |
+| `Model` | Camera model |
+| `Software` | Software used to process the image |
+| `ExposureTime` | Shutter speed |
+| `FNumber` | Aperture (f-stop) |
+| `ISOSpeedRatings` | ISO sensitivity |
+| `ExposureProgram` | Exposure program used (e.g., Manual, Aperture priority) |
+| `FocalLength` | Focal length of the lens |
+| `MeteringMode` | Metering mode (how the camera measured light) |
+| `Flash` | Flash status (on/off, fired, etc.) |
+| `WhiteBalance` | White balance mode |
+| `Orientation` | Image orientation (rotation) |
+| `GPSLatitude` | Latitude where photo was taken |
+| `GPSLongitude` | Longitude where photo was taken |
+| `GPSAltitude` | Altitude where photo was taken |
+| `ColorSpace` | Color space of the image |
+| `ExifImageWidth` | Width recorded in EXIF (may differ from actual width) |
+| `ExifImageHeight` | Height recorded in EXIF (may differ from actual height) |
 
 ### ImageMagick shapes
 
