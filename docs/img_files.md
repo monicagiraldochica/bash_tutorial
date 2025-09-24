@@ -163,27 +163,7 @@ Output using `-canny`:
 
 Syntax: `identify [options] input_file`
 
-The following table shows the formats that you can use:
-
-| Format | Description |
-| --- | --- |
-| `%w` | Image width in pixels |
-| `%h` | Image height in pixels |
-| `%m` | Image format (i.e. PNG) |
-| `%b` | File size (i.e. 123KB) |
-| `%f` | File name |
-| `%t` | File name without extension |
-| `%e` | File name extension |
-| `%[EXIF:tag]` | Image metadata. [This](#imagemagick-exif-tags) is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string. |
-| `%x` | Horizontal resolution (pixels per unit) |
-| `%y` | Vertical resolution (pixels per unit) |
-| `%z` | Depth (bits per channel) |
-| `%c` | Image class and colorspace |
-| `%[colorspace]` | Colorspace |
-| `%[channels]` | List of channels |
-| `%[mean]` | Mean pixel intensity |
-| `%[standard-deviation]` | Standard deviation of pixel intensity |
-| `%[fx:expression]` | Custom expression |
+Please check the list of [`-format`](#imagemagick-format-escapes) escapes that you can use with ImageMagick.
 
 Examples:
 
@@ -219,6 +199,36 @@ fi
 #### `import`
 
 #### `conjure`
+
+### ImageMagick Format escapes
+
+| Escape | Meaning |
+| --- | --- |
+| `%b` | File size (i.e. 123KB) |
+| `%c` | Image class and colorspace |
+| `` | |
+| `%e` | File name extension |
+| `%f` | File name |
+| `` | |
+| `%h` | Image height in pixels |
+| `%m` | Image format (i.e. PNG) |
+| `` | |
+| `` | |
+| `%t` | File name without extension |
+| `` | |
+| `%w` | Image width in pixels |
+| `%x` | Horizontal resolution (pixels per unit) |
+| `%y` | Vertical resolution (pixels per unit) |
+| `%z` | Depth (bits per channel) |
+| `%[channels]` | List of channels |
+| `%[colorspace]` | Colorspace |
+| `%[EXIF:tag]` | Image metadata. [This](#imagemagick-exif-tags) is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string. |
+| `%[fx:expression]` | Custom expression |
+| `` | |
+| `%[mean]` | Mean pixel intensity |
+| `` | |
+| `` | |
+| `%[standard-deviation]` | Standard deviation of pixel intensity |
 
 ### ImageMagick EXIF tags
 
