@@ -165,8 +165,6 @@ Syntax: `identify [options] input_file`
 
 Please check the list of [`-format`](#imagemagick-format-escapes) escapes that you can use with ImageMagick.
 
-Examples:
-
 ```bash
 # To specify the width and height of a 2D image:
 identify -format "%w %h\n" grandma.jpg
@@ -206,29 +204,43 @@ fi
 | --- | --- |
 | `%b` | File size (i.e. 123KB) |
 | `%c` | Image class and colorspace |
-| `` | |
+| `%d` | Directory path of the image file |
 | `%e` | File name extension |
 | `%f` | File name |
-| `` | |
+| `%g` | Geometry: `<width>x<height>{+-}<xoffset>{+-}<yoffset>` |
 | `%h` | Image height in pixels |
 | `%m` | Image format (i.e. PNG) |
-| `` | |
-| `` | |
+| `%Q` | Compression quality (for JPEG/PNG/MIFF) |
+| `%r` | Image class only (DirectClass or PseudoClass) |
 | `%t` | File name without extension |
-| `` | |
+| `%U` | Resolution unit (PixelsPerInch, PixelsPerCentimeter, or Undefined) |
 | `%w` | Image width in pixels |
-| `%x` | Horizontal resolution (pixels per unit) |
-| `%y` | Vertical resolution (pixels per unit) |
+| `%x` | Horizontal resolution (pixels per unit). See `%U` for the unit. |
+| `%y` | Vertical resolution (pixels per unit). See `%U` for the unit. |
 | `%z` | Depth (bits per channel) |
 | `%[channels]` | List of channels |
 | `%[colorspace]` | Colorspace |
 | `%[EXIF:tag]` | Image metadata. [This](#imagemagick-exif-tags) is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string. |
-| `%[fx:expression]` | Custom expression |
-| `` | |
+| `%[fx:expression]` | Custom expression. This is a mathematical formula that can reference pixels, image dimensions, channels or constants. Please see the [ImageMagick expressions](#imagemagick-expressions) sections for more details. |
+| `%[IPTC:tag]` | IPTC metadata (captions, keywords, etc.) |
 | `%[mean]` | Mean pixel intensity |
-| `` | |
-| `` | |
+| `%[profile:name]` | ICC/ICM or other image profile |
+| `%[property:name]` | Image property (generic metadata) |
 | `%[standard-deviation]` | Standard deviation of pixel intensity |
+
+### ImageMagick expressions
+
+ImageMagick expressions allow you to compute custom values using image properties.
+
+Image properties that can be used in expressions:
+
+- Basic image properties: `w` (image width in pixels), `h` (image height) in pixels, `u` (total number of pixels), `channels` (number of channels), `depth` (bits per channel), `colorspace`, `size`, `page.x` (x-offset of virtual canvas), `page.y` (y-offset of virtual canvas), `page.width` (width of virtual canvas), `page.height` (height of virtual canvas).
+- Pixel values: `p{X,Y}.r` (red channel of pixel at X,Y), `p{X,Y}.g` (green channel of pixel at X,Y), `p{X,Y}.b` (blue channel of pixel at X,Y), `p{X,Y}.a` (alpha of pixel at X,Y).
+- Arithmetic operators: `+`, `-`, `*`, `/`, `%` (modulus), `^` power, `()` (grouping).
+- Logical operators: `<`, `>`, `<=`, `>=`, `==`, `!=`
+- If/else expression: `%[fx:w>h ? "landscape" : "portrait"]` if weight is greater than height, prints `landscape`, else prints `portrait`.
+- Functions: `abs(x)`, `sin(x)`, `cos(x)`, `tan(x)`, `log(x)`, `exp(x)`, `sqrt(x)`, `min(a,b)`, `max(a,b)`, `floor(x)`, `ceil(x)`.
+- Channel statistics: `mean.r`, `mean.g`, `mean.b`, `standard_deviation.r`, `standard_deviation.g`, `standard_deviation.b`.
 
 ### ImageMagick EXIF tags
 
