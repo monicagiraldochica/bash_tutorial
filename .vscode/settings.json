@@ -1,8 +1,28 @@
 {
     "cSpell.words": [
+        "bordercolor",
+        "closepath",
+        "CMYK",
+        "colorspace",
+        "Colorspace",
+        "curveto",
+        "Exif",
+        "EXIF",
         "glightbox",
+        "hexcolor",
+        "IPTC",
+        "lineto",
+        "magick",
+        "Magick",
+        "mogrify",
+        "moveto",
         "myuser",
+        "pointsize",
         "pymdownx",
-        "superfences"
+        "qtif",
+        "rgba",
+        "superfences",
+        "xoffset",
+        "yoffset"
     ]
 }

@@ -8,7 +8,7 @@ Go to the [ImageMagic installation page](https://imagemagick.org/script/download
 
 ### Utilities
 
-ImageMagick has a list of utilities that can be used for different purposes. The following table presents a summary of those. Then, I will show some examples for each of these utilities. These examples will help you better understand how to use them.
+The following table presents a list of utilities that are part of ImageMagick and that can be used for different purposes. Each tool will have input and output options. Check [this section](#imagemagick-options) for a complete list of these options.
 
 When specifying a color in any ImageMagick command, you can use the name of any [recognized color](#imagemagick-color-list), the RGB value, or the Hex value.
 
@@ -27,176 +27,6 @@ When specifying a shape to draw on an image, you can use any of the [valid shape
 | `animate` | Animates an image sequence. | `animate [options] input-file` | [Man page](https://docs.oracle.com/cd/E88353_01/html/E37839/animate-1.html), [Documentation](http://imagemagick.org/script/animate.php) |
 | `import` | Saves  any  visible  window as an img file. Captures a single window, the entire screen, or any rectangular portion of the screen. | `import [options] output-file` | [Man page](https://docs.oracle.com/cd/E88353_01/html/E37839/import-1.html), [Documentation](http://imagemagick.org/script/import.php) |
 | `conjure` | Interprets and executes scripts written in the Magick Scripting Language (MSL). | `conjure [options] script.msl` | [Man page](https://docs.oracle.com/cd/E88353_01/html/E37839/conjure-1.html), [Documentation](http://imagemagick.org/script/conjure.php) |
-
-### Examples
-
-In the following examples we will use this image:
-
-![original](img/grandma.jpg)
-
-#### `magick`
-
-Syntax: `magick [input-option] input-file [output-option] output-file`
-
-**Changing the color of pixels:**
-
-In the following example we are replacing all pixels that have a distance of at most 50%, 60% and 100% from 255 in the blue value of their RGB:
-
-```bash
-magick grandma.jpg -fuzz 50% -fill "red" -opaque "blue" grandma_50.jpg
-magick grandma.jpg -fuzz 60% -fill "red" -opaque "blue" grandma_60.jpg
-magick grandma.jpg -fuzz 100% -fill "red" -opaque "blue" grandma_100.jpg
-```
-
-Meaning of used options:
-
-1. `fuzz`: Distance from 255 in those pixels to be matched.
-    - 50% means any pixel with blue value between 127.5 (50% of 255) and 255.
-    - 60% means any pixel with blue value between 102 and 255. 60% of 255 is 153, and 255-153=102. Any pixel with blue value within this range will be at most 60% away from being 100% blue.
-    - 100% means any pixel with blue value at most 100% away from being 100% blue, this includes all pixels in the image.
-2. `opaque`: Color to be replaced. See the list of [recognized colors](#imagemagick-color-list).
-
-Output with 50% of fuzz:
-
-![50% fuzz](img/grandma_50.jpg)
-
-Output with 60% of fuzz:
-
-![50% fuzz](img/grandma_60.jpg)
-
-Output with 100% of fuzz:
-
-![50% fuzz](img/grandma_100.jpg)
-
-You can also change the color of pixels in a specific area:
-
-```bash
-magick grandma.jpg -fill "rgb(255,250,250)" -draw "rectangle 0,300 200,350" grandma_rect.jpg
-```
-
-Meaning of used options:
-
-1. `fill`: Color to fill the form. See the list of [recognized colors](#imagemagick-color-list).
-2. `draw`: Shape to draw. See list of [valid shapes and their parameters](#imagemagick-shapes).
-
-Output:
-
-![rectangle](img/grandma_rect.jpg)
-
-**Add text over the rectangle drawn on the image above:**
-
-```bash
-magick grandma_rect.jpg -font helvetica -fill black -pointsize 15 -draw "text 0,315 'Grandma\nand\nbaby'" grandma_rect_txt.png
-```
-
-Meaning of used options:
-
-1. `font`: Font for the text. To see the list of all available fonts type `magick -list font`.
-2. `fill`: Color to fill the form, in this case the text. See the list of [recognized colors](#imagemagick-color-list).
-3. `pointsize`: Text size.
-4. `draw`: Shape to draw. See list of [valid shapes and their parameters](#imagemagick-shapes).
-
-Output:
-
-![text](img/grandma_rect_txt.png)
-
-**Concatenate images horizontally:**
-
-In the following example I will concatenate some images (`grandma.jpg grandma_50.jpg grandma_100.jpg`) horizontally, add a border, and flip the image along the horizontal axis.
-
-```bash
-magick grandma.jpg grandma_50.jpg grandma_100.jpg +append -resize x300 -bordercolor black -border 10x15 -flip horizontal.png
-```
-
-Meaning of used options:
-
-1. `resize`: Force the output file to have a *height* of 300 pixels. If the input images have different heights, then this parameter is recommended. Otherwise, the output will have the same height as the input files if this parameter is not used.
-2. `bordercolor`: Color of the border. See the list of [recognized colors](#imagemagick-color-list).
-3. `border`: Add a border with the specified thickness. In this case we are adding a border with a thickness of 10 pixels on the left and right and 15 pixels on the top and bottom.
-4. `flip`: I'm flipping the *output* image along the *horizontal axis*. To flip the image along the vertical axis, use `-flop`. Make sure to insert the `flip` flag after `+append` to apply the flip to the output instead of any of the input files. See example below on how to apply `flip` or `flop` to the input instead of output files.
-
-Output:
-
-![horizontal](img/horizontal.png)
-
-**Concatenate images vertically:**
-
-In the following example I will concatenate some images (`grandma.jpg` and `grandma_50.jpg`) horizontally. *Before* the concatenation, I will flip the first input file along the vertical axis and transform the color space to Gray.
-
-```bash
-magick grandma.jpg -colorspace Gray -flop grandma_50.jpg -append -resize 300x vertical.png
-```
-
-Meaning of used options:
-
-1. `colorspace`: Color space to apply to the *input* image. It will apply to any input image specified before the flag, in this case `grandma.jpg`. If we wanted the whole output file to be on Gray scale, we would add the flag at the end of all input images. Available color spaces: `sRGB`, `RGB`, `Gray`, `HSV`, `HSB`, `HSL`, `LAB`, `LCH`, `CMYK`, `XYZ`, `YUV`, `YCbCr`, `AdobeRGB`, plus others.
-2. `flop`: I'm flipping the *input* image (grandma.jpg) along the *vertical axis*. To flip the image along the horizontal axis, use `flip`.
-3. `resize`: Force the output file to have a *width* of 300 pixels. If the input images have different widths, then this parameter is recommended. Otherwise, the output will have the same width as the input files if this parameter is not used.
-
-Output:
-
-![vertical](img/vertical.png)
-
-**Detect edges:**
-
-In the following example I will detect edges in the image generated in the example above using two methods: the standard edge detection with the `-edge` flag, and the Canny Edge detection with smoothing using `-canny`. `-canny` is more sophisticated and allows for modifying the radius, sigma and threshold for filtering out edges.
-
-```bash
-magick vertical.png -edge 2 edges.png
-magick vertical.png -canny 0x1+10%+30% edges2.png
-```
-
-Meaning of used options:
-
-1. `-edge 2`: Apply an edge of radius 2. To make the edges thicker, increment the value of `2`, or to make them thinner, give a value of `1`.
-2. `-canny 0x1+10%+30%`: Apply Canny Edge Detection with smoothing. The arguments here set the radius to 0 (auto-determined) and sigma to 1. Increase sigma for more smoothing. 10% and 30% are the lower and upper percentage thresholds for edge detection. Play around with these values to filter out weaker edges and highlight more important ones. Increasing the upper percentage will remove more edges.
-
-Output using `-edge`:
-
-![edge](img/edges.png)
-
-Output using `-canny`:
-
-![canny](img/edges2.png)
-
-#### `identify`
-
-Syntax: `identify [options] input_file`
-
-Please check the list of [`-format`](#imagemagick-format-escapes) escapes that you can use with ImageMagick.
-
-```bash
-# To specify the width and height of a 2D image:
-identify -format "%w %h\n" grandma.jpg
-# To specify the width and height of an image with multiple frames:
-identify -format "%wx%h\n" "grandma.gif[0]"
-identify -format "%w-%h\n" "grandma.pdf[0]"
-# Get the date and time when a picture was taken
-datetime=$(identify -format "%[EXIF:DateTimeOriginal]" "grandma.jpg")
-if [ -z "$datetime" ]; then
-  echo "$file has no DateTimeOriginal"
-else
-  echo "$file taken at $datetime"
-fi
-```
-
-#### `mogrify`
-
-#### `composite`
-
-#### `montage`
-
-#### `compare`
-
-#### `stream`
-
-#### `display`
-
-#### `animate`
-
-#### `import`
-
-#### `conjure`
 
 ### ImageMagick Format escapes
 
@@ -285,6 +115,275 @@ Image properties that can be used in expressions:
 | Path | `path specification` | represents an outline of an object, defined in terms of `moveto` (set a new current point), `lineto` (draw a straight line), `curveto` (draw a Bezier curve), arc (elliptical or circular arc) and `closepath` (close the current shape by drawing a line to the last `moveto`) elements. |
 | Image | `image operator x0,y0 w,h filename` | Used to composite an image with another image. |
 | Text | `text x,y text_to_display` | Add text in coordinates x,y of image. |
+
+### ImageMagick options
+
+| Option | Arguments | Description | Category | `magick` | `identify` | `mogrify` | `composite` | `montage` | `compare` | `stream` | `display` | `animate` | `import` | `conjure` |
+|--------|-----------|--------------|-----------|----------|-----------|-----------|-----------|----------|----------|----------|----------|----------|----------|
+| `-adjoin` | No arguments | Join images into a single multi-image file  | bi-functional | false | false | true | false | true | true | false | false | false | true | false |
+| `-affine` | `matrix` | affine transform matrix  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-alpha` | `option` | activate, deactivate, reset, or set the alpha channel  | bi-functional | false | true | true | true | true | true | false | true | true | false | false |
+| `-antialias` | `remove` | pixel-aliasing  | bi-functional | false | true | true | false | false | false | false | true | false | false | false |
+| `-authenticate` | `password` |  | bi-functional | false | true | true | true | true | true | true | true | true | false | false |
+| `-attenuate` | `factor` | lessen (or intensify) when adding noise to an image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-background` | `color` | background color  | bi-functional | false | false | true | false | false | true | false | false | false | false | false |
+| `-bias` | `value` | add bias when convolving an image | input-option | false | false | true | false | false | false | false | false | false | false | false |
+| `-black-point-compensation` | No arguments |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-blue-primary` | `point` | chromaticity blue primary point  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-bordercolor` | `color` | border color | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-caption` | `string` | assign a caption to an image | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-clip` | No arguments | along the first path from the 8BIM profile  | input-option | false | true | true | false | false | false | false | true | false | false | false |
+| `-clip-mask` | `filename` | associate a clip mask with the image  | input-option | false | true | true | false | false | false | false | false | false | false | false |
+| `-clip-path` | `id` | clip along a named path from the 8BIM profile  | input-option | false | true | true | false | false | false | false | true | false | false | false |
+| `-colorspace` | `type` | alternate image colorspace  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-comment` | `string` | annotate image with comment  | bi-functional | false | false | true | true | true | false | false | true | false | true | false |
+| `-compose` | `operator` | set image composite operator  | bi-functional | false | false | true | true | true | true | false | false | false | false | false |
+| `-compress` | `type` | type of pixel compression when writing the image  | bi-functional | false | false | true | true | true | true | true | true | false | true | false |
+| `-define` | `format:key=value` |  | output-option | false | true | true | true | true | true | true | true | true | true | false |
+| `-delay` | `seconds` | display the next image after pausing  | bi-functional | false | false | true | false | true | false | false | true | true | true | false |
+| `-density` | `geometry` | horizontal and vertical density of the image  | input-option | false | true | true | true | true | true | true | true | true | true | false |
+| `-depth` | `value` | image depth  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-direction` | `type` | render text right-to-left or left-to-right  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-display` | `server` | get image or font from this X server  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-dispose` | `method` | layer disposal method  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-dither` | `method` | apply error diffusion to image  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-encoding` | `type` | text encoding type  | bi-functional | false | false | true | true | true | false | false | false | false | true | false |
+| `-endian` | `type` | endianness (MSB or LSB) of the image  | bi-functional | false | true | true | true | true | false | false | true | false | true | false |
+| `-family` | `name` | render text with this font family  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-features` | `distance` | analyze image features (e.g. contrast, correlation)  | bi-functional | false | true | true | false | false | false | false | false | false | false | false |
+| `-fill` | `color` | color to use when filling a graphic primitive  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-filter` | `type` | use this filter when resizing an image  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-font` | `name` | render text with this font  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-format` | `string` | output formatted image characteristics  | bi-functional | false | true | true | true | true | true | false | true | true | true | false |
+| `-fuzz` | `distance` | colors within this distance are considered equal  | bi-functional | false | true | true | false | false | true | false | true | false | false | false |
+| `-gravity` | `type` | horizontal and vertical text placement  | bi-functional | false | false | true | true | true | true | false | true | true | true | false |
+| `-green-primary` | `point` | chromaticity green primary point  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-illuminant` | `type` | reference illuminant  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-intensity` | `method` | method to generate an intensity value from a pixel  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-intent` | `type` | type of rendering intent when managing the image color  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-interlace` | `type` | type of image interlacing scheme  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-interline-spacing` | `value` |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-interpolate` | `method` | pixel color interpolation method  | input-option | false | true | true | true | true | false | true | true | true | true | false |
+| `-interword-spacing` | `value` |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-kerning` | `value` | set the space between two letters  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-label` | `string` | assign a label to an image  | bi-functional | false | false | true | true | true | false | false | true | false | true | false |
+| `-limit` | `type` | value pixel cache resource limit  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-loop` | `iterations` | add Netscape loop extension to your GIF animation  | bi-functional | false | false | true | false | false | false | false | true | true | false | false |
+| `-matte` | No arguments | matte channel if the image has one  | bi-functional | false | true | true | true | true | false | false | true | true | false | false |
+| `-mattecolor` | `color` | frame color  | bi-functional | false | false | true | false | true | false | false | true | true | false | false |
+| `-moments` | No arguments | image moments  | bi-functional | false | true | false | false | false | false | false | false | false | false | false |
+| `-monitor` | No arguments | progress | input-option | false | true | true | true | true | true | true | true | true | true | true |
+| `-orient` | `type` | image orientation  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-page` | `geometry` | size and location of an image canvas (setting)  | input-option | false | false | true | true | true | false | false | true | true | true | false |
+| `-ping` | No arguments | determine image attributes  | bi-functional | false | true | true | false | false | false | false | false | false | false | false |
+| `-pointsize` | `value` | font point size  | bi-functional | false | false | true | true | true | false | false | false | false | true | false |
+| `-precision` | `value` | maximum number of significant digits to print  | bi-functional | false | true | true | false | false | true | false | false | false | false | false |
+| `-preview` | `type` | image preview type  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-quality` | `value` | JPEG/MIFF/PNG compression level  | output-option | false | false | true | true | true | true | false | true | false | true | false |
+| `-quiet` | No arguments | suppress all warning messages  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-read-mask` | `filename` | associate a read mask with the image  | bi-functional | false | false | true | false | false | true | false | false | false | false | false |
+| `-red-primary` | `point` | chromaticity red primary point  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-regard-warnings` | No arguments | pay attention to warning messages  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-remap` | `filename` | transform image colors to match this set of colors  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-repage` | `geometry` | size and location of an image canvas  | input-option | false | false | true | true | true | true | false | true | true | true | false |
+| `-respect-parentheses` | No arguments | settings remain in effect until parenthesis boundary  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-sampling-factor` | `geometry` |  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-scene` | `value` | image scene number  | bi-functional | false | false | true | true | false | false | false | false | false | true | false |
+| `-seed` | `value` | seed a new sequence of pseudo-random numbers  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-size` | `geometry` | width and height of image  | bi-functional | false | true | true | true | true | true | true | true | true | false | false |
+| `-stretch` | `type` | render text with this font stretch  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-stroke` | `color` | graphic primitive stroke color  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-strokewidth` | `value` | graphic primitive stroke width  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-style` | `type` | render text with this font style  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-support` | `factor` | resize support: > 1.0 is blurry, < 1.0 is sharp  | bi-functional | false | false | false | true | true | false | false | true | true | true | false |
+| `-synchronize` | `synchronize` | image to storage device  | bi-functional | false | false | true | true | true | true | true | false | false | true | false |
+| `-taint` | No arguments | declare the image as modified  | bi-functional | false | false | true | true | true | true | true | false | false | true | false |
+| `-texture` | filename | name of texture to tile onto the image background  | bi-functional | false | false | true | false | true | false | false | true | false | false | false |
+| `-tile-offset` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-treedepth` | value | color tree depth  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-transparent-color` | color |  | bi-functional | false | false | true | true | true | true | true | true | true | true | false |
+| `-undercolor` | color | annotation bounding box color  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-units` | type | the units of image resolution  | bi-functional | false | true | true | true | true | false | false | false | false | false | false |
+| `-verbose` | print | detailed information about the image  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-view` | FlashPix | viewing transforms  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-virtual-pixel` | method |  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-weight` | type | render text with this font weight  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-white-point` | point | chromaticity white point  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-write-mask` | filename | associate a write mask with the image -word-break type sets whether line breaks appear wherever the text would otherwise overflow  | bi-functional | false | false | false | false | false | true | false | false | false | false | false |
+| `-adaptive-blur` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-adaptive-resize` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-adaptive-sharpen` | geometry |  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-alpha` | option | on, activate, off, deactivate, set, opaque, copy  | bi-functional | false | true | true | true | true | true | false | true | true | false | false |
+| `-annotate` | geometry | text  | bi-functional | false | false | true | false | true | false | false | false | false | true | false |
+| `-auto-gamma` | automagically | adjust gamma level of image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-auto-level` | automagically | adjust color levels of image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-auto-orient` | automagically | orient (rotate) image  | bi-functional | false | true | true | false | true | true | false | true | false | false | false |
+| `-auto-threshold` | method |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-bench` | iterations | measure performance  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-bilateral-blur` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-black-threshold` | value |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-blue-shift` | factor | simulate a scene at nighttime in the moonlight  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-blur` | geometry | reduce image noise and reduce detail levels  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-border` | geometry | surround image with a border of color  | bi-functional | false | false | true | true | true | false | false | true | false | true | false |
+| `-bordercolor` | color | border color  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-brightness-contrast` | geometry |  | bi-functional | false | false | true | false | false | true | false | false | false | false | false |
+| `-canny` | geometry | detect edges in the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-cdl` | filename | color correct with a color decision list  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-channel` | mask | set the image channel mask  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-charcoal` | radius | simulate a charcoal drawing  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-chop` | geometry | remove pixels from the image interior  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-clahe` | geometry | contrast limited adaptive histogram equalization  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-clamp` | keep | pixel values in range (0-QuantumRange)  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-colorize` | value | colorize the image with the fill color  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-color-matrix` | matrix | apply color correction to the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-colors` | value | preferred number of colors in the image  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-connected-components` | connectivity |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-contrast` | enhance | or reduce the image contrast  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-contrast-stretch` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-convolve` | coefficients |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-cycle` | amount | cycle the image colormap  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-decipher` | filename | convert cipher pixels to plain pixels  | bi-functional | false | false | true | true | false | true | false | true | true | false | false |
+| `-deskew` | threshold | straighten an image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-despeckle` | reduce | the speckles within an image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-distort` | method | args  | bi-functional | false | false | true | true | true | true | false | false | false | false | false |
+| `-draw` | string | annotate the image with a graphic primitive  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-edge` | radius | apply a filter to detect edges in the image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-encipher` | filename | convert plain pixels to cipher pixels  | bi-functional | false | false | true | true | false | true | false | false | false | true | false |
+| `-emboss` | radius | emboss an image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-enhance` | apply | a digital filter to enhance a noisy image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-equalize` | perform | histogram equalization to an image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-evaluate` | operator | value  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-extent` | geometry | set the image size  | bi-functional | false | false | true | false | true | false | false | true | true | true | false |
+| `-extract` | geometry | extract area from image  | bi-functional | false | true | true | true | true | true | true | true | true | false | false |
+| `-fft` | implements | the discrete Fourier transform (DFT)  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-flip` | flip | image vertically  | bi-functional | false | false | true | false | true | false | false | true | false | false | false |
+| `-floodfill` | geometry | color  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-flop` | flop | image horizontally  | bi-functional | false | false | true | false | true | false | false | true | false | false | false |
+| `-frame` | geometry | surround image with an ornamental border  | bi-functional | false | false | true | false | true | false | false | true | false | true | false |
+| `-function` | name | parameters  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-gamma` | value | level of gamma correction  | bi-functional | false | true | true | false | true | false | false | true | true | false | false |
+| `-gaussian-blur` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-geometry` | geometry | preferred size or location of the image  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-grayscale` | method | convert image to grayscale  | bi-functional | false | true | true | false | false | false | false | false | false | false | false |
+| `-hough-lines` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-identify` | identify | the format and characteristics of the image  | bi-functional | false | false | true | true | true | true | true | true | true | true | false |
+| `-ift` | implements | the inverse discrete Fourier transform (DFT)  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-implode` | amount | implode image pixels about the center  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-integral` | calculate | the sum of values (pixel values) in the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-interpolative-resize` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-kmeans` | geometry | K means color reduction  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-kuwahara` | geometry | edge preserving noise reduction filter  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-lat` | geometry | local adaptive thresholding  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-level` | value | adjust the level of image contrast  | bi-functional | false | false | true | false | false | true | false | false | false | false | false |
+| `-level-colors` | color,color |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-linear-stretch` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-liquid-rescale` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-local-contrast` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-mean-shift` | geometry | delineate arbitrarily shaped clusters in the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-median` | geometry | apply a median filter to the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-mode` | geometry | make each pixel the 'predominant color' of the  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-modulate` | value | vary the brightness, saturation, and hue  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-monochrome` | transform | image to black and white  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-morphology` | method | kernel  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-motion-blur` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-negate` | replace | every pixel with its complementary color  | bi-functional | false | true | true | true | false | true | false | true | false | true | false |
+| `-noise` | geometry | add or reduce noise in an image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-normalize` | transform | image to span the full range of colors  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-opaque` | color | change this color to the fill color  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-ordered-dither` | NxN |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-paint` | radius | simulate an oil painting  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-perceptible` | epsilon |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-epsilon` |  |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-polaroid` | angle | simulate a Polaroid picture  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-posterize` | levels | reduce the image to a limited number of color levels  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-profile` | filename | add, delete, or apply an image profile  | bi-functional | false | false | true | true | true | true | false | true | false | false | false |
+| `-quantize` | colorspace | reduce colors in this colorspace  | bi-functional | false | false | true | true | true | true | true | true | true | true | false |
+| `-raise` | value | lighten/darken image edges to create a 3-D effect  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-random-threshold` | low,high |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-range-threshold` | values |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-region` | geometry | apply options to a portion of the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-render` | render | vector graphics  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-resample` | geometry | change the resolution of an image  | bi-functional | false | false | true | false | false | false | false | true | true | false | false |
+| `-reshape` | geometry | reshape the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-resize` | geometry | resize the image  | bi-functional | false | false | true | true | true | true | false | true | true | true | false |
+| `-roll` | geometry | roll an image vertically or horizontally  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-rotate` | degrees | apply Paeth rotation to the image  | bi-functional | false | false | true | true | true | true | false | true | true | true | false |
+| `-rotational-blur` | angle |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-sample` | geometry | scale image with pixel sampling  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-scale` | geometry | scale the image  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-segment` | values | segment an image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-selective-blur` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-sepia-tone` | threshold |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-set` | property | value set an image property  | bi-functional | false | true | true | false | true | true | true | true | true | true | false |
+| `-shade` | degrees | shade the image using a distant light source  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-shadow` | geometry | simulate an image shadow  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-sharpen` | geometry | sharpen the image  | bi-functional | false | false | true | true | false | false | false | true | false | false | false |
+| `-shave` | geometry | shave pixels from the image edges  | bi-functional | false | false | true | true | false | false | false | false | false | false | false |
+| `-shear` | geometry | slide one edge of the image along the X or Y axis  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-sigmoidal-contrast` | geometry |  | bi-functional | false | false | true | false | false | true | false | false | false | false | false |
+| `-sketch` | geometry | simulate a pencil sketch  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-solarize` | threshold | negate all pixels above the threshold level  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-sort-pixels` | sort | each scanline in ascending order of intensity  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-sparse-color` | method | args  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-splice` | geometry | splice the background color into the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-spread` | radius | displace image pixels by a random amount  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-statistic` | type | geometry  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-strip` | strip | image of all profiles and comments  | output-option | false | true | true | true | true | false | false | true | true | true | false |
+| `-swirl` | degrees | swirl image pixels about the center  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-threshold` | value | threshold the image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-thumbnail` | geometry | create a thumbnail of the image  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-tile` | filename | tile image when filling a graphic primitive  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-tint` | value | tint the image with the fill color  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-transform` | affine | transform image  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-transparent` | color | make this color transparent within the image  | bi-functional | false | false | true | true | true | true | true | true | true | true | false |
+| `-transpose` | flip | image vertically and rotate 90 degrees  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-transverse` | flop | image horizontally and rotate 270 degrees  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-trim` | trim | image edges  | bi-functional | false | false | true | false | true | true | false | true | true | true | false |
+| `-type` | type | image type  | bi-functional | false | false | true | true | true | true | false | false | false | true | false |
+| `-unique-colors` | discard | all but one of any pixel color  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-unsharp` | geometry | sharpen the image  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-vignette` | geometry | soften the edges of the image in vignette style  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-wave` | geometry | alter an image along a sine wave  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-wavelet-denoise` | threshold |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-white-balance` | automagically | adjust white balance of image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-white-threshold` | value |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-channel-fx` | expression |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-separate` | separate | an image channel into a grayscale image  | bi-functional | false | false | true | false | false | true | false | false | false | false | false |
+| `-append` | append | an image sequence  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-clut` | apply | a color lookup table to the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-coalesce` | merge | a sequence of images  | bi-functional | false | false | true | false | true | false | false | true | true | false | false |
+| `-combine` | combine | a sequence of images  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-compare` | mathematically | and visually annotate the difference between an image and its reconstruction  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-complex` | operator | perform complex mathematics on an image sequence  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-composite` | composite | image  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-copy` | geometry | offset  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-crop` | geometry | cut out a rectangular region of the image  | input-option | false | true | true | false | true | true | false | true | true | true | false |
+| `-deconstruct` | break | down an image sequence into constituent parts  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-evaluate-sequence` | operator |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-flatten` | flatten | a sequence of images  | bi-functional | false | false | true | false | true | false | false | true | true | false | false |
+| `-fx` | expression | apply mathematical expression to an image channel(s)  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-hald-clut` | apply | a Hald color lookup table to the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-layers` | method | optimize, merge, or compare image layers  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-morph` | value | morph an image sequence  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-mosaic` | create | a mosaic from an image sequence  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-poly` | terms | build a polynomial from the image sequence and the corresponding  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-print` | string | interpret string and print to console  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-process` | arguments | process the image with a custom image filter  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-smush` | geometry | smush an image sequence together  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-write` | filename | write images to this file  | bi-functional | false | false | true | true | false | true | false | true | false | false | false |
+| `-clone` | indexes | clone an image  | bi-functional | false | false | false | false | true | false | false | false | false | false | false |
+| `-delete` | indexes | delete the image from the image sequence  | bi-functional | false | false | true | false | true | true | false | false | false | false | false |
+| `-duplicate` | count,indexes |  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-insert` | index | insert last image into the image sequence  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-reverse` | reverse | image sequence  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-swap` | indexes | swap two images in the image sequence  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-debug` | events | display copious debugging information  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-distribute-cache` | port |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-help` | print | program options  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-list` | type | print a list of supported option arguments  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-log` | format | format of debugging information  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-usage` | print | program usage  | bi-functional | false | false | false | false | false | false | false | false | false | false | false |
+| `-version` | print | version information  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
 
 ### ImageMagick color list
 
