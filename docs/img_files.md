@@ -297,8 +297,8 @@ Image properties that can be used in expressions:
 | `-polaroid` | angle | simulate a Polaroid picture  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
 | `-posterize` | levels | reduce the image to a limited number of color levels  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-profile` | filename | add, delete, or apply an image profile  | bi-functional | no | no | true | true | true | true | no | true | no | no | no |
-| `-quantize` | colorspace | reduce colors in this colorspace  | bi-functional | no | no | true | true | true | true | true | true | true | true | no |
-| `-raise` | value | lighten/darken image edges to create a 3-D effect  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| `-quantize` | colorspace | reduce colors in this colorspace | bi-functional | no | no | true | true | true | true | true | true | true | true | no |
+| `-raise` | value | lighten/darken image edges to create a 3-D effect | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
 | `-random-threshold` | low,high |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-range-threshold` | values |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-region` | geometry | apply options to a portion of the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
@@ -331,16 +331,16 @@ Image properties that can be used in expressions:
 | `-strip` | strip | image of all profiles and comments  | output-option | no | true | true | true | true | no | no | true | true | true | no |
 | `-swirl` | degrees | swirl image pixels about the center  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-threshold` | value | threshold the image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-thumbnail` | geometry | create a thumbnail of the image  | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
+| `-thumbnail` | geometry | create a thumbnail of the image | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
 | `-tile` | filename | tile image when filling a graphic primitive  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-tint` | value | tint the image with the fill color  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-tint` | value | tint the image with the fill color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-transform` | affine | transform image  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
 | `-transparent` | color | make this color transparent within the image  | bi-functional | no | no | true | true | true | true | true | true | true | true | no |
 | `-transpose` | flip | image vertically and rotate 90 degrees  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
 | `-transverse` | flop | image horizontally and rotate 270 degrees  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-trim` | trim | image edges  | bi-functional | no | no | true | no | true | true | no | true | true | true | no |
-| `-type` | type | image type  | bi-functional | no | no | true | true | true | true | no | no | no | true | no |
-| `-unique-colors` | discard | all but one of any pixel color  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-trim` | trim | image edges | bi-functional | no | no | true | no | true | true | no | true | true | true | no |
+| `-type` | type | image type | bi-functional | no | no | true | true | true | true | no | no | no | true | no |
+| `-unique-colors` | discard | all but one of any pixel color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-unsharp` | geometry | sharpen the image  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
 | `-vignette` | geometry | soften the edges of the image in vignette style  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-wave` | geometry | alter an image along a sine wave  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
@@ -348,40 +348,40 @@ Image properties that can be used in expressions:
 | `-white-balance` | automagically | adjust white balance of image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-white-threshold` | value |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-channel-fx` | expression |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-separate` | separate | an image channel into a grayscale image  | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
-| `-append` | append | an image sequence  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-clut` | apply | a color lookup table to the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-coalesce` | merge | a sequence of images  | bi-functional | no | no | true | no | true | no | no | true | true | no | no |
-| `-combine` | combine | a sequence of images  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-separate` | separate | an image channel into a grayscale image | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
+| `-append` | append | an image sequence | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-clut` | apply | a color lookup table to the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-coalesce` | merge | a sequence of images | bi-functional | no | no | true | no | true | no | no | true | true | no | no |
+| `-combine` | combine | a sequence of images | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-compare` | mathematically | and visually annotate the difference between an image and its reconstruction  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-complex` | operator | perform complex mathematics on an image sequence  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-composite` | composite | image  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
 | `-copy` | geometry | offset  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-crop` | geometry | cut out a rectangular region of the image  | input-option | no | true | true | no | true | true | no | true | true | true | no |
+| `-crop` | geometry | cut out a rectangular region of the image | input-option | no | true | true | no | true | true | no | true | true | true | no |
 | `-deconstruct` | break | down an image sequence into constituent parts  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-evaluate-sequence` | operator |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-flatten` | flatten | a sequence of images  | bi-functional | no | no | true | no | true | no | no | true | true | no | no |
-| `-fx` | expression | apply mathematical expression to an image channel(s)  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-hald-clut` | apply | a Hald color lookup table to the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-flatten` | flatten | a sequence of images | bi-functional | no | no | true | no | true | no | no | true | true | no | no |
+| `-fx` | expression | apply mathematical expression to an image channel(s) | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-hald-clut` | apply | a Hald color lookup table to the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-layers` | method | optimize, merge, or compare image layers  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-morph` | value | morph an image sequence  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-mosaic` | create | a mosaic from an image sequence  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-morph` | value | morph an image sequence | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-mosaic` | create | a mosaic from an image sequence | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-poly` | terms | build a polynomial from the image sequence and the corresponding  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-print` | string | interpret string and print to console  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-process` | arguments | process the image with a custom image filter  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-print` | string | interpret string and print to console | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-process` | arguments | process the image with a custom image filter | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-smush` | geometry | smush an image sequence together  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-write` | filename | write images to this file  | bi-functional | no | no | true | true | no | true | no | true | no | no | no |
-| `-clone` | indexes | clone an image  | bi-functional | no | no | no | no | true | no | no | no | no | no | no |
+| `-clone` | indexes | clone an image | bi-functional | no | no | no | no | true | no | no | no | no | no | no |
 | `-delete` | indexes | delete the image from the image sequence  | bi-functional | no | no | true | no | true | true | no | no | no | no | no |
 | `-duplicate` | count,indexes |  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-insert` | index | insert last image into the image sequence  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-reverse` | reverse | image sequence  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
+| `-insert` | index | insert last image into the image sequence | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
+| `-reverse` | reverse | image sequence | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
 | `-swap` | indexes | swap two images in the image sequence  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-debug` | events | display copious debugging information  | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
+| `-debug` | events | display copious debugging information | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
 | `-distribute-cache` | port |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-help` | print | program options  | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
-| `-list` | type | print a list of supported option arguments  | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
-| `-log` | format | format of debugging information  | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
+| `-help` | print | program options | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
+| `-list` | type | print a list of supported option arguments | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
+| `-log` | format | format of debugging information | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
 | `-usage` | print | program usage | bi-functional | no | no | no | no | no | no | no | no | no | no | no |
 | `-version` | print | version information | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
 
