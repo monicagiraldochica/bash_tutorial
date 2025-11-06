@@ -120,7 +120,7 @@ Image properties that can be used in expressions:
 
 | Option | Arguments | Description | Category | `magick` | `identify` | `mogrify` | `composite` | `montage` | `compare` | `stream` | `display` | `animate` | `import` | `conjure` |
 |--------|-----------|--------------|-----------|----------|-----------|-----------|-----------|----------|----------|----------|----------|----------|----------|
-| `-adjoin` | No arguments | Join images into a single multi-image file  | bi-functional | false | false | true | false | true | true | false | false | false | true | false |
+| `-adjoin` | No arguments | Join images into a single multi-image file  | bi-functional | no | no | true | no | true | true | no | no | no | true | no |
 | `-affine` | `matrix` | affine transform matrix  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
 | `-alpha` | `option` | activate, deactivate, reset, or set the alpha channel  | bi-functional | false | true | true | true | true | true | false | true | true | false | false |
 | `-antialias` | `remove` | pixel-aliasing  | bi-functional | false | true | true | false | false | false | false | true | false | false | false |
@@ -198,35 +198,35 @@ Image properties that can be used in expressions:
 | `-support` | `factor` | resize support: > 1.0 is blurry, < 1.0 is sharp  | bi-functional | false | false | false | true | true | false | false | true | true | true | false |
 | `-synchronize` | `synchronize` | image to storage device  | bi-functional | false | false | true | true | true | true | true | false | false | true | false |
 | `-taint` | No arguments | declare the image as modified  | bi-functional | false | false | true | true | true | true | true | false | false | true | false |
-| `-texture` | filename | name of texture to tile onto the image background  | bi-functional | false | false | true | false | true | false | false | true | false | false | false |
-| `-tile-offset` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-treedepth` | value | color tree depth  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
-| `-transparent-color` | color |  | bi-functional | false | false | true | true | true | true | true | true | true | true | false |
-| `-undercolor` | color | annotation bounding box color  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-units` | type | the units of image resolution  | bi-functional | false | true | true | true | true | false | false | false | false | false | false |
-| `-verbose` | print | detailed information about the image  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
-| `-view` | FlashPix | viewing transforms  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-virtual-pixel` | method |  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
-| `-weight` | type | render text with this font weight  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-white-point` | point | chromaticity white point  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
-| `-write-mask` | filename | associate a write mask with the image -word-break type sets whether line breaks appear wherever the text would otherwise overflow  | bi-functional | false | false | false | false | false | true | false | false | false | false | false |
-| `-adaptive-blur` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-adaptive-resize` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-adaptive-sharpen` | geometry |  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
-| `-alpha` | option | on, activate, off, deactivate, set, opaque, copy  | bi-functional | false | true | true | true | true | true | false | true | true | false | false |
-| `-annotate` | geometry | text  | bi-functional | false | false | true | false | true | false | false | false | false | true | false |
-| `-auto-gamma` | automagically | adjust gamma level of image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-auto-level` | automagically | adjust color levels of image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
-| `-auto-orient` | automagically | orient (rotate) image  | bi-functional | false | true | true | false | true | true | false | true | false | false | false |
-| `-auto-threshold` | method |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-bench` | iterations | measure performance  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-bilateral-blur` | geometry |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-black-threshold` | value |  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-blue-shift` | factor | simulate a scene at nighttime in the moonlight  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
-| `-blur` | geometry | reduce image noise and reduce detail levels  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
-| `-border` | geometry | surround image with a border of color  | bi-functional | false | false | true | true | true | false | false | true | false | true | false |
-| `-bordercolor` | color | border color  | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
-| `-brightness-contrast` | geometry |  | bi-functional | false | false | true | false | false | true | false | false | false | false | false |
+| `-texture` | `filename` | name of texture to tile onto the image background  | bi-functional | false | false | true | false | true | false | false | true | false | false | false |
+| `-tile-offset` | `x,y` | Horizontal and vertical offset in pixels  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-treedepth` | `value` | color tree depth  | bi-functional | false | false | true | true | true | false | false | true | true | true | false |
+| `-transparent-color` | `color` | The color name or value that will be use as the transparent color | bi-functional | false | false | true | true | true | true | true | true | true | true | false |
+| `-undercolor` | `color` | Highlight color that is drawn behind text  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-units` | `type` | `type` can be `Undefined`, `PixelsPerInch` or `PixelsPerCentimeter` | bi-functional | false | true | true | true | true | false | false | false | false | false | false |
+| `-verbose` | No arguments | print detailed information about the image  | bi-functional | false | true | true | true | true | true | true | true | true | true | true |
+| `-view` | `WxH+X+Y` | Portion of the image to view or initial viewport | bi-functional (`W`: width, `H`: height, `X`: horizontal offset, `Y`: vertical offset) | false | false | true | false | false | false | false | false | false | false | false |
+| `-virtual-pixel` | `method` | `method` used to generate pixels outside the image boundaries when performing distortions, transformations, or convolutions | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
+| `-weight` | `value` | render text with this font weight value | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-white-point` | `color` | color that represents the white reference for adjusting the image | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-write-mask` | `filename` | Path to the output file where the mask of the current image will be saved | bi-functional | false | false | false | false | false | true | false | false | false | false | false |
+| `-adaptive-blur` | `radius{,sigma}` | `radius` of the blur in pixels, sigma is optional | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-adaptive-resize` | `geometry` | target size for the resized image (`widthxheight`, `width`, `height`) | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-adaptive-sharpen` | `radius{,sigma}` | `radius` determines the neighborhood size for the operation, sigma is optional | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-alpha` | `option` | on, activate, off, deactivate, set, opaque, copy  | bi-functional | false | true | true | true | true | true | false | true | true | false | false |
+| `-annotate` | `geometry text` | `geometry`: `angle[xoffset][yoffset]`, `text`: string of text to draw on the image | bi-functional | false | false | true | false | true | false | false | false | false | true | false |
+| `-auto-gamma` | No arguments | automagically adjust gamma level of image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-auto-level` | No arguments | automagically adjust color levels of image  | bi-functional | false | false | true | false | false | false | false | true | false | false | false |
+| `-auto-orient` | No arguments | automagically orient (rotate) image  | bi-functional | false | true | true | false | true | true | false | true | false | false | false |
+| `-auto-threshold` | `value` | `value` adjusts how aggressively the image is binarized, if omitted it's computed automatically | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-bench` | `filename` | measure performance | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-bilateral-blur` | `radius{,sigma}` | `radius` of the filter in pixels, sigma is optional | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-black-threshold` | `value` | pixels with intensity less than or equal to `value` are converted to black | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-blue-shift` | `factor` | simulate a scene at nighttime in the moonlight, higher `factor` values increase the effect | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
+| `-blur` | `radius{,sigma}` | reduce image noise and detail levels  | bi-functional | false | false | true | false | true | false | false | false | false | false | false |
+| `-border` | `width` or `widthxheight` | surround image with a border of color | bi-functional | false | false | true | true | true | false | false | true | false | true | false |
+| `-bordercolor` | `color` | border color | bi-functional | false | false | true | true | true | false | false | false | false | false | false |
+| `-brightness-contrast` | `brightness{,contrast}` | positive values for `brightness` increase it, negative decrease it, same for contrast, which is optional | bi-functional | false | false | true | false | false | true | false | false | false | false | false |
 | `-canny` | geometry | detect edges in the image  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
 | `-cdl` | filename | color correct with a color decision list  | bi-functional | false | false | true | false | false | false | false | false | false | false | false |
 | `-channel` | mask | set the image channel mask  | bi-functional | false | true | true | true | true | true | true | true | true | true | false |
