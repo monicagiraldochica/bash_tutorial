@@ -120,44 +120,44 @@ Image properties that can be used in expressions:
 
 | Option | Arguments | Description | Category | `magick` | `identify` | `mogrify` | `composite` | `montage` | `compare` | `stream` | `display` | `animate` | `import` | `conjure` |
 |--------|-----------|--------------|-----------|----------|-----------|-----------|-----------|----------|----------|----------|----------|----------|----------|
-| `-adjoin` | No arguments | Join images into a single multi-image file  | bi-functional | no | no | true | no | true | true | no | no | no | true | no |
-| `-affine` | `matrix` | affine transform matrix  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-alpha` | `option` | activate, deactivate, reset, or set the alpha channel  | bi-functional | no | true | true | true | true | true | no | true | true | no | no |
-| `-antialias` | `remove` | pixel-aliasing  | bi-functional | no | true | true | no | no | no | no | true | no | no | no |
-| `-authenticate` | `password` |  | bi-functional | no | true | true | true | true | true | true | true | true | no | no |
-| `-attenuate` | `factor` | lessen (or intensify) when adding noise to an image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-background` | `color` | background color  | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
-| `-bias` | `value` | add bias when convolving an image | input-option | no | no | true | no | no | no | no | no | no | no | no |
-| `-black-point-compensation` | No arguments |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-blue-primary` | `point` | chromaticity blue primary point  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-bordercolor` | `color` | border color | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-caption` | `string` | assign a caption to an image | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-clip` | No arguments | along the first path from the 8BIM profile  | input-option | no | true | true | no | no | no | no | true | no | no | no |
-| `-clip-mask` | `filename` | associate a clip mask with the image  | input-option | no | true | true | no | no | no | no | no | no | no | no |
-| `-clip-path` | `id` | clip along a named path from the 8BIM profile  | input-option | no | true | true | no | no | no | no | true | no | no | no |
-| `-colorspace` | `type` | alternate image colorspace  | bi-functional | no | true | true | true | true | true | true | true | true | true | no |
-| `-comment` | `string` | annotate image with comment  | bi-functional | no | no | true | true | true | no | no | true | no | true | no |
-| `-compose` | `operator` | set image composite operator  | bi-functional | no | no | true | true | true | true | no | no | no | no | no |
-| `-compress` | `type` | type of pixel compression when writing the image  | bi-functional | no | no | true | true | true | true | true | true | no | true | no |
-| `-define` | `format:key=value` |  | output-option | no | true | true | true | true | true | true | true | true | true | no |
-| `-delay` | `seconds` | display the next image after pausing  | bi-functional | no | no | true | no | true | no | no | true | true | true | no |
-| `-density` | `geometry` | horizontal and vertical density of the image  | input-option | no | true | true | true | true | true | true | true | true | true | no |
-| `-depth` | `value` | image depth  | bi-functional | no | true | true | true | true | true | true | true | true | true | no |
-| `-direction` | `type` | render text right-to-left or left-to-right  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-display` | `server` | get image or font from this X server  | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| `-dispose` | `method` | layer disposal method  | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| `-dither` | `method` | apply error diffusion to image  | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| `-encoding` | `type` | text encoding type  | bi-functional | no | no | true | true | true | no | no | no | no | true | no |
-| `-endian` | `type` | endianness (MSB or LSB) of the image  | bi-functional | no | true | true | true | true | no | no | true | no | true | no |
-| `-family` | `name` | render text with this font family  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-features` | `distance` | analyze image features (e.g. contrast, correlation)  | bi-functional | no | true | true | no | no | no | no | no | no | no | no |
-| `-fill` | `color` | color to use when filling a graphic primitive  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-filter` | `type` | use this filter when resizing an image  | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| `-font` | `name` | render text with this font  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-format` | `string` | output formatted image characteristics  | bi-functional | no | true | true | true | true | true | no | true | true | true | no |
-| `-fuzz` | `distance` | colors within this distance are considered equal  | bi-functional | no | true | true | no | no | true | no | true | no | no | no |
-| `-gravity` | `type` | horizontal and vertical text placement  | bi-functional | no | no | true | true | true | true | no | true | true | true | no |
-| `-green-primary` | `point` | chromaticity green primary point  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
+| `-adjoin` | No arguments | used to control how multi-image files are written | bi-functional | no | no | yes | no | yes | yes | no | no | no | yes | no |
+| `-affine` | `matrix` | specify an affine transformation matrix that can then be applied to an image with `-transform` | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| `-alpha` | `option` | control the alpha channel of an image, which represents transparency | bi-functional | no | yes | yes | yes | yes | yes | no | yes | yes | no | no |
+| `-antialias` | No arguments | enable or disable antialiasing, which smooths jagged edges in text, shapes, or lines | bi-functional | no | yes | yes | no | no | no | no | yes | no | no | no |
+| `-authenticate` | `password` | provide a password or key when reading images that are encrypted | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | no | no |
+| `-attenuate` | `factor` | scale the effect of the next image-editing operation | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-background` | `color` | background color  | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| `-bias` | `value` | add bias when convolving an image | input-option | no | no | yes | no | no | no | no | no | no | no | no |
+| `-black-point-compensation` | No arguments |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-blue-primary` | `point` | chromaticity blue primary point  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| `-bordercolor` | `color` | border color | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| `-caption` | `string` | assign a caption to an image | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-clip` | No arguments | along the first path from the 8BIM profile  | input-option | no | yes | yes | no | no | no | no | yes | no | no | no |
+| `-clip-mask` | `filename` | associate a clip mask with the image  | input-option | no | yes | yes | no | no | no | no | no | no | no | no |
+| `-clip-path` | `id` | clip along a named path from the 8BIM profile  | input-option | no | yes | yes | no | no | no | no | yes | no | no | no |
+| `-colorspace` | `type` | alternate image colorspace  | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| `-comment` | `string` | annotate image with comment  | bi-functional | no | no | yes | yes | yes | no | no | yes | no | yes | no |
+| `-compose` | `operator` | set image composite operator  | bi-functional | no | no | yes | yes | yes | yes | no | no | no | no | no |
+| `-compress` | `type` | type of pixel compression when writing the image  | bi-functional | no | no | yes | yes | yes | yes | yes | yes | no | yes | no |
+| `-define` | `format:key=value` |  | output-option | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| `-delay` | `seconds` | display the next image after pausing  | bi-functional | no | no | yes | no | yes | no | no | yes | yes | yes | no |
+| `-density` | `geometry` | horizontal and vertical density of the image  | input-option | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| `-depth` | `value` | image depth  | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| `-direction` | `type` | render text right-to-left or left-to-right  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-display` | `server` | get image or font from this X server  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| `-dispose` | `method` | layer disposal method  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| `-dither` | `method` | apply error diffusion to image  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| `-encoding` | `type` | text encoding type  | bi-functional | no | no | yes | yes | yes | no | no | no | no | yes | no |
+| `-endian` | `type` | endianness (MSB or LSB) of the image  | bi-functional | no | yes | yes | yes | yes | no | no | yes | no | yes | no |
+| `-family` | `name` | render text with this font family  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-features` | `distance` | analyze image features (e.g. contrast, correlation)  | bi-functional | no | yes | yes | no | no | no | no | no | no | no | no |
+| `-fill` | `color` | color to use when filling a graphic primitive  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-filter` | `type` | use this filter when resizing an image  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| `-font` | `name` | render text with this font  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| `-format` | `string` | output formatted image characteristics  | bi-functional | no | yes | yes | yes | yes | yes | no | yes | yes | yes | no |
+| `-fuzz` | `distance` | colors within this distance are considered equal  | bi-functional | no | yes | yes | no | no | yes | no | yes | no | no | no |
+| `-gravity` | `type` | horizontal and vertical text placement  | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
+| `-green-primary` | `point` | chromaticity green primary point  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
 | `-illuminant` | `type` | reference illuminant  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-intensity` | `method` | method to generate an intensity value from a pixel  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-intent` | `type` | type of rendering intent when managing the image color  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
@@ -227,163 +227,163 @@ Image properties that can be used in expressions:
 | `-border` | `width` or `widthxheight` | surround image with a border of color | bi-functional | no | no | true | true | true | no | no | true | no | true | no |
 | `-bordercolor` | `color` | border color | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
 | `-brightness-contrast` | `brightness{,contrast}` | positive values for `brightness` increase it, negative decrease it, same for contrast, which is optional | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
-| `-canny` | geometry | detect edges in the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-cdl` | filename | color correct with a color decision list | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-channel` | mask | set the image channel mask | bi-functional | no | true | true | true | true | true | true | true | true | true | no |
-| `-charcoal` | radius | simulate a charcoal drawing | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-chop` | geometry | remove pixels from the image interior | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-clahe` | geometry | contrast limited adaptive histogram equalization | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-clamp` | keep | pixel values in range (0-QuantumRange) | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-colorize` | value | colorize the image with the fill color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-canny` | radius+sigma low_threshold+high_threshold | detect edges in the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-cdl` | slope,offset,power,saturation | color correct with a color decision list | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-channel` | channel-list | set the image channel mask | bi-functional | no | true | true | true | true | true | true | true | true | true | no |
+| `-charcoal` | radius+sigma | simulate a charcoal drawing | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-chop` | -chop {width}x{height}{+-}x{+-}y | remove pixels from the image interior | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-clahe` | widthxheight{+clip-limit}{+bins} | contrast limited adaptive histogram equalization | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-clamp` | No arguments| keep pixel values in range (0-QuantumRange) | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-colorize` | amount{%} color | colorize the image with the fill color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
 | `-color-matrix` | matrix | apply color correction to the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-colors` | value | preferred number of colors in the image | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| `-connected-components` | connectivity |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-contrast` | enhance | or reduce the image contrast  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-contrast-stretch` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-convolve` | coefficients |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-cycle` | amount | cycle the image colormap  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-decipher` | filename | convert cipher pixels to plain pixels  | bi-functional | no | no | true | true | no | true | no | true | true | no | no |
-| `-deskew` | threshold | straighten an image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-despeckle` | reduce | the speckles within an image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-distort` | method | args  | bi-functional | no | no | true | true | true | true | no | no | no | no | no |
-| `-draw` | string | annotate the image with a graphic primitive  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-edge` | radius | apply a filter to detect edges in the image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-encipher` | filename | convert plain pixels to cipher pixels  | bi-functional | no | no | true | true | no | true | no | no | no | true | no |
-| `-emboss` | radius | emboss an image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-enhance` | apply | a digital filter to enhance a noisy image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-equalize` | perform | histogram equalization to an image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-evaluate` | operator | value  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-extent` | geometry | set the image size  | bi-functional | no | no | true | no | true | no | no | true | true | true | no |
-| `-extract` | geometry | extract area from image  | bi-functional | no | true | true | true | true | true | true | true | true | no | no |
-| `-fft` | implements | the discrete Fourier transform (DFT)  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-flip` | flip | image vertically  | bi-functional | no | no | true | no | true | no | no | true | no | no | no |
-| `-floodfill` | geometry | color  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-flop` | flop | image horizontally  | bi-functional | no | no | true | no | true | no | no | true | no | no | no |
-| `-frame` | geometry | surround image with an ornamental border  | bi-functional | no | no | true | no | true | no | no | true | no | true | no |
-| `-function` | name | parameters  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-gamma` | value | level of gamma correction  | bi-functional | no | true | true | no | true | no | no | true | true | no | no |
-| `-gaussian-blur` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-geometry` | geometry | preferred size or location of the image  | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| `-grayscale` | method | convert image to grayscale  | bi-functional | no | true | true | no | no | no | no | no | no | no | no |
-| `-hough-lines` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-identify` | identify | the format and characteristics of the image  | bi-functional | no | no | true | true | true | true | true | true | true | true | no |
-| `-ift` | implements | the inverse discrete Fourier transform (DFT)  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-implode` | amount | implode image pixels about the center  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-integral` | calculate | the sum of values (pixel values) in the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-interpolative-resize` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-kmeans` | geometry | K means color reduction  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-kuwahara` | geometry | edge preserving noise reduction filter  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-lat` | geometry | local adaptive thresholding  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-level` | value | adjust the level of image contrast  | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
-| `-level-colors` | color,color |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-linear-stretch` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-liquid-rescale` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-local-contrast` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-mean-shift` | geometry | delineate arbitrarily shaped clusters in the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-median` | geometry | apply a median filter to the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-mode` | geometry | make each pixel the 'predominant color' of the  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-modulate` | value | vary the brightness, saturation, and hue  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-monochrome` | transform | image to black and white  | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| `-morphology` | method | kernel  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-motion-blur` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-negate` | replace | every pixel with its complementary color  | bi-functional | no | true | true | true | no | true | no | true | no | true | no |
-| `-noise` | geometry | add or reduce noise in an image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-normalize` | transform | image to span the full range of colors  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-opaque` | color | change this color to the fill color  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-ordered-dither` | NxN |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-paint` | radius | simulate an oil painting  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-perceptible` | epsilon |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-epsilon` |  |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-polaroid` | angle | simulate a Polaroid picture  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-posterize` | levels | reduce the image to a limited number of color levels  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-profile` | filename | add, delete, or apply an image profile  | bi-functional | no | no | true | true | true | true | no | true | no | no | no |
-| `-quantize` | colorspace | reduce colors in this colorspace | bi-functional | no | no | true | true | true | true | true | true | true | true | no |
-| `-raise` | value | lighten/darken image edges to create a 3-D effect | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-random-threshold` | low,high |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-range-threshold` | values |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-region` | geometry | apply options to a portion of the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-render` | render | vector graphics  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-resample` | geometry | change the resolution of an image  | bi-functional | no | no | true | no | no | no | no | true | true | no | no |
-| `-reshape` | geometry | reshape the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-resize` | geometry | resize the image  | bi-functional | no | no | true | true | true | true | no | true | true | true | no |
-| `-roll` | geometry | roll an image vertically or horizontally  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-rotate` | degrees | apply Paeth rotation to the image  | bi-functional | no | no | true | true | true | true | no | true | true | true | no |
-| `-rotational-blur` | angle |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-sample` | geometry | scale image with pixel sampling  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-scale` | geometry | scale the image  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-segment` | values | segment an image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-selective-blur` | geometry |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-sepia-tone` | threshold |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-set` | property | value set an image property  | bi-functional | no | true | true | no | true | true | true | true | true | true | no |
-| `-shade` | degrees | shade the image using a distant light source  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-shadow` | geometry | simulate an image shadow  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-sharpen` | geometry | sharpen the image  | bi-functional | no | no | true | true | no | no | no | true | no | no | no |
-| `-shave` | geometry | shave pixels from the image edges  | bi-functional | no | no | true | true | no | no | no | no | no | no | no |
-| `-shear` | geometry | slide one edge of the image along the X or Y axis  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-sigmoidal-contrast` | geometry |  | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
-| `-sketch` | geometry | simulate a pencil sketch  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-solarize` | threshold | negate all pixels above the threshold level  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-sort-pixels` | sort | each scanline in ascending order of intensity  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-sparse-color` | method | args  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-splice` | geometry | splice the background color into the image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-spread` | radius | displace image pixels by a random amount  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-statistic` | type | geometry  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-strip` | strip | image of all profiles and comments  | output-option | no | true | true | true | true | no | no | true | true | true | no |
-| `-swirl` | degrees | swirl image pixels about the center  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-threshold` | value | threshold the image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| `-thumbnail` | geometry | create a thumbnail of the image | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| `-tile` | filename | tile image when filling a graphic primitive  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-tint` | value | tint the image with the fill color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-transform` | affine | transform image  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-transparent` | color | make this color transparent within the image  | bi-functional | no | no | true | true | true | true | true | true | true | true | no |
-| `-transpose` | flip | image vertically and rotate 90 degrees  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-transverse` | flop | image horizontally and rotate 270 degrees  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-trim` | trim | image edges | bi-functional | no | no | true | no | true | true | no | true | true | true | no |
-| `-type` | type | image type | bi-functional | no | no | true | true | true | true | no | no | no | true | no |
-| `-unique-colors` | discard | all but one of any pixel color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-unsharp` | geometry | sharpen the image  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-vignette` | geometry | soften the edges of the image in vignette style  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-wave` | geometry | alter an image along a sine wave  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-wavelet-denoise` | threshold |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-white-balance` | automagically | adjust white balance of image  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-white-threshold` | value |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-channel-fx` | expression |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-separate` | separate | an image channel into a grayscale image | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
-| `-append` | append | an image sequence | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-clut` | apply | a color lookup table to the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-coalesce` | merge | a sequence of images | bi-functional | no | no | true | no | true | no | no | true | true | no | no |
-| `-combine` | combine | a sequence of images | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-compare` | mathematically | and visually annotate the difference between an image and its reconstruction  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-complex` | operator | perform complex mathematics on an image sequence  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-composite` | composite | image  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-copy` | geometry | offset  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-crop` | geometry | cut out a rectangular region of the image | input-option | no | true | true | no | true | true | no | true | true | true | no |
-| `-deconstruct` | break | down an image sequence into constituent parts  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-evaluate-sequence` | operator |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-flatten` | flatten | a sequence of images | bi-functional | no | no | true | no | true | no | no | true | true | no | no |
-| `-fx` | expression | apply mathematical expression to an image channel(s) | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-hald-clut` | apply | a Hald color lookup table to the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-layers` | method | optimize, merge, or compare image layers  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-morph` | value | morph an image sequence | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-mosaic` | create | a mosaic from an image sequence | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-poly` | terms | build a polynomial from the image sequence and the corresponding  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-print` | string | interpret string and print to console | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-process` | arguments | process the image with a custom image filter | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-smush` | geometry | smush an image sequence together  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-write` | filename | write images to this file  | bi-functional | no | no | true | true | no | true | no | true | no | no | no |
-| `-clone` | indexes | clone an image | bi-functional | no | no | no | no | true | no | no | no | no | no | no |
-| `-delete` | indexes | delete the image from the image sequence  | bi-functional | no | no | true | no | true | true | no | no | no | no | no |
-| `-duplicate` | count,indexes |  | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-insert` | index | insert last image into the image sequence | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-reverse` | reverse | image sequence | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| `-swap` | indexes | swap two images in the image sequence  | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| `-debug` | events | display copious debugging information | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
-| `-distribute-cache` | port |  | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| `-help` | print | program options | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
-| `-list` | type | print a list of supported option arguments | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
-| `-log` | format | format of debugging information | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
+| `-colors` | value | preferred maximum number of colors in the image | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
+| `-connected-components` | options label-type | used for analyzing or labeling connected regions in a binary or grayscale image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-contrast` | No arguments| enhance or reduce the image contrast | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| `-contrast-stretch` | `black-point%xwhite-point%` | enhance image contrast by remapping pixel values | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-convolve` | `coefficients` | apply a convolution kernel to an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-cycle` | `amount` | cycle the image colormap | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-decipher` | `key` | decode images that were previously encrypted | bi-functional | no | no | true | true | no | true | no | true | true | no | no |
+| `-deskew` | `threshold` | straighten an image | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| `-despeckle` | No arguments| reduce the speckles within an image  | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| `-distort` | `method arguments` | geometrically transform an image using various distortion methods | bi-functional | no | no | true | true | true | true | no | no | no | no | no |
+| `-draw` | `primitive parameters` | render vector graphics, shapes, text, or paths directly onto an image | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
+| `-edge` | `radius` | edge detection on an image | no | no | true | no | no | no | no | true | no | no | no |
+| `-encipher` | `key` | encrypt an image so that it cannot be viewed normally without a key | bi-functional | no | no | true | true | no | true | no | no | no | true | no |
+| `-emboss` | `radiusxsigma` | create a 3D relief effect that makes an image appear raised or stamped | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-enhance` | No arguments| improve the quality of an image by reducing noise and optimizing contrast | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| `-equalize` | No arguments| global histogram equalization, which enhances the contrast of an image by redistributing pixel intensities | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| `-evaluate` | `operator value` | perform arithmetic operations on the pixel values of an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-extent` | `widthxheight{+-x+-y}` | resize the canvas of an image without scaling the original | bi-functional | no | no | true | no | true | no | no | true | true | true | no |
+| `-extract` | `widthxheight+x+y` | crop a rectangular region from an image based on specified geometry | bi-functional | no | true | true | true | true | true | true | true | true | no | no |
+| `-fft` | No arguments| perform a Fast Fourier Transform (FFT) on an image, converting it from the spatial domain (pixel values) to the frequency domain | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-flip` | No arguments| flip image vertically (along the horizontal axis) | bi-functional | no | no | true | no | true | no | no | true | no | no | no |
+| `-floodfill` | `x,y target_color fill_color` |  fill a connected region of pixels with a new color, starting from a specified point and replacing pixels that match a target color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-flop` | No arguments | flip an image horizontally (along the vertical axis) | bi-functional | no | no | true | no | true | no | no | true | no | no | no |
+| `-frame` | `widthxheight+outerBevel+innerBevel` | add a decorative border or frame around an image | bi-functional | no | no | true | no | true | no | no | true | no | true | no |
+| `-function` | `type arguments` | apply a mathematical function to pixel values in an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-gamma` | `value` | adjust the gamma value of an image, which non-linearly modifies pixel brightness | bi-functional | no | true | true | no | true | no | no | true | true | no | no |
+| `-gaussian-blur` | `radiusxsigma` | smooth pixel values in a way that preserves edges | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| `-geometry` | geometry | preferred size or location of the image  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| `-grayscale` | method | convert image to grayscale  | bi-functional | no | yes | yes | no | no | no | no | no | no | no | no |
+| `-hough-lines` | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-identify` | identify | the format and characteristics of the image  | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| `-ift` | implements | the inverse discrete Fourier transform (DFT)  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-implode` | amount | implode image pixels about the center  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-integral` | calculate | the sum of values (pixel values) in the image  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-interpolative-resize` | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-kmeans` | geometry | K means color reduction  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-kuwahara` | geometry | edge preserving noise reduction filter  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-lat` | geometry | local adaptive thresholding  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-level` | value | adjust the level of image contrast  | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| `-level-colors` | color,color |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-linear-stretch` | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-liquid-rescale` | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-local-contrast` | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-mean-shift` | geometry | delineate arbitrarily shaped clusters in the image  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-median` | geometry | apply a median filter to the image  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-mode` | geometry | make each pixel the 'predominant color' of the  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-modulate` | value | vary the brightness, saturation, and hue  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-monochrome` | transform | image to black and white  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| `-morphology` | method | kernel  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-motion-blur` | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-negate` | replace | every pixel with its complementary color  | bi-functional | no | yes | yes | yes | no | yes | no | yes | no | yes | no |
+| `-noise` | geometry | add or reduce noise in an image  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-normalize` | transform | image to span the full range of colors  | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| `-opaque` | color | change this color to the fill color  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-ordered-dither` | NxN |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-paint` | radius | simulate an oil painting  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-perceptible` | epsilon |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-epsilon` |  |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-polaroid` | angle | simulate a Polaroid picture  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-posterize` | levels | reduce the image to a limited number of color levels  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-profile` | filename | add, delete, or apply an image profile  | bi-functional | no | no | yes | yes | yes | yes | no | yes | no | no | no |
+| `-quantize` | colorspace | reduce colors in this colorspace | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| `-raise` | value | lighten/darken image edges to create a 3-D effect | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| `-random-threshold` | low,high |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-range-threshold` | values |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-region` | geometry | apply options to a portion of the image  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-render` | render | vector graphics  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-resample` | geometry | change the resolution of an image  | bi-functional | no | no | yes | no | no | no | no | yes | yes | no | no |
+| `-reshape` | geometry | reshape the image  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-resize` | geometry | resize the image  | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
+| `-roll` | geometry | roll an image vertically or horizontally  | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| `-rotate` | degrees | apply Paeth rotation to the image  | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
+| `-rotational-blur` | angle |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-sample` | geometry | scale image with pixel sampling  | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| `-scale` | geometry | scale the image  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-segment` | values | segment an image  | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| `-selective-blur` | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-sepia-tone` | threshold |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-set` | property | value set an image property  | bi-functional | no | yes | yes | no | yes | yes | yes | yes | yes | yes | no |
+| `-shade` | degrees | shade the image using a distant light source  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-shadow` | geometry | simulate an image shadow  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-sharpen` | geometry | sharpen the image  | bi-functional | no | no | yes | yes | no | no | no | yes | no | no | no |
+| `-shave` | geometry | shave pixels from the image edges  | bi-functional | no | no | yes | yes | no | no | no | no | no | no | no |
+| `-shear` | geometry | slide one edge of the image along the X or Y axis  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-sigmoidal-contrast` | geometry |  | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| `-sketch` | geometry | simulate a pencil sketch  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-solarize` | threshold | negate all pixels above the threshold level  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-sort-pixels` | sort | each scanline in ascending order of intensity  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-sparse-color` | method | args  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-splice` | geometry | splice the background color into the image  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-spread` | radius | displace image pixels by a random amount  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-statistic` | type | geometry  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-strip` | strip | image of all profiles and comments  | output-option | no | yes | yes | yes | yes | no | no | yes | yes | yes | no |
+| `-swirl` | degrees | swirl image pixels about the center  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-threshold` | value | threshold the image  | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| `-thumbnail` | geometry | create a thumbnail of the image | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| `-tile` | filename | tile image when filling a graphic primitive  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| `-tint` | value | tint the image with the fill color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-transform` | affine | transform image  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| `-transparent` | color | make this color transparent within the image  | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| `-transpose` | flip | image vertically and rotate 90 degrees  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-transverse` | flop | image horizontally and rotate 270 degrees  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-trim` | trim | image edges | bi-functional | no | no | yes | no | yes | yes | no | yes | yes | yes | no |
+| `-type` | type | image type | bi-functional | no | no | yes | yes | yes | yes | no | no | no | yes | no |
+| `-unique-colors` | discard | all but one of any pixel color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-unsharp` | geometry | sharpen the image  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| `-vignette` | geometry | soften the edges of the image in vignette style  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-wave` | geometry | alter an image along a sine wave  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-wavelet-denoise` | threshold |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-white-balance` | automagically | adjust white balance of image  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-white-threshold` | value |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-channel-fx` | expression |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-separate` | separate | an image channel into a grayscale image | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| `-append` | append | an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-clut` | apply | a color lookup table to the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-coalesce` | merge | a sequence of images | bi-functional | no | no | yes | no | yes | no | no | yes | yes | no | no |
+| `-combine` | combine | a sequence of images | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-compare` | mathematically | and visually annotate the difference between an image and its reconstruction  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-complex` | operator | perform complex mathematics on an image sequence  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-composite` | composite | image  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-copy` | geometry | offset  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-crop` | geometry | cut out a rectangular region of the image | input-option | no | yes | yes | no | yes | yes | no | yes | yes | yes | no |
+| `-deconstruct` | break | down an image sequence into constituent parts  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-evaluate-sequence` | operator |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-flatten` | flatten | a sequence of images | bi-functional | no | no | yes | no | yes | no | no | yes | yes | no | no |
+| `-fx` | expression | apply mathematical expression to an image channel(s) | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-hald-clut` | apply | a Hald color lookup table to the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-layers` | method | optimize, merge, or compare image layers  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-morph` | value | morph an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-mosaic` | create | a mosaic from an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-poly` | terms | build a polynomial from the image sequence and the corresponding  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-print` | string | interpret string and print to console | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-process` | arguments | process the image with a custom image filter | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-smush` | geometry | smush an image sequence together  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-write` | filename | write images to this file  | bi-functional | no | no | yes | yes | no | yes | no | yes | no | no | no |
+| `-clone` | indexes | clone an image | bi-functional | no | no | no | no | yes | no | no | no | no | no | no |
+| `-delete` | indexes | delete the image from the image sequence  | bi-functional | no | no | yes | no | yes | yes | no | no | no | no | no |
+| `-duplicate` | count,indexes |  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-insert` | index | insert last image into the image sequence | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-reverse` | reverse | image sequence | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| `-swap` | indexes | swap two images in the image sequence  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| `-debug` | events | display copious debugging information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| `-distribute-cache` | port |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| `-help` | print | program options | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| `-list` | type | print a list of supported option arguments | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| `-log` | format | format of debugging information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
 | `-usage` | print | program usage | bi-functional | no | no | no | no | no | no | no | no | no | no | no |
-| `-version` | print | version information | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
+| `-version` | print | version information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
 
 ### ImageMagick color list
 
