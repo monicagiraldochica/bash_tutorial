@@ -1,18 +1,22 @@
-# Manipulating image files
+# ImageMagick
 
-## ImageMagick (linux, Mac)
-
-### Installation
+## Installation (Linux, Mac)
 
 Go to the [ImageMagic installation page](https://imagemagick.org/script/download.php) for detailed instructions for different operating systems.
 
-### Utilities
+## Syntax
 
-The following table presents a list of utilities that are part of ImageMagick and that can be used for different purposes. Each tool will have input and output options. Check [this section](#imagemagick-options) for a complete list of these options.
+```bash
+[utility] [options]
+```
 
-When specifying a color in any ImageMagick command, you can use the name of any [recognized color](#imagemagick-color-list), the RGB value, or the Hex value.
+## Utilities
 
-When specifying a shape to draw on an image, you can use any of the [valid shapes](#imagemagick-shapes).
+The following table presents a list of utilities that are part of ImageMagick and that can be used for different purposes. Each tool will have input and output options. Check [this section](#options) for a complete list of these options.
+
+When specifying a color in any ImageMagick command, you can use the name of any [recognized color](#color-list), the RGB value, or the Hex value.
+
+When specifying a shape to draw on an image, you can use any of the [valid shapes](#shapes).
 
 | Utility | Use | Syntax | Links |
 | --- | --- | --- | --- |
@@ -28,7 +32,7 @@ When specifying a shape to draw on an image, you can use any of the [valid shape
 | `import` | Saves  any  visible  window as an img file. Captures a single window, the entire screen, or any rectangular portion of the screen. | `import [options] output-file` | [Man page](https://docs.oracle.com/cd/E88353_01/html/E37839/import-1.html), [Documentation](http://imagemagick.org/script/import.php) |
 | `conjure` | Interprets and executes scripts written in the Magick Scripting Language (MSL). | `conjure [options] script.msl` | [Man page](https://docs.oracle.com/cd/E88353_01/html/E37839/conjure-1.html), [Documentation](http://imagemagick.org/script/conjure.php) |
 
-### ImageMagick Format escapes
+## Format Escapes
 
 | Escape | Meaning |
 | --- | --- |
@@ -50,15 +54,15 @@ When specifying a shape to draw on an image, you can use any of the [valid shape
 | `%z` | Depth (bits per channel) |
 | `%[channels]` | List of channels |
 | `%[colorspace]` | Colorspace |
-| `%[EXIF:tag]` | Image metadata. [This](#imagemagick-exif-tags) is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string. |
-| `%[fx:expression]` | Custom expression. This is a mathematical formula that can reference pixels, image dimensions, channels or constants. Please see the [ImageMagick expressions](#imagemagick-expressions) sections for more details. |
+| `%[EXIF:tag]` | Image metadata. [This](#exif-tags) is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string. |
+| `%[fx:expression]` | Custom expression. This is a mathematical formula that can reference pixels, image dimensions, channels or constants. Please see the [ImageMagick expressions](#expressions) sections for more details. |
 | `%[IPTC:tag]` | IPTC metadata (captions, keywords, etc.) |
 | `%[mean]` | Mean pixel intensity |
 | `%[profile:name]` | ICC/ICM or other image profile |
 | `%[property:name]` | Image property (generic metadata) |
 | `%[standard-deviation]` | Standard deviation of pixel intensity |
 
-### ImageMagick expressions
+## Expressions
 
 ImageMagick expressions allow you to compute custom values using image properties.
 
@@ -72,9 +76,9 @@ Image properties that can be used in expressions:
 - Functions: `abs(x)`, `sin(x)`, `cos(x)`, `tan(x)`, `log(x)`, `exp(x)`, `sqrt(x)`, `min(a,b)`, `max(a,b)`, `floor(x)`, `ceil(x)`.
 - Channel statistics: `mean.r`, `mean.g`, `mean.b`, `standard_deviation.r`, `standard_deviation.g`, `standard_deviation.b`.
 
-### ImageMagick EXIF tags
+## EXIF Tags
 
-| EXIF Tag | Description |
+| Tag | Description |
 | --- | --- |
 | `DateTime` | Date and time of image modification |
 | `DateTimeOriginal` | Original date and time the photo was taken |
@@ -98,7 +102,7 @@ Image properties that can be used in expressions:
 | `ExifImageWidth` | Width recorded in EXIF (may differ from actual width) |
 | `ExifImageHeight` | Height recorded in EXIF (may differ from actual height) |
 
-### ImageMagick shapes
+## Shapes
 
 | Shape | Syntax | Notes |
 | --- | --- | --- |
@@ -116,7 +120,7 @@ Image properties that can be used in expressions:
 | Image | `image operator x0,y0 w,h filename` | Used to composite an image with another image. |
 | Text | `text x,y text_to_display` | Add text in coordinates x,y of image. |
 
-### ImageMagick options
+## Options
 
 | Option | Arguments | Description | Category | `magick` | `identify` | `mogrify` | `composite` | `montage` | `compare` | `stream` | `display` | `animate` | `import` | `conjure` |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -385,7 +389,7 @@ Image properties that can be used in expressions:
 | `-usage` | print | program usage | bi-functional | no | no | no | no | no | no | no | no | no | no | no |
 | `-version` | print | version information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
 
-### ImageMagick color list
+## Color List
 
 | Color name | RGB | Hex | Sample |
 | --- | --- | --- | --- |
@@ -912,145 +916,3 @@ Image properties that can be used in expressions:
 | DarkGray | rgb(169,169,169) | #A9A9A9 | <font style="background-color: #A9A9A9;">#A9A9A9</font> |
 | Black | rgb(0,0,0) | #000000 | <font style="background-color: #000000;">#000000</font> |
 | Transparent | rgba(0,0,0,0.0) | #00000000 | <font style="background-color: #00000000;">#00000000</font> |
-
-## sips (Mac)
-
-Usage: `sips [flags] inputFile [--out outputFile]`
-
-Image modification flags:
-
-| Flag | Meaning |
-| --- | --- |
-| `-s key value` | Set the value for a `key` (see table below for the available keys and acceptable values). |
-| `-r degreesCW` | Rotate an image several degrees clockwise. |
-| `-f option` | Flip the image using one of the following two options: horizontal or vertical. |
-| `-c pixelsH pixelsW` | Crop image to fit specified size. `pixelsH` indicates the new height in number of pixels, `pixelsW` indicates the new width in number of pixels. |
-| `-z pixelsH pixelsW` | Resample image at specified size. Image aspect ratio may be altered. `pixelsH` indicate the new height in number of pixels, `pixelsW` indicate the new width in number of pixels. |
-| `-Z pixelsWH` | Resample image so height and width aren't greater than specified. |
-| `--resampleWidth pixelsW` | Resample image to specified width. `pixelsW` indicate the new width in number of pixels. |
-| `--resampleHeight pixelsH` | Resample image to specified height. `pixelsH` indicate the new height in number of pixels. |
-| `-o` | Optimize color for sharing. |
-| `-p pixelsH pixelsW` | Add padding to the image. Use `--padColor hexcolor` to select the padding color as hexadecimal number. |
-
-If you want to modify one image to match the properties of another image (for example have one image match the height of another image), you can use the flag `-g key` or `--getProperty key` on the image that you want to match. Where `key` is one of the following properties:
-
-| Profile property keys | Usage |
-| --- | --- |
-| `dpiHeight` | Height in dpi (printer dots per inch). |
-| `dpiWidth` | Width in dpi (printer dots per inch). |
-| `pixelHeight` | Height in number of pixels. |
-| `pixelWidth` | Width in number of pixels. |
-| `format` | Image format. Acceptable values for this key: `jpeg`, `tiff`, `png`, `gif`, `jp2`, `pict`, `bmp`, `qtif`, `psd`, `sgi`, `tga`, `pdf`. |
-| `formatOptions` | Quality of the new image. Acceptable values for this key: `low`, `normal`, `high`, `best`, or some percentage. |
-| `samplesPerPixel` | Samples per pixel. |
-| `bitsPerSample` | Bits per sample. |
-| `software` | Software use to create the image. |
-| `description` | Description. |
-| `copyright` | Copyright. |
-| `version` | Version. |
-| `platform` | Platform where file was created. |
-| `quality` | Acceptable values for this key: normal, draft, best. |
-| `renderingIntent` | Acceptable values for this key: perceptual, relative, saturation, absolute. |
-| `creator` | Creator of the file. |
-
-For the examples below I will be using the following image, taken from the following article, which I published long time ago: [link to article](https://pubmed.ncbi.nlm.nih.gov/29113642/).
-
-![original](img/nihms909531f2.jpg)
-
-Convert `AutismArticle1.png` to pdf.
-
-```bash
-$ sips -s format pdf AutismArticle1.png --out AutismArticle1.pdf
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.pdf
-```
-
-Rotate `AutismArticle1.png` 45 degrees clock-wise.
-
-```bash
-$ sips -r 45 AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-```
-
-Result image:
-
-![rotated1](img/rotated1.png)
-
-Rotate `AutismArticle1.png` 45 degrees counter-clock-wise.
-
-```bash
-$ sips -r -45 AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/test2.png
-```
-
-Result image:
-
-![rotated2](img/rotated2.png)
-
-Flip `AutismArticle1.png` horizontally.
-
-```bash
-$ sips -f horizontal AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-```
-
-Result image:
-
-![flipped](img/flipped.png)
-
-Flip `AutismArticle1.png` vertically.
-
-```bash
-$ sips -f vertical AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-```
-
-Result image:
-
-![flipped2](img/flipped2.png)
-
-Crop `AutismArticle1.png` to fit a new size that be 1/4 of its original height and 1/4 of its original weight:
-
-The first step is to obtain the current width and height using `sips` with the flags `--getProperty pixelWidth` and `--getProperty pixelHeight`. Then, divide the two numbers by four. And finally use `sips` with the `-c` flag to crop the file.
-
-```bash
-$ sips --getProperty pixelHeight AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-  pixelHeight: 440
-$ sips --getProperty pixelWidth AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-  pixelWidth: 727
-$ echo "440/4" | bc -l
-110.00000000000000000000
-$ echo "727/4" | bc -l
-181.75000000000000000000
-$ sips -c 110 181 AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-  /Users/monica/Desktop/Backup/images_presentations/test.png
-```
-
-Result image:
-
-![cropped](img/cropped.png)
-
-Resample image to 110x181:
-
-```bash
-$ sips -z 110 181 AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-  /Users/monica/Desktop/Backup/images_presentations/test.png
-$ sips --getProperty pixelHeight test.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-  pixelHeight: 110
-$ sips --getProperty pixelWidth test.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-  pixelWidth: 181
-```
-
-Result image:
-
-![resampled](img/resampled.png)

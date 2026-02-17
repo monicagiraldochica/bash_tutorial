@@ -1,9 +1,13 @@
-# Complex bash scripts
+# Advanced Bash
 
-## Reading arguments
+## Reading Arguments
 
-## Using functions
+## Using Functions
 
-## Using libraries
+## Using Libraries
 
-## Parallel processes
+## Parallel Processes
+
+## Downloading Files
+
+## Aliases

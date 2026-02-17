@@ -22,15 +22,14 @@ nav:
   - Iteration: iteration.md
   - File manipulation: files.md
   - Text and CSV files: txt_csv.md
-  - Image files: img_files.md
+  - Image files (ImageMagick): image_magick.md
+  - Image files (sips): sips.md
   - Videos: videos.md
-  - PDF files: pdf.md
+  - PDFs (pdftk): pdftk.md
+  - PDFs (qpdf): qpdf.md
+  - PDFs (ghostscript): ghostscript.md
   - Advanced bash: advanced_bash.md
-  - Remote shell: remote_shell.md
-  - Cluster jobs: cluster.md
-  - Downloading files: downloads.md
-  - Backups: backups.md
-  - File permissions: permissions.md
-  - Aliases: aliases.md
+  - Permissions: permissions.md
+  - Containers: containers.md
   - Report an error: errors.html
   - About the author: https://monicagiraldochica.github.io/

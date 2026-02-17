@@ -1,6 +1,3 @@
-
-
-
 ### Examples
 
 In the following examples we will use this image:
