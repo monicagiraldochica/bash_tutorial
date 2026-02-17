@@ -1,0 +1,169 @@
+### Examples
+
+In the following examples we will use this image:
+
+![original](img/grandma.jpg)
+
+#### `magick`
+
+Syntax: `magick [input-option] input-file [output-option] output-file`
+
+**Changing the color of pixels:**
+
+In the following example we are replacing all pixels that have a distance of at most 50%, 60% and 100% from 255 in the blue value of their RGB:
+
+```bash
+magick grandma.jpg -fuzz 50% -fill "red" -opaque "blue" grandma_50.jpg
+magick grandma.jpg -fuzz 60% -fill "red" -opaque "blue" grandma_60.jpg
+magick grandma.jpg -fuzz 100% -fill "red" -opaque "blue" grandma_100.jpg
+```
+
+Meaning of used options:
+
+1. `fuzz`: Distance from 255 in those pixels to be matched.
+    - 50% means any pixel with blue value between 127.5 (50% of 255) and 255.
+    - 60% means any pixel with blue value between 102 and 255. 60% of 255 is 153, and 255-153=102. Any pixel with blue value within this range will be at most 60% away from being 100% blue.
+    - 100% means any pixel with blue value at most 100% away from being 100% blue, this includes all pixels in the image.
+2. `opaque`: Color to be replaced. See the list of [recognized colors](#imagemagick-color-list).
+
+Output with 50% of fuzz:
+
+![50% fuzz](img/grandma_50.jpg)
+
+Output with 60% of fuzz:
+
+![50% fuzz](img/grandma_60.jpg)
+
+Output with 100% of fuzz:
+
+![50% fuzz](img/grandma_100.jpg)
+
+You can also change the color of pixels in a specific area:
+
+```bash
+magick grandma.jpg -fill "rgb(255,250,250)" -draw "rectangle 0,300 200,350" grandma_rect.jpg
+```
+
+Meaning of used options:
+
+1. `fill`: Color to fill the form. See the list of [recognized colors](#imagemagick-color-list).
+2. `draw`: Shape to draw. See list of [valid shapes and their parameters](#imagemagick-shapes).
+
+Output:
+
+![rectangle](img/grandma_rect.jpg)
+
+**Add text over the rectangle drawn on the image above:**
+
+```bash
+magick grandma_rect.jpg -font helvetica -fill black -pointsize 15 -draw "text 0,315 'Grandma\nand\nbaby'" grandma_rect_txt.png
+```
+
+Meaning of used options:
+
+1. `font`: Font for the text. To see the list of all available fonts type `magick -list font`.
+2. `fill`: Color to fill the form, in this case the text. See the list of [recognized colors](#imagemagick-color-list).
+3. `pointsize`: Text size.
+4. `draw`: Shape to draw. See list of [valid shapes and their parameters](#imagemagick-shapes).
+
+Output:
+
+![text](img/grandma_rect_txt.png)
+
+**Concatenate images horizontally:**
+
+In the following example I will concatenate some images (`grandma.jpg grandma_50.jpg grandma_100.jpg`) horizontally, add a border, and flip the image along the horizontal axis.
+
+```bash
+magick grandma.jpg grandma_50.jpg grandma_100.jpg +append -resize x300 -bordercolor black -border 10x15 -flip horizontal.png
+```
+
+Meaning of used options:
+
+1. `resize`: Force the output file to have a *height* of 300 pixels. If the input images have different heights, then this parameter is recommended. Otherwise, the output will have the same height as the input files if this parameter is not used.
+2. `bordercolor`: Color of the border. See the list of [recognized colors](#imagemagick-color-list).
+3. `border`: Add a border with the specified thickness. In this case we are adding a border with a thickness of 10 pixels on the left and right and 15 pixels on the top and bottom.
+4. `flip`: I'm flipping the *output* image along the *horizontal axis*. To flip the image along the vertical axis, use `-flop`. Make sure to insert the `flip` flag after `+append` to apply the flip to the output instead of any of the input files. See example below on how to apply `flip` or `flop` to the input instead of output files.
+
+Output:
+
+![horizontal](img/horizontal.png)
+
+**Concatenate images vertically:**
+
+In the following example I will concatenate some images (`grandma.jpg` and `grandma_50.jpg`) horizontally. *Before* the concatenation, I will flip the first input file along the vertical axis and transform the color space to Gray.
+
+```bash
+magick grandma.jpg -colorspace Gray -flop grandma_50.jpg -append -resize 300x vertical.png
+```
+
+Meaning of used options:
+
+1. `colorspace`: Color space to apply to the *input* image. It will apply to any input image specified before the flag, in this case `grandma.jpg`. If we wanted the whole output file to be on Gray scale, we would add the flag at the end of all input images. Available color spaces: `sRGB`, `RGB`, `Gray`, `HSV`, `HSB`, `HSL`, `LAB`, `LCH`, `CMYK`, `XYZ`, `YUV`, `YCbCr`, `AdobeRGB`, plus others.
+2. `flop`: I'm flipping the *input* image (grandma.jpg) along the *vertical axis*. To flip the image along the horizontal axis, use `flip`.
+3. `resize`: Force the output file to have a *width* of 300 pixels. If the input images have different widths, then this parameter is recommended. Otherwise, the output will have the same width as the input files if this parameter is not used.
+
+Output:
+
+![vertical](img/vertical.png)
+
+**Detect edges:**
+
+In the following example I will detect edges in the image generated in the example above using two methods: the standard edge detection with the `-edge` flag, and the Canny Edge detection with smoothing using `-canny`. `-canny` is more sophisticated and allows for modifying the radius, sigma and threshold for filtering out edges.
+
+```bash
+magick vertical.png -edge 2 edges.png
+magick vertical.png -canny 0x1+10%+30% edges2.png
+```
+
+Meaning of used options:
+
+1. `-edge 2`: Apply an edge of radius 2. To make the edges thicker, increment the value of `2`, or to make them thinner, give a value of `1`.
+2. `-canny 0x1+10%+30%`: Apply Canny Edge Detection with smoothing. The arguments here set the radius to 0 (auto-determined) and sigma to 1. Increase sigma for more smoothing. 10% and 30% are the lower and upper percentage thresholds for edge detection. Play around with these values to filter out weaker edges and highlight more important ones. Increasing the upper percentage will remove more edges.
+
+Output using `-edge`:
+
+![edge](img/edges.png)
+
+Output using `-canny`:
+
+![canny](img/edges2.png)
+
+#### `identify`
+
+Syntax: `identify [options] input_file`
+
+Please check the list of [`-format`](#imagemagick-format-escapes) escapes that you can use with ImageMagick.
+
+```bash
+# To specify the width and height of a 2D image:
+identify -format "%w %h\n" grandma.jpg
+# To specify the width and height of an image with multiple frames:
+identify -format "%wx%h\n" "grandma.gif[0]"
+identify -format "%w-%h\n" "grandma.pdf[0]"
+# Get the date and time when a picture was taken
+datetime=$(identify -format "%[EXIF:DateTimeOriginal]" "grandma.jpg")
+if [ -z "$datetime" ]; then
+  echo "$file has no DateTimeOriginal"
+else
+  echo "$file taken at $datetime"
+fi
+```
+
+#### `mogrify`
+
+#### `composite`
+
+#### `montage`
+
+#### `compare`
+
+#### `stream`
+
+#### `display`
+
+#### `animate`
+
+#### `import`
+
+#### `conjure`

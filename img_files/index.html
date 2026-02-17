@@ -87,7 +87,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h3 id="installation">Installation</h3>
 <p>Go to the <a href="https://imagemagick.org/script/download.php">ImageMagic installation page</a> for detailed instructions for different operating systems.</p>
 <h3 id="utilities">Utilities</h3>
-<p>ImageMagick has a list of utilities that can be used for different purposes. The following table presents a summary of those. Then, I will show some examples for each of these utilities. These examples will help you better understand how to use them.</p>
+<p>The following table presents a list of utilities that are part of ImageMagick and that can be used for different purposes. Each tool will have input and output options. Check <a href="#imagemagick-options">this section</a> for a complete list of these options.</p>
 <p>When specifying a color in any ImageMagick command, you can use the name of any <a href="#imagemagick-color-list">recognized color</a>, the RGB value, or the Hex value.</p>
 <p>When specifying a shape to draw on an image, you can use any of the <a href="#imagemagick-shapes">valid shapes</a>.</p>
 <table>
@@ -168,104 +168,224 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
-<h3 id="examples">Examples</h3>
-<p>In the following examples we will use this image:</p>
-<p><img alt="original" src="../img/grandma.jpg" /></p>
-<h4 id="magick"><code>magick</code></h4>
-<p>Syntax: <code>magick [input-option] input-file [output-option] output-file</code></p>
-<p><strong>Changing the color of pixels:</strong></p>
-<p>In the following example we are replacing all pixels that have a distance of at most 50%, 60% and 100% from 255 in the blue value of their RGB:</p>
-<pre><code class="language-bash">magick grandma.jpg -fuzz 50% -fill &quot;red&quot; -opaque &quot;blue&quot; grandma_50.jpg
-magick grandma.jpg -fuzz 60% -fill &quot;red&quot; -opaque &quot;blue&quot; grandma_60.jpg
-magick grandma.jpg -fuzz 100% -fill &quot;red&quot; -opaque &quot;blue&quot; grandma_100.jpg
-</code></pre>
-<p>Meaning of used options:</p>
-<ol>
-<li><code>fuzz</code>: Distance from 255 in those pixels to be matched.<ul>
-<li>50% means any pixel with blue value between 127.5 (50% of 255) and 255.</li>
-<li>60% means any pixel with blue value between 102 and 255. 60% of 255 is 153, and 255-153=102. Any pixel with blue value within this range will be at most 60% away from being 100% blue.</li>
-<li>100% means any pixel with blue value at most 100% away from being 100% blue, this includes all pixels in the image.</li>
+<h3 id="imagemagick-format-escapes">ImageMagick Format escapes</h3>
+<table>
+<thead>
+<tr>
+<th>Escape</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%b</code></td>
+<td>File size (i.e. 123KB)</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td>Image class and colorspace</td>
+</tr>
+<tr>
+<td><code>%d</code></td>
+<td>Directory path of the image file</td>
+</tr>
+<tr>
+<td><code>%e</code></td>
+<td>File name extension</td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td>File name</td>
+</tr>
+<tr>
+<td><code>%g</code></td>
+<td>Geometry: <code>&lt;width&gt;x&lt;height&gt;{+-}&lt;xoffset&gt;{+-}&lt;yoffset&gt;</code></td>
+</tr>
+<tr>
+<td><code>%h</code></td>
+<td>Image height in pixels</td>
+</tr>
+<tr>
+<td><code>%m</code></td>
+<td>Image format (i.e. PNG)</td>
+</tr>
+<tr>
+<td><code>%Q</code></td>
+<td>Compression quality (for JPEG/PNG/MIFF)</td>
+</tr>
+<tr>
+<td><code>%r</code></td>
+<td>Image class only (DirectClass or PseudoClass)</td>
+</tr>
+<tr>
+<td><code>%t</code></td>
+<td>File name without extension</td>
+</tr>
+<tr>
+<td><code>%U</code></td>
+<td>Resolution unit (PixelsPerInch, PixelsPerCentimeter, or Undefined)</td>
+</tr>
+<tr>
+<td><code>%w</code></td>
+<td>Image width in pixels</td>
+</tr>
+<tr>
+<td><code>%x</code></td>
+<td>Horizontal resolution (pixels per unit). See <code>%U</code> for the unit.</td>
+</tr>
+<tr>
+<td><code>%y</code></td>
+<td>Vertical resolution (pixels per unit). See <code>%U</code> for the unit.</td>
+</tr>
+<tr>
+<td><code>%z</code></td>
+<td>Depth (bits per channel)</td>
+</tr>
+<tr>
+<td><code>%[channels]</code></td>
+<td>List of channels</td>
+</tr>
+<tr>
+<td><code>%[colorspace]</code></td>
+<td>Colorspace</td>
+</tr>
+<tr>
+<td><code>%[EXIF:tag]</code></td>
+<td>Image metadata. <a href="#imagemagick-exif-tags">This</a> is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string.</td>
+</tr>
+<tr>
+<td><code>%[fx:expression]</code></td>
+<td>Custom expression. This is a mathematical formula that can reference pixels, image dimensions, channels or constants. Please see the <a href="#imagemagick-expressions">ImageMagick expressions</a> sections for more details.</td>
+</tr>
+<tr>
+<td><code>%[IPTC:tag]</code></td>
+<td>IPTC metadata (captions, keywords, etc.)</td>
+</tr>
+<tr>
+<td><code>%[mean]</code></td>
+<td>Mean pixel intensity</td>
+</tr>
+<tr>
+<td><code>%[profile:name]</code></td>
+<td>ICC/ICM or other image profile</td>
+</tr>
+<tr>
+<td><code>%[property:name]</code></td>
+<td>Image property (generic metadata)</td>
+</tr>
+<tr>
+<td><code>%[standard-deviation]</code></td>
+<td>Standard deviation of pixel intensity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="imagemagick-expressions">ImageMagick expressions</h3>
+<p>ImageMagick expressions allow you to compute custom values using image properties.</p>
+<p>Image properties that can be used in expressions:</p>
+<ul>
+<li>Basic image properties: <code>w</code> (image width in pixels), <code>h</code> (image height) in pixels, <code>u</code> (total number of pixels), <code>channels</code> (number of channels), <code>depth</code> (bits per channel), <code>colorspace</code>, <code>size</code>, <code>page.x</code> (x-offset of virtual canvas), <code>page.y</code> (y-offset of virtual canvas), <code>page.width</code> (width of virtual canvas), <code>page.height</code> (height of virtual canvas).</li>
+<li>Pixel values: <code>p{X,Y}.r</code> (red channel of pixel at X,Y), <code>p{X,Y}.g</code> (green channel of pixel at X,Y), <code>p{X,Y}.b</code> (blue channel of pixel at X,Y), <code>p{X,Y}.a</code> (alpha of pixel at X,Y).</li>
+<li>Arithmetic operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code> (modulus), <code>^</code> power, <code>()</code> (grouping).</li>
+<li>Logical operators: <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code></li>
+<li>If/else expression: <code>%[fx:w&gt;h ? "landscape" : "portrait"]</code> if weight is greater than height, prints <code>landscape</code>, else prints <code>portrait</code>.</li>
+<li>Functions: <code>abs(x)</code>, <code>sin(x)</code>, <code>cos(x)</code>, <code>tan(x)</code>, <code>log(x)</code>, <code>exp(x)</code>, <code>sqrt(x)</code>, <code>min(a,b)</code>, <code>max(a,b)</code>, <code>floor(x)</code>, <code>ceil(x)</code>.</li>
+<li>Channel statistics: <code>mean.r</code>, <code>mean.g</code>, <code>mean.b</code>, <code>standard_deviation.r</code>, <code>standard_deviation.g</code>, <code>standard_deviation.b</code>.</li>
 </ul>
-</li>
-<li><code>opaque</code>: Color to be replaced. See the list of <a href="#imagemagick-color-list">recognized colors</a>.</li>
-</ol>
-<p>Output with 50% of fuzz:</p>
-<p><img alt="50% fuzz" src="../img/grandma_50.jpg" /></p>
-<p>Output with 60% of fuzz:</p>
-<p><img alt="50% fuzz" src="../img/grandma_60.jpg" /></p>
-<p>Output with 100% of fuzz:</p>
-<p><img alt="50% fuzz" src="../img/grandma_100.jpg" /></p>
-<p>You can also change the color of pixels in a specific area:</p>
-<pre><code class="language-bash">magick grandma.jpg -fill &quot;rgb(255,250,250)&quot; -draw &quot;rectangle 0,300 200,350&quot; grandma_rect.jpg
-</code></pre>
-<p>Meaning of used options:</p>
-<ol>
-<li><code>fill</code>: Color to fill the form. See the list of <a href="#imagemagick-color-list">recognized colors</a>.</li>
-<li><code>draw</code>: Shape to draw. See list of <a href="#imagemagick-shapes">valid shapes and their parameters</a>.</li>
-</ol>
-<p>Output:</p>
-<p><img alt="rectangle" src="../img/grandma_rect.jpg" /></p>
-<p><strong>Add text over the rectangle drawn on the image above:</strong></p>
-<pre><code class="language-bash">magick grandma_rect.jpg -font helvetica -fill black -pointsize 15 -draw &quot;text 0,315 'Grandma\nand\nbaby'&quot; grandma_rect_txt.png
-</code></pre>
-<p>Meaning of used options:</p>
-<ol>
-<li><code>font</code>: Font for the text. To see the list of all available fonts type <code>magick -list font</code>.</li>
-<li><code>fill</code>: Color to fill the form, in this case the text. See the list of <a href="#imagemagick-color-list">recognized colors</a>.</li>
-<li><code>pointsize</code>: Text size.</li>
-<li><code>draw</code>: Shape to draw. See list of <a href="#imagemagick-shapes">valid shapes and their parameters</a>.</li>
-</ol>
-<p>Output:</p>
-<p><img alt="text" src="../img/grandma_rect_txt.png" /></p>
-<p><strong>Concatenate images horizontally:</strong></p>
-<p>In the following example I will concatenate some images (<code>grandma.jpg grandma_50.jpg grandma_100.jpg</code>) horizontally, add a border, and flip the image along the horizontal axis.</p>
-<pre><code class="language-bash">magick grandma.jpg grandma_50.jpg grandma_100.jpg +append -resize x300 -bordercolor black -border 10x15 -flip horizontal.png
-</code></pre>
-<p>Meaning of used options:</p>
-<ol>
-<li><code>resize</code>: Force the output file to have a <em>height</em> of 300 pixels. If the input images have different heights, then this parameter is recommended. Otherwise, the output will have the same height as the input files if this parameter is not used.</li>
-<li><code>bordercolor</code>: Color of the border. See the list of <a href="#imagemagick-color-list">recognized colors</a>.</li>
-<li><code>border</code>: Add a border with the specified thickness. In this case we are adding a border with a thickness of 10 pixels on the left and right and 15 pixels on the top and bottom.</li>
-<li><code>flip</code>: I'm flipping the <em>output</em> image along the <em>horizontal axis</em>. To flip the image along the vertical axis, use <code>-flop</code>. Make sure to insert the <code>flip</code> flag after <code>+append</code> to apply the flip to the output instead of any of the input files. See example below on how to apply <code>flip</code> or <code>flop</code> to the input instead of output files.</li>
-</ol>
-<p>Output:</p>
-<p><img alt="horizontal" src="../img/horizontal.png" /></p>
-<p><strong>Concatenate images vertically:</strong></p>
-<p>In the following example I will concatenate some images (<code>grandma.jpg</code> and <code>grandma_50.jpg</code>) horizontally. <em>Before</em> the concatenation, I will flip the first input file along the vertical axis and transform the color space to Gray.</p>
-<pre><code class="language-bash">magick grandma.jpg -colorspace Gray -flop grandma_50.jpg -append -resize 300x vertical.png
-</code></pre>
-<p>Meaning of used options:</p>
-<ol>
-<li><code>colorspace</code>: Color space to apply to the <em>input</em> image. It will apply to any input image specified before the flag, in this case <code>grandma.jpg</code>. If we wanted the whole output file to be on Gray scale, we would add the flag at the end of all input images. Available color spaces: <code>sRGB</code>, <code>RGB</code>, <code>Gray</code>, <code>HSV</code>, <code>HSB</code>, <code>HSL</code>, <code>LAB</code>, <code>LCH</code>, <code>CMYK</code>, <code>XYZ</code>, <code>YUV</code>, <code>YCbCr</code>, <code>AdobeRGB</code>, plus others.</li>
-<li><code>flop</code>: I'm flipping the <em>input</em> image (grandma.jpg) along the <em>vertical axis</em>. To flip the image along the horizontal axis, use <code>flip</code>.</li>
-<li><code>resize</code>: Force the output file to have a <em>width</em> of 300 pixels. If the input images have different widths, then this parameter is recommended. Otherwise, the output will have the same width as the input files if this parameter is not used.</li>
-</ol>
-<p>Output:</p>
-<p><img alt="vertical" src="../img/vertical.png" /></p>
-<p><strong>Detect edges:</strong></p>
-<p>In the following example I will detect edges in the image generated in the example above using two methods: the standard edge detection with the <code>-edge</code> flag, and the Canny Edge detection with smoothing using <code>-canny</code>. <code>-canny</code> is more sophisticated and allows for modifying the radius, sigma and threshold for filtering out edges.</p>
-<pre><code class="language-bash">magick vertical.png -edge 2 edges.png
-magick vertical.png -canny 0x1+10%+30% edges2.png
-</code></pre>
-<p>Meaning of used options:</p>
-<ol>
-<li><code>-edge 2</code>: Apply an edge of radius 2. To make the edges thicker, increment the value of <code>2</code>, or to make them thinner, give a value of <code>1</code>.</li>
-<li><code>-canny 0x1+10%+30%</code>: Apply Canny Edge Detection with smoothing. The arguments here set the radius to 0 (auto-determined) and sigma to 1. Increase sigma for more smoothing. 10% and 30% are the lower and upper percentage thresholds for edge detection. Play around with these values to filter out weaker edges and highlight more important ones. Increasing the upper percentage will remove more edges.</li>
-</ol>
-<p>Output using <code>-edge</code>:</p>
-<p><img alt="edge" src="../img/edges.png" /></p>
-<p>Output using <code>-canny</code>:</p>
-<p><img alt="canny" src="../img/edges2.png" /></p>
-<h4 id="identify"><code>identify</code></h4>
-<h4 id="mogrify"><code>mogrify</code></h4>
-<h4 id="composite"><code>composite</code></h4>
-<h4 id="montage"><code>montage</code></h4>
-<h4 id="compare"><code>compare</code></h4>
-<h4 id="stream"><code>stream</code></h4>
-<h4 id="display"><code>display</code></h4>
-<h4 id="animate"><code>animate</code></h4>
-<h4 id="import"><code>import</code></h4>
-<h4 id="conjure"><code>conjure</code></h4>
+<h3 id="imagemagick-exif-tags">ImageMagick EXIF tags</h3>
+<table>
+<thead>
+<tr>
+<th>EXIF Tag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DateTime</code></td>
+<td>Date and time of image modification</td>
+</tr>
+<tr>
+<td><code>DateTimeOriginal</code></td>
+<td>Original date and time the photo was taken</td>
+</tr>
+<tr>
+<td><code>DateTimeDigitized</code></td>
+<td>Date and time the image was digitized</td>
+</tr>
+<tr>
+<td><code>Make</code></td>
+<td>Camera manufacturer</td>
+</tr>
+<tr>
+<td><code>Model</code></td>
+<td>Camera model</td>
+</tr>
+<tr>
+<td><code>Software</code></td>
+<td>Software used to process the image</td>
+</tr>
+<tr>
+<td><code>ExposureTime</code></td>
+<td>Shutter speed</td>
+</tr>
+<tr>
+<td><code>FNumber</code></td>
+<td>Aperture (f-stop)</td>
+</tr>
+<tr>
+<td><code>ISOSpeedRatings</code></td>
+<td>ISO sensitivity</td>
+</tr>
+<tr>
+<td><code>ExposureProgram</code></td>
+<td>Exposure program used (e.g., Manual, Aperture priority)</td>
+</tr>
+<tr>
+<td><code>FocalLength</code></td>
+<td>Focal length of the lens</td>
+</tr>
+<tr>
+<td><code>MeteringMode</code></td>
+<td>Metering mode (how the camera measured light)</td>
+</tr>
+<tr>
+<td><code>Flash</code></td>
+<td>Flash status (on/off, fired, etc.)</td>
+</tr>
+<tr>
+<td><code>WhiteBalance</code></td>
+<td>White balance mode</td>
+</tr>
+<tr>
+<td><code>Orientation</code></td>
+<td>Image orientation (rotation)</td>
+</tr>
+<tr>
+<td><code>GPSLatitude</code></td>
+<td>Latitude where photo was taken</td>
+</tr>
+<tr>
+<td><code>GPSLongitude</code></td>
+<td>Longitude where photo was taken</td>
+</tr>
+<tr>
+<td><code>GPSAltitude</code></td>
+<td>Altitude where photo was taken</td>
+</tr>
+<tr>
+<td><code>ColorSpace</code></td>
+<td>Color space of the image</td>
+</tr>
+<tr>
+<td><code>ExifImageWidth</code></td>
+<td>Width recorded in EXIF (may differ from actual width)</td>
+</tr>
+<tr>
+<td><code>ExifImageHeight</code></td>
+<td>Height recorded in EXIF (may differ from actual height)</td>
+</tr>
+</tbody>
+</table>
 <h3 id="imagemagick-shapes">ImageMagick shapes</h3>
 <table>
 <thead>
@@ -343,6 +463,273 @@ magick vertical.png -canny 0x1+10%+30% edges2.png
 </tr>
 </tbody>
 </table>
+<h3 id="imagemagick-options">ImageMagick options</h3>
+<p>| Option | Arguments | Description | Category | <code>magick</code> | <code>identify</code> | <code>mogrify</code> | <code>composite</code> | <code>montage</code> | <code>compare</code> | <code>stream</code> | <code>display</code> | <code>animate</code> | <code>import</code> | <code>conjure</code> |
+|--------|-----------|--------------|-----------|----------|-----------|-----------|-----------|----------|----------|----------|----------|----------|----------|
+| <code>-adjoin</code> | No arguments | used to control how multi-image files are written | bi-functional | no | no | yes | no | yes | yes | no | no | no | yes | no |
+| <code>-affine</code> | <code>matrix</code> | specify an affine transformation matrix that can then be applied to an image with <code>-transform</code> | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-alpha</code> | <code>option</code> | control the alpha channel of an image, which represents transparency | bi-functional | no | yes | yes | yes | yes | yes | no | yes | yes | no | no |
+| <code>-antialias</code> | No arguments | enable or disable antialiasing, which smooths jagged edges in text, shapes, or lines | bi-functional | no | yes | yes | no | no | no | no | yes | no | no | no |
+| <code>-authenticate</code> | <code>password</code> | provide a password or key when reading images that are encrypted | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | no | no |
+| <code>-attenuate</code> | <code>factor</code> | scale the effect of the next image-editing operation | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-background</code> | <code>color</code> | background color  | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| <code>-bias</code> | <code>value</code> | add bias when convolving an image | input-option | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-black-point-compensation</code> | No arguments |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-blue-primary</code> | <code>point</code> | chromaticity blue primary point  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-bordercolor</code> | <code>color</code> | border color | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-caption</code> | <code>string</code> | assign a caption to an image | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-clip</code> | No arguments | along the first path from the 8BIM profile  | input-option | no | yes | yes | no | no | no | no | yes | no | no | no |
+| <code>-clip-mask</code> | <code>filename</code> | associate a clip mask with the image  | input-option | no | yes | yes | no | no | no | no | no | no | no | no |
+| <code>-clip-path</code> | <code>id</code> | clip along a named path from the 8BIM profile  | input-option | no | yes | yes | no | no | no | no | yes | no | no | no |
+| <code>-colorspace</code> | <code>type</code> | alternate image colorspace  | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-comment</code> | <code>string</code> | annotate image with comment  | bi-functional | no | no | yes | yes | yes | no | no | yes | no | yes | no |
+| <code>-compose</code> | <code>operator</code> | set image composite operator  | bi-functional | no | no | yes | yes | yes | yes | no | no | no | no | no |
+| <code>-compress</code> | <code>type</code> | type of pixel compression when writing the image  | bi-functional | no | no | yes | yes | yes | yes | yes | yes | no | yes | no |
+| <code>-define</code> | <code>format:key=value</code> |  | output-option | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-delay</code> | <code>seconds</code> | display the next image after pausing  | bi-functional | no | no | yes | no | yes | no | no | yes | yes | yes | no |
+| <code>-density</code> | <code>geometry</code> | horizontal and vertical density of the image  | input-option | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-depth</code> | <code>value</code> | image depth  | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-direction</code> | <code>type</code> | render text right-to-left or left-to-right  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-display</code> | <code>server</code> | get image or font from this X server  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-dispose</code> | <code>method</code> | layer disposal method  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-dither</code> | <code>method</code> | apply error diffusion to image  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-encoding</code> | <code>type</code> | text encoding type  | bi-functional | no | no | yes | yes | yes | no | no | no | no | yes | no |
+| <code>-endian</code> | <code>type</code> | endianness (MSB or LSB) of the image  | bi-functional | no | yes | yes | yes | yes | no | no | yes | no | yes | no |
+| <code>-family</code> | <code>name</code> | render text with this font family  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-features</code> | <code>distance</code> | analyze image features (e.g. contrast, correlation)  | bi-functional | no | yes | yes | no | no | no | no | no | no | no | no |
+| <code>-fill</code> | <code>color</code> | color to use when filling a graphic primitive  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-filter</code> | <code>type</code> | use this filter when resizing an image  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-font</code> | <code>name</code> | render text with this font  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-format</code> | <code>string</code> | output formatted image characteristics  | bi-functional | no | yes | yes | yes | yes | yes | no | yes | yes | yes | no |
+| <code>-fuzz</code> | <code>distance</code> | colors within this distance are considered equal  | bi-functional | no | yes | yes | no | no | yes | no | yes | no | no | no |
+| <code>-gravity</code> | <code>type</code> | horizontal and vertical text placement  | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
+| <code>-green-primary</code> | <code>point</code> | chromaticity green primary point | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-illuminant</code> | <code>type</code> | reference illuminant | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-intensity</code> | <code>method</code> | method to generate an intensity value from a pixel | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-intent</code> | <code>type</code> | type of rendering intent when managing the image color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-interlace</code> | <code>type</code> | type of image interlacing scheme | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-interline-spacing</code> | <code>value</code> |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-interpolate</code> | <code>method</code> | pixel color interpolation method | input-option | no | yes | yes | yes | yes | no | yes | yes | yes | yes | no |
+| <code>-interword-spacing</code> | <code>value</code> |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-kerning</code> | <code>value</code> | set the space between two letters | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-label</code> | <code>string</code> | assign a label to an image | bi-functional | no | no | yes | yes | yes | no | no | yes | no | yes | no |
+| <code>-limit</code> | <code>type</code> | value pixel cache resource limit | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-loop</code> | <code>iterations</code> | add Netscape loop extension to your GIF animation | bi-functional | no | no | yes | no | no | no | no | yes | yes | no | no |
+| <code>-matte</code> | No arguments | matte channel if the image has one | bi-functional | no | yes | yes | yes | yes | no | no | yes | yes | no | no |
+| <code>-mattecolor</code> | <code>color</code> | frame color | bi-functional | no | no | yes | no | yes | no | no | yes | yes | no | no |
+| <code>-moments</code> | No arguments | image moments | bi-functional | no | yes | no | no | no | no | no | no | no | no | no |
+| <code>-monitor</code> | No arguments | progress | input-option | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| <code>-orient</code> | <code>type</code> | image orientation | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-page</code> | <code>geometry</code> | size and location of an image canvas (setting) | input-option | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-ping</code> | No arguments | determine image attributes | bi-functional | no | yes | yes | no | no | no | no | no | no | no | no |
+| <code>-pointsize</code> | <code>value</code> | font point size | bi-functional | no | no | yes | yes | yes | no | no | no | no | yes | no |
+| <code>-precision</code> | <code>value</code> | maximum number of significant digits to print | bi-functional | no | yes | yes | no | no | yes | no | no | no | no | no |
+| <code>-preview</code> | <code>type</code> | image preview type | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-quality</code> | <code>value</code> | JPEG/MIFF/PNG compression level | output-option | no | no | yes | yes | yes | yes | no | yes | no | yes | no |
+| <code>-quiet</code> | No arguments | suppress all warning messages | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| <code>-read-mask</code> | <code>filename</code> | associate a read mask with the image | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| <code>-red-primary</code> | <code>point</code> | chromaticity red primary point | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-regard-warnings</code> | No arguments | pay attention to warning messages | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| <code>-remap</code> | <code>filename</code> | transform image colors to match this set of colors | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-repage</code> | <code>geometry</code> | size and location of an image canvas | input-option | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
+| <code>-respect-parentheses</code> | No arguments | settings remain in effect until parenthesis boundary | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-sampling-factor</code> | <code>geometry</code> | | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-scene</code> | <code>value</code> | image scene number | bi-functional | no | no | yes | yes | no | no | no | no | no | yes | no |
+| <code>-seed</code> | <code>value</code> | seed a new sequence of pseudo-random numbers | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| <code>-size</code> | <code>geometry</code> | width and height of image | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | no | no |
+| <code>-stretch</code> | <code>type</code> | render text with this font stretch | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-stroke</code> | <code>color</code> | graphic primitive stroke color | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-strokewidth</code> | <code>value</code> | graphic primitive stroke width | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-style</code> | <code>type</code> | render text with this font style | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-support</code> | <code>factor</code> | resize support: &gt; 1.0 is blurry, &lt; 1.0 is sharp | bi-functional | no | no | no | yes | yes | no | no | yes | yes | yes | no |
+| <code>-synchronize</code> | <code>synchronize</code> | image to storage device | bi-functional | no | no | yes | yes | yes | yes | yes | no | no | yes | no |
+| <code>-taint</code> | No arguments | declare the image as modified | bi-functional | no | no | yes | yes | yes | yes | yes | no | no | yes | no |
+| <code>-texture</code> | <code>filename</code> | name of texture to tile onto the image background | bi-functional | no | no | yes | no | yes | no | no | yes | no | no | no |
+| <code>-tile-offset</code> | <code>x,y</code> | Horizontal and vertical offset in pixels | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-treedepth</code> | <code>value</code> | color tree depth | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
+| <code>-transparent-color</code> | <code>color</code> | The color name or value that will be use as the transparent color | bi-functional | no | no | true | true | true | true | true | true | true | true | no |
+| <code>-undercolor</code> | <code>color</code> | Highlight color that is drawn behind text | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-units</code> | <code>type</code> | <code>type</code> can be <code>Undefined</code>, <code>PixelsPerInch</code> or <code>PixelsPerCentimeter</code> | bi-functional | no | true | true | true | true | no | no | no | no | no | no |
+| <code>-verbose</code> | No arguments | print detailed information about the image | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
+| <code>-view</code> | <code>WxH+X+Y</code> | Portion of the image to view or initial viewport | bi-functional (<code>W</code>: width, <code>H</code>: height, <code>X</code>: horizontal offset, <code>Y</code>: vertical offset) | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-virtual-pixel</code> | <code>method</code> | <code>method</code> used to generate pixels outside the image boundaries when performing distortions, transformations, or convolutions | bi-functional | no | true | true | true | true | true | true | true | true | true | no |
+| <code>-weight</code> | <code>value</code> | render text with this font weight value | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-white-point</code> | <code>color</code> | color that represents the white reference for adjusting the image | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
+| <code>-write-mask</code> | <code>filename</code> | Path to the output file where the mask of the current image will be saved | bi-functional | no | no | no | no | no | true | no | no | no | no | no |
+| <code>-adaptive-blur</code> | <code>radius{,sigma}</code> | <code>radius</code> of the blur in pixels, sigma is optional | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-adaptive-resize</code> | <code>geometry</code> | target size for the resized image (<code>widthxheight</code>, <code>width</code>, <code>height</code>) | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-adaptive-sharpen</code> | <code>radius{,sigma}</code> | <code>radius</code> determines the neighborhood size for the operation, sigma is optional | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
+| <code>-alpha</code> | <code>option</code> | on, activate, off, deactivate, set, opaque, copy | bi-functional | no | true | true | true | true | true | no | true | true | no | no |
+| <code>-annotate</code> | <code>geometry text</code> | <code>geometry</code>: <code>angle[xoffset][yoffset]</code>, <code>text</code>: string of text to draw on the image | bi-functional | no | no | true | no | true | no | no | no | no | true | no |
+| <code>-auto-gamma</code> | No arguments | automagically adjust gamma level of image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-auto-level</code> | No arguments | automagically adjust color levels of image | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| <code>-auto-orient</code> | No arguments | automagically orient (rotate) image | bi-functional | no | true | true | no | true | true | no | true | no | no | no |
+| <code>-auto-threshold</code> | <code>value</code> | <code>value</code> adjusts how aggressively the image is binarized, if omitted it's computed automatically | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-bench</code> | <code>filename</code> | measure performance | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-bilateral-blur</code> | <code>radius{,sigma}</code> | <code>radius</code> of the filter in pixels, sigma is optional | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-black-threshold</code> | <code>value</code> | pixels with intensity less than or equal to <code>value</code> are converted to black | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-blue-shift</code> | <code>factor</code> | simulate a scene at nighttime in the moonlight, higher <code>factor</code> values increase the effect | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-blur</code> | <code>radius{,sigma}</code> | reduce image noise and detail levels | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
+| <code>-border</code> | <code>width</code> or <code>widthxheight</code> | surround image with a border of color | bi-functional | no | no | true | true | true | no | no | true | no | true | no |
+| <code>-bordercolor</code> | <code>color</code> | border color | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
+| <code>-brightness-contrast</code> | <code>brightness{,contrast}</code> | positive values for <code>brightness</code> increase it, negative decrease it, same for contrast, which is optional | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
+| <code>-canny</code> | radius+sigma low_threshold+high_threshold | detect edges in the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-cdl</code> | slope,offset,power,saturation | color correct with a color decision list | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-channel</code> | channel-list | set the image channel mask | bi-functional | no | true | true | true | true | true | true | true | true | true | no |
+| <code>-charcoal</code> | radius+sigma | simulate a charcoal drawing | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-chop</code> | -chop {width}x{height}{+-}x{+-}y | remove pixels from the image interior | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-clahe</code> | widthxheight{+clip-limit}{+bins} | contrast limited adaptive histogram equalization | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-clamp</code> | No arguments| keep pixel values in range (0-QuantumRange) | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-colorize</code> | amount{%} color | colorize the image with the fill color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-color-matrix</code> | matrix | apply color correction to the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-colors</code> | value | preferred maximum number of colors in the image | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
+| <code>-connected-components</code> | options label-type | used for analyzing or labeling connected regions in a binary or grayscale image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-contrast</code> | No arguments| enhance or reduce the image contrast | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| <code>-contrast-stretch</code> | <code>black-point%xwhite-point%</code> | enhance image contrast by remapping pixel values | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-convolve</code> | <code>coefficients</code> | apply a convolution kernel to an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-cycle</code> | <code>amount</code> | cycle the image colormap | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-decipher</code> | <code>key</code> | decode images that were previously encrypted | bi-functional | no | no | true | true | no | true | no | true | true | no | no |
+| <code>-deskew</code> | <code>threshold</code> | straighten an image | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| <code>-despeckle</code> | No arguments| reduce the speckles within an image | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| <code>-distort</code> | <code>method arguments</code> | geometrically transform an image using various distortion methods | bi-functional | no | no | true | true | true | true | no | no | no | no | no |
+| <code>-draw</code> | <code>primitive parameters</code> | render vector graphics, shapes, text, or paths directly onto an image | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
+| <code>-edge</code> | <code>radius</code> | edge detection on an image | no | no | true | no | no | no | no | true | no | no | no |
+| <code>-encipher</code> | <code>key</code> | encrypt an image so that it cannot be viewed normally without a key | bi-functional | no | no | true | true | no | true | no | no | no | true | no |
+| <code>-emboss</code> | <code>radiusxsigma</code> | create a 3D relief effect that makes an image appear raised or stamped | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-enhance</code> | No arguments| improve the quality of an image by reducing noise and optimizing contrast | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| <code>-equalize</code> | No arguments| global histogram equalization, which enhances the contrast of an image by redistributing pixel intensities | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
+| <code>-evaluate</code> | <code>operator value</code> | perform arithmetic operations on the pixel values of an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-extent</code> | <code>widthxheight{+-x+-y}</code> | resize the canvas of an image without scaling the original | bi-functional | no | no | true | no | true | no | no | true | true | true | no |
+| <code>-extract</code> | <code>widthxheight+x+y</code> | crop a rectangular region from an image based on specified geometry | bi-functional | no | true | true | true | true | true | true | true | true | no | no |
+| <code>-fft</code> | No arguments| perform a Fast Fourier Transform (FFT) on an image, converting it from the spatial domain (pixel values) to the frequency domain | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-flip</code> | No arguments| flip image vertically (along the horizontal axis) | bi-functional | no | no | true | no | true | no | no | true | no | no | no |
+| <code>-floodfill</code> | <code>x,y target_color fill_color</code> | fill a connected region of pixels with a new color, starting from a specified point and replacing pixels that match a target color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-flop</code> | No arguments | flip an image horizontally (along the vertical axis) | bi-functional | no | no | true | no | true | no | no | true | no | no | no |
+| <code>-frame</code> | <code>widthxheight+outerBevel+innerBevel</code> | add a decorative border or frame around an image | bi-functional | no | no | true | no | true | no | no | true | no | true | no |
+| <code>-function</code> | <code>type arguments</code> | apply a mathematical function to pixel values in an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-gamma</code> | <code>value</code> | adjust the gamma value of an image, which non-linearly modifies pixel brightness | bi-functional | no | true | true | no | true | no | no | true | true | no | no |
+| <code>-gaussian-blur</code> | <code>radiusxsigma</code> | smooth pixel values in a way that preserves edges | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
+| <code>-geometry</code> | <code>{width}x{height}{offset}</code> | preferred size or location of the image | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-grayscale</code> | <code>method</code> | convert image to grayscale. possible methods: <code>intensity</code>, <code>brightness</code>, <code>lightness</code>, <code>rec601luma</code>, <code>rec601luminance</code>, <code>rec709luma</code>, <code>rec709luminance</code> | bi-functional | no | yes | yes | no | no | no | no | no | no | no | no |
+| <code>-hough-lines</code> | <code>radiusx{sigma}</code> | detect straight lines in an image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-identify</code> | <code>format</code> | identify the format and characteristics of the image. format can include any ImageMagick property escape. | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-ift</code> | <code>{normalize}</code> | implements the inverse discrete Fourier transform (DFT) | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-implode</code> | <code>amount</code> | implode image pixels about the center | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-integral</code> | No arguments | calculate the sum of values (pixel values) in the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-interpolative-resize</code> | <code>interpolator</code> | performs fast resizing using a point‑sampling interpolator. <code>interpolator</code> must be one of ImageMagick point sampling filters | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-kmeans</code> | <code>clusters</code> | K means color reduction | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-kuwahara</code> | <code>radius</code> | edge preserving noise reduction filter | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-lat</code> | geometry | local adaptive thresholding | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-level</code> | value | adjust the level of image contrast | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| <code>-level-colors</code> | color,color | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-linear-stretch</code> | geometry | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-liquid-rescale</code> | geometry | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-local-contrast</code> | geometry | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-mean-shift</code> | geometry | delineate arbitrarily shaped clusters in the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-median</code> | geometry | apply a median filter to the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-mode</code> | geometry | make each pixel the 'predominant color' of the | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-modulate</code> | value | vary the brightness, saturation, and hue | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-monochrome</code> | transform | image to black and white | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-morphology</code> | method | kernel | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-motion-blur</code> | geometry | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-negate</code> | replace | every pixel with its complementary color | bi-functional | no | yes | yes | yes | no | yes | no | yes | no | yes | no |
+| <code>-noise</code> | geometry | add or reduce noise in an image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-normalize</code> | transform | image to span the full range of colors | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| <code>-opaque</code> | color | change this color to the fill color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-ordered-dither</code> | NxN | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-paint</code> | radius | simulate an oil painting | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-perceptible</code> | epsilon | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-epsilon</code> |  |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-polaroid</code> | angle | simulate a Polaroid picture | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-posterize</code> | levels | reduce the image to a limited number of color levels | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-profile</code> | filename | add, delete, or apply an image profile | bi-functional | no | no | yes | yes | yes | yes | no | yes | no | no | no |
+| <code>-quantize</code> | colorspace | reduce colors in this colorspace | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-raise</code> | value | lighten/darken image edges to create a 3-D effect | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| <code>-random-threshold</code> | low,high | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-range-threshold</code> | values | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-region</code> | geometry | apply options to a portion of the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-render</code> | render | vector graphics | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-resample</code> | geometry | change the resolution of an image | bi-functional | no | no | yes | no | no | no | no | yes | yes | no | no |
+| <code>-reshape</code> | geometry | reshape the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-resize</code> | geometry | resize the image | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
+| <code>-roll</code> | geometry | roll an image vertically or horizontally | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| <code>-rotate</code> | degrees | apply Paeth rotation to the image | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
+| <code>-rotational-blur</code> | angle |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-sample</code> | geometry | scale image with pixel sampling | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| <code>-scale</code> | geometry | scale the image | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-segment</code> | values | segment an image | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| <code>-selective-blur</code> | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-sepia-tone</code> | threshold |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-set</code> | property | value set an image property | bi-functional | no | yes | yes | no | yes | yes | yes | yes | yes | yes | no |
+| <code>-shade</code> | degrees | shade the image using a distant light source | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-shadow</code> | geometry | simulate an image shadow | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-sharpen</code> | geometry | sharpen the image | bi-functional | no | no | yes | yes | no | no | no | yes | no | no | no |
+| <code>-shave</code> | geometry | shave pixels from the image edges | bi-functional | no | no | yes | yes | no | no | no | no | no | no | no |
+| <code>-shear</code> | geometry | slide one edge of the image along the X or Y axis | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-sigmoidal-contrast</code> | geometry |  | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| <code>-sketch</code> | geometry | simulate a pencil sketch | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-solarize</code> | threshold | negate all pixels above the threshold level | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-sort-pixels</code> | sort | each scanline in ascending order of intensity | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-sparse-color</code> | method | args | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-splice</code> | geometry | splice the background color into the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-spread</code> | radius | displace image pixels by a random amount | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-statistic</code> | type | geometry | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-strip</code> | strip | image of all profiles and comments | output-option | no | yes | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-swirl</code> | degrees | swirl image pixels about the center | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-threshold</code> | value | threshold the image | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
+| <code>-thumbnail</code> | geometry | create a thumbnail of the image | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
+| <code>-tile</code> | filename | tile image when filling a graphic primitive | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-tint</code> | value | tint the image with the fill color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-transform</code> | affine | transform image | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-transparent</code> | color | make this color transparent within the image | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
+| <code>-transpose</code> | flip | image vertically and rotate 90 degrees | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-transverse</code> | flop | image horizontally and rotate 270 degrees | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-trim</code> | trim | image edges | bi-functional | no | no | yes | no | yes | yes | no | yes | yes | yes | no |
+| <code>-type</code> | type | image type | bi-functional | no | no | yes | yes | yes | yes | no | no | no | yes | no |
+| <code>-unique-colors</code> | discard | all but one of any pixel color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-unsharp</code> | geometry | sharpen the image | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-vignette</code> | geometry | soften the edges of the image in vignette style | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-wave</code> | geometry | alter an image along a sine wave | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-wavelet-denoise</code> | threshold | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-white-balance</code> | automagically | adjust white balance of image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-white-threshold</code> | value | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-channel-fx</code> | expression | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-separate</code> | separate | an image channel into a grayscale image | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
+| <code>-append</code> | append | an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-clut</code> | apply | a color lookup table to the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-coalesce</code> | merge | a sequence of images | bi-functional | no | no | yes | no | yes | no | no | yes | yes | no | no |
+| <code>-combine</code> | combine | a sequence of images | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-compare</code> | mathematically | and visually annotate the difference between an image and its reconstruction | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-complex</code> | operator | perform complex mathematics on an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-composite</code> | composite | image | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-copy</code> | geometry | offset | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-crop</code> | geometry | cut out a rectangular region of the image | input-option | no | yes | yes | no | yes | yes | no | yes | yes | yes | no |
+| <code>-deconstruct</code> | break | down an image sequence into constituent parts | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-evaluate-sequence</code> | operator | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-flatten</code> | flatten | a sequence of images | bi-functional | no | no | yes | no | yes | no | no | yes | yes | no | no |
+| <code>-fx</code> | expression | apply mathematical expression to an image channel(s) | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-hald-clut</code> | apply | a Hald color lookup table to the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-layers</code> | method | optimize, merge, or compare image layers | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-morph</code> | value | morph an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-mosaic</code> | create | a mosaic from an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-poly</code> | terms | build a polynomial from the image sequence and the corresponding | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-print</code> | string | interpret string and print to console | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-process</code> | arguments | process the image with a custom image filter | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-smush</code> | geometry | smush an image sequence together | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-write</code> | filename | write images to this file | bi-functional | no | no | yes | yes | no | yes | no | yes | no | no | no |
+| <code>-clone</code> | indexes | clone an image | bi-functional | no | no | no | no | yes | no | no | no | no | no | no |
+| <code>-delete</code> | indexes | delete the image from the image sequence | bi-functional | no | no | yes | no | yes | yes | no | no | no | no | no |
+| <code>-duplicate</code> | count,indexes |  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-insert</code> | index | insert last image into the image sequence | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-reverse</code> | reverse | image sequence | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
+| <code>-swap</code> | indexes | swap two images in the image sequence | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
+| <code>-debug</code> | events | display copious debugging information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| <code>-distribute-cache</code> | port |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
+| <code>-help</code> | print | program options | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| <code>-list</code> | type | print a list of supported option arguments | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| <code>-log</code> | format | format of debugging information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| <code>-usage</code> | print | program usage | bi-functional | no | no | no | no | no | no | no | no | no | no | no |
+| <code>-version</code> | print | version information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |</p>
 <h3 id="imagemagick-color-list">ImageMagick color list</h3>
 <table>
 <thead>
@@ -350,3088 +737,3147 @@ magick vertical.png -canny 0x1+10%+30% edges2.png
 <th>Color name</th>
 <th>RGB</th>
 <th>Hex</th>
+<th>Sample</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><font style="background-color: #FFFAFA;">snow1</font></td>
-<td>rgb(255,250,250)</td>
-<td>#FFFAFA</td>
-</tr>
-<tr>
-<td>snow2</td>
-<td>rgb(238,233,233)</td>
-<td>#EEE9E9</td>
-</tr>
-<tr>
-<td>RosyBrown1</td>
-<td>rgb(255,193,193)</td>
-<td>#FFC1C1</td>
-</tr>
-<tr>
-<td>RosyBrown2</td>
-<td>rgb(238,180,180)</td>
-<td>#EEB4B4</td>
-</tr>
-<tr>
-<td>snow3</td>
-<td>rgb(205,201,201)</td>
-<td>#CDC9C9</td>
-</tr>
-<tr>
-<td>LightCoral</td>
-<td>rgb(240,128,128)</td>
-<td>#F08080</td>
-</tr>
-<tr>
-<td>IndianRed1</td>
-<td>rgb(255,106,106)</td>
-<td>#FF6A6A</td>
-</tr>
-<tr>
-<td>RosyBrown3</td>
-<td>rgb(205,155,155)</td>
-<td>#CD9B9B</td>
-</tr>
-<tr>
-<td>IndianRed2</td>
-<td>rgb(238,99,99)</td>
-<td>#EE6363</td>
-</tr>
-<tr>
-<td>RosyBrown</td>
-<td>rgb(188,143,143)</td>
-<td>#BC8F8F</td>
-</tr>
-<tr>
-<td>brown1</td>
-<td>rgb(255,64,64)</td>
-<td>#FF4040</td>
-</tr>
-<tr>
-<td>firebrick1</td>
-<td>rgb(255,48,48)</td>
-<td>#FF3030</td>
-</tr>
-<tr>
-<td>brown2</td>
-<td>rgb(238,59,59)</td>
-<td>#EE3B3B</td>
-</tr>
-<tr>
-<td>IndianRed</td>
-<td>rgb(205,92,92)</td>
-<td>#CD5C5C</td>
-</tr>
-<tr>
-<td>IndianRed3</td>
-<td>rgb(205,85,85)</td>
-<td>#CD5555</td>
-</tr>
-<tr>
-<td>firebrick2</td>
-<td>rgb(238,44,44)</td>
-<td>#EE2C2C</td>
-</tr>
-<tr>
-<td>snow4</td>
-<td>rgb(139,137,137)</td>
-<td>#8B8989</td>
-</tr>
-<tr>
-<td>brown3</td>
-<td>rgb(205,51,51)</td>
-<td>#CD3333</td>
-</tr>
-<tr>
-<td>red</td>
-<td>rgb(255,0,0)</td>
-<td>#FF0000</td>
-</tr>
-<tr>
-<td>red1</td>
-<td>rgb(255,0,0)</td>
-<td>#FF0000</td>
-</tr>
-<tr>
-<td>RosyBrown4</td>
-<td>rgb(139,105,105)</td>
-<td>#8B6969</td>
-</tr>
-<tr>
-<td>firebrick3</td>
-<td>rgb(205,38,38)</td>
-<td>#CD2626</td>
-</tr>
-<tr>
-<td>red2</td>
-<td>rgb(238,0,0)</td>
-<td>#EE0000</td>
-</tr>
-<tr>
-<td>firebrick</td>
-<td>rgb(178,34,34)</td>
-<td>#B22222</td>
-</tr>
-<tr>
-<td>brown</td>
-<td>rgb(165,42,42)</td>
-<td>#A52A2A</td>
-</tr>
-<tr>
-<td>red3</td>
-<td>rgb(205,0,0)</td>
-<td>#CD0000</td>
-</tr>
-<tr>
-<td>IndianRed4</td>
-<td>rgb(139,58,58)</td>
-<td>#8B3A3A</td>
-</tr>
-<tr>
-<td>brown4</td>
-<td>rgb(139,35,35)</td>
-<td>#8B2323</td>
-</tr>
-<tr>
-<td>firebrick4</td>
-<td>rgb(139,26,26)</td>
-<td>#8B1A1A</td>
-</tr>
-<tr>
-<td>DarkRed</td>
-<td>rgb(139,0,0)</td>
-<td>#8B0000</td>
-</tr>
-<tr>
-<td>red4</td>
-<td>rgb(139,0,0)</td>
-<td>#8B0000</td>
-</tr>
-<tr>
-<td>maroon(SVGcompliance)</td>
-<td>rgb(128,0,0)</td>
-<td>#800000</td>
-</tr>
-<tr>
-<td>LightPink1</td>
-<td>rgb(255,174,185)</td>
-<td>#FFAEB9</td>
-</tr>
-<tr>
-<td>LightPink3</td>
-<td>rgb(205,140,149)</td>
-<td>#CD8C95</td>
-</tr>
-<tr>
-<td>LightPink4</td>
-<td>rgb(139,95,101)</td>
-<td>#8B5F65</td>
-</tr>
-<tr>
-<td>LightPink2</td>
-<td>rgb(238,162,173)</td>
-<td>#EEA2AD</td>
-</tr>
-<tr>
-<td>LightPink</td>
-<td>rgb(255,182,193)</td>
-<td>#FFB6C1</td>
-</tr>
-<tr>
-<td>pink</td>
-<td>rgb(255,192,203)</td>
-<td>#FFC0CB</td>
-</tr>
-<tr>
-<td>crimson</td>
-<td>rgb(220,20,60)</td>
-<td>#DC143C</td>
-</tr>
-<tr>
-<td>pink1</td>
-<td>rgb(255,181,197)</td>
-<td>#FFB5C5</td>
-</tr>
-<tr>
-<td>pink2</td>
-<td>rgb(238,169,184)</td>
-<td>#EEA9B8</td>
-</tr>
-<tr>
-<td>pink3</td>
-<td>rgb(205,145,158)</td>
-<td>#CD919E</td>
-</tr>
-<tr>
-<td>pink4</td>
-<td>rgb(139,99,108)</td>
-<td>#8B636C</td>
-</tr>
-<tr>
-<td>PaleVioletRed4</td>
-<td>rgb(139,71,93)</td>
-<td>#8B475D</td>
-</tr>
-<tr>
-<td>PaleVioletRed</td>
-<td>rgb(219,112,147)</td>
-<td>#DB7093</td>
-</tr>
-<tr>
-<td>PaleVioletRed2</td>
-<td>rgb(238,121,159)</td>
-<td>#EE799F</td>
-</tr>
-<tr>
-<td>PaleVioletRed1</td>
-<td>rgb(255,130,171)</td>
-<td>#FF82AB</td>
-</tr>
-<tr>
-<td>PaleVioletRed3</td>
-<td>rgb(205,104,137)</td>
-<td>#CD6889</td>
-</tr>
-<tr>
-<td>LavenderBlush</td>
-<td>rgb(255,240,245)</td>
-<td>#FFF0F5</td>
-</tr>
-<tr>
-<td>LavenderBlush1</td>
-<td>rgb(255,240,245)</td>
-<td>#FFF0F5</td>
-</tr>
-<tr>
-<td>LavenderBlush3</td>
-<td>rgb(205,193,197)</td>
-<td>#CDC1C5</td>
-</tr>
-<tr>
-<td>LavenderBlush2</td>
-<td>rgb(238,224,229)</td>
-<td>#EEE0E5</td>
-</tr>
-<tr>
-<td>LavenderBlush4</td>
-<td>rgb(139,131,134)</td>
-<td>#8B8386</td>
-</tr>
-<tr>
-<td>maroon(X11compliance)</td>
-<td>rgb(176,48,96)</td>
-<td>#B03060</td>
-</tr>
-<tr>
-<td>HotPink3</td>
-<td>rgb(205,96,144)</td>
-<td>#CD6090</td>
-</tr>
-<tr>
-<td>VioletRed3</td>
-<td>rgb(205,50,120)</td>
-<td>#CD3278</td>
-</tr>
-<tr>
-<td>VioletRed1</td>
-<td>rgb(255,62,150)</td>
-<td>#FF3E96</td>
-</tr>
-<tr>
-<td>VioletRed2</td>
-<td>rgb(238,58,140)</td>
-<td>#EE3A8C</td>
-</tr>
-<tr>
-<td>VioletRed4</td>
-<td>rgb(139,34,82)</td>
-<td>#8B2252</td>
-</tr>
-<tr>
-<td>HotPink2</td>
-<td>rgb(238,106,167)</td>
-<td>#EE6AA7</td>
-</tr>
-<tr>
-<td>HotPink1</td>
-<td>rgb(255,110,180)</td>
-<td>#FF6EB4</td>
-</tr>
-<tr>
-<td>HotPink4</td>
-<td>rgb(139,58,98)</td>
-<td>#8B3A62</td>
-</tr>
-<tr>
-<td>HotPink</td>
-<td>rgb(255,105,180)</td>
-<td>#FF69B4</td>
-</tr>
-<tr>
-<td>DeepPink</td>
-<td>rgb(255,20,147)</td>
-<td>#FF1493</td>
-</tr>
-<tr>
-<td>DeepPink1</td>
-<td>rgb(255,20,147)</td>
-<td>#FF1493</td>
-</tr>
-<tr>
-<td>DeepPink2</td>
-<td>rgb(238,18,137)</td>
-<td>#EE1289</td>
-</tr>
-<tr>
-<td>DeepPink3</td>
-<td>rgb(205,16,118)</td>
-<td>#CD1076</td>
-</tr>
-<tr>
-<td>DeepPink4</td>
-<td>rgb(139,10,80)</td>
-<td>#8B0A50</td>
-</tr>
-<tr>
-<td>maroon1</td>
-<td>rgb(255,52,179)</td>
-<td>#FF34B3</td>
-</tr>
-<tr>
-<td>maroon2</td>
-<td>rgb(238,48,167)</td>
-<td>#EE30A7</td>
-</tr>
-<tr>
-<td>maroon3</td>
-<td>rgb(205,41,144)</td>
-<td>#CD2990</td>
-</tr>
-<tr>
-<td>maroon4</td>
-<td>rgb(139,28,98)</td>
-<td>#8B1C62</td>
-</tr>
-<tr>
-<td>MediumVioletRed</td>
-<td>rgb(199,21,133)</td>
-<td>#C71585</td>
-</tr>
-<tr>
-<td>VioletRed</td>
-<td>rgb(208,32,144)</td>
-<td>#D02090</td>
-</tr>
-<tr>
-<td>orchid2</td>
-<td>rgb(238,122,233)</td>
-<td>#EE7AE9</td>
-</tr>
-<tr>
-<td>orchid</td>
-<td>rgb(218,112,214)</td>
-<td>#DA70D6</td>
-</tr>
-<tr>
-<td>orchid1</td>
-<td>rgb(255,131,250)</td>
-<td>#FF83FA</td>
-</tr>
-<tr>
-<td>orchid3</td>
-<td>rgb(205,105,201)</td>
-<td>#CD69C9</td>
-</tr>
-<tr>
-<td>orchid4</td>
-<td>rgb(139,71,137)</td>
-<td>#8B4789</td>
-</tr>
-<tr>
-<td>thistle1</td>
-<td>rgb(255,225,255)</td>
-<td>#FFE1FF</td>
-</tr>
-<tr>
-<td>thistle2</td>
-<td>rgb(238,210,238)</td>
-<td>#EED2EE</td>
-</tr>
-<tr>
-<td>plum1</td>
-<td>rgb(255,187,255)</td>
-<td>#FFBBFF</td>
-</tr>
-<tr>
-<td>plum2</td>
-<td>rgb(238,174,238)</td>
-<td>#EEAEEE</td>
-</tr>
-<tr>
-<td>thistle</td>
-<td>rgb(216,191,216)</td>
-<td>#D8BFD8</td>
-</tr>
-<tr>
-<td>thistle3</td>
-<td>rgb(205,181,205)</td>
-<td>#CDB5CD</td>
-</tr>
-<tr>
-<td>plum</td>
-<td>rgb(221,160,221)</td>
-<td>#DDA0DD</td>
-</tr>
-<tr>
-<td>violet</td>
-<td>rgb(238,130,238)</td>
-<td>#EE82EE</td>
-</tr>
-<tr>
-<td>plum3</td>
-<td>rgb(205,150,205)</td>
-<td>#CD96CD</td>
-</tr>
-<tr>
-<td>thistle4</td>
-<td>rgb(139,123,139)</td>
-<td>#8B7B8B</td>
-</tr>
-<tr>
-<td>fuchsia</td>
-<td>rgb(255,0,255)</td>
-<td>#FF00FF</td>
-</tr>
-<tr>
-<td>magenta</td>
-<td>rgb(255,0,255)</td>
-<td>#FF00FF</td>
-</tr>
-<tr>
-<td>magenta1</td>
-<td>rgb(255,0,255)</td>
-<td>#FF00FF</td>
-</tr>
-<tr>
-<td>plum4</td>
-<td>rgb(139,102,139)</td>
-<td>#8B668B</td>
-</tr>
-<tr>
-<td>magenta2</td>
-<td>rgb(238,0,238)</td>
-<td>#EE00EE</td>
-</tr>
-<tr>
-<td>magenta3</td>
-<td>rgb(205,0,205)</td>
-<td>#CD00CD</td>
-</tr>
-<tr>
-<td>DarkMagenta</td>
-<td>rgb(139,0,139)</td>
-<td>#8B008B</td>
-</tr>
-<tr>
-<td>magenta4</td>
-<td>rgb(139,0,139)</td>
-<td>#8B008B</td>
-</tr>
-<tr>
-<td>purple(SVGcompliance)</td>
-<td>rgb(128,0,128)</td>
-<td>#800080</td>
-</tr>
-<tr>
-<td>MediumOrchid</td>
-<td>rgb(186,85,211)</td>
-<td>#BA55D3</td>
-</tr>
-<tr>
-<td>MediumOrchid1</td>
-<td>rgb(224,102,255)</td>
-<td>#E066FF</td>
-</tr>
-<tr>
-<td>MediumOrchid2</td>
-<td>rgb(209,95,238)</td>
-<td>#D15FEE</td>
-</tr>
-<tr>
-<td>MediumOrchid3</td>
-<td>rgb(180,82,205)</td>
-<td>#B452CD</td>
-</tr>
-<tr>
-<td>MediumOrchid4</td>
-<td>rgb(122,55,139)</td>
-<td>#7A378B</td>
-</tr>
-<tr>
-<td>DarkViolet</td>
-<td>rgb(148,0,211)</td>
-<td>#9400D3</td>
-</tr>
-<tr>
-<td>DarkOrchid</td>
-<td>rgb(153,50,204)</td>
-<td>#9932CC</td>
-</tr>
-<tr>
-<td>DarkOrchid1</td>
-<td>rgb(191,62,255)</td>
-<td>#BF3EFF</td>
-</tr>
-<tr>
-<td>DarkOrchid3</td>
-<td>rgb(154,50,205)</td>
-<td>#9A32CD</td>
-</tr>
-<tr>
-<td>DarkOrchid2</td>
-<td>rgb(178,58,238)</td>
-<td>#B23AEE</td>
-</tr>
-<tr>
-<td>DarkOrchid4</td>
-<td>rgb(104,34,139)</td>
-<td>#68228B</td>
-</tr>
-<tr>
-<td>purple(X11compliance)</td>
-<td>rgb(160,32,240)</td>
-<td>#A020F0</td>
-</tr>
-<tr>
-<td>indigo</td>
-<td>rgb(75,0,130)</td>
-<td>#4B0082</td>
-</tr>
-<tr>
-<td>BlueViolet</td>
-<td>rgb(138,43,226)</td>
-<td>#8A2BE2</td>
-</tr>
-<tr>
-<td>purple2</td>
-<td>rgb(145,44,238)</td>
-<td>#912CEE</td>
-</tr>
-<tr>
-<td>purple3</td>
-<td>rgb(125,38,205)</td>
-<td>#7D26CD</td>
-</tr>
-<tr>
-<td>purple4</td>
-<td>rgb(85,26,139)</td>
-<td>#551A8B</td>
-</tr>
-<tr>
-<td>purple1</td>
-<td>rgb(155,48,255)</td>
-<td>#9B30FF</td>
-</tr>
-<tr>
-<td>MediumPurple</td>
-<td>rgb(147,112,219)</td>
-<td>#9370DB</td>
-</tr>
-<tr>
-<td>MediumPurple1</td>
-<td>rgb(171,130,255)</td>
-<td>#AB82FF</td>
-</tr>
-<tr>
-<td>MediumPurple2</td>
-<td>rgb(159,121,238)</td>
-<td>#9F79EE</td>
-</tr>
-<tr>
-<td>MediumPurple3</td>
-<td>rgb(137,104,205)</td>
-<td>#8968CD</td>
-</tr>
-<tr>
-<td>MediumPurple4</td>
-<td>rgb(93,71,139)</td>
-<td>#5D478B</td>
-</tr>
-<tr>
-<td>DarkSlateBlue</td>
-<td>rgb(72,61,139)</td>
-<td>#483D8B</td>
-</tr>
-<tr>
-<td>LightSlateBlue</td>
-<td>rgb(132,112,255)</td>
-<td>#8470FF</td>
-</tr>
-<tr>
-<td>MediumSlateBlue</td>
-<td>rgb(123,104,238)</td>
-<td>#7B68EE</td>
-</tr>
-<tr>
-<td>SlateBlue</td>
-<td>rgb(106,90,205)</td>
-<td>#6A5ACD</td>
-</tr>
-<tr>
-<td>SlateBlue1</td>
-<td>rgb(131,111,255)</td>
-<td>#836FFF</td>
-</tr>
-<tr>
-<td>SlateBlue2</td>
-<td>rgb(122,103,238)</td>
-<td>#7A67EE</td>
-</tr>
-<tr>
-<td>SlateBlue3</td>
-<td>rgb(105,89,205)</td>
-<td>#6959CD</td>
-</tr>
-<tr>
-<td>SlateBlue4</td>
-<td>rgb(71,60,139)</td>
-<td>#473C8B</td>
+<td>White</td>
+<td>rgb(255,255,255)</td>
+<td>#FFFFFF</td>
+<td><font style="background-color: #FFFFFF;">#FFFFFF</font></td>
 </tr>
 <tr>
 <td>GhostWhite</td>
 <td>rgb(248,248,255)</td>
 <td>#F8F8FF</td>
-</tr>
-<tr>
-<td>lavender</td>
-<td>rgb(230,230,250)</td>
-<td>#E6E6FA</td>
-</tr>
-<tr>
-<td>blue</td>
-<td>rgb(0,0,255)</td>
-<td>#0000FF</td>
-</tr>
-<tr>
-<td>blue1</td>
-<td>rgb(0,0,255)</td>
-<td>#0000FF</td>
-</tr>
-<tr>
-<td>blue2</td>
-<td>rgb(0,0,238)</td>
-<td>#0000EE</td>
-</tr>
-<tr>
-<td>blue3</td>
-<td>rgb(0,0,205)</td>
-<td>#0000CD</td>
-</tr>
-<tr>
-<td>MediumBlue</td>
-<td>rgb(0,0,205)</td>
-<td>#0000CD</td>
-</tr>
-<tr>
-<td>blue4</td>
-<td>rgb(0,0,139)</td>
-<td>#00008B</td>
-</tr>
-<tr>
-<td>DarkBlue</td>
-<td>rgb(0,0,139)</td>
-<td>#00008B</td>
-</tr>
-<tr>
-<td>MidnightBlue</td>
-<td>rgb(25,25,112)</td>
-<td>#191970</td>
-</tr>
-<tr>
-<td>navy</td>
-<td>rgb(0,0,128)</td>
-<td>#000080</td>
-</tr>
-<tr>
-<td>NavyBlue</td>
-<td>rgb(0,0,128)</td>
-<td>#000080</td>
-</tr>
-<tr>
-<td>RoyalBlue</td>
-<td>rgb(65,105,225)</td>
-<td>#4169E1</td>
-</tr>
-<tr>
-<td>RoyalBlue1</td>
-<td>rgb(72,118,255)</td>
-<td>#4876FF</td>
-</tr>
-<tr>
-<td>RoyalBlue2</td>
-<td>rgb(67,110,238)</td>
-<td>#436EEE</td>
-</tr>
-<tr>
-<td>RoyalBlue3</td>
-<td>rgb(58,95,205)</td>
-<td>#3A5FCD</td>
-</tr>
-<tr>
-<td>RoyalBlue4</td>
-<td>rgb(39,64,139)</td>
-<td>#27408B</td>
-</tr>
-<tr>
-<td>CornflowerBlue</td>
-<td>rgb(100,149,237)</td>
-<td>#6495ED</td>
-</tr>
-<tr>
-<td>LightSteelBlue</td>
-<td>rgb(176,196,222)</td>
-<td>#B0C4DE</td>
-</tr>
-<tr>
-<td>LightSteelBlue1</td>
-<td>rgb(202,225,255)</td>
-<td>#CAE1FF</td>
-</tr>
-<tr>
-<td>LightSteelBlue2</td>
-<td>rgb(188,210,238)</td>
-<td>#BCD2EE</td>
-</tr>
-<tr>
-<td>LightSteelBlue3</td>
-<td>rgb(162,181,205)</td>
-<td>#A2B5CD</td>
-</tr>
-<tr>
-<td>LightSteelBlue4</td>
-<td>rgb(110,123,139)</td>
-<td>#6E7B8B</td>
-</tr>
-<tr>
-<td>SlateGray4</td>
-<td>rgb(108,123,139)</td>
-<td>#6C7B8B</td>
-</tr>
-<tr>
-<td>SlateGray1</td>
-<td>rgb(198,226,255)</td>
-<td>#C6E2FF</td>
-</tr>
-<tr>
-<td>SlateGray2</td>
-<td>rgb(185,211,238)</td>
-<td>#B9D3EE</td>
-</tr>
-<tr>
-<td>SlateGray3</td>
-<td>rgb(159,182,205)</td>
-<td>#9FB6CD</td>
-</tr>
-<tr>
-<td>LightSlateGray</td>
-<td>rgb(119,136,153)</td>
-<td>#778899</td>
-</tr>
-<tr>
-<td>LightSlateGrey</td>
-<td>rgb(119,136,153)</td>
-<td>#778899</td>
-</tr>
-<tr>
-<td>SlateGray</td>
-<td>rgb(112,128,144)</td>
-<td>#708090</td>
-</tr>
-<tr>
-<td>SlateGrey</td>
-<td>rgb(112,128,144)</td>
-<td>#708090</td>
-</tr>
-<tr>
-<td>DodgerBlue</td>
-<td>rgb(30,144,255)</td>
-<td>#1E90FF</td>
-</tr>
-<tr>
-<td>DodgerBlue1</td>
-<td>rgb(30,144,255)</td>
-<td>#1E90FF</td>
-</tr>
-<tr>
-<td>DodgerBlue2</td>
-<td>rgb(28,134,238)</td>
-<td>#1C86EE</td>
-</tr>
-<tr>
-<td>DodgerBlue4</td>
-<td>rgb(16,78,139)</td>
-<td>#104E8B</td>
-</tr>
-<tr>
-<td>DodgerBlue3</td>
-<td>rgb(24,116,205)</td>
-<td>#1874CD</td>
-</tr>
-<tr>
-<td>AliceBlue</td>
-<td>rgb(240,248,255)</td>
-<td>#F0F8FF</td>
-</tr>
-<tr>
-<td>SteelBlue4</td>
-<td>rgb(54,100,139)</td>
-<td>#36648B</td>
-</tr>
-<tr>
-<td>SteelBlue</td>
-<td>rgb(70,130,180)</td>
-<td>#4682B4</td>
-</tr>
-<tr>
-<td>SteelBlue1</td>
-<td>rgb(99,184,255)</td>
-<td>#63B8FF</td>
-</tr>
-<tr>
-<td>SteelBlue2</td>
-<td>rgb(92,172,238)</td>
-<td>#5CACEE</td>
-</tr>
-<tr>
-<td>SteelBlue3</td>
-<td>rgb(79,148,205)</td>
-<td>#4F94CD</td>
-</tr>
-<tr>
-<td>SkyBlue4</td>
-<td>rgb(74,112,139)</td>
-<td>#4A708B</td>
-</tr>
-<tr>
-<td>SkyBlue1</td>
-<td>rgb(135,206,255)</td>
-<td>#87CEFF</td>
-</tr>
-<tr>
-<td>SkyBlue2</td>
-<td>rgb(126,192,238)</td>
-<td>#7EC0EE</td>
-</tr>
-<tr>
-<td>SkyBlue3</td>
-<td>rgb(108,166,205)</td>
-<td>#6CA6CD</td>
-</tr>
-<tr>
-<td>LightSkyBlue</td>
-<td>rgb(135,206,250)</td>
-<td>#87CEFA</td>
-</tr>
-<tr>
-<td>LightSkyBlue4</td>
-<td>rgb(96,123,139)</td>
-<td>#607B8B</td>
-</tr>
-<tr>
-<td>LightSkyBlue1</td>
-<td>rgb(176,226,255)</td>
-<td>#B0E2FF</td>
-</tr>
-<tr>
-<td>LightSkyBlue2</td>
-<td>rgb(164,211,238)</td>
-<td>#A4D3EE</td>
-</tr>
-<tr>
-<td>LightSkyBlue3</td>
-<td>rgb(141,182,205)</td>
-<td>#8DB6CD</td>
-</tr>
-<tr>
-<td>SkyBlue</td>
-<td>rgb(135,206,235)</td>
-<td>#87CEEB</td>
-</tr>
-<tr>
-<td>LightBlue3</td>
-<td>rgb(154,192,205)</td>
-<td>#9AC0CD</td>
-</tr>
-<tr>
-<td>DeepSkyBlue</td>
-<td>rgb(0,191,255)</td>
-<td>#00BFFF</td>
-</tr>
-<tr>
-<td>DeepSkyBlue1</td>
-<td>rgb(0,191,255)</td>
-<td>#00BFFF</td>
-</tr>
-<tr>
-<td>DeepSkyBlue2</td>
-<td>rgb(0,178,238)</td>
-<td>#00B2EE</td>
-</tr>
-<tr>
-<td>DeepSkyBlue4</td>
-<td>rgb(0,104,139)</td>
-<td>#00688B</td>
-</tr>
-<tr>
-<td>DeepSkyBlue3</td>
-<td>rgb(0,154,205)</td>
-<td>#009ACD</td>
-</tr>
-<tr>
-<td>LightBlue1</td>
-<td>rgb(191,239,255)</td>
-<td>#BFEFFF</td>
-</tr>
-<tr>
-<td>LightBlue2</td>
-<td>rgb(178,223,238)</td>
-<td>#B2DFEE</td>
-</tr>
-<tr>
-<td>LightBlue</td>
-<td>rgb(173,216,230)</td>
-<td>#ADD8E6</td>
-</tr>
-<tr>
-<td>LightBlue4</td>
-<td>rgb(104,131,139)</td>
-<td>#68838B</td>
-</tr>
-<tr>
-<td>PowderBlue</td>
-<td>rgb(176,224,230)</td>
-<td>#B0E0E6</td>
-</tr>
-<tr>
-<td>CadetBlue1</td>
-<td>rgb(152,245,255)</td>
-<td>#98F5FF</td>
-</tr>
-<tr>
-<td>CadetBlue2</td>
-<td>rgb(142,229,238)</td>
-<td>#8EE5EE</td>
-</tr>
-<tr>
-<td>CadetBlue3</td>
-<td>rgb(122,197,205)</td>
-<td>#7AC5CD</td>
-</tr>
-<tr>
-<td>CadetBlue4</td>
-<td>rgb(83,134,139)</td>
-<td>#53868B</td>
-</tr>
-<tr>
-<td>turquoise1</td>
-<td>rgb(0,245,255)</td>
-<td>#00F5FF</td>
-</tr>
-<tr>
-<td>turquoise2</td>
-<td>rgb(0,229,238)</td>
-<td>#00E5EE</td>
-</tr>
-<tr>
-<td>turquoise3</td>
-<td>rgb(0,197,205)</td>
-<td>#00C5CD</td>
-</tr>
-<tr>
-<td>turquoise4</td>
-<td>rgb(0,134,139)</td>
-<td>#00868B</td>
-</tr>
-<tr>
-<td>cadetblue</td>
-<td>rgb(95,158,160)</td>
-<td>#5F9EA0</td>
-</tr>
-<tr>
-<td>CadetBlue</td>
-<td>rgb(95,158,160)</td>
-<td>#5F9EA0</td>
-</tr>
-<tr>
-<td>DarkTurquoise</td>
-<td>rgb(0,206,209)</td>
-<td>#00CED1</td>
-</tr>
-<tr>
-<td>azure</td>
-<td>rgb(240,255,255)</td>
-<td>#F0FFFF</td>
-</tr>
-<tr>
-<td>azure1</td>
-<td>rgb(240,255,255)</td>
-<td>#F0FFFF</td>
-</tr>
-<tr>
-<td>LightCyan</td>
-<td>rgb(224,255,255)</td>
-<td>#E0FFFF</td>
-</tr>
-<tr>
-<td>LightCyan1</td>
-<td>rgb(224,255,255)</td>
-<td>#E0FFFF</td>
-</tr>
-<tr>
-<td>azure2</td>
-<td>rgb(224,238,238)</td>
-<td>#E0EEEE</td>
-</tr>
-<tr>
-<td>LightCyan2</td>
-<td>rgb(209,238,238)</td>
-<td>#D1EEEE</td>
-</tr>
-<tr>
-<td>PaleTurquoise1</td>
-<td>rgb(187,255,255)</td>
-<td>#BBFFFF</td>
-</tr>
-<tr>
-<td>PaleTurquoise</td>
-<td>rgb(175,238,238)</td>
-<td>#AFEEEE</td>
-</tr>
-<tr>
-<td>PaleTurquoise2</td>
-<td>rgb(174,238,238)</td>
-<td>#AEEEEE</td>
-</tr>
-<tr>
-<td>DarkSlateGray1</td>
-<td>rgb(151,255,255)</td>
-<td>#97FFFF</td>
-</tr>
-<tr>
-<td>azure3</td>
-<td>rgb(193,205,205)</td>
-<td>#C1CDCD</td>
-</tr>
-<tr>
-<td>LightCyan3</td>
-<td>rgb(180,205,205)</td>
-<td>#B4CDCD</td>
-</tr>
-<tr>
-<td>DarkSlateGray2</td>
-<td>rgb(141,238,238)</td>
-<td>#8DEEEE</td>
-</tr>
-<tr>
-<td>PaleTurquoise3</td>
-<td>rgb(150,205,205)</td>
-<td>#96CDCD</td>
-</tr>
-<tr>
-<td>DarkSlateGray3</td>
-<td>rgb(121,205,205)</td>
-<td>#79CDCD</td>
-</tr>
-<tr>
-<td>azure4</td>
-<td>rgb(131,139,139)</td>
-<td>#838B8B</td>
-</tr>
-<tr>
-<td>LightCyan4</td>
-<td>rgb(122,139,139)</td>
-<td>#7A8B8B</td>
-</tr>
-<tr>
-<td>aqua</td>
-<td>rgb(0,255,255)</td>
-<td>#00FFFF</td>
-</tr>
-<tr>
-<td>cyan</td>
-<td>rgb(0,255,255)</td>
-<td>#00FFFF</td>
-</tr>
-<tr>
-<td>cyan1</td>
-<td>rgb(0,255,255)</td>
-<td>#00FFFF</td>
-</tr>
-<tr>
-<td>PaleTurquoise4</td>
-<td>rgb(102,139,139)</td>
-<td>#668B8B</td>
-</tr>
-<tr>
-<td>cyan2</td>
-<td>rgb(0,238,238)</td>
-<td>#00EEEE</td>
-</tr>
-<tr>
-<td>DarkSlateGray4</td>
-<td>rgb(82,139,139)</td>
-<td>#528B8B</td>
-</tr>
-<tr>
-<td>cyan3</td>
-<td>rgb(0,205,205)</td>
-<td>#00CDCD</td>
-</tr>
-<tr>
-<td>cyan4</td>
-<td>rgb(0,139,139)</td>
-<td>#008B8B</td>
-</tr>
-<tr>
-<td>DarkCyan</td>
-<td>rgb(0,139,139)</td>
-<td>#008B8B</td>
-</tr>
-<tr>
-<td>teal</td>
-<td>rgb(0,128,128)</td>
-<td>#008080</td>
-</tr>
-<tr>
-<td>DarkSlateGray</td>
-<td>rgb(47,79,79)</td>
-<td>#2F4F4F</td>
-</tr>
-<tr>
-<td>DarkSlateGrey</td>
-<td>rgb(47,79,79)</td>
-<td>#2F4F4F</td>
-</tr>
-<tr>
-<td>MediumTurquoise</td>
-<td>rgb(72,209,204)</td>
-<td>#48D1CC</td>
-</tr>
-<tr>
-<td>LightSeaGreen</td>
-<td>rgb(32,178,170)</td>
-<td>#20B2AA</td>
-</tr>
-<tr>
-<td>turquoise</td>
-<td>rgb(64,224,208)</td>
-<td>#40E0D0</td>
-</tr>
-<tr>
-<td>aquamarine4</td>
-<td>rgb(69,139,116)</td>
-<td>#458B74</td>
-</tr>
-<tr>
-<td>aquamarine</td>
-<td>rgb(127,255,212)</td>
-<td>#7FFFD4</td>
-</tr>
-<tr>
-<td>aquamarine1</td>
-<td>rgb(127,255,212)</td>
-<td>#7FFFD4</td>
-</tr>
-<tr>
-<td>aquamarine2</td>
-<td>rgb(118,238,198)</td>
-<td>#76EEC6</td>
-</tr>
-<tr>
-<td>aquamarine3</td>
-<td>rgb(102,205,170)</td>
-<td>#66CDAA</td>
-</tr>
-<tr>
-<td>MediumAquamarine</td>
-<td>rgb(102,205,170)</td>
-<td>#66CDAA</td>
-</tr>
-<tr>
-<td>MediumSpringGreen</td>
-<td>rgb(0,250,154)</td>
-<td>#00FA9A</td>
-</tr>
-<tr>
-<td>MintCream</td>
-<td>rgb(245,255,250)</td>
-<td>#F5FFFA</td>
-</tr>
-<tr>
-<td>SpringGreen</td>
-<td>rgb(0,255,127)</td>
-<td>#00FF7F</td>
-</tr>
-<tr>
-<td>SpringGreen1</td>
-<td>rgb(0,255,127)</td>
-<td>#00FF7F</td>
-</tr>
-<tr>
-<td>SpringGreen2</td>
-<td>rgb(0,238,118)</td>
-<td>#00EE76</td>
-</tr>
-<tr>
-<td>SpringGreen3</td>
-<td>rgb(0,205,102)</td>
-<td>#00CD66</td>
-</tr>
-<tr>
-<td>SpringGreen4</td>
-<td>rgb(0,139,69)</td>
-<td>#008B45</td>
-</tr>
-<tr>
-<td>MediumSeaGreen</td>
-<td>rgb(60,179,113)</td>
-<td>#3CB371</td>
-</tr>
-<tr>
-<td>SeaGreen</td>
-<td>rgb(46,139,87)</td>
-<td>#2E8B57</td>
-</tr>
-<tr>
-<td>SeaGreen3</td>
-<td>rgb(67,205,128)</td>
-<td>#43CD80</td>
-</tr>
-<tr>
-<td>SeaGreen1</td>
-<td>rgb(84,255,159)</td>
-<td>#54FF9F</td>
-</tr>
-<tr>
-<td>SeaGreen4</td>
-<td>rgb(46,139,87)</td>
-<td>#2E8B57</td>
-</tr>
-<tr>
-<td>SeaGreen2</td>
-<td>rgb(78,238,148)</td>
-<td>#4EEE94</td>
-</tr>
-<tr>
-<td>MediumForestGreen</td>
-<td>rgb(50,129,75)</td>
-<td>#32814B</td>
-</tr>
-<tr>
-<td>honeydew</td>
-<td>rgb(240,255,240)</td>
-<td>#F0FFF0</td>
-</tr>
-<tr>
-<td>honeydew1</td>
-<td>rgb(240,255,240)</td>
-<td>#F0FFF0</td>
-</tr>
-<tr>
-<td>honeydew2</td>
-<td>rgb(224,238,224)</td>
-<td>#E0EEE0</td>
-</tr>
-<tr>
-<td>DarkSeaGreen1</td>
-<td>rgb(193,255,193)</td>
-<td>#C1FFC1</td>
-</tr>
-<tr>
-<td>DarkSeaGreen2</td>
-<td>rgb(180,238,180)</td>
-<td>#B4EEB4</td>
-</tr>
-<tr>
-<td>PaleGreen1</td>
-<td>rgb(154,255,154)</td>
-<td>#9AFF9A</td>
-</tr>
-<tr>
-<td>PaleGreen</td>
-<td>rgb(152,251,152)</td>
-<td>#98FB98</td>
-</tr>
-<tr>
-<td>honeydew3</td>
-<td>rgb(193,205,193)</td>
-<td>#C1CDC1</td>
-</tr>
-<tr>
-<td>LightGreen</td>
-<td>rgb(144,238,144)</td>
-<td>#90EE90</td>
-</tr>
-<tr>
-<td>PaleGreen2</td>
-<td>rgb(144,238,144)</td>
-<td>#90EE90</td>
-</tr>
-<tr>
-<td>DarkSeaGreen3</td>
-<td>rgb(155,205,155)</td>
-<td>#9BCD9B</td>
-</tr>
-<tr>
-<td>DarkSeaGreen</td>
-<td>rgb(143,188,143)</td>
-<td>#8FBC8F</td>
-</tr>
-<tr>
-<td>PaleGreen3</td>
-<td>rgb(124,205,124)</td>
-<td>#7CCD7C</td>
-</tr>
-<tr>
-<td>honeydew4</td>
-<td>rgb(131,139,131)</td>
-<td>#838B83</td>
-</tr>
-<tr>
-<td>green1</td>
-<td>rgb(0,255,0)</td>
-<td>#00FF00</td>
-</tr>
-<tr>
-<td>lime</td>
-<td>rgb(0,255,0)</td>
-<td>#00FF00</td>
-</tr>
-<tr>
-<td>LimeGreen</td>
-<td>rgb(50,205,50)</td>
-<td>#32CD32</td>
-</tr>
-<tr>
-<td>DarkSeaGreen4</td>
-<td>rgb(105,139,105)</td>
-<td>#698B69</td>
-</tr>
-<tr>
-<td>green2</td>
-<td>rgb(0,238,0)</td>
-<td>#00EE00</td>
-</tr>
-<tr>
-<td>PaleGreen4</td>
-<td>rgb(84,139,84)</td>
-<td>#548B54</td>
-</tr>
-<tr>
-<td>green3</td>
-<td>rgb(0,205,0)</td>
-<td>#00CD00</td>
-</tr>
-<tr>
-<td>ForestGreen</td>
-<td>rgb(34,139,34)</td>
-<td>#228B22</td>
-</tr>
-<tr>
-<td>green4</td>
-<td>rgb(0,139,0)</td>
-<td>#008B00</td>
-</tr>
-<tr>
-<td>green</td>
-<td>rgb(0,128,0)</td>
-<td>#008000</td>
-</tr>
-<tr>
-<td>DarkGreen</td>
-<td>rgb(0,100,0)</td>
-<td>#006400</td>
-</tr>
-<tr>
-<td>LawnGreen</td>
-<td>rgb(124,252,0)</td>
-<td>#7CFC00</td>
-</tr>
-<tr>
-<td>chartreuse</td>
-<td>rgb(127,255,0)</td>
-<td>#7FFF00</td>
-</tr>
-<tr>
-<td>chartreuse1</td>
-<td>rgb(127,255,0)</td>
-<td>#7FFF00</td>
-</tr>
-<tr>
-<td>chartreuse2</td>
-<td>rgb(118,238,0)</td>
-<td>#76EE00</td>
-</tr>
-<tr>
-<td>chartreuse3</td>
-<td>rgb(102,205,0)</td>
-<td>#66CD00</td>
-</tr>
-<tr>
-<td>chartreuse4</td>
-<td>rgb(69,139,0)</td>
-<td>#458B00</td>
-</tr>
-<tr>
-<td>GreenYellow</td>
-<td>rgb(173,255,47)</td>
-<td>#ADFF2F</td>
-</tr>
-<tr>
-<td>DarkOliveGreen3</td>
-<td>rgb(162,205,90)</td>
-<td>#A2CD5A</td>
-</tr>
-<tr>
-<td>DarkOliveGreen1</td>
-<td>rgb(202,255,112)</td>
-<td>#CAFF70</td>
-</tr>
-<tr>
-<td>DarkOliveGreen2</td>
-<td>rgb(188,238,104)</td>
-<td>#BCEE68</td>
-</tr>
-<tr>
-<td>DarkOliveGreen4</td>
-<td>rgb(110,139,61)</td>
-<td>#6E8B3D</td>
-</tr>
-<tr>
-<td>DarkOliveGreen</td>
-<td>rgb(85,107,47)</td>
-<td>#556B2F</td>
-</tr>
-<tr>
-<td>OliveDrab</td>
-<td>rgb(107,142,35)</td>
-<td>#6B8E23</td>
-</tr>
-<tr>
-<td>OliveDrab1</td>
-<td>rgb(192,255,62)</td>
-<td>#C0FF3E</td>
-</tr>
-<tr>
-<td>OliveDrab2</td>
-<td>rgb(179,238,58)</td>
-<td>#B3EE3A</td>
-</tr>
-<tr>
-<td>OliveDrab3</td>
-<td>rgb(154,205,50)</td>
-<td>#9ACD32</td>
-</tr>
-<tr>
-<td>YellowGreen</td>
-<td>rgb(154,205,50)</td>
-<td>#9ACD32</td>
-</tr>
-<tr>
-<td>OliveDrab4</td>
-<td>rgb(105,139,34)</td>
-<td>#698B22</td>
-</tr>
-<tr>
-<td>ivory</td>
-<td>rgb(255,255,240)</td>
-<td>#FFFFF0</td>
-</tr>
-<tr>
-<td>ivory1</td>
-<td>rgb(255,255,240)</td>
-<td>#FFFFF0</td>
-</tr>
-<tr>
-<td>LightYellow</td>
-<td>rgb(255,255,224)</td>
-<td>#FFFFE0</td>
-</tr>
-<tr>
-<td>LightYellow1</td>
-<td>rgb(255,255,224)</td>
-<td>#FFFFE0</td>
-</tr>
-<tr>
-<td>beige</td>
-<td>rgb(245,245,220)</td>
-<td>#F5F5DC</td>
-</tr>
-<tr>
-<td>ivory2</td>
-<td>rgb(238,238,224)</td>
-<td>#EEEEE0</td>
-</tr>
-<tr>
-<td>LightGoldenrodYellow</td>
-<td>rgb(250,250,210)</td>
-<td>#FAFAD2</td>
-</tr>
-<tr>
-<td>LightYellow2</td>
-<td>rgb(238,238,209)</td>
-<td>#EEEED1</td>
-</tr>
-<tr>
-<td>ivory3</td>
-<td>rgb(205,205,193)</td>
-<td>#CDCDC1</td>
-</tr>
-<tr>
-<td>LightYellow3</td>
-<td>rgb(205,205,180)</td>
-<td>#CDCDB4</td>
-</tr>
-<tr>
-<td>ivory4</td>
-<td>rgb(139,139,131)</td>
-<td>#8B8B83</td>
-</tr>
-<tr>
-<td>LightYellow4</td>
-<td>rgb(139,139,122)</td>
-<td>#8B8B7A</td>
-</tr>
-<tr>
-<td>yellow</td>
-<td>rgb(255,255,0)</td>
-<td>#FFFF00</td>
-</tr>
-<tr>
-<td>yellow1</td>
-<td>rgb(255,255,0)</td>
-<td>#FFFF00</td>
-</tr>
-<tr>
-<td>yellow2</td>
-<td>rgb(238,238,0)</td>
-<td>#EEEE00</td>
-</tr>
-<tr>
-<td>yellow3</td>
-<td>rgb(205,205,0)</td>
-<td>#CDCD00</td>
-</tr>
-<tr>
-<td>yellow4</td>
-<td>rgb(139,139,0)</td>
-<td>#8B8B00</td>
-</tr>
-<tr>
-<td>olive</td>
-<td>rgb(128,128,0)</td>
-<td>#808000</td>
-</tr>
-<tr>
-<td>DarkKhaki</td>
-<td>rgb(189,183,107)</td>
-<td>#BDB76B</td>
-</tr>
-<tr>
-<td>khaki2</td>
-<td>rgb(238,230,133)</td>
-<td>#EEE685</td>
-</tr>
-<tr>
-<td>LemonChiffon4</td>
-<td>rgb(139,137,112)</td>
-<td>#8B8970</td>
-</tr>
-<tr>
-<td>khaki1</td>
-<td>rgb(255,246,143)</td>
-<td>#FFF68F</td>
-</tr>
-<tr>
-<td>khaki3</td>
-<td>rgb(205,198,115)</td>
-<td>#CDC673</td>
-</tr>
-<tr>
-<td>khaki4</td>
-<td>rgb(139,134,78)</td>
-<td>#8B864E</td>
-</tr>
-<tr>
-<td>PaleGoldenrod</td>
-<td>rgb(238,232,170)</td>
-<td>#EEE8AA</td>
-</tr>
-<tr>
-<td>LemonChiffon</td>
-<td>rgb(255,250,205)</td>
-<td>#FFFACD</td>
-</tr>
-<tr>
-<td>LemonChiffon1</td>
-<td>rgb(255,250,205)</td>
-<td>#FFFACD</td>
-</tr>
-<tr>
-<td>khaki</td>
-<td>rgb(240,230,140)</td>
-<td>#F0E68C</td>
-</tr>
-<tr>
-<td>LemonChiffon3</td>
-<td>rgb(205,201,165)</td>
-<td>#CDC9A5</td>
-</tr>
-<tr>
-<td>LemonChiffon2</td>
-<td>rgb(238,233,191)</td>
-<td>#EEE9BF</td>
-</tr>
-<tr>
-<td>MediumGoldenRod</td>
-<td>rgb(209,193,102)</td>
-<td>#D1C166</td>
-</tr>
-<tr>
-<td>cornsilk4</td>
-<td>rgb(139,136,120)</td>
-<td>#8B8878</td>
-</tr>
-<tr>
-<td>gold</td>
-<td>rgb(255,215,0)</td>
-<td>#FFD700</td>
-</tr>
-<tr>
-<td>gold1</td>
-<td>rgb(255,215,0)</td>
-<td>#FFD700</td>
-</tr>
-<tr>
-<td>gold2</td>
-<td>rgb(238,201,0)</td>
-<td>#EEC900</td>
-</tr>
-<tr>
-<td>gold3</td>
-<td>rgb(205,173,0)</td>
-<td>#CDAD00</td>
-</tr>
-<tr>
-<td>gold4</td>
-<td>rgb(139,117,0)</td>
-<td>#8B7500</td>
-</tr>
-<tr>
-<td>LightGoldenrod</td>
-<td>rgb(238,221,130)</td>
-<td>#EEDD82</td>
-</tr>
-<tr>
-<td>LightGoldenrod4</td>
-<td>rgb(139,129,76)</td>
-<td>#8B814C</td>
-</tr>
-<tr>
-<td>LightGoldenrod1</td>
-<td>rgb(255,236,139)</td>
-<td>#FFEC8B</td>
-</tr>
-<tr>
-<td>LightGoldenrod3</td>
-<td>rgb(205,190,112)</td>
-<td>#CDBE70</td>
-</tr>
-<tr>
-<td>LightGoldenrod2</td>
-<td>rgb(238,220,130)</td>
-<td>#EEDC82</td>
-</tr>
-<tr>
-<td>cornsilk3</td>
-<td>rgb(205,200,177)</td>
-<td>#CDC8B1</td>
-</tr>
-<tr>
-<td>cornsilk2</td>
-<td>rgb(238,232,205)</td>
-<td>#EEE8CD</td>
-</tr>
-<tr>
-<td>cornsilk</td>
-<td>rgb(255,248,220)</td>
-<td>#FFF8DC</td>
-</tr>
-<tr>
-<td>cornsilk1</td>
-<td>rgb(255,248,220)</td>
-<td>#FFF8DC</td>
-</tr>
-<tr>
-<td>goldenrod</td>
-<td>rgb(218,165,32)</td>
-<td>#DAA520</td>
-</tr>
-<tr>
-<td>goldenrod1</td>
-<td>rgb(255,193,37)</td>
-<td>#FFC125</td>
-</tr>
-<tr>
-<td>goldenrod2</td>
-<td>rgb(238,180,34)</td>
-<td>#EEB422</td>
-</tr>
-<tr>
-<td>goldenrod3</td>
-<td>rgb(205,155,29)</td>
-<td>#CD9B1D</td>
-</tr>
-<tr>
-<td>goldenrod4</td>
-<td>rgb(139,105,20)</td>
-<td>#8B6914</td>
-</tr>
-<tr>
-<td>DarkGoldenrod</td>
-<td>rgb(184,134,11)</td>
-<td>#B8860B</td>
-</tr>
-<tr>
-<td>DarkGoldenrod1</td>
-<td>rgb(255,185,15)</td>
-<td>#FFB90F</td>
-</tr>
-<tr>
-<td>DarkGoldenrod2</td>
-<td>rgb(238,173,14)</td>
-<td>#EEAD0E</td>
-</tr>
-<tr>
-<td>DarkGoldenrod3</td>
-<td>rgb(205,149,12)</td>
-<td>#CD950C</td>
-</tr>
-<tr>
-<td>DarkGoldenrod4</td>
-<td>rgb(139,101,8)</td>
-<td>#8B6508</td>
-</tr>
-<tr>
-<td>FloralWhite</td>
-<td>rgb(255,250,240)</td>
-<td>#FFFAF0</td>
-</tr>
-<tr>
-<td>wheat2</td>
-<td>rgb(238,216,174)</td>
-<td>#EED8AE</td>
-</tr>
-<tr>
-<td>OldLace</td>
-<td>rgb(253,245,230)</td>
-<td>#FDF5E6</td>
-</tr>
-<tr>
-<td>wheat</td>
-<td>rgb(245,222,179)</td>
-<td>#F5DEB3</td>
-</tr>
-<tr>
-<td>wheat1</td>
-<td>rgb(255,231,186)</td>
-<td>#FFE7BA</td>
-</tr>
-<tr>
-<td>wheat3</td>
-<td>rgb(205,186,150)</td>
-<td>#CDBA96</td>
-</tr>
-<tr>
-<td>orange</td>
-<td>rgb(255,165,0)</td>
-<td>#FFA500</td>
-</tr>
-<tr>
-<td>orange1</td>
-<td>rgb(255,165,0)</td>
-<td>#FFA500</td>
-</tr>
-<tr>
-<td>orange2</td>
-<td>rgb(238,154,0)</td>
-<td>#EE9A00</td>
-</tr>
-<tr>
-<td>orange3</td>
-<td>rgb(205,133,0)</td>
-<td>#CD8500</td>
-</tr>
-<tr>
-<td>orange4</td>
-<td>rgb(139,90,0)</td>
-<td>#8B5A00</td>
-</tr>
-<tr>
-<td>wheat4</td>
-<td>rgb(139,126,102)</td>
-<td>#8B7E66</td>
-</tr>
-<tr>
-<td>moccasin</td>
-<td>rgb(255,228,181)</td>
-<td>#FFE4B5</td>
-</tr>
-<tr>
-<td>PapayaWhip</td>
-<td>rgb(255,239,213)</td>
-<td>#FFEFD5</td>
-</tr>
-<tr>
-<td>NavajoWhite3</td>
-<td>rgb(205,179,139)</td>
-<td>#CDB38B</td>
-</tr>
-<tr>
-<td>BlanchedAlmond</td>
-<td>rgb(255,235,205)</td>
-<td>#FFEBCD</td>
-</tr>
-<tr>
-<td>NavajoWhite</td>
-<td>rgb(255,222,173)</td>
-<td>#FFDEAD</td>
-</tr>
-<tr>
-<td>NavajoWhite1</td>
-<td>rgb(255,222,173)</td>
-<td>#FFDEAD</td>
-</tr>
-<tr>
-<td>NavajoWhite2</td>
-<td>rgb(238,207,161)</td>
-<td>#EECFA1</td>
-</tr>
-<tr>
-<td>NavajoWhite4</td>
-<td>rgb(139,121,94)</td>
-<td>#8B795E</td>
-</tr>
-<tr>
-<td>AntiqueWhite4</td>
-<td>rgb(139,131,120)</td>
-<td>#8B8378</td>
-</tr>
-<tr>
-<td>AntiqueWhite</td>
-<td>rgb(250,235,215)</td>
-<td>#FAEBD7</td>
-</tr>
-<tr>
-<td>tan</td>
-<td>rgb(210,180,140)</td>
-<td>#D2B48C</td>
-</tr>
-<tr>
-<td>bisque4</td>
-<td>rgb(139,125,107)</td>
-<td>#8B7D6B</td>
-</tr>
-<tr>
-<td>burlywood</td>
-<td>rgb(222,184,135)</td>
-<td>#DEB887</td>
-</tr>
-<tr>
-<td>AntiqueWhite2</td>
-<td>rgb(238,223,204)</td>
-<td>#EEDFCC</td>
-</tr>
-<tr>
-<td>burlywood1</td>
-<td>rgb(255,211,155)</td>
-<td>#FFD39B</td>
-</tr>
-<tr>
-<td>burlywood3</td>
-<td>rgb(205,170,125)</td>
-<td>#CDAA7D</td>
-</tr>
-<tr>
-<td>burlywood2</td>
-<td>rgb(238,197,145)</td>
-<td>#EEC591</td>
-</tr>
-<tr>
-<td>AntiqueWhite1</td>
-<td>rgb(255,239,219)</td>
-<td>#FFEFDB</td>
-</tr>
-<tr>
-<td>burlywood4</td>
-<td>rgb(139,115,85)</td>
-<td>#8B7355</td>
-</tr>
-<tr>
-<td>AntiqueWhite3</td>
-<td>rgb(205,192,176)</td>
-<td>#CDC0B0</td>
-</tr>
-<tr>
-<td>DarkOrange</td>
-<td>rgb(255,140,0)</td>
-<td>#FF8C00</td>
-</tr>
-<tr>
-<td>bisque2</td>
-<td>rgb(238,213,183)</td>
-<td>#EED5B7</td>
-</tr>
-<tr>
-<td>bisque</td>
-<td>rgb(255,228,196)</td>
-<td>#FFE4C4</td>
-</tr>
-<tr>
-<td>bisque1</td>
-<td>rgb(255,228,196)</td>
-<td>#FFE4C4</td>
-</tr>
-<tr>
-<td>bisque3</td>
-<td>rgb(205,183,158)</td>
-<td>#CDB79E</td>
-</tr>
-<tr>
-<td>DarkOrange1</td>
-<td>rgb(255,127,0)</td>
-<td>#FF7F00</td>
-</tr>
-<tr>
-<td>linen</td>
-<td>rgb(250,240,230)</td>
-<td>#FAF0E6</td>
-</tr>
-<tr>
-<td>DarkOrange2</td>
-<td>rgb(238,118,0)</td>
-<td>#EE7600</td>
-</tr>
-<tr>
-<td>DarkOrange3</td>
-<td>rgb(205,102,0)</td>
-<td>#CD6600</td>
-</tr>
-<tr>
-<td>DarkOrange4</td>
-<td>rgb(139,69,0)</td>
-<td>#8B4500</td>
-</tr>
-<tr>
-<td>peru</td>
-<td>rgb(205,133,63)</td>
-<td>#CD853F</td>
-</tr>
-<tr>
-<td>tan1</td>
-<td>rgb(255,165,79)</td>
-<td>#FFA54F</td>
-</tr>
-<tr>
-<td>tan2</td>
-<td>rgb(238,154,73)</td>
-<td>#EE9A49</td>
-</tr>
-<tr>
-<td>tan3</td>
-<td>rgb(205,133,63)</td>
-<td>#CD853F</td>
-</tr>
-<tr>
-<td>tan4</td>
-<td>rgb(139,90,43)</td>
-<td>#8B5A2B</td>
-</tr>
-<tr>
-<td>PeachPuff</td>
-<td>rgb(255,218,185)</td>
-<td>#FFDAB9</td>
-</tr>
-<tr>
-<td>PeachPuff1</td>
-<td>rgb(255,218,185)</td>
-<td>#FFDAB9</td>
-</tr>
-<tr>
-<td>PeachPuff4</td>
-<td>rgb(139,119,101)</td>
-<td>#8B7765</td>
-</tr>
-<tr>
-<td>PeachPuff2</td>
-<td>rgb(238,203,173)</td>
-<td>#EECBAD</td>
-</tr>
-<tr>
-<td>PeachPuff3</td>
-<td>rgb(205,175,149)</td>
-<td>#CDAF95</td>
-</tr>
-<tr>
-<td>SandyBrown</td>
-<td>rgb(244,164,96)</td>
-<td>#F4A460</td>
-</tr>
-<tr>
-<td>seashell4</td>
-<td>rgb(139,134,130)</td>
-<td>#8B8682</td>
-</tr>
-<tr>
-<td>seashell2</td>
-<td>rgb(238,229,222)</td>
-<td>#EEE5DE</td>
-</tr>
-<tr>
-<td>seashell3</td>
-<td>rgb(205,197,191)</td>
-<td>#CDC5BF</td>
-</tr>
-<tr>
-<td>chocolate</td>
-<td>rgb(210,105,30)</td>
-<td>#D2691E</td>
-</tr>
-<tr>
-<td>chocolate1</td>
-<td>rgb(255,127,36)</td>
-<td>#FF7F24</td>
-</tr>
-<tr>
-<td>chocolate2</td>
-<td>rgb(238,118,33)</td>
-<td>#EE7621</td>
-</tr>
-<tr>
-<td>chocolate3</td>
-<td>rgb(205,102,29)</td>
-<td>#CD661D</td>
-</tr>
-<tr>
-<td>chocolate4</td>
-<td>rgb(139,69,19)</td>
-<td>#8B4513</td>
-</tr>
-<tr>
-<td>SaddleBrown</td>
-<td>rgb(139,69,19)</td>
-<td>#8B4513</td>
-</tr>
-<tr>
-<td>seashell</td>
-<td>rgb(255,245,238)</td>
-<td>#FFF5EE</td>
-</tr>
-<tr>
-<td>seashell1</td>
-<td>rgb(255,245,238)</td>
-<td>#FFF5EE</td>
-</tr>
-<tr>
-<td>sienna4</td>
-<td>rgb(139,71,38)</td>
-<td>#8B4726</td>
-</tr>
-<tr>
-<td>sienna</td>
-<td>rgb(160,82,45)</td>
-<td>#A0522D</td>
-</tr>
-<tr>
-<td>sienna1</td>
-<td>rgb(255,130,71)</td>
-<td>#FF8247</td>
-</tr>
-<tr>
-<td>sienna2</td>
-<td>rgb(238,121,66)</td>
-<td>#EE7942</td>
-</tr>
-<tr>
-<td>sienna3</td>
-<td>rgb(205,104,57)</td>
-<td>#CD6839</td>
-</tr>
-<tr>
-<td>LightSalmon3</td>
-<td>rgb(205,129,98)</td>
-<td>#CD8162</td>
-</tr>
-<tr>
-<td>LightSalmon</td>
-<td>rgb(255,160,122)</td>
-<td>#FFA07A</td>
-</tr>
-<tr>
-<td>LightSalmon1</td>
-<td>rgb(255,160,122)</td>
-<td>#FFA07A</td>
-</tr>
-<tr>
-<td>LightSalmon4</td>
-<td>rgb(139,87,66)</td>
-<td>#8B5742</td>
-</tr>
-<tr>
-<td>LightSalmon2</td>
-<td>rgb(238,149,114)</td>
-<td>#EE9572</td>
-</tr>
-<tr>
-<td>coral</td>
-<td>rgb(255,127,80)</td>
-<td>#FF7F50</td>
-</tr>
-<tr>
-<td>OrangeRed</td>
-<td>rgb(255,69,0)</td>
-<td>#FF4500</td>
-</tr>
-<tr>
-<td>OrangeRed1</td>
-<td>rgb(255,69,0)</td>
-<td>#FF4500</td>
-</tr>
-<tr>
-<td>OrangeRed2</td>
-<td>rgb(238,64,0)</td>
-<td>#EE4000</td>
-</tr>
-<tr>
-<td>OrangeRed3</td>
-<td>rgb(205,55,0)</td>
-<td>#CD3700</td>
-</tr>
-<tr>
-<td>OrangeRed4</td>
-<td>rgb(139,37,0)</td>
-<td>#8B2500</td>
-</tr>
-<tr>
-<td>DarkSalmon</td>
-<td>rgb(233,150,122)</td>
-<td>#E9967A</td>
-</tr>
-<tr>
-<td>salmon1</td>
-<td>rgb(255,140,105)</td>
-<td>#FF8C69</td>
-</tr>
-<tr>
-<td>salmon2</td>
-<td>rgb(238,130,98)</td>
-<td>#EE8262</td>
-</tr>
-<tr>
-<td>salmon3</td>
-<td>rgb(205,112,84)</td>
-<td>#CD7054</td>
-</tr>
-<tr>
-<td>salmon4</td>
-<td>rgb(139,76,57)</td>
-<td>#8B4C39</td>
-</tr>
-<tr>
-<td>coral1</td>
-<td>rgb(255,114,86)</td>
-<td>#FF7256</td>
-</tr>
-<tr>
-<td>coral2</td>
-<td>rgb(238,106,80)</td>
-<td>#EE6A50</td>
-</tr>
-<tr>
-<td>coral3</td>
-<td>rgb(205,91,69)</td>
-<td>#CD5B45</td>
-</tr>
-<tr>
-<td>coral4</td>
-<td>rgb(139,62,47)</td>
-<td>#8B3E2F</td>
-</tr>
-<tr>
-<td>tomato4</td>
-<td>rgb(139,54,38)</td>
-<td>#8B3626</td>
-</tr>
-<tr>
-<td>tomato</td>
-<td>rgb(255,99,71)</td>
-<td>#FF6347</td>
-</tr>
-<tr>
-<td>tomato1</td>
-<td>rgb(255,99,71)</td>
-<td>#FF6347</td>
-</tr>
-<tr>
-<td>tomato2</td>
-<td>rgb(238,92,66)</td>
-<td>#EE5C42</td>
-</tr>
-<tr>
-<td>tomato3</td>
-<td>rgb(205,79,57)</td>
-<td>#CD4F39</td>
-</tr>
-<tr>
-<td>MistyRose4</td>
-<td>rgb(139,125,123)</td>
-<td>#8B7D7B</td>
-</tr>
-<tr>
-<td>MistyRose2</td>
-<td>rgb(238,213,210)</td>
-<td>#EED5D2</td>
-</tr>
-<tr>
-<td>MistyRose</td>
-<td>rgb(255,228,225)</td>
-<td>#FFE4E1</td>
-</tr>
-<tr>
-<td>MistyRose1</td>
-<td>rgb(255,228,225)</td>
-<td>#FFE4E1</td>
-</tr>
-<tr>
-<td>salmon</td>
-<td>rgb(250,128,114)</td>
-<td>#FA8072</td>
-</tr>
-<tr>
-<td>MistyRose3</td>
-<td>rgb(205,183,181)</td>
-<td>#CDB7B5</td>
-</tr>
-<tr>
-<td>white</td>
-<td>rgb(255,255,255)</td>
-<td>#FFFFFF</td>
-</tr>
-<tr>
-<td>gray100</td>
-<td>rgb(255,255,255)</td>
-<td>#FFFFFF</td>
-</tr>
-<tr>
-<td>grey100</td>
-<td>rgb(255,255,255)</td>
-<td>#FFFFFF</td>
-</tr>
-<tr>
-<td>grey100</td>
-<td>rgb(255,255,255)</td>
-<td>#FFFFFF</td>
-</tr>
-<tr>
-<td>gray99</td>
-<td>rgb(252,252,252)</td>
-<td>#FCFCFC</td>
-</tr>
-<tr>
-<td>grey99</td>
-<td>rgb(252,252,252)</td>
-<td>#FCFCFC</td>
-</tr>
-<tr>
-<td>gray98</td>
-<td>rgb(250,250,250)</td>
-<td>#FAFAFA</td>
-</tr>
-<tr>
-<td>grey98</td>
-<td>rgb(250,250,250)</td>
-<td>#FAFAFA</td>
-</tr>
-<tr>
-<td>gray97</td>
-<td>rgb(247,247,247)</td>
-<td>#F7F7F7</td>
-</tr>
-<tr>
-<td>grey97</td>
-<td>rgb(247,247,247)</td>
-<td>#F7F7F7</td>
-</tr>
-<tr>
-<td>gray96</td>
-<td>rgb(245,245,245)</td>
-<td>#F5F5F5</td>
-</tr>
-<tr>
-<td>grey96</td>
-<td>rgb(245,245,245)</td>
-<td>#F5F5F5</td>
+<td><font style="background-color: #F8F8FF;">#F8F8FF</font></td>
 </tr>
 <tr>
 <td>WhiteSmoke</td>
 <td>rgb(245,245,245)</td>
 <td>#F5F5F5</td>
+<td><font style="background-color: #F5F5F5;">#F5F5F5</font></td>
 </tr>
 <tr>
-<td>gray95</td>
-<td>rgb(242,242,242)</td>
-<td>#F2F2F2</td>
+<td>Snow1</td>
+<td>rgb(255,250,250)</td>
+<td>#FFFAFA</td>
+<td><font style="background-color: #FFFAFA;">#FFFAFA</font></td>
 </tr>
 <tr>
-<td>grey95</td>
-<td>rgb(242,242,242)</td>
-<td>#F2F2F2</td>
+<td>Snow2</td>
+<td>rgb(238,233,233)</td>
+<td>#EEE9E9</td>
+<td><font style="background-color: #EEE9E9;">#EEE9E9</font></td>
 </tr>
 <tr>
-<td>gray94</td>
-<td>rgb(240,240,240)</td>
-<td>#F0F0F0</td>
+<td>Snow3</td>
+<td>rgb(205,201,201)</td>
+<td>#CDC9C9</td>
+<td><font style="background-color: #CDC9C9;">#CDC9C9</font></td>
 </tr>
 <tr>
-<td>grey94</td>
-<td>rgb(240,240,240)</td>
-<td>#F0F0F0</td>
+<td>Snow4</td>
+<td>rgb(139,137,137)</td>
+<td>#8B8989</td>
+<td><font style="background-color: #8B8989;">#8B8989</font></td>
 </tr>
 <tr>
-<td>gray93</td>
-<td>rgb(237,237,237)</td>
-<td>#EDEDED</td>
+<td>RosyBrown1</td>
+<td>rgb(255,193,193)</td>
+<td>#FFC1C1</td>
+<td><font style="background-color: #FFC1C1;">#FFC1C1</font></td>
 </tr>
 <tr>
-<td>grey93</td>
-<td>rgb(237,237,237)</td>
-<td>#EDEDED</td>
+<td>RosyBrown2</td>
+<td>rgb(238,180,180)</td>
+<td>#EEB4B4</td>
+<td><font style="background-color: #EEB4B4;">#EEB4B4</font></td>
 </tr>
 <tr>
-<td>gray92</td>
-<td>rgb(235,235,235)</td>
-<td>#EBEBEB</td>
+<td>RosyBrown3</td>
+<td>rgb(205,155,155)</td>
+<td>#CD9B9B</td>
+<td><font style="background-color: #CD9B9B;">#CD9B9B</font></td>
 </tr>
 <tr>
-<td>grey92</td>
-<td>rgb(235,235,235)</td>
-<td>#EBEBEB</td>
+<td>RosyBrown4</td>
+<td>rgb(139,105,105)</td>
+<td>#8B6969</td>
+<td><font style="background-color: #8B6969;">#8B6969</font></td>
 </tr>
 <tr>
-<td>gray91</td>
-<td>rgb(232,232,232)</td>
-<td>#E8E8E8</td>
+<td>RosyBrown</td>
+<td>rgb(188,143,143)</td>
+<td>#BC8F8F</td>
+<td><font style="background-color: #BC8F8F;">#BC8F8F</font></td>
 </tr>
 <tr>
-<td>grey91</td>
-<td>rgb(232,232,232)</td>
-<td>#E8E8E8</td>
+<td>LightCoral</td>
+<td>rgb(240,128,128)</td>
+<td>#F08080</td>
+<td><font style="background-color: #F08080;">#F08080</font></td>
 </tr>
 <tr>
-<td>gray90</td>
-<td>rgb(229,229,229)</td>
-<td>#E5E5E5</td>
+<td>IndianRed</td>
+<td>rgb(205,92,92)</td>
+<td>#CD5C5C</td>
+<td><font style="background-color: #CD5C5C;">#CD5C5C</font></td>
 </tr>
 <tr>
-<td>grey90</td>
-<td>rgb(229,229,229)</td>
-<td>#E5E5E5</td>
+<td>IndianRed1</td>
+<td>rgb(255,106,106)</td>
+<td>#FF6A6A</td>
+<td><font style="background-color: #FF6A6A;">#FF6A6A</font></td>
 </tr>
 <tr>
-<td>gray89</td>
-<td>rgb(227,227,227)</td>
-<td>#E3E3E3</td>
+<td>IndianRed2</td>
+<td>rgb(238,99,99)</td>
+<td>#EE6363</td>
+<td><font style="background-color: #EE6363;">#EE6363</font></td>
 </tr>
 <tr>
-<td>grey89</td>
-<td>rgb(227,227,227)</td>
-<td>#E3E3E3</td>
+<td>IndianRed3</td>
+<td>rgb(205,85,85)</td>
+<td>#CD5555</td>
+<td><font style="background-color: #CD5555;">#CD5555</font></td>
 </tr>
 <tr>
-<td>gray88</td>
-<td>rgb(224,224,224)</td>
-<td>#E0E0E0</td>
+<td>IndianRed4</td>
+<td>rgb(139,58,58)</td>
+<td>#8B3A3A</td>
+<td><font style="background-color: #8B3A3A;">#8B3A3A</font></td>
 </tr>
 <tr>
-<td>grey88</td>
-<td>rgb(224,224,224)</td>
-<td>#E0E0E0</td>
+<td>Brown1</td>
+<td>rgb(255,64,64)</td>
+<td>#FF4040</td>
+<td><font style="background-color: #FF4040;">#FF4040</font></td>
 </tr>
 <tr>
-<td>gray87</td>
-<td>rgb(222,222,222)</td>
-<td>#DEDEDE</td>
+<td>Brown2</td>
+<td>rgb(238,59,59)</td>
+<td>#EE3B3B</td>
+<td><font style="background-color: #EE3B3B;">#EE3B3B</font></td>
 </tr>
 <tr>
-<td>grey87</td>
-<td>rgb(222,222,222)</td>
-<td>#DEDEDE</td>
+<td>Brown3</td>
+<td>rgb(205,51,51)</td>
+<td>#CD3333</td>
+<td><font style="background-color: #CD3333;">#CD3333</font></td>
 </tr>
 <tr>
-<td>gainsboro</td>
+<td>Brown4</td>
+<td>rgb(139,35,35)</td>
+<td>#8B2323</td>
+<td><font style="background-color: #8B2323;">#8B2323</font></td>
+</tr>
+<tr>
+<td>Brown</td>
+<td>rgb(165,42,42)</td>
+<td>#A52A2A</td>
+<td><font style="background-color: #A52A2A;">#A52A2A</font></td>
+</tr>
+<tr>
+<td>Firebrick1</td>
+<td>rgb(255,48,48)</td>
+<td>#FF3030</td>
+<td><font style="background-color: #FF3030;">#FF3030</font></td>
+</tr>
+<tr>
+<td>Firebrick2</td>
+<td>rgb(238,44,44)</td>
+<td>#EE2C2C</td>
+<td><font style="background-color: #EE2C2C;">#EE2C2C</font></td>
+</tr>
+<tr>
+<td>Firebrick3</td>
+<td>rgb(205,38,38)</td>
+<td>#CD2626</td>
+<td><font style="background-color: #CD2626;">#CD2626</font></td>
+</tr>
+<tr>
+<td>Firebrick4</td>
+<td>rgb(139,26,26)</td>
+<td>#8B1A1A</td>
+<td><font style="background-color: #8B1A1A;">#8B1A1A</font></td>
+</tr>
+<tr>
+<td>Firebrick</td>
+<td>rgb(178,34,34)</td>
+<td>#B22222</td>
+<td><font style="background-color: #B22222;">#B22222</font></td>
+</tr>
+<tr>
+<td>Crimson</td>
+<td>rgb(220,20,60)</td>
+<td>#DC143C</td>
+<td><font style="background-color: #DC143C;">#DC143C</font></td>
+</tr>
+<tr>
+<td>Red1</td>
+<td>rgb(255,0,0)</td>
+<td>#FF0000</td>
+<td><font style="background-color: #FF0000;">#FF0000</font></td>
+</tr>
+<tr>
+<td>Red2</td>
+<td>rgb(238,0,0)</td>
+<td>#EE0000</td>
+<td><font style="background-color: #EE0000;">#EE0000</font></td>
+</tr>
+<tr>
+<td>Red3</td>
+<td>rgb(205,0,0)</td>
+<td>#CD0000</td>
+<td><font style="background-color: #CD0000;">#CD0000</font></td>
+</tr>
+<tr>
+<td>Red4</td>
+<td>rgb(139,0,0)</td>
+<td>#8B0000</td>
+<td><font style="background-color: #8B0000;">#8B0000</font></td>
+</tr>
+<tr>
+<td>DarkRed</td>
+<td>rgb(139,0,0)</td>
+<td>#8B0000</td>
+<td><font style="background-color: #8B0000;">#8B0000</font></td>
+</tr>
+<tr>
+<td>Maroon(SVGcompliance)</td>
+<td>rgb(128,0,0)</td>
+<td>#800000</td>
+<td><font style="background-color: #800000;">#800000</font></td>
+</tr>
+<tr>
+<td>LightPink</td>
+<td>rgb(255,182,193)</td>
+<td>#FFB6C1</td>
+<td><font style="background-color: #FFB6C1;">#FFB6C1</font></td>
+</tr>
+<tr>
+<td>LightPink1</td>
+<td>rgb(255,174,185)</td>
+<td>#FFAEB9</td>
+<td><font style="background-color: #FFAEB9;">#FFAEB9</font></td>
+</tr>
+<tr>
+<td>LightPink2</td>
+<td>rgb(238,162,173)</td>
+<td>#EEA2AD</td>
+<td><font style="background-color: #EEA2AD;">#EEA2AD</font></td>
+</tr>
+<tr>
+<td>LightPink3</td>
+<td>rgb(205,140,149)</td>
+<td>#CD8C95</td>
+<td><font style="background-color: #CD8C95;">#CD8C95</font></td>
+</tr>
+<tr>
+<td>LightPink4</td>
+<td>rgb(139,95,101)</td>
+<td>#8B5F65</td>
+<td><font style="background-color: #8B5F65;">#8B5F65</font></td>
+</tr>
+<tr>
+<td>Pink</td>
+<td>rgb(255,192,203)</td>
+<td>#FFC0CB</td>
+<td><font style="background-color: #FFC0CB;">#FFC0CB</font></td>
+</tr>
+<tr>
+<td>Pink1</td>
+<td>rgb(255,181,197)</td>
+<td>#FFB5C5</td>
+<td><font style="background-color: #FFB5C5;">#FFB5C5</font></td>
+</tr>
+<tr>
+<td>Pink2</td>
+<td>rgb(238,169,184)</td>
+<td>#EEA9B8</td>
+<td><font style="background-color: #EEA9B8;">#EEA9B8</font></td>
+</tr>
+<tr>
+<td>Pink3</td>
+<td>rgb(205,145,158)</td>
+<td>#CD919E</td>
+<td><font style="background-color: #CD919E;">#CD919E</font></td>
+</tr>
+<tr>
+<td>Pink4</td>
+<td>rgb(139,99,108)</td>
+<td>#8B636C</td>
+<td><font style="background-color: #8B636C;">#8B636C</font></td>
+</tr>
+<tr>
+<td>PaleVioletRed</td>
+<td>rgb(219,112,147)</td>
+<td>#DB7093</td>
+<td><font style="background-color: #DB7093;">#DB7093</font></td>
+</tr>
+<tr>
+<td>PaleVioletRed1</td>
+<td>rgb(255,130,171)</td>
+<td>#FF82AB</td>
+<td><font style="background-color: #FF82AB;">#FF82AB</font></td>
+</tr>
+<tr>
+<td>PaleVioletRed2</td>
+<td>rgb(238,121,159)</td>
+<td>#EE799F</td>
+<td><font style="background-color: #EE799F;">#EE799F</font></td>
+</tr>
+<tr>
+<td>PaleVioletRed3</td>
+<td>rgb(205,104,137)</td>
+<td>#CD6889</td>
+<td><font style="background-color: #CD6889;">#CD6889</font></td>
+</tr>
+<tr>
+<td>PaleVioletRed4</td>
+<td>rgb(139,71,93)</td>
+<td>#8B475D</td>
+<td><font style="background-color: #8B475D;">#8B475D</font></td>
+</tr>
+<tr>
+<td>Lavender</td>
+<td>rgb(230,230,250)</td>
+<td>#E6E6FA</td>
+<td><font style="background-color: #E6E6FA;">#E6E6FA</font></td>
+</tr>
+<tr>
+<td>LavenderBlush1</td>
+<td>rgb(255,240,245)</td>
+<td>#FFF0F5</td>
+<td><font style="background-color: #FFF0F5;">#FFF0F5</font></td>
+</tr>
+<tr>
+<td>LavenderBlush2</td>
+<td>rgb(238,224,229)</td>
+<td>#EEE0E5</td>
+<td><font style="background-color: #EEE0E5;">#EEE0E5</font></td>
+</tr>
+<tr>
+<td>LavenderBlush3</td>
+<td>rgb(205,193,197)</td>
+<td>#CDC1C5</td>
+<td><font style="background-color: #CDC1C5;">#CDC1C5</font></td>
+</tr>
+<tr>
+<td>LavenderBlush4</td>
+<td>rgb(139,131,134)</td>
+<td>#8B8386</td>
+<td><font style="background-color: #8B8386;">#8B8386</font></td>
+</tr>
+<tr>
+<td>Violet</td>
+<td>rgb(238,130,238)</td>
+<td>#EE82EE</td>
+<td><font style="background-color: #EE82EE;">#EE82EE</font></td>
+</tr>
+<tr>
+<td>VioletRed</td>
+<td>rgb(208,32,144)</td>
+<td>#D02090</td>
+<td><font style="background-color: #D02090;">#D02090</font></td>
+</tr>
+<tr>
+<td>VioletRed1</td>
+<td>rgb(255,62,150)</td>
+<td>#FF3E96</td>
+<td><font style="background-color: #FF3E96;">#FF3E96</font></td>
+</tr>
+<tr>
+<td>VioletRed2</td>
+<td>rgb(238,58,140)</td>
+<td>#EE3A8C</td>
+<td><font style="background-color: #EE3A8C;">#EE3A8C</font></td>
+</tr>
+<tr>
+<td>VioletRed3</td>
+<td>rgb(205,50,120)</td>
+<td>#CD3278</td>
+<td><font style="background-color: #CD3278;">#CD3278</font></td>
+</tr>
+<tr>
+<td>VioletRed4</td>
+<td>rgb(139,34,82)</td>
+<td>#8B2252</td>
+<td><font style="background-color: #8B2252;">#8B2252</font></td>
+</tr>
+<tr>
+<td>MediumVioletRed</td>
+<td>rgb(199,21,133)</td>
+<td>#C71585</td>
+<td><font style="background-color: #C71585;">#C71585</font></td>
+</tr>
+<tr>
+<td>HotPink1</td>
+<td>rgb(255,110,180)</td>
+<td>#FF6EB4</td>
+<td><font style="background-color: #FF6EB4;">#FF6EB4</font></td>
+</tr>
+<tr>
+<td>HotPink2</td>
+<td>rgb(238,106,167)</td>
+<td>#EE6AA7</td>
+<td><font style="background-color: #EE6AA7;">#EE6AA7</font></td>
+</tr>
+<tr>
+<td>HotPink3</td>
+<td>rgb(205,96,144)</td>
+<td>#CD6090</td>
+<td><font style="background-color: #CD6090;">#CD6090</font></td>
+</tr>
+<tr>
+<td>HotPink4</td>
+<td>rgb(139,58,98)</td>
+<td>#8B3A62</td>
+<td><font style="background-color: #8B3A62;">#8B3A62</font></td>
+</tr>
+<tr>
+<td>DeepPink1</td>
+<td>rgb(255,20,147)</td>
+<td>#FF1493</td>
+<td><font style="background-color: #FF1493;">#FF1493</font></td>
+</tr>
+<tr>
+<td>DeepPink2</td>
+<td>rgb(238,18,137)</td>
+<td>#EE1289</td>
+<td><font style="background-color: #EE1289;">#EE1289</font></td>
+</tr>
+<tr>
+<td>DeepPink3</td>
+<td>rgb(205,16,118)</td>
+<td>#CD1076</td>
+<td><font style="background-color: #CD1076;">#CD1076</font></td>
+</tr>
+<tr>
+<td>DeepPink4</td>
+<td>rgb(139,10,80)</td>
+<td>#8B0A50</td>
+<td><font style="background-color: #8B0A50;">#8B0A50</font></td>
+</tr>
+<tr>
+<td>Maroon1</td>
+<td>rgb(255,52,179)</td>
+<td>#FF34B3</td>
+<td><font style="background-color: #FF34B3;">#FF34B3</font></td>
+</tr>
+<tr>
+<td>Maroon2</td>
+<td>rgb(238,48,167)</td>
+<td>#EE30A7</td>
+<td><font style="background-color: #EE30A7;">#EE30A7</font></td>
+</tr>
+<tr>
+<td>Maroon3</td>
+<td>rgb(205,41,144)</td>
+<td>#CD2990</td>
+<td><font style="background-color: #CD2990;">#CD2990</font></td>
+</tr>
+<tr>
+<td>Maroon4</td>
+<td>rgb(139,28,98)</td>
+<td>#8B1C62</td>
+<td><font style="background-color: #8B1C62;">#8B1C62</font></td>
+</tr>
+<tr>
+<td>Maroon(X11compliance)</td>
+<td>rgb(176,48,96)</td>
+<td>#B03060</td>
+<td><font style="background-color: #B03060;">#B03060</font></td>
+</tr>
+<tr>
+<td>Orchid</td>
+<td>rgb(218,112,214)</td>
+<td>#DA70D6</td>
+<td><font style="background-color: #DA70D6;">#DA70D6</font></td>
+</tr>
+<tr>
+<td>Orchid1</td>
+<td>rgb(255,131,250)</td>
+<td>#FF83FA</td>
+<td><font style="background-color: #FF83FA;">#FF83FA</font></td>
+</tr>
+<tr>
+<td>Orchid2</td>
+<td>rgb(238,122,233)</td>
+<td>#EE7AE9</td>
+<td><font style="background-color: #EE7AE9;">#EE7AE9</font></td>
+</tr>
+<tr>
+<td>Orchid3</td>
+<td>rgb(205,105,201)</td>
+<td>#CD69C9</td>
+<td><font style="background-color: #CD69C9;">#CD69C9</font></td>
+</tr>
+<tr>
+<td>Orchid4</td>
+<td>rgb(139,71,137)</td>
+<td>#8B4789</td>
+<td><font style="background-color: #8B4789;">#8B4789</font></td>
+</tr>
+<tr>
+<td>MediumOrchid</td>
+<td>rgb(186,85,211)</td>
+<td>#BA55D3</td>
+<td><font style="background-color: #BA55D3;">#BA55D3</font></td>
+</tr>
+<tr>
+<td>MediumOrchid1</td>
+<td>rgb(224,102,255)</td>
+<td>#E066FF</td>
+<td><font style="background-color: #E066FF;">#E066FF</font></td>
+</tr>
+<tr>
+<td>MediumOrchid2</td>
+<td>rgb(209,95,238)</td>
+<td>#D15FEE</td>
+<td><font style="background-color: #D15FEE;">#D15FEE</font></td>
+</tr>
+<tr>
+<td>MediumOrchid3</td>
+<td>rgb(180,82,205)</td>
+<td>#B452CD</td>
+<td><font style="background-color: #B452CD;">#B452CD</font></td>
+</tr>
+<tr>
+<td>MediumOrchid4</td>
+<td>rgb(122,55,139)</td>
+<td>#7A378B</td>
+<td><font style="background-color: #7A378B;">#7A378B</font></td>
+</tr>
+<tr>
+<td>DarkOrchid</td>
+<td>rgb(153,50,204)</td>
+<td>#9932CC</td>
+<td><font style="background-color: #9932CC;">#9932CC</font></td>
+</tr>
+<tr>
+<td>DarkOrchid1</td>
+<td>rgb(191,62,255)</td>
+<td>#BF3EFF</td>
+<td><font style="background-color: #BF3EFF;">#BF3EFF</font></td>
+</tr>
+<tr>
+<td>DarkOrchid2</td>
+<td>rgb(178,58,238)</td>
+<td>#B23AEE</td>
+<td><font style="background-color: #B23AEE;">#B23AEE</font></td>
+</tr>
+<tr>
+<td>DarkOrchid3</td>
+<td>rgb(154,50,205)</td>
+<td>#9A32CD</td>
+<td><font style="background-color: #9A32CD;">#9A32CD</font></td>
+</tr>
+<tr>
+<td>DarkOrchid4</td>
+<td>rgb(104,34,139)</td>
+<td>#68228B</td>
+<td><font style="background-color: #68228B;">#68228B</font></td>
+</tr>
+<tr>
+<td>Plum</td>
+<td>rgb(221,160,221)</td>
+<td>#DDA0DD</td>
+<td><font style="background-color: #DDA0DD;">#DDA0DD</font></td>
+</tr>
+<tr>
+<td>Plum1</td>
+<td>rgb(255,187,255)</td>
+<td>#FFBBFF</td>
+<td><font style="background-color: #FFBBFF;">#FFBBFF</font></td>
+</tr>
+<tr>
+<td>Plum2</td>
+<td>rgb(238,174,238)</td>
+<td>#EEAEEE</td>
+<td><font style="background-color: #EEAEEE;">#EEAEEE</font></td>
+</tr>
+<tr>
+<td>Plum3</td>
+<td>rgb(205,150,205)</td>
+<td>#CD96CD</td>
+<td><font style="background-color: #CD96CD;">#CD96CD</font></td>
+</tr>
+<tr>
+<td>Plum4</td>
+<td>rgb(139,102,139)</td>
+<td>#8B668B</td>
+<td><font style="background-color: #8B668B;">#8B668B</font></td>
+</tr>
+<tr>
+<td>Thistle</td>
+<td>rgb(216,191,216)</td>
+<td>#D8BFD8</td>
+<td><font style="background-color: #D8BFD8;">#D8BFD8</font></td>
+</tr>
+<tr>
+<td>Thistle1</td>
+<td>rgb(255,225,255)</td>
+<td>#FFE1FF</td>
+<td><font style="background-color: #FFE1FF;">#FFE1FF</font></td>
+</tr>
+<tr>
+<td>Thistle2</td>
+<td>rgb(238,210,238)</td>
+<td>#EED2EE</td>
+<td><font style="background-color: #EED2EE;">#EED2EE</font></td>
+</tr>
+<tr>
+<td>Thistle3</td>
+<td>rgb(205,181,205)</td>
+<td>#CDB5CD</td>
+<td><font style="background-color: #CDB5CD;">#CDB5CD</font></td>
+</tr>
+<tr>
+<td>Thistle4</td>
+<td>rgb(139,123,139)</td>
+<td>#8B7B8B</td>
+<td><font style="background-color: #8B7B8B;">#8B7B8B</font></td>
+</tr>
+<tr>
+<td>Magenta1</td>
+<td>rgb(255,0,255)</td>
+<td>#FF00FF</td>
+<td><font style="background-color: #FF00FF;">#FF00FF</font></td>
+</tr>
+<tr>
+<td>Magenta2</td>
+<td>rgb(238,0,238)</td>
+<td>#EE00EE</td>
+<td><font style="background-color: #EE00EE;">#EE00EE</font></td>
+</tr>
+<tr>
+<td>Magenta3</td>
+<td>rgb(205,0,205)</td>
+<td>#CD00CD</td>
+<td><font style="background-color: #CD00CD;">#CD00CD</font></td>
+</tr>
+<tr>
+<td>Magenta4</td>
+<td>rgb(139,0,139)</td>
+<td>#8B008B</td>
+<td><font style="background-color: #8B008B;">#8B008B</font></td>
+</tr>
+<tr>
+<td>DarkMagenta</td>
+<td>rgb(139,0,139)</td>
+<td>#8B008B</td>
+<td><font style="background-color: #8B008B;">#8B008B</font></td>
+</tr>
+<tr>
+<td>DarkViolet</td>
+<td>rgb(148,0,211)</td>
+<td>#9400D3</td>
+<td><font style="background-color: #9400D3;">#9400D3</font></td>
+</tr>
+<tr>
+<td>BlueViolet</td>
+<td>rgb(138,43,226)</td>
+<td>#8A2BE2</td>
+<td><font style="background-color: #8A2BE2;">#8A2BE2</font></td>
+</tr>
+<tr>
+<td>Indigo</td>
+<td>rgb(75,0,130)</td>
+<td>#4B0082</td>
+<td><font style="background-color: #4B0082;">#4B0082</font></td>
+</tr>
+<tr>
+<td>Purple1</td>
+<td>rgb(155,48,255)</td>
+<td>#9B30FF</td>
+<td><font style="background-color: #9B30FF;">#9B30FF</font></td>
+</tr>
+<tr>
+<td>Purple2</td>
+<td>rgb(145,44,238)</td>
+<td>#912CEE</td>
+<td><font style="background-color: #912CEE;">#912CEE</font></td>
+</tr>
+<tr>
+<td>Purple3</td>
+<td>rgb(125,38,205)</td>
+<td>#7D26CD</td>
+<td><font style="background-color: #7D26CD;">#7D26CD</font></td>
+</tr>
+<tr>
+<td>Purple4</td>
+<td>rgb(85,26,139)</td>
+<td>#551A8B</td>
+<td><font style="background-color: #551A8B;">#551A8B</font></td>
+</tr>
+<tr>
+<td>Purple(X11compliance)</td>
+<td>rgb(160,32,240)</td>
+<td>#A020F0</td>
+<td><font style="background-color: #A020F0;">#A020F0</font></td>
+</tr>
+<tr>
+<td>Purple(SVGcompliance)</td>
+<td>rgb(128,0,128)</td>
+<td>#800080</td>
+<td><font style="background-color: #800080;">#800080</font></td>
+</tr>
+<tr>
+<td>MediumPurple</td>
+<td>rgb(147,112,219)</td>
+<td>#9370DB</td>
+<td><font style="background-color: #9370DB;">#9370DB</font></td>
+</tr>
+<tr>
+<td>MediumPurple1</td>
+<td>rgb(171,130,255)</td>
+<td>#AB82FF</td>
+<td><font style="background-color: #AB82FF;">#AB82FF</font></td>
+</tr>
+<tr>
+<td>MediumPurple2</td>
+<td>rgb(159,121,238)</td>
+<td>#9F79EE</td>
+<td><font style="background-color: #9F79EE;">#9F79EE</font></td>
+</tr>
+<tr>
+<td>MediumPurple3</td>
+<td>rgb(137,104,205)</td>
+<td>#8968CD</td>
+<td><font style="background-color: #8968CD;">#8968CD</font></td>
+</tr>
+<tr>
+<td>MediumPurple4</td>
+<td>rgb(93,71,139)</td>
+<td>#5D478B</td>
+<td><font style="background-color: #5D478B;">#5D478B</font></td>
+</tr>
+<tr>
+<td>LightSlateBlue</td>
+<td>rgb(132,112,255)</td>
+<td>#8470FF</td>
+<td><font style="background-color: #8470FF;">#8470FF</font></td>
+</tr>
+<tr>
+<td>MediumSlateBlue</td>
+<td>rgb(123,104,238)</td>
+<td>#7B68EE</td>
+<td><font style="background-color: #7B68EE;">#7B68EE</font></td>
+</tr>
+<tr>
+<td>DarkSlateBlue</td>
+<td>rgb(72,61,139)</td>
+<td>#483D8B</td>
+<td><font style="background-color: #483D8B;">#483D8B</font></td>
+</tr>
+<tr>
+<td>SlateBlue</td>
+<td>rgb(106,90,205)</td>
+<td>#6A5ACD</td>
+<td><font style="background-color: #6A5ACD;">#6A5ACD</font></td>
+</tr>
+<tr>
+<td>SlateBlue1</td>
+<td>rgb(131,111,255)</td>
+<td>#836FFF</td>
+<td><font style="background-color: #836FFF;">#836FFF</font></td>
+</tr>
+<tr>
+<td>SlateBlue2</td>
+<td>rgb(122,103,238)</td>
+<td>#7A67EE</td>
+<td><font style="background-color: #7A67EE;">#7A67EE</font></td>
+</tr>
+<tr>
+<td>SlateBlue3</td>
+<td>rgb(105,89,205)</td>
+<td>#6959CD</td>
+<td><font style="background-color: #6959CD;">#6959CD</font></td>
+</tr>
+<tr>
+<td>SlateBlue4</td>
+<td>rgb(71,60,139)</td>
+<td>#473C8B</td>
+<td><font style="background-color: #473C8B;">#473C8B</font></td>
+</tr>
+<tr>
+<td>Blue1</td>
+<td>rgb(0,0,255)</td>
+<td>#0000FF</td>
+<td><font style="background-color: #0000FF;">#0000FF</font></td>
+</tr>
+<tr>
+<td>Blue2</td>
+<td>rgb(0,0,238)</td>
+<td>#0000EE</td>
+<td><font style="background-color: #0000EE;">#0000EE</font></td>
+</tr>
+<tr>
+<td>Blue3</td>
+<td>rgb(0,0,205)</td>
+<td>#0000CD</td>
+<td><font style="background-color: #0000CD;">#0000CD</font></td>
+</tr>
+<tr>
+<td>Blue4</td>
+<td>rgb(0,0,139)</td>
+<td>#00008B</td>
+<td><font style="background-color: #00008B;">#00008B</font></td>
+</tr>
+<tr>
+<td>MediumBlue</td>
+<td>rgb(0,0,205)</td>
+<td>#0000CD</td>
+<td><font style="background-color: #0000CD;">#0000CD</font></td>
+</tr>
+<tr>
+<td>DarkBlue</td>
+<td>rgb(0,0,139)</td>
+<td>#00008B</td>
+<td><font style="background-color: #00008B;">#00008B</font></td>
+</tr>
+<tr>
+<td>MidnightBlue</td>
+<td>rgb(25,25,112)</td>
+<td>#191970</td>
+<td><font style="background-color: #191970;">#191970</font></td>
+</tr>
+<tr>
+<td>NavyBlue</td>
+<td>rgb(0,0,128)</td>
+<td>#000080</td>
+<td><font style="background-color: #000080;">#000080</font></td>
+</tr>
+<tr>
+<td>RoyalBlue</td>
+<td>rgb(65,105,225)</td>
+<td>#4169E1</td>
+<td><font style="background-color: #4169E1;">#4169E1</font></td>
+</tr>
+<tr>
+<td>RoyalBlue1</td>
+<td>rgb(72,118,255)</td>
+<td>#4876FF</td>
+<td><font style="background-color: #4876FF;">#4876FF</font></td>
+</tr>
+<tr>
+<td>RoyalBlue2</td>
+<td>rgb(67,110,238)</td>
+<td>#436EEE</td>
+<td><font style="background-color: #436EEE;">#436EEE</font></td>
+</tr>
+<tr>
+<td>RoyalBlue3</td>
+<td>rgb(58,95,205)</td>
+<td>#3A5FCD</td>
+<td><font style="background-color: #3A5FCD;">#3A5FCD</font></td>
+</tr>
+<tr>
+<td>RoyalBlue4</td>
+<td>rgb(39,64,139)</td>
+<td>#27408B</td>
+<td><font style="background-color: #27408B;">#27408B</font></td>
+</tr>
+<tr>
+<td>CornflowerBlue</td>
+<td>rgb(100,149,237)</td>
+<td>#6495ED</td>
+<td><font style="background-color: #6495ED;">#6495ED</font></td>
+</tr>
+<tr>
+<td>DodgerBlue1</td>
+<td>rgb(30,144,255)</td>
+<td>#1E90FF</td>
+<td><font style="background-color: #1E90FF;">#1E90FF</font></td>
+</tr>
+<tr>
+<td>DodgerBlue2</td>
+<td>rgb(28,134,238)</td>
+<td>#1C86EE</td>
+<td><font style="background-color: #1C86EE;">#1C86EE</font></td>
+</tr>
+<tr>
+<td>DodgerBlue3</td>
+<td>rgb(24,116,205)</td>
+<td>#1874CD</td>
+<td><font style="background-color: #1874CD;">#1874CD</font></td>
+</tr>
+<tr>
+<td>DodgerBlue4</td>
+<td>rgb(16,78,139)</td>
+<td>#104E8B</td>
+<td><font style="background-color: #104E8B;">#104E8B</font></td>
+</tr>
+<tr>
+<td>SteelBlue</td>
+<td>rgb(70,130,180)</td>
+<td>#4682B4</td>
+<td><font style="background-color: #4682B4;">#4682B4</font></td>
+</tr>
+<tr>
+<td>SteelBlue1</td>
+<td>rgb(99,184,255)</td>
+<td>#63B8FF</td>
+<td><font style="background-color: #63B8FF;">#63B8FF</font></td>
+</tr>
+<tr>
+<td>SteelBlue2</td>
+<td>rgb(92,172,238)</td>
+<td>#5CACEE</td>
+<td><font style="background-color: #5CACEE;">#5CACEE</font></td>
+</tr>
+<tr>
+<td>SteelBlue3</td>
+<td>rgb(79,148,205)</td>
+<td>#4F94CD</td>
+<td><font style="background-color: #4F94CD;">#4F94CD</font></td>
+</tr>
+<tr>
+<td>SteelBlue4</td>
+<td>rgb(54,100,139)</td>
+<td>#36648B</td>
+<td><font style="background-color: #36648B;">#36648B</font></td>
+</tr>
+<tr>
+<td>SkyBlue</td>
+<td>rgb(135,206,235)</td>
+<td>#87CEEB</td>
+<td><font style="background-color: #87CEEB;">#87CEEB</font></td>
+</tr>
+<tr>
+<td>SkyBlue1</td>
+<td>rgb(135,206,255)</td>
+<td>#87CEFF</td>
+<td><font style="background-color: #87CEFF;">#87CEFF</font></td>
+</tr>
+<tr>
+<td>SkyBlue2</td>
+<td>rgb(126,192,238)</td>
+<td>#7EC0EE</td>
+<td><font style="background-color: #7EC0EE;">#7EC0EE</font></td>
+</tr>
+<tr>
+<td>SkyBlue3</td>
+<td>rgb(108,166,205)</td>
+<td>#6CA6CD</td>
+<td><font style="background-color: #6CA6CD;">#6CA6CD</font></td>
+</tr>
+<tr>
+<td>SkyBlue4</td>
+<td>rgb(74,112,139)</td>
+<td>#4A708B</td>
+<td><font style="background-color: #4A708B;">#4A708B</font></td>
+</tr>
+<tr>
+<td>Azure4</td>
+<td>rgb(131,139,139)</td>
+<td>#838B8B</td>
+<td><font style="background-color: #838B8B;">#838B8B</font></td>
+</tr>
+<tr>
+<td>Azure3</td>
+<td>rgb(193,205,205)</td>
+<td>#C1CDCD</td>
+<td><font style="background-color: #C1CDCD;">#C1CDCD</font></td>
+</tr>
+<tr>
+<td>Azure2</td>
+<td>rgb(224,238,238)</td>
+<td>#E0EEEE</td>
+<td><font style="background-color: #E0EEEE;">#E0EEEE</font></td>
+</tr>
+<tr>
+<td>Azure1</td>
+<td>rgb(240,255,255)</td>
+<td>#F0FFFF</td>
+<td><font style="background-color: #F0FFFF;">#F0FFFF</font></td>
+</tr>
+<tr>
+<td>MintCream</td>
+<td>rgb(245,255,250)</td>
+<td>#F5FFFA</td>
+<td><font style="background-color: #F5FFFA;">#F5FFFA</font></td>
+</tr>
+<tr>
+<td>AliceBlue</td>
+<td>rgb(240,248,255)</td>
+<td>#F0F8FF</td>
+<td><font style="background-color: #F0F8FF;">#F0F8FF</font></td>
+</tr>
+<tr>
+<td>LightSteelBlue</td>
+<td>rgb(176,196,222)</td>
+<td>#B0C4DE</td>
+<td><font style="background-color: #B0C4DE;">#B0C4DE</font></td>
+</tr>
+<tr>
+<td>LightSteelBlue1</td>
+<td>rgb(202,225,255)</td>
+<td>#CAE1FF</td>
+<td><font style="background-color: #CAE1FF;">#CAE1FF</font></td>
+</tr>
+<tr>
+<td>LightSteelBlue2</td>
+<td>rgb(188,210,238)</td>
+<td>#BCD2EE</td>
+<td><font style="background-color: #BCD2EE;">#BCD2EE</font></td>
+</tr>
+<tr>
+<td>LightSteelBlue3</td>
+<td>rgb(162,181,205)</td>
+<td>#A2B5CD</td>
+<td><font style="background-color: #A2B5CD;">#A2B5CD</font></td>
+</tr>
+<tr>
+<td>LightSteelBlue4</td>
+<td>rgb(110,123,139)</td>
+<td>#6E7B8B</td>
+<td><font style="background-color: #6E7B8B;">#6E7B8B</font></td>
+</tr>
+<tr>
+<td>LightSlateGray</td>
+<td>rgb(119,136,153)</td>
+<td>#778899</td>
+<td><font style="background-color: #778899;">#778899</font></td>
+</tr>
+<tr>
+<td>SlateGray</td>
+<td>rgb(112,128,144)</td>
+<td>#708090</td>
+<td><font style="background-color: #708090;">#708090</font></td>
+</tr>
+<tr>
+<td>SlateGray4</td>
+<td>rgb(108,123,139)</td>
+<td>#6C7B8B</td>
+<td><font style="background-color: #6C7B8B;">#6C7B8B</font></td>
+</tr>
+<tr>
+<td>SlateGray3</td>
+<td>rgb(159,182,205)</td>
+<td>#9FB6CD</td>
+<td><font style="background-color: #9FB6CD;">#9FB6CD</font></td>
+</tr>
+<tr>
+<td>SlateGray2</td>
+<td>rgb(185,211,238)</td>
+<td>#B9D3EE</td>
+<td><font style="background-color: #B9D3EE;">#B9D3EE</font></td>
+</tr>
+<tr>
+<td>SlateGray1</td>
+<td>rgb(198,226,255)</td>
+<td>#C6E2FF</td>
+<td><font style="background-color: #C6E2FF;">#C6E2FF</font></td>
+</tr>
+<tr>
+<td>LightSkyBlue</td>
+<td>rgb(135,206,250)</td>
+<td>#87CEFA</td>
+<td><font style="background-color: #87CEFA;">#87CEFA</font></td>
+</tr>
+<tr>
+<td>LightSkyBlue1</td>
+<td>rgb(176,226,255)</td>
+<td>#B0E2FF</td>
+<td><font style="background-color: #B0E2FF;">#B0E2FF</font></td>
+</tr>
+<tr>
+<td>LightSkyBlue2</td>
+<td>rgb(164,211,238)</td>
+<td>#A4D3EE</td>
+<td><font style="background-color: #A4D3EE;">#A4D3EE</font></td>
+</tr>
+<tr>
+<td>LightSkyBlue3</td>
+<td>rgb(141,182,205)</td>
+<td>#8DB6CD</td>
+<td><font style="background-color: #8DB6CD;">#8DB6CD</font></td>
+</tr>
+<tr>
+<td>LightSkyBlue4</td>
+<td>rgb(96,123,139)</td>
+<td>#607B8B</td>
+<td><font style="background-color: #607B8B;">#607B8B</font></td>
+</tr>
+<tr>
+<td>DeepSkyBlue1</td>
+<td>rgb(0,191,255)</td>
+<td>#00BFFF</td>
+<td><font style="background-color: #00BFFF;">#00BFFF</font></td>
+</tr>
+<tr>
+<td>DeepSkyBlue2</td>
+<td>rgb(0,178,238)</td>
+<td>#00B2EE</td>
+<td><font style="background-color: #00B2EE;">#00B2EE</font></td>
+</tr>
+<tr>
+<td>DeepSkyBlue3</td>
+<td>rgb(0,154,205)</td>
+<td>#009ACD</td>
+<td><font style="background-color: #009ACD;">#009ACD</font></td>
+</tr>
+<tr>
+<td>DeepSkyBlue4</td>
+<td>rgb(0,104,139)</td>
+<td>#00688B</td>
+<td><font style="background-color: #00688B;">#00688B</font></td>
+</tr>
+<tr>
+<td>LightBlue</td>
+<td>rgb(173,216,230)</td>
+<td>#ADD8E6</td>
+<td><font style="background-color: #ADD8E6;">#ADD8E6</font></td>
+</tr>
+<tr>
+<td>LightBlue1</td>
+<td>rgb(191,239,255)</td>
+<td>#BFEFFF</td>
+<td><font style="background-color: #BFEFFF;">#BFEFFF</font></td>
+</tr>
+<tr>
+<td>LightBlue2</td>
+<td>rgb(178,223,238)</td>
+<td>#B2DFEE</td>
+<td><font style="background-color: #B2DFEE;">#B2DFEE</font></td>
+</tr>
+<tr>
+<td>LightBlue3</td>
+<td>rgb(154,192,205)</td>
+<td>#9AC0CD</td>
+<td><font style="background-color: #9AC0CD;">#9AC0CD</font></td>
+</tr>
+<tr>
+<td>LightBlue4</td>
+<td>rgb(104,131,139)</td>
+<td>#68838B</td>
+<td><font style="background-color: #68838B;">#68838B</font></td>
+</tr>
+<tr>
+<td>PowderBlue</td>
+<td>rgb(176,224,230)</td>
+<td>#B0E0E6</td>
+<td><font style="background-color: #B0E0E6;">#B0E0E6</font></td>
+</tr>
+<tr>
+<td>CadetBlue</td>
+<td>rgb(95,158,160)</td>
+<td>#5F9EA0</td>
+<td><font style="background-color: #5F9EA0;">#5F9EA0</font></td>
+</tr>
+<tr>
+<td>CadetBlue1</td>
+<td>rgb(152,245,255)</td>
+<td>#98F5FF</td>
+<td><font style="background-color: #98F5FF;">#98F5FF</font></td>
+</tr>
+<tr>
+<td>CadetBlue2</td>
+<td>rgb(142,229,238)</td>
+<td>#8EE5EE</td>
+<td><font style="background-color: #8EE5EE;">#8EE5EE</font></td>
+</tr>
+<tr>
+<td>CadetBlue3</td>
+<td>rgb(122,197,205)</td>
+<td>#7AC5CD</td>
+<td><font style="background-color: #7AC5CD;">#7AC5CD</font></td>
+</tr>
+<tr>
+<td>CadetBlue4</td>
+<td>rgb(83,134,139)</td>
+<td>#53868B</td>
+<td><font style="background-color: #53868B;">#53868B</font></td>
+</tr>
+<tr>
+<td>LightCyan1</td>
+<td>rgb(224,255,255)</td>
+<td>#E0FFFF</td>
+<td><font style="background-color: #E0FFFF;">#E0FFFF</font></td>
+</tr>
+<tr>
+<td>LightCyan2</td>
+<td>rgb(209,238,238)</td>
+<td>#D1EEEE</td>
+<td><font style="background-color: #D1EEEE;">#D1EEEE</font></td>
+</tr>
+<tr>
+<td>LightCyan3</td>
+<td>rgb(180,205,205)</td>
+<td>#B4CDCD</td>
+<td><font style="background-color: #B4CDCD;">#B4CDCD</font></td>
+</tr>
+<tr>
+<td>LightCyan4</td>
+<td>rgb(122,139,139)</td>
+<td>#7A8B8B</td>
+<td><font style="background-color: #7A8B8B;">#7A8B8B</font></td>
+</tr>
+<tr>
+<td>PaleTurquoise</td>
+<td>rgb(175,238,238)</td>
+<td>#AFEEEE</td>
+<td><font style="background-color: #AFEEEE;">#AFEEEE</font></td>
+</tr>
+<tr>
+<td>PaleTurquoise1</td>
+<td>rgb(187,255,255)</td>
+<td>#BBFFFF</td>
+<td><font style="background-color: #BBFFFF;">#BBFFFF</font></td>
+</tr>
+<tr>
+<td>PaleTurquoise2</td>
+<td>rgb(174,238,238)</td>
+<td>#AEEEEE</td>
+<td><font style="background-color: #AEEEEE;">#AEEEEE</font></td>
+</tr>
+<tr>
+<td>PaleTurquoise3</td>
+<td>rgb(150,205,205)</td>
+<td>#96CDCD</td>
+<td><font style="background-color: #96CDCD;">#96CDCD</font></td>
+</tr>
+<tr>
+<td>PaleTurquoise4</td>
+<td>rgb(102,139,139)</td>
+<td>#668B8B</td>
+<td><font style="background-color: #668B8B;">#668B8B</font></td>
+</tr>
+<tr>
+<td>DarkSlateGray</td>
+<td>rgb(47,79,79)</td>
+<td>#2F4F4F</td>
+<td><font style="background-color: #2F4F4F;">#2F4F4F</font></td>
+</tr>
+<tr>
+<td>DarkSlateGray1</td>
+<td>rgb(151,255,255)</td>
+<td>#97FFFF</td>
+<td><font style="background-color: #97FFFF;">#97FFFF</font></td>
+</tr>
+<tr>
+<td>DarkSlateGray2</td>
+<td>rgb(141,238,238)</td>
+<td>#8DEEEE</td>
+<td><font style="background-color: #8DEEEE;">#8DEEEE</font></td>
+</tr>
+<tr>
+<td>DarkSlateGray3</td>
+<td>rgb(121,205,205)</td>
+<td>#79CDCD</td>
+<td><font style="background-color: #79CDCD;">#79CDCD</font></td>
+</tr>
+<tr>
+<td>DarkSlateGray4</td>
+<td>rgb(82,139,139)</td>
+<td>#528B8B</td>
+<td><font style="background-color: #528B8B;">#528B8B</font></td>
+</tr>
+<tr>
+<td>Turquoise</td>
+<td>rgb(64,224,208)</td>
+<td>#40E0D0</td>
+<td><font style="background-color: #40E0D0;">#40E0D0</font></td>
+</tr>
+<tr>
+<td>Turquoise1</td>
+<td>rgb(0,245,255)</td>
+<td>#00F5FF</td>
+<td><font style="background-color: #00F5FF;">#00F5FF</font></td>
+</tr>
+<tr>
+<td>Turquoise2</td>
+<td>rgb(0,229,238)</td>
+<td>#00E5EE</td>
+<td><font style="background-color: #00E5EE;">#00E5EE</font></td>
+</tr>
+<tr>
+<td>Turquoise3</td>
+<td>rgb(0,197,205)</td>
+<td>#00C5CD</td>
+<td><font style="background-color: #00C5CD;">#00C5CD</font></td>
+</tr>
+<tr>
+<td>Turquoise4</td>
+<td>rgb(0,134,139)</td>
+<td>#00868B</td>
+<td><font style="background-color: #00868B;">#00868B</font></td>
+</tr>
+<tr>
+<td>MediumTurquoise</td>
+<td>rgb(72,209,204)</td>
+<td>#48D1CC</td>
+<td><font style="background-color: #48D1CC;">#48D1CC</font></td>
+</tr>
+<tr>
+<td>DarkTurquoise</td>
+<td>rgb(0,206,209)</td>
+<td>#00CED1</td>
+<td><font style="background-color: #00CED1;">#00CED1</font></td>
+</tr>
+<tr>
+<td>Cyan1</td>
+<td>rgb(0,255,255)</td>
+<td>#00FFFF</td>
+<td><font style="background-color: #00FFFF;">#00FFFF</font></td>
+</tr>
+<tr>
+<td>Cyan2</td>
+<td>rgb(0,238,238)</td>
+<td>#00EEEE</td>
+<td><font style="background-color: #00EEEE;">#00EEEE</font></td>
+</tr>
+<tr>
+<td>Cyan3</td>
+<td>rgb(0,205,205)</td>
+<td>#00CDCD</td>
+<td><font style="background-color: #00CDCD;">#00CDCD</font></td>
+</tr>
+<tr>
+<td>Cyan4</td>
+<td>rgb(0,139,139)</td>
+<td>#008B8B</td>
+<td><font style="background-color: #008B8B;">#008B8B</font></td>
+</tr>
+<tr>
+<td>DarkCyan</td>
+<td>rgb(0,139,139)</td>
+<td>#008B8B</td>
+<td><font style="background-color: #008B8B;">#008B8B</font></td>
+</tr>
+<tr>
+<td>Teal</td>
+<td>rgb(0,128,128)</td>
+<td>#008080</td>
+<td><font style="background-color: #008080;">#008080</font></td>
+</tr>
+<tr>
+<td>LightSeaGreen</td>
+<td>rgb(32,178,170)</td>
+<td>#20B2AA</td>
+<td><font style="background-color: #20B2AA;">#20B2AA</font></td>
+</tr>
+<tr>
+<td>Aquamarine1</td>
+<td>rgb(127,255,212)</td>
+<td>#7FFFD4</td>
+<td><font style="background-color: #7FFFD4;">#7FFFD4</font></td>
+</tr>
+<tr>
+<td>Aquamarine2</td>
+<td>rgb(118,238,198)</td>
+<td>#76EEC6</td>
+<td><font style="background-color: #76EEC6;">#76EEC6</font></td>
+</tr>
+<tr>
+<td>Aquamarine3</td>
+<td>rgb(102,205,170)</td>
+<td>#66CDAA</td>
+<td><font style="background-color: #66CDAA;">#66CDAA</font></td>
+</tr>
+<tr>
+<td>Aquamarine4</td>
+<td>rgb(69,139,116)</td>
+<td>#458B74</td>
+<td><font style="background-color: #458B74;">#458B74</font></td>
+</tr>
+<tr>
+<td>MediumAquamarine</td>
+<td>rgb(102,205,170)</td>
+<td>#66CDAA</td>
+<td><font style="background-color: #66CDAA;">#66CDAA</font></td>
+</tr>
+<tr>
+<td>SpringGreen1</td>
+<td>rgb(0,255,127)</td>
+<td>#00FF7F</td>
+<td><font style="background-color: #00FF7F;">#00FF7F</font></td>
+</tr>
+<tr>
+<td>SpringGreen2</td>
+<td>rgb(0,238,118)</td>
+<td>#00EE76</td>
+<td><font style="background-color: #00EE76;">#00EE76</font></td>
+</tr>
+<tr>
+<td>SpringGreen3</td>
+<td>rgb(0,205,102)</td>
+<td>#00CD66</td>
+<td><font style="background-color: #00CD66;">#00CD66</font></td>
+</tr>
+<tr>
+<td>SpringGreen4</td>
+<td>rgb(0,139,69)</td>
+<td>#008B45</td>
+<td><font style="background-color: #008B45;">#008B45</font></td>
+</tr>
+<tr>
+<td>MediumSpringGreen</td>
+<td>rgb(0,250,154)</td>
+<td>#00FA9A</td>
+<td><font style="background-color: #00FA9A;">#00FA9A</font></td>
+</tr>
+<tr>
+<td>SeaGreen</td>
+<td>rgb(46,139,87)</td>
+<td>#2E8B57</td>
+<td><font style="background-color: #2E8B57;">#2E8B57</font></td>
+</tr>
+<tr>
+<td>SeaGreen1</td>
+<td>rgb(84,255,159)</td>
+<td>#54FF9F</td>
+<td><font style="background-color: #54FF9F;">#54FF9F</font></td>
+</tr>
+<tr>
+<td>SeaGreen2</td>
+<td>rgb(78,238,148)</td>
+<td>#4EEE94</td>
+<td><font style="background-color: #4EEE94;">#4EEE94</font></td>
+</tr>
+<tr>
+<td>SeaGreen3</td>
+<td>rgb(67,205,128)</td>
+<td>#43CD80</td>
+<td><font style="background-color: #43CD80;">#43CD80</font></td>
+</tr>
+<tr>
+<td>SeaGreen4</td>
+<td>rgb(46,139,87)</td>
+<td>#2E8B57</td>
+<td><font style="background-color: #2E8B57;">#2E8B57</font></td>
+</tr>
+<tr>
+<td>MediumSeaGreen</td>
+<td>rgb(60,179,113)</td>
+<td>#3CB371</td>
+<td><font style="background-color: #3CB371;">#3CB371</font></td>
+</tr>
+<tr>
+<td>DarkSeaGreen</td>
+<td>rgb(143,188,143)</td>
+<td>#8FBC8F</td>
+<td><font style="background-color: #8FBC8F;">#8FBC8F</font></td>
+</tr>
+<tr>
+<td>DarkSeaGreen1</td>
+<td>rgb(193,255,193)</td>
+<td>#C1FFC1</td>
+<td><font style="background-color: #C1FFC1;">#C1FFC1</font></td>
+</tr>
+<tr>
+<td>DarkSeaGreen2</td>
+<td>rgb(180,238,180)</td>
+<td>#B4EEB4</td>
+<td><font style="background-color: #B4EEB4;">#B4EEB4</font></td>
+</tr>
+<tr>
+<td>DarkSeaGreen3</td>
+<td>rgb(155,205,155)</td>
+<td>#9BCD9B</td>
+<td><font style="background-color: #9BCD9B;">#9BCD9B</font></td>
+</tr>
+<tr>
+<td>DarkSeaGreen4</td>
+<td>rgb(105,139,105)</td>
+<td>#698B69</td>
+<td><font style="background-color: #698B69;">#698B69</font></td>
+</tr>
+<tr>
+<td>MediumForestGreen</td>
+<td>rgb(50,129,75)</td>
+<td>#32814B</td>
+<td><font style="background-color: #32814B;">#32814B</font></td>
+</tr>
+<tr>
+<td>Honeydew1</td>
+<td>rgb(240,255,240)</td>
+<td>#F0FFF0</td>
+<td><font style="background-color: #F0FFF0;">#F0FFF0</font></td>
+</tr>
+<tr>
+<td>Honeydew2</td>
+<td>rgb(224,238,224)</td>
+<td>#E0EEE0</td>
+<td><font style="background-color: #E0EEE0;">#E0EEE0</font></td>
+</tr>
+<tr>
+<td>Honeydew3</td>
+<td>rgb(193,205,193)</td>
+<td>#C1CDC1</td>
+<td><font style="background-color: #C1CDC1;">#C1CDC1</font></td>
+</tr>
+<tr>
+<td>Honeydew4</td>
+<td>rgb(131,139,131)</td>
+<td>#838B83</td>
+<td><font style="background-color: #838B83;">#838B83</font></td>
+</tr>
+<tr>
+<td>PaleGreen</td>
+<td>rgb(152,251,152)</td>
+<td>#98FB98</td>
+<td><font style="background-color: #98FB98;">#98FB98</font></td>
+</tr>
+<tr>
+<td>PaleGreen1</td>
+<td>rgb(154,255,154)</td>
+<td>#9AFF9A</td>
+<td><font style="background-color: #9AFF9A;">#9AFF9A</font></td>
+</tr>
+<tr>
+<td>PaleGreen2</td>
+<td>rgb(144,238,144)</td>
+<td>#90EE90</td>
+<td><font style="background-color: #90EE90;">#90EE90</font></td>
+</tr>
+<tr>
+<td>PaleGreen3</td>
+<td>rgb(124,205,124)</td>
+<td>#7CCD7C</td>
+<td><font style="background-color: #7CCD7C;">#7CCD7C</font></td>
+</tr>
+<tr>
+<td>PaleGreen4</td>
+<td>rgb(84,139,84)</td>
+<td>#548B54</td>
+<td><font style="background-color: #548B54;">#548B54</font></td>
+</tr>
+<tr>
+<td>LightGreen</td>
+<td>rgb(144,238,144)</td>
+<td>#90EE90</td>
+<td><font style="background-color: #90EE90;">#90EE90</font></td>
+</tr>
+<tr>
+<td>Green</td>
+<td>rgb(0,128,0)</td>
+<td>#008000</td>
+<td><font style="background-color: #008000;">#008000</font></td>
+</tr>
+<tr>
+<td>Green1</td>
+<td>rgb(0,255,0)</td>
+<td>#00FF00</td>
+<td><font style="background-color: #00FF00;">#00FF00</font></td>
+</tr>
+<tr>
+<td>Green2</td>
+<td>rgb(0,238,0)</td>
+<td>#00EE00</td>
+<td><font style="background-color: #00EE00;">#00EE00</font></td>
+</tr>
+<tr>
+<td>Green3</td>
+<td>rgb(0,205,0)</td>
+<td>#00CD00</td>
+<td><font style="background-color: #00CD00;">#00CD00</font></td>
+</tr>
+<tr>
+<td>Green4</td>
+<td>rgb(0,139,0)</td>
+<td>#008B00</td>
+<td><font style="background-color: #008B00;">#008B00</font></td>
+</tr>
+<tr>
+<td>LimeGreen</td>
+<td>rgb(50,205,50)</td>
+<td>#32CD32</td>
+<td><font style="background-color: #32CD32;">#32CD32</font></td>
+</tr>
+<tr>
+<td>ForestGreen</td>
+<td>rgb(34,139,34)</td>
+<td>#228B22</td>
+<td><font style="background-color: #228B22;">#228B22</font></td>
+</tr>
+<tr>
+<td>DarkGreen</td>
+<td>rgb(0,100,0)</td>
+<td>#006400</td>
+<td><font style="background-color: #006400;">#006400</font></td>
+</tr>
+<tr>
+<td>LawnGreen</td>
+<td>rgb(124,252,0)</td>
+<td>#7CFC00</td>
+<td><font style="background-color: #7CFC00;">#7CFC00</font></td>
+</tr>
+<tr>
+<td>Chartreuse1</td>
+<td>rgb(127,255,0)</td>
+<td>#7FFF00</td>
+<td><font style="background-color: #7FFF00;">#7FFF00</font></td>
+</tr>
+<tr>
+<td>Chartreuse2</td>
+<td>rgb(118,238,0)</td>
+<td>#76EE00</td>
+<td><font style="background-color: #76EE00;">#76EE00</font></td>
+</tr>
+<tr>
+<td>Chartreuse3</td>
+<td>rgb(102,205,0)</td>
+<td>#66CD00</td>
+<td><font style="background-color: #66CD00;">#66CD00</font></td>
+</tr>
+<tr>
+<td>Chartreuse4</td>
+<td>rgb(69,139,0)</td>
+<td>#458B00</td>
+<td><font style="background-color: #458B00;">#458B00</font></td>
+</tr>
+<tr>
+<td>GreenYellow</td>
+<td>rgb(173,255,47)</td>
+<td>#ADFF2F</td>
+<td><font style="background-color: #ADFF2F;">#ADFF2F</font></td>
+</tr>
+<tr>
+<td>YellowGreen</td>
+<td>rgb(154,205,50)</td>
+<td>#9ACD32</td>
+<td><font style="background-color: #9ACD32;">#9ACD32</font></td>
+</tr>
+<tr>
+<td>DarkOliveGreen</td>
+<td>rgb(85,107,47)</td>
+<td>#556B2F</td>
+<td><font style="background-color: #556B2F;">#556B2F</font></td>
+</tr>
+<tr>
+<td>DarkOliveGreen1</td>
+<td>rgb(202,255,112)</td>
+<td>#CAFF70</td>
+<td><font style="background-color: #CAFF70;">#CAFF70</font></td>
+</tr>
+<tr>
+<td>DarkOliveGreen2</td>
+<td>rgb(188,238,104)</td>
+<td>#BCEE68</td>
+<td><font style="background-color: #BCEE68;">#BCEE68</font></td>
+</tr>
+<tr>
+<td>DarkOliveGreen3</td>
+<td>rgb(162,205,90)</td>
+<td>#A2CD5A</td>
+<td><font style="background-color: #A2CD5A;">#A2CD5A</font></td>
+</tr>
+<tr>
+<td>DarkOliveGreen4</td>
+<td>rgb(110,139,61)</td>
+<td>#6E8B3D</td>
+<td><font style="background-color: #6E8B3D;">#6E8B3D</font></td>
+</tr>
+<tr>
+<td>OliveDrab</td>
+<td>rgb(107,142,35)</td>
+<td>#6B8E23</td>
+<td><font style="background-color: #6B8E23;">#6B8E23</font></td>
+</tr>
+<tr>
+<td>OliveDrab1</td>
+<td>rgb(192,255,62)</td>
+<td>#C0FF3E</td>
+<td><font style="background-color: #C0FF3E;">#C0FF3E</font></td>
+</tr>
+<tr>
+<td>OliveDrab2</td>
+<td>rgb(179,238,58)</td>
+<td>#B3EE3A</td>
+<td><font style="background-color: #B3EE3A;">#B3EE3A</font></td>
+</tr>
+<tr>
+<td>OliveDrab3</td>
+<td>rgb(154,205,50)</td>
+<td>#9ACD32</td>
+<td><font style="background-color: #9ACD32;">#9ACD32</font></td>
+</tr>
+<tr>
+<td>OliveDrab4</td>
+<td>rgb(105,139,34)</td>
+<td>#698B22</td>
+<td><font style="background-color: #698B22;">#698B22</font></td>
+</tr>
+<tr>
+<td>Ivory1</td>
+<td>rgb(255,255,240)</td>
+<td>#FFFFF0</td>
+<td><font style="background-color: #FFFFF0;">#FFFFF0</font></td>
+</tr>
+<tr>
+<td>Ivory2</td>
+<td>rgb(238,238,224)</td>
+<td>#EEEEE0</td>
+<td><font style="background-color: #EEEEE0;">#EEEEE0</font></td>
+</tr>
+<tr>
+<td>Ivory3</td>
+<td>rgb(205,205,193)</td>
+<td>#CDCDC1</td>
+<td><font style="background-color: #CDCDC1;">#CDCDC1</font></td>
+</tr>
+<tr>
+<td>Ivory4</td>
+<td>rgb(139,139,131)</td>
+<td>#8B8B83</td>
+<td><font style="background-color: #8B8B83;">#8B8B83</font></td>
+</tr>
+<tr>
+<td>LightYellow1</td>
+<td>rgb(255,255,224)</td>
+<td>#FFFFE0</td>
+<td><font style="background-color: #FFFFE0;">#FFFFE0</font></td>
+</tr>
+<tr>
+<td>LightYellow2</td>
+<td>rgb(238,238,209)</td>
+<td>#EEEED1</td>
+<td><font style="background-color: #EEEED1;">#EEEED1</font></td>
+</tr>
+<tr>
+<td>LightYellow3</td>
+<td>rgb(205,205,180)</td>
+<td>#CDCDB4</td>
+<td><font style="background-color: #CDCDB4;">#CDCDB4</font></td>
+</tr>
+<tr>
+<td>LightYellow4</td>
+<td>rgb(139,139,122)</td>
+<td>#8B8B7A</td>
+<td><font style="background-color: #8B8B7A;">#8B8B7A</font></td>
+</tr>
+<tr>
+<td>Beige</td>
+<td>rgb(245,245,220)</td>
+<td>#F5F5DC</td>
+<td><font style="background-color: #F5F5DC;">#F5F5DC</font></td>
+</tr>
+<tr>
+<td>LightGoldenrodYellow</td>
+<td>rgb(250,250,210)</td>
+<td>#FAFAD2</td>
+<td><font style="background-color: #FAFAD2;">#FAFAD2</font></td>
+</tr>
+<tr>
+<td>Yellow1</td>
+<td>rgb(255,255,0)</td>
+<td>#FFFF00</td>
+<td><font style="background-color: #FFFF00;">#FFFF00</font></td>
+</tr>
+<tr>
+<td>Yellow2</td>
+<td>rgb(238,238,0)</td>
+<td>#EEEE00</td>
+<td><font style="background-color: #EEEE00;">#EEEE00</font></td>
+</tr>
+<tr>
+<td>Yellow3</td>
+<td>rgb(205,205,0)</td>
+<td>#CDCD00</td>
+<td><font style="background-color: #CDCD00;">#CDCD00</font></td>
+</tr>
+<tr>
+<td>Yellow4</td>
+<td>rgb(139,139,0)</td>
+<td>#8B8B00</td>
+<td><font style="background-color: #8B8B00;">#8B8B00</font></td>
+</tr>
+<tr>
+<td>Olive</td>
+<td>rgb(128,128,0)</td>
+<td>#808000</td>
+<td><font style="background-color: #808000;">#808000</font></td>
+</tr>
+<tr>
+<td>Khaki</td>
+<td>rgb(240,230,140)</td>
+<td>#F0E68C</td>
+<td><font style="background-color: #F0E68C;">#F0E68C</font></td>
+</tr>
+<tr>
+<td>Khaki1</td>
+<td>rgb(255,246,143)</td>
+<td>#FFF68F</td>
+<td><font style="background-color: #FFF68F;">#FFF68F</font></td>
+</tr>
+<tr>
+<td>Khaki2</td>
+<td>rgb(238,230,133)</td>
+<td>#EEE685</td>
+<td><font style="background-color: #EEE685;">#EEE685</font></td>
+</tr>
+<tr>
+<td>Khaki3</td>
+<td>rgb(205,198,115)</td>
+<td>#CDC673</td>
+<td><font style="background-color: #CDC673;">#CDC673</font></td>
+</tr>
+<tr>
+<td>Khaki4</td>
+<td>rgb(139,134,78)</td>
+<td>#8B864E</td>
+<td><font style="background-color: #8B864E;">#8B864E</font></td>
+</tr>
+<tr>
+<td>DarkKhaki</td>
+<td>rgb(189,183,107)</td>
+<td>#BDB76B</td>
+<td><font style="background-color: #BDB76B;">#BDB76B</font></td>
+</tr>
+<tr>
+<td>LemonChiffon1</td>
+<td>rgb(255,250,205)</td>
+<td>#FFFACD</td>
+<td><font style="background-color: #FFFACD;">#FFFACD</font></td>
+</tr>
+<tr>
+<td>LemonChiffon2</td>
+<td>rgb(238,233,191)</td>
+<td>#EEE9BF</td>
+<td><font style="background-color: #EEE9BF;">#EEE9BF</font></td>
+</tr>
+<tr>
+<td>LemonChiffon3</td>
+<td>rgb(205,201,165)</td>
+<td>#CDC9A5</td>
+<td><font style="background-color: #CDC9A5;">#CDC9A5</font></td>
+</tr>
+<tr>
+<td>LemonChiffon4</td>
+<td>rgb(139,137,112)</td>
+<td>#8B8970</td>
+<td><font style="background-color: #8B8970;">#8B8970</font></td>
+</tr>
+<tr>
+<td>PaleGoldenrod</td>
+<td>rgb(238,232,170)</td>
+<td>#EEE8AA</td>
+<td><font style="background-color: #EEE8AA;">#EEE8AA</font></td>
+</tr>
+<tr>
+<td>MediumGoldenRod</td>
+<td>rgb(209,193,102)</td>
+<td>#D1C166</td>
+<td><font style="background-color: #D1C166;">#D1C166</font></td>
+</tr>
+<tr>
+<td>Gold1</td>
+<td>rgb(255,215,0)</td>
+<td>#FFD700</td>
+<td><font style="background-color: #FFD700;">#FFD700</font></td>
+</tr>
+<tr>
+<td>Gold2</td>
+<td>rgb(238,201,0)</td>
+<td>#EEC900</td>
+<td><font style="background-color: #EEC900;">#EEC900</font></td>
+</tr>
+<tr>
+<td>Gold3</td>
+<td>rgb(205,173,0)</td>
+<td>#CDAD00</td>
+<td><font style="background-color: #CDAD00;">#CDAD00</font></td>
+</tr>
+<tr>
+<td>Gold4</td>
+<td>rgb(139,117,0)</td>
+<td>#8B7500</td>
+<td><font style="background-color: #8B7500;">#8B7500</font></td>
+</tr>
+<tr>
+<td>LightGoldenrod</td>
+<td>rgb(238,221,130)</td>
+<td>#EEDD82</td>
+<td><font style="background-color: #EEDD82;">#EEDD82</font></td>
+</tr>
+<tr>
+<td>LightGoldenrod1</td>
+<td>rgb(255,236,139)</td>
+<td>#FFEC8B</td>
+<td><font style="background-color: #FFEC8B;">#FFEC8B</font></td>
+</tr>
+<tr>
+<td>LightGoldenrod2</td>
+<td>rgb(238,220,130)</td>
+<td>#EEDC82</td>
+<td><font style="background-color: #EEDC82;">#EEDC82</font></td>
+</tr>
+<tr>
+<td>LightGoldenrod3</td>
+<td>rgb(205,190,112)</td>
+<td>#CDBE70</td>
+<td><font style="background-color: #CDBE70;">#CDBE70</font></td>
+</tr>
+<tr>
+<td>LightGoldenrod4</td>
+<td>rgb(139,129,76)</td>
+<td>#8B814C</td>
+<td><font style="background-color: #8B814C;">#8B814C</font></td>
+</tr>
+<tr>
+<td>Cornsilk1</td>
+<td>rgb(255,248,220)</td>
+<td>#FFF8DC</td>
+<td><font style="background-color: #FFF8DC;">#FFF8DC</font></td>
+</tr>
+<tr>
+<td>Cornsilk2</td>
+<td>rgb(238,232,205)</td>
+<td>#EEE8CD</td>
+<td><font style="background-color: #EEE8CD;">#EEE8CD</font></td>
+</tr>
+<tr>
+<td>Cornsilk3</td>
+<td>rgb(205,200,177)</td>
+<td>#CDC8B1</td>
+<td><font style="background-color: #CDC8B1;">#CDC8B1</font></td>
+</tr>
+<tr>
+<td>Cornsilk4</td>
+<td>rgb(139,136,120)</td>
+<td>#8B8878</td>
+<td><font style="background-color: #8B8878;">#8B8878</font></td>
+</tr>
+<tr>
+<td>Goldenrod</td>
+<td>rgb(218,165,32)</td>
+<td>#DAA520</td>
+<td><font style="background-color: #DAA520;">#DAA520</font></td>
+</tr>
+<tr>
+<td>Goldenrod1</td>
+<td>rgb(255,193,37)</td>
+<td>#FFC125</td>
+<td><font style="background-color: #FFC125;">#FFC125</font></td>
+</tr>
+<tr>
+<td>Goldenrod2</td>
+<td>rgb(238,180,34)</td>
+<td>#EEB422</td>
+<td><font style="background-color: #EEB422;">#EEB422</font></td>
+</tr>
+<tr>
+<td>Goldenrod3</td>
+<td>rgb(205,155,29)</td>
+<td>#CD9B1D</td>
+<td><font style="background-color: #CD9B1D;">#CD9B1D</font></td>
+</tr>
+<tr>
+<td>Goldenrod4</td>
+<td>rgb(139,105,20)</td>
+<td>#8B6914</td>
+<td><font style="background-color: #8B6914;">#8B6914</font></td>
+</tr>
+<tr>
+<td>DarkGoldenrod</td>
+<td>rgb(184,134,11)</td>
+<td>#B8860B</td>
+<td><font style="background-color: #B8860B;">#B8860B</font></td>
+</tr>
+<tr>
+<td>DarkGoldenrod1</td>
+<td>rgb(255,185,15)</td>
+<td>#FFB90F</td>
+<td><font style="background-color: #FFB90F;">#FFB90F</font></td>
+</tr>
+<tr>
+<td>DarkGoldenrod2</td>
+<td>rgb(238,173,14)</td>
+<td>#EEAD0E</td>
+<td><font style="background-color: #EEAD0E;">#EEAD0E</font></td>
+</tr>
+<tr>
+<td>DarkGoldenrod3</td>
+<td>rgb(205,149,12)</td>
+<td>#CD950C</td>
+<td><font style="background-color: #CD950C;">#CD950C</font></td>
+</tr>
+<tr>
+<td>DarkGoldenrod4</td>
+<td>rgb(139,101,8)</td>
+<td>#8B6508</td>
+<td><font style="background-color: #8B6508;">#8B6508</font></td>
+</tr>
+<tr>
+<td>FloralWhite</td>
+<td>rgb(255,250,240)</td>
+<td>#FFFAF0</td>
+<td><font style="background-color: #FFFAF0;">#FFFAF0</font></td>
+</tr>
+<tr>
+<td>Wheat</td>
+<td>rgb(245,222,179)</td>
+<td>#F5DEB3</td>
+<td><font style="background-color: #F5DEB3;">#F5DEB3</font></td>
+</tr>
+<tr>
+<td>Wheat1</td>
+<td>rgb(255,231,186)</td>
+<td>#FFE7BA</td>
+<td><font style="background-color: #FFE7BA;">#FFE7BA</font></td>
+</tr>
+<tr>
+<td>Wheat2</td>
+<td>rgb(238,216,174)</td>
+<td>#EED8AE</td>
+<td><font style="background-color: #EED8AE;">#EED8AE</font></td>
+</tr>
+<tr>
+<td>Wheat3</td>
+<td>rgb(205,186,150)</td>
+<td>#CDBA96</td>
+<td><font style="background-color: #CDBA96;">#CDBA96</font></td>
+</tr>
+<tr>
+<td>Wheat4</td>
+<td>rgb(139,126,102)</td>
+<td>#8B7E66</td>
+<td><font style="background-color: #8B7E66;">#8B7E66</font></td>
+</tr>
+<tr>
+<td>OldLace</td>
+<td>rgb(253,245,230)</td>
+<td>#FDF5E6</td>
+<td><font style="background-color: #FDF5E6;">#FDF5E6</font></td>
+</tr>
+<tr>
+<td>Orange1</td>
+<td>rgb(255,165,0)</td>
+<td>#FFA500</td>
+<td><font style="background-color: #FFA500;">#FFA500</font></td>
+</tr>
+<tr>
+<td>Orange2</td>
+<td>rgb(238,154,0)</td>
+<td>#EE9A00</td>
+<td><font style="background-color: #EE9A00;">#EE9A00</font></td>
+</tr>
+<tr>
+<td>Orange3</td>
+<td>rgb(205,133,0)</td>
+<td>#CD8500</td>
+<td><font style="background-color: #CD8500;">#CD8500</font></td>
+</tr>
+<tr>
+<td>Orange4</td>
+<td>rgb(139,90,0)</td>
+<td>#8B5A00</td>
+<td><font style="background-color: #8B5A00;">#8B5A00</font></td>
+</tr>
+<tr>
+<td>Moccasin</td>
+<td>rgb(255,228,181)</td>
+<td>#FFE4B5</td>
+<td><font style="background-color: #FFE4B5;">#FFE4B5</font></td>
+</tr>
+<tr>
+<td>PapayaWhip</td>
+<td>rgb(255,239,213)</td>
+<td>#FFEFD5</td>
+<td><font style="background-color: #FFEFD5;">#FFEFD5</font></td>
+</tr>
+<tr>
+<td>BlanchedAlmond</td>
+<td>rgb(255,235,205)</td>
+<td>#FFEBCD</td>
+<td><font style="background-color: #FFEBCD;">#FFEBCD</font></td>
+</tr>
+<tr>
+<td>NavajoWhite1</td>
+<td>rgb(255,222,173)</td>
+<td>#FFDEAD</td>
+<td><font style="background-color: #FFDEAD;">#FFDEAD</font></td>
+</tr>
+<tr>
+<td>NavajoWhite2</td>
+<td>rgb(238,207,161)</td>
+<td>#EECFA1</td>
+<td><font style="background-color: #EECFA1;">#EECFA1</font></td>
+</tr>
+<tr>
+<td>NavajoWhite3</td>
+<td>rgb(205,179,139)</td>
+<td>#CDB38B</td>
+<td><font style="background-color: #CDB38B;">#CDB38B</font></td>
+</tr>
+<tr>
+<td>NavajoWhite4</td>
+<td>rgb(139,121,94)</td>
+<td>#8B795E</td>
+<td><font style="background-color: #8B795E;">#8B795E</font></td>
+</tr>
+<tr>
+<td>AntiqueWhite</td>
+<td>rgb(250,235,215)</td>
+<td>#FAEBD7</td>
+<td><font style="background-color: #FAEBD7;">#FAEBD7</font></td>
+</tr>
+<tr>
+<td>AntiqueWhite1</td>
+<td>rgb(255,239,219)</td>
+<td>#FFEFDB</td>
+<td><font style="background-color: #FFEFDB;">#FFEFDB</font></td>
+</tr>
+<tr>
+<td>AntiqueWhite2</td>
+<td>rgb(238,223,204)</td>
+<td>#EEDFCC</td>
+<td><font style="background-color: #EEDFCC;">#EEDFCC</font></td>
+</tr>
+<tr>
+<td>AntiqueWhite3</td>
+<td>rgb(205,192,176)</td>
+<td>#CDC0B0</td>
+<td><font style="background-color: #CDC0B0;">#CDC0B0</font></td>
+</tr>
+<tr>
+<td>AntiqueWhite4</td>
+<td>rgb(139,131,120)</td>
+<td>#8B8378</td>
+<td><font style="background-color: #8B8378;">#8B8378</font></td>
+</tr>
+<tr>
+<td>Bisque1</td>
+<td>rgb(255,228,196)</td>
+<td>#FFE4C4</td>
+<td><font style="background-color: #FFE4C4;">#FFE4C4</font></td>
+</tr>
+<tr>
+<td>Bisque2</td>
+<td>rgb(238,213,183)</td>
+<td>#EED5B7</td>
+<td><font style="background-color: #EED5B7;">#EED5B7</font></td>
+</tr>
+<tr>
+<td>Bisque3</td>
+<td>rgb(205,183,158)</td>
+<td>#CDB79E</td>
+<td><font style="background-color: #CDB79E;">#CDB79E</font></td>
+</tr>
+<tr>
+<td>Bisque4</td>
+<td>rgb(139,125,107)</td>
+<td>#8B7D6B</td>
+<td><font style="background-color: #8B7D6B;">#8B7D6B</font></td>
+</tr>
+<tr>
+<td>Burlywood</td>
+<td>rgb(222,184,135)</td>
+<td>#DEB887</td>
+<td><font style="background-color: #DEB887;">#DEB887</font></td>
+</tr>
+<tr>
+<td>Burlywood1</td>
+<td>rgb(255,211,155)</td>
+<td>#FFD39B</td>
+<td><font style="background-color: #FFD39B;">#FFD39B</font></td>
+</tr>
+<tr>
+<td>Burlywood2</td>
+<td>rgb(238,197,145)</td>
+<td>#EEC591</td>
+<td><font style="background-color: #EEC591;">#EEC591</font></td>
+</tr>
+<tr>
+<td>Burlywood3</td>
+<td>rgb(205,170,125)</td>
+<td>#CDAA7D</td>
+<td><font style="background-color: #CDAA7D;">#CDAA7D</font></td>
+</tr>
+<tr>
+<td>Burlywood4</td>
+<td>rgb(139,115,85)</td>
+<td>#8B7355</td>
+<td><font style="background-color: #8B7355;">#8B7355</font></td>
+</tr>
+<tr>
+<td>DarkOrange</td>
+<td>rgb(255,140,0)</td>
+<td>#FF8C00</td>
+<td><font style="background-color: #FF8C00;">#FF8C00</font></td>
+</tr>
+<tr>
+<td>DarkOrange1</td>
+<td>rgb(255,127,0)</td>
+<td>#FF7F00</td>
+<td><font style="background-color: #FF7F00;">#FF7F00</font></td>
+</tr>
+<tr>
+<td>DarkOrange2</td>
+<td>rgb(238,118,0)</td>
+<td>#EE7600</td>
+<td><font style="background-color: #EE7600;">#EE7600</font></td>
+</tr>
+<tr>
+<td>DarkOrange3</td>
+<td>rgb(205,102,0)</td>
+<td>#CD6600</td>
+<td><font style="background-color: #CD6600;">#CD6600</font></td>
+</tr>
+<tr>
+<td>DarkOrange4</td>
+<td>rgb(139,69,0)</td>
+<td>#8B4500</td>
+<td><font style="background-color: #8B4500;">#8B4500</font></td>
+</tr>
+<tr>
+<td>Linen</td>
+<td>rgb(250,240,230)</td>
+<td>#FAF0E6</td>
+<td><font style="background-color: #FAF0E6;">#FAF0E6</font></td>
+</tr>
+<tr>
+<td>Peru</td>
+<td>rgb(205,133,63)</td>
+<td>#CD853F</td>
+<td><font style="background-color: #CD853F;">#CD853F</font></td>
+</tr>
+<tr>
+<td>Tan</td>
+<td>rgb(210,180,140)</td>
+<td>#D2B48C</td>
+<td><font style="background-color: #D2B48C;">#D2B48C</font></td>
+</tr>
+<tr>
+<td>Tan1</td>
+<td>rgb(255,165,79)</td>
+<td>#FFA54F</td>
+<td><font style="background-color: #FFA54F;">#FFA54F</font></td>
+</tr>
+<tr>
+<td>Tan2</td>
+<td>rgb(238,154,73)</td>
+<td>#EE9A49</td>
+<td><font style="background-color: #EE9A49;">#EE9A49</font></td>
+</tr>
+<tr>
+<td>Tan3</td>
+<td>rgb(205,133,63)</td>
+<td>#CD853F</td>
+<td><font style="background-color: #CD853F;">#CD853F</font></td>
+</tr>
+<tr>
+<td>Tan4</td>
+<td>rgb(139,90,43)</td>
+<td>#8B5A2B</td>
+<td><font style="background-color: #8B5A2B;">#8B5A2B</font></td>
+</tr>
+<tr>
+<td>PeachPuff1</td>
+<td>rgb(255,218,185)</td>
+<td>#FFDAB9</td>
+<td><font style="background-color: #FFDAB9;">#FFDAB9</font></td>
+</tr>
+<tr>
+<td>PeachPuff2</td>
+<td>rgb(238,203,173)</td>
+<td>#EECBAD</td>
+<td><font style="background-color: #EECBAD;">#EECBAD</font></td>
+</tr>
+<tr>
+<td>PeachPuff3</td>
+<td>rgb(205,175,149)</td>
+<td>#CDAF95</td>
+<td><font style="background-color: #CDAF95;">#CDAF95</font></td>
+</tr>
+<tr>
+<td>PeachPuff4</td>
+<td>rgb(139,119,101)</td>
+<td>#8B7765</td>
+<td><font style="background-color: #8B7765;">#8B7765</font></td>
+</tr>
+<tr>
+<td>SandyBrown</td>
+<td>rgb(244,164,96)</td>
+<td>#F4A460</td>
+<td><font style="background-color: #F4A460;">#F4A460</font></td>
+</tr>
+<tr>
+<td>Seashell1</td>
+<td>rgb(255,245,238)</td>
+<td>#FFF5EE</td>
+<td><font style="background-color: #FFF5EE;">#FFF5EE</font></td>
+</tr>
+<tr>
+<td>Seashell2</td>
+<td>rgb(238,229,222)</td>
+<td>#EEE5DE</td>
+<td><font style="background-color: #EEE5DE;">#EEE5DE</font></td>
+</tr>
+<tr>
+<td>Seashell3</td>
+<td>rgb(205,197,191)</td>
+<td>#CDC5BF</td>
+<td><font style="background-color: #CDC5BF;">#CDC5BF</font></td>
+</tr>
+<tr>
+<td>Seashell4</td>
+<td>rgb(139,134,130)</td>
+<td>#8B8682</td>
+<td><font style="background-color: #8B8682;">#8B8682</font></td>
+</tr>
+<tr>
+<td>Chocolate</td>
+<td>rgb(210,105,30)</td>
+<td>#D2691E</td>
+<td><font style="background-color: #D2691E;">#D2691E</font></td>
+</tr>
+<tr>
+<td>Chocolate1</td>
+<td>rgb(255,127,36)</td>
+<td>#FF7F24</td>
+<td><font style="background-color: #FF7F24;">#FF7F24</font></td>
+</tr>
+<tr>
+<td>Chocolate2</td>
+<td>rgb(238,118,33)</td>
+<td>#EE7621</td>
+<td><font style="background-color: #EE7621;">#EE7621</font></td>
+</tr>
+<tr>
+<td>Chocolate3</td>
+<td>rgb(205,102,29)</td>
+<td>#CD661D</td>
+<td><font style="background-color: #CD661D;">#CD661D</font></td>
+</tr>
+<tr>
+<td>Chocolate4</td>
+<td>rgb(139,69,19)</td>
+<td>#8B4513</td>
+<td><font style="background-color: #8B4513;">#8B4513</font></td>
+</tr>
+<tr>
+<td>SaddleBrown</td>
+<td>rgb(139,69,19)</td>
+<td>#8B4513</td>
+<td><font style="background-color: #8B4513;">#8B4513</font></td>
+</tr>
+<tr>
+<td>Sienna</td>
+<td>rgb(160,82,45)</td>
+<td>#A0522D</td>
+<td><font style="background-color: #A0522D;">#A0522D</font></td>
+</tr>
+<tr>
+<td>Sienna1</td>
+<td>rgb(255,130,71)</td>
+<td>#FF8247</td>
+<td><font style="background-color: #FF8247;">#FF8247</font></td>
+</tr>
+<tr>
+<td>Sienna2</td>
+<td>rgb(238,121,66)</td>
+<td>#EE7942</td>
+<td><font style="background-color: #EE7942;">#EE7942</font></td>
+</tr>
+<tr>
+<td>Sienna3</td>
+<td>rgb(205,104,57)</td>
+<td>#CD6839</td>
+<td><font style="background-color: #CD6839;">#CD6839</font></td>
+</tr>
+<tr>
+<td>Sienna4</td>
+<td>rgb(139,71,38)</td>
+<td>#8B4726</td>
+<td><font style="background-color: #8B4726;">#8B4726</font></td>
+</tr>
+<tr>
+<td>LightSalmon1</td>
+<td>rgb(255,160,122)</td>
+<td>#FFA07A</td>
+<td><font style="background-color: #FFA07A;">#FFA07A</font></td>
+</tr>
+<tr>
+<td>LightSalmon2</td>
+<td>rgb(238,149,114)</td>
+<td>#EE9572</td>
+<td><font style="background-color: #EE9572;">#EE9572</font></td>
+</tr>
+<tr>
+<td>LightSalmon3</td>
+<td>rgb(205,129,98)</td>
+<td>#CD8162</td>
+<td><font style="background-color: #CD8162;">#CD8162</font></td>
+</tr>
+<tr>
+<td>LightSalmon4</td>
+<td>rgb(139,87,66)</td>
+<td>#8B5742</td>
+<td><font style="background-color: #8B5742;">#8B5742</font></td>
+</tr>
+<tr>
+<td>Salmon</td>
+<td>rgb(250,128,114)</td>
+<td>#FA8072</td>
+<td><font style="background-color: #FA8072;">#FA8072</font></td>
+</tr>
+<tr>
+<td>Salmon1</td>
+<td>rgb(255,140,105)</td>
+<td>#FF8C69</td>
+<td><font style="background-color: #FF8C69;">#FF8C69</font></td>
+</tr>
+<tr>
+<td>Salmon2</td>
+<td>rgb(238,130,98)</td>
+<td>#EE8262</td>
+<td><font style="background-color: #EE8262;">#EE8262</font></td>
+</tr>
+<tr>
+<td>Salmon3</td>
+<td>rgb(205,112,84)</td>
+<td>#CD7054</td>
+<td><font style="background-color: #CD7054;">#CD7054</font></td>
+</tr>
+<tr>
+<td>Salmon4</td>
+<td>rgb(139,76,57)</td>
+<td>#8B4C39</td>
+<td><font style="background-color: #8B4C39;">#8B4C39</font></td>
+</tr>
+<tr>
+<td>DarkSalmon</td>
+<td>rgb(233,150,122)</td>
+<td>#E9967A</td>
+<td><font style="background-color: #E9967A;">#E9967A</font></td>
+</tr>
+<tr>
+<td>OrangeRed1</td>
+<td>rgb(255,69,0)</td>
+<td>#FF4500</td>
+<td><font style="background-color: #FF4500;">#FF4500</font></td>
+</tr>
+<tr>
+<td>OrangeRed2</td>
+<td>rgb(238,64,0)</td>
+<td>#EE4000</td>
+<td><font style="background-color: #EE4000;">#EE4000</font></td>
+</tr>
+<tr>
+<td>OrangeRed3</td>
+<td>rgb(205,55,0)</td>
+<td>#CD3700</td>
+<td><font style="background-color: #CD3700;">#CD3700</font></td>
+</tr>
+<tr>
+<td>OrangeRed4</td>
+<td>rgb(139,37,0)</td>
+<td>#8B2500</td>
+<td><font style="background-color: #8B2500;">#8B2500</font></td>
+</tr>
+<tr>
+<td>Coral</td>
+<td>rgb(255,127,80)</td>
+<td>#FF7F50</td>
+<td><font style="background-color: #FF7F50;">#FF7F50</font></td>
+</tr>
+<tr>
+<td>Coral1</td>
+<td>rgb(255,114,86)</td>
+<td>#FF7256</td>
+<td><font style="background-color: #FF7256;">#FF7256</font></td>
+</tr>
+<tr>
+<td>Coral2</td>
+<td>rgb(238,106,80)</td>
+<td>#EE6A50</td>
+<td><font style="background-color: #EE6A50;">#EE6A50</font></td>
+</tr>
+<tr>
+<td>Coral3</td>
+<td>rgb(205,91,69)</td>
+<td>#CD5B45</td>
+<td><font style="background-color: #CD5B45;">#CD5B45</font></td>
+</tr>
+<tr>
+<td>Coral4</td>
+<td>rgb(139,62,47)</td>
+<td>#8B3E2F</td>
+<td><font style="background-color: #8B3E2F;">#8B3E2F</font></td>
+</tr>
+<tr>
+<td>Tomato1</td>
+<td>rgb(255,99,71)</td>
+<td>#FF6347</td>
+<td><font style="background-color: #FF6347;">#FF6347</font></td>
+</tr>
+<tr>
+<td>Tomato2</td>
+<td>rgb(238,92,66)</td>
+<td>#EE5C42</td>
+<td><font style="background-color: #EE5C42;">#EE5C42</font></td>
+</tr>
+<tr>
+<td>Tomato3</td>
+<td>rgb(205,79,57)</td>
+<td>#CD4F39</td>
+<td><font style="background-color: #CD4F39;">#CD4F39</font></td>
+</tr>
+<tr>
+<td>Tomato4</td>
+<td>rgb(139,54,38)</td>
+<td>#8B3626</td>
+<td><font style="background-color: #8B3626;">#8B3626</font></td>
+</tr>
+<tr>
+<td>MistyRose1</td>
+<td>rgb(255,228,225)</td>
+<td>#FFE4E1</td>
+<td><font style="background-color: #FFE4E1;">#FFE4E1</font></td>
+</tr>
+<tr>
+<td>MistyRose2</td>
+<td>rgb(238,213,210)</td>
+<td>#EED5D2</td>
+<td><font style="background-color: #EED5D2;">#EED5D2</font></td>
+</tr>
+<tr>
+<td>MistyRose3</td>
+<td>rgb(205,183,181)</td>
+<td>#CDB7B5</td>
+<td><font style="background-color: #CDB7B5;">#CDB7B5</font></td>
+</tr>
+<tr>
+<td>MistyRose4</td>
+<td>rgb(139,125,123)</td>
+<td>#8B7D7B</td>
+<td><font style="background-color: #8B7D7B;">#8B7D7B</font></td>
+</tr>
+<tr>
+<td>Gainsboro</td>
 <td>rgb(220,220,220)</td>
 <td>#DCDCDC</td>
+<td><font style="background-color: #DCDCDC;">#DCDCDC</font></td>
 </tr>
 <tr>
-<td>gray86</td>
-<td>rgb(219,219,219)</td>
-<td>#DBDBDB</td>
+<td>Silver</td>
+<td>rgb(192,192,192)</td>
+<td>#C0C0C0</td>
+<td><font style="background-color: #C0C0C0;">#C0C0C0</font></td>
 </tr>
 <tr>
-<td>grey86</td>
-<td>rgb(219,219,219)</td>
-<td>#DBDBDB</td>
-</tr>
-<tr>
-<td>gray85</td>
-<td>rgb(217,217,217)</td>
-<td>#D9D9D9</td>
-</tr>
-<tr>
-<td>grey85</td>
-<td>rgb(217,217,217)</td>
-<td>#D9D9D9</td>
-</tr>
-<tr>
-<td>gray84</td>
-<td>rgb(214,214,214)</td>
-<td>#D6D6D6</td>
-</tr>
-<tr>
-<td>grey84</td>
-<td>rgb(214,214,214)</td>
-<td>#D6D6D6</td>
-</tr>
-<tr>
-<td>gray83</td>
-<td>rgb(212,212,212)</td>
-<td>#D4D4D4</td>
-</tr>
-<tr>
-<td>grey83</td>
-<td>rgb(212,212,212)</td>
-<td>#D4D4D4</td>
+<td>Fractal</td>
+<td>rgb(128,128,128)</td>
+<td>#808080</td>
+<td><font style="background-color: #808080;">#808080</font></td>
 </tr>
 <tr>
 <td>LightGray</td>
 <td>rgb(211,211,211)</td>
 <td>#D3D3D3</td>
+<td><font style="background-color: #D3D3D3;">#D3D3D3</font></td>
 </tr>
 <tr>
-<td>LightGrey</td>
-<td>rgb(211,211,211)</td>
-<td>#D3D3D3</td>
+<td>DimGray</td>
+<td>rgb(105,105,105)</td>
+<td>#696969</td>
+<td><font style="background-color: #696969;">#696969</font></td>
 </tr>
 <tr>
-<td>gray82</td>
+<td>Gray</td>
+<td>rgb(126,126,126)</td>
+<td>#7E7E7E</td>
+<td><font style="background-color: #7E7E7E;">#7E7E7E</font></td>
+</tr>
+<tr>
+<td>Gray99</td>
+<td>rgb(252,252,252)</td>
+<td>#FCFCFC</td>
+<td><font style="background-color: #FCFCFC;">#FCFCFC</font></td>
+</tr>
+<tr>
+<td>Gray98</td>
+<td>rgb(250,250,250)</td>
+<td>#FAFAFA</td>
+<td><font style="background-color: #FAFAFA;">#FAFAFA</font></td>
+</tr>
+<tr>
+<td>Gray97</td>
+<td>rgb(247,247,247)</td>
+<td>#F7F7F7</td>
+<td><font style="background-color: #F7F7F7;">#F7F7F7</font></td>
+</tr>
+<tr>
+<td>Gray96</td>
+<td>rgb(245,245,245)</td>
+<td>#F5F5F5</td>
+<td><font style="background-color: #F5F5F5;">#F5F5F5</font></td>
+</tr>
+<tr>
+<td>Gray95</td>
+<td>rgb(242,242,242)</td>
+<td>#F2F2F2</td>
+<td><font style="background-color: #F2F2F2;">#F2F2F2</font></td>
+</tr>
+<tr>
+<td>Gray94</td>
+<td>rgb(240,240,240)</td>
+<td>#F0F0F0</td>
+<td><font style="background-color: #F0F0F0;">#F0F0F0</font></td>
+</tr>
+<tr>
+<td>Gray93</td>
+<td>rgb(237,237,237)</td>
+<td>#EDEDED</td>
+<td><font style="background-color: #EDEDED;">#EDEDED</font></td>
+</tr>
+<tr>
+<td>Gray92</td>
+<td>rgb(235,235,235)</td>
+<td>#EBEBEB</td>
+<td><font style="background-color: #EBEBEB;">#EBEBEB</font></td>
+</tr>
+<tr>
+<td>Gray91</td>
+<td>rgb(232,232,232)</td>
+<td>#E8E8E8</td>
+<td><font style="background-color: #E8E8E8;">#E8E8E8</font></td>
+</tr>
+<tr>
+<td>Gray90</td>
+<td>rgb(229,229,229)</td>
+<td>#E5E5E5</td>
+<td><font style="background-color: #E5E5E5;">#E5E5E5</font></td>
+</tr>
+<tr>
+<td>Gray89</td>
+<td>rgb(227,227,227)</td>
+<td>#E3E3E3</td>
+<td><font style="background-color: #E3E3E3;">#E3E3E3</font></td>
+</tr>
+<tr>
+<td>Gray88</td>
+<td>rgb(224,224,224)</td>
+<td>#E0E0E0</td>
+<td><font style="background-color: #E0E0E0;">#E0E0E0</font></td>
+</tr>
+<tr>
+<td>Gray87</td>
+<td>rgb(222,222,222)</td>
+<td>#DEDEDE</td>
+<td><font style="background-color: #DEDEDE;">#DEDEDE</font></td>
+</tr>
+<tr>
+<td>Gray86</td>
+<td>rgb(219,219,219)</td>
+<td>#DBDBDB</td>
+<td><font style="background-color: #DBDBDB;">#DBDBDB</font></td>
+</tr>
+<tr>
+<td>Gray85</td>
+<td>rgb(217,217,217)</td>
+<td>#D9D9D9</td>
+<td><font style="background-color: #D9D9D9;">#D9D9D9</font></td>
+</tr>
+<tr>
+<td>Gray84</td>
+<td>rgb(214,214,214)</td>
+<td>#D6D6D6</td>
+<td><font style="background-color: #D6D6D6;">#D6D6D6</font></td>
+</tr>
+<tr>
+<td>Gray83</td>
+<td>rgb(212,212,212)</td>
+<td>#D4D4D4</td>
+<td><font style="background-color: #D4D4D4;">#D4D4D4</font></td>
+</tr>
+<tr>
+<td>Gray82</td>
 <td>rgb(209,209,209)</td>
 <td>#D1D1D1</td>
+<td><font style="background-color: #D1D1D1;">#D1D1D1</font></td>
 </tr>
 <tr>
-<td>grey82</td>
-<td>rgb(209,209,209)</td>
-<td>#D1D1D1</td>
-</tr>
-<tr>
-<td>gray81</td>
+<td>Gray81</td>
 <td>rgb(207,207,207)</td>
 <td>#CFCFCF</td>
+<td><font style="background-color: #CFCFCF;">#CFCFCF</font></td>
 </tr>
 <tr>
-<td>grey81</td>
-<td>rgb(207,207,207)</td>
-<td>#CFCFCF</td>
-</tr>
-<tr>
-<td>gray80</td>
+<td>Gray80</td>
 <td>rgb(204,204,204)</td>
 <td>#CCCCCC</td>
+<td><font style="background-color: #CCCCCC;">#CCCCCC</font></td>
 </tr>
 <tr>
-<td>grey80</td>
-<td>rgb(204,204,204)</td>
-<td>#CCCCCC</td>
-</tr>
-<tr>
-<td>gray79</td>
+<td>Gray79</td>
 <td>rgb(201,201,201)</td>
 <td>#C9C9C9</td>
+<td><font style="background-color: #C9C9C9;">#C9C9C9</font></td>
 </tr>
 <tr>
-<td>grey79</td>
-<td>rgb(201,201,201)</td>
-<td>#C9C9C9</td>
-</tr>
-<tr>
-<td>gray78</td>
+<td>Gray78</td>
 <td>rgb(199,199,199)</td>
 <td>#C7C7C7</td>
+<td><font style="background-color: #C7C7C7;">#C7C7C7</font></td>
 </tr>
 <tr>
-<td>grey78</td>
-<td>rgb(199,199,199)</td>
-<td>#C7C7C7</td>
-</tr>
-<tr>
-<td>gray77</td>
+<td>Gray77</td>
 <td>rgb(196,196,196)</td>
 <td>#C4C4C4</td>
+<td><font style="background-color: #C4C4C4;">#C4C4C4</font></td>
 </tr>
 <tr>
-<td>grey77</td>
-<td>rgb(196,196,196)</td>
-<td>#C4C4C4</td>
-</tr>
-<tr>
-<td>gray76</td>
+<td>Gray76</td>
 <td>rgb(194,194,194)</td>
 <td>#C2C2C2</td>
+<td><font style="background-color: #C2C2C2;">#C2C2C2</font></td>
 </tr>
 <tr>
-<td>grey76</td>
-<td>rgb(194,194,194)</td>
-<td>#C2C2C2</td>
-</tr>
-<tr>
-<td>silver</td>
-<td>rgb(192,192,192)</td>
-<td>#C0C0C0</td>
-</tr>
-<tr>
-<td>gray75</td>
+<td>Gray75</td>
 <td>rgb(191,191,191)</td>
 <td>#BFBFBF</td>
+<td><font style="background-color: #BFBFBF;">#BFBFBF</font></td>
 </tr>
 <tr>
-<td>grey75</td>
-<td>rgb(191,191,191)</td>
-<td>#BFBFBF</td>
-</tr>
-<tr>
-<td>gray74</td>
+<td>Gray74</td>
 <td>rgb(189,189,189)</td>
 <td>#BDBDBD</td>
+<td><font style="background-color: #BDBDBD;">#BDBDBD</font></td>
 </tr>
 <tr>
-<td>grey74</td>
-<td>rgb(189,189,189)</td>
-<td>#BDBDBD</td>
-</tr>
-<tr>
-<td>gray73</td>
+<td>Gray73</td>
 <td>rgb(186,186,186)</td>
 <td>#BABABA</td>
+<td><font style="background-color: #BABABA;">#BABABA</font></td>
 </tr>
 <tr>
-<td>grey73</td>
-<td>rgb(186,186,186)</td>
-<td>#BABABA</td>
-</tr>
-<tr>
-<td>gray72</td>
+<td>Gray72</td>
 <td>rgb(184,184,184)</td>
 <td>#B8B8B8</td>
+<td><font style="background-color: #B8B8B8;">#B8B8B8</font></td>
 </tr>
 <tr>
-<td>grey72</td>
-<td>rgb(184,184,184)</td>
-<td>#B8B8B8</td>
-</tr>
-<tr>
-<td>gray71</td>
+<td>Gray71</td>
 <td>rgb(181,181,181)</td>
 <td>#B5B5B5</td>
+<td><font style="background-color: #B5B5B5;">#B5B5B5</font></td>
 </tr>
 <tr>
-<td>grey71</td>
-<td>rgb(181,181,181)</td>
-<td>#B5B5B5</td>
-</tr>
-<tr>
-<td>gray70</td>
+<td>Gray70</td>
 <td>rgb(179,179,179)</td>
 <td>#B3B3B3</td>
+<td><font style="background-color: #B3B3B3;">#B3B3B3</font></td>
 </tr>
 <tr>
-<td>grey70</td>
-<td>rgb(179,179,179)</td>
-<td>#B3B3B3</td>
-</tr>
-<tr>
-<td>gray69</td>
+<td>Gray69</td>
 <td>rgb(176,176,176)</td>
 <td>#B0B0B0</td>
+<td><font style="background-color: #B0B0B0;">#B0B0B0</font></td>
 </tr>
 <tr>
-<td>grey69</td>
-<td>rgb(176,176,176)</td>
-<td>#B0B0B0</td>
-</tr>
-<tr>
-<td>gray68</td>
+<td>Gray68</td>
 <td>rgb(173,173,173)</td>
 <td>#ADADAD</td>
+<td><font style="background-color: #ADADAD;">#ADADAD</font></td>
 </tr>
 <tr>
-<td>grey68</td>
-<td>rgb(173,173,173)</td>
-<td>#ADADAD</td>
-</tr>
-<tr>
-<td>gray67</td>
+<td>Gray67</td>
 <td>rgb(171,171,171)</td>
 <td>#ABABAB</td>
+<td><font style="background-color: #ABABAB;">#ABABAB</font></td>
 </tr>
 <tr>
-<td>grey67</td>
-<td>rgb(171,171,171)</td>
-<td>#ABABAB</td>
+<td>Gray66</td>
+<td>rgb(168,168,168)</td>
+<td>#A8A8A8</td>
+<td><font style="background-color: #A8A8A8;">#A8A8A8</font></td>
+</tr>
+<tr>
+<td>Gray65</td>
+<td>rgb(166,166,166)</td>
+<td>#A6A6A6</td>
+<td><font style="background-color: #A6A6A6;">#A6A6A6</font></td>
+</tr>
+<tr>
+<td>Gray64</td>
+<td>rgb(163,163,163)</td>
+<td>#A3A3A3</td>
+<td><font style="background-color: #A3A3A3;">#A3A3A3</font></td>
+</tr>
+<tr>
+<td>Gray63</td>
+<td>rgb(161,161,161)</td>
+<td>#A1A1A1</td>
+<td><font style="background-color: #A1A1A1;">#A1A1A1</font></td>
+</tr>
+<tr>
+<td>Gray62</td>
+<td>rgb(158,158,158)</td>
+<td>#9E9E9E</td>
+<td><font style="background-color: #9E9E9E;">#9E9E9E</font></td>
+</tr>
+<tr>
+<td>Gray61</td>
+<td>rgb(156,156,156)</td>
+<td>#9C9C9C</td>
+<td><font style="background-color: #9C9C9C;">#9C9C9C</font></td>
+</tr>
+<tr>
+<td>Gray60</td>
+<td>rgb(153,153,153)</td>
+<td>#999999</td>
+<td><font style="background-color: #999999;">#999999</font></td>
+</tr>
+<tr>
+<td>Gray59</td>
+<td>rgb(150,150,150)</td>
+<td>#969696</td>
+<td><font style="background-color: #969696;">#969696</font></td>
+</tr>
+<tr>
+<td>Gray58</td>
+<td>rgb(148,148,148)</td>
+<td>#949494</td>
+<td><font style="background-color: #949494;">#949494</font></td>
+</tr>
+<tr>
+<td>Gray57</td>
+<td>rgb(145,145,145)</td>
+<td>#919191</td>
+<td><font style="background-color: #919191;">#919191</font></td>
+</tr>
+<tr>
+<td>Gray56</td>
+<td>rgb(143,143,143)</td>
+<td>#8F8F8F</td>
+<td><font style="background-color: #8F8F8F;">#8F8F8F</font></td>
+</tr>
+<tr>
+<td>Gray55</td>
+<td>rgb(140,140,140)</td>
+<td>#8C8C8C</td>
+<td><font style="background-color: #8C8C8C;">#8C8C8C</font></td>
+</tr>
+<tr>
+<td>Gray54</td>
+<td>rgb(138,138,138)</td>
+<td>#8A8A8A</td>
+<td><font style="background-color: #8A8A8A;">#8A8A8A</font></td>
+</tr>
+<tr>
+<td>Gray53</td>
+<td>rgb(135,135,135)</td>
+<td>#878787</td>
+<td><font style="background-color: #878787;">#878787</font></td>
+</tr>
+<tr>
+<td>Gray52</td>
+<td>rgb(133,133,133)</td>
+<td>#858585</td>
+<td><font style="background-color: #858585;">#858585</font></td>
+</tr>
+<tr>
+<td>Gray51</td>
+<td>rgb(130,130,130)</td>
+<td>#828282</td>
+<td><font style="background-color: #828282;">#828282</font></td>
+</tr>
+<tr>
+<td>Gray50</td>
+<td>rgb(127,127,127)</td>
+<td>#7F7F7F</td>
+<td><font style="background-color: #7F7F7F;">#7F7F7F</font></td>
+</tr>
+<tr>
+<td>Gray49</td>
+<td>rgb(125,125,125)</td>
+<td>#7D7D7D</td>
+<td><font style="background-color: #7D7D7D;">#7D7D7D</font></td>
+</tr>
+<tr>
+<td>Gray47</td>
+<td>rgb(120,120,120)</td>
+<td>#787878</td>
+<td><font style="background-color: #787878;">#787878</font></td>
+</tr>
+<tr>
+<td>Gray46</td>
+<td>rgb(117,117,117)</td>
+<td>#757575</td>
+<td><font style="background-color: #757575;">#757575</font></td>
+</tr>
+<tr>
+<td>Gray45</td>
+<td>rgb(115,115,115)</td>
+<td>#737373</td>
+<td><font style="background-color: #737373;">#737373</font></td>
+</tr>
+<tr>
+<td>Gray44</td>
+<td>rgb(112,112,112)</td>
+<td>#707070</td>
+<td><font style="background-color: #707070;">#707070</font></td>
+</tr>
+<tr>
+<td>Gray43</td>
+<td>rgb(110,110,110)</td>
+<td>#6E6E6E</td>
+<td><font style="background-color: #6E6E6E;">#6E6E6E</font></td>
+</tr>
+<tr>
+<td>Gray42</td>
+<td>rgb(107,107,107)</td>
+<td>#6B6B6B</td>
+<td><font style="background-color: #6B6B6B;">#6B6B6B</font></td>
+</tr>
+<tr>
+<td>Gray39</td>
+<td>rgb(99,99,99)</td>
+<td>#636363</td>
+<td><font style="background-color: #636363;">#636363</font></td>
+</tr>
+<tr>
+<td>Gray38</td>
+<td>rgb(97,97,97)</td>
+<td>#616161</td>
+<td><font style="background-color: #616161;">#616161</font></td>
+</tr>
+<tr>
+<td>Gray37</td>
+<td>rgb(94,94,94)</td>
+<td>#5E5E5E</td>
+<td><font style="background-color: #5E5E5E;">#5E5E5E</font></td>
+</tr>
+<tr>
+<td>Gray36</td>
+<td>rgb(92,92,92)</td>
+<td>#5C5C5C</td>
+<td><font style="background-color: #5C5C5C;">#5C5C5C</font></td>
+</tr>
+<tr>
+<td>Gray35</td>
+<td>rgb(89,89,89)</td>
+<td>#595959</td>
+<td><font style="background-color: #595959;">#595959</font></td>
+</tr>
+<tr>
+<td>Gray34</td>
+<td>rgb(87,87,87)</td>
+<td>#575757</td>
+<td><font style="background-color: #575757;">#575757</font></td>
+</tr>
+<tr>
+<td>Gray33</td>
+<td>rgb(84,84,84)</td>
+<td>#545454</td>
+<td><font style="background-color: #545454;">#545454</font></td>
+</tr>
+<tr>
+<td>Gray32</td>
+<td>rgb(82,82,82)</td>
+<td>#525252</td>
+<td><font style="background-color: #525252;">#525252</font></td>
+</tr>
+<tr>
+<td>Gray31</td>
+<td>rgb(79,79,79)</td>
+<td>#4F4F4F</td>
+<td><font style="background-color: #4F4F4F;">#4F4F4F</font></td>
+</tr>
+<tr>
+<td>Gray30</td>
+<td>rgb(77,77,77)</td>
+<td>#4D4D4D</td>
+<td><font style="background-color: #4D4D4D;">#4D4D4D</font></td>
+</tr>
+<tr>
+<td>Gray29</td>
+<td>rgb(74,74,74)</td>
+<td>#4A4A4A</td>
+<td><font style="background-color: #4A4A4A;">#4A4A4A</font></td>
+</tr>
+<tr>
+<td>Gray28</td>
+<td>rgb(71,71,71)</td>
+<td>#474747</td>
+<td><font style="background-color: #474747;">#474747</font></td>
+</tr>
+<tr>
+<td>Gray27</td>
+<td>rgb(69,69,69)</td>
+<td>#454545</td>
+<td><font style="background-color: #454545;">#454545</font></td>
+</tr>
+<tr>
+<td>Gray26</td>
+<td>rgb(66,66,66)</td>
+<td>#424242</td>
+<td><font style="background-color: #424242;">#424242</font></td>
+</tr>
+<tr>
+<td>Gray25</td>
+<td>rgb(64,64,64)</td>
+<td>#404040</td>
+<td><font style="background-color: #404040;">#404040</font></td>
+</tr>
+<tr>
+<td>Gray24</td>
+<td>rgb(61,61,61)</td>
+<td>#3D3D3D</td>
+<td><font style="background-color: #3D3D3D;">#3D3D3D</font></td>
+</tr>
+<tr>
+<td>Gray23</td>
+<td>rgb(59,59,59)</td>
+<td>#3B3B3B</td>
+<td><font style="background-color: #3B3B3B;">#3B3B3B</font></td>
+</tr>
+<tr>
+<td>Gray22</td>
+<td>rgb(56,56,56)</td>
+<td>#383838</td>
+<td><font style="background-color: #383838;">#383838</font></td>
+</tr>
+<tr>
+<td>Gray21</td>
+<td>rgb(54,54,54)</td>
+<td>#363636</td>
+<td><font style="background-color: #363636;">#363636</font></td>
+</tr>
+<tr>
+<td>Gray20</td>
+<td>rgb(51,51,51)</td>
+<td>#333333</td>
+<td><font style="background-color: #333333;">#333333</font></td>
+</tr>
+<tr>
+<td>Gray19</td>
+<td>rgb(48,48,48)</td>
+<td>#303030</td>
+<td><font style="background-color: #303030;">#303030</font></td>
+</tr>
+<tr>
+<td>Gray18</td>
+<td>rgb(46,46,46)</td>
+<td>#2E2E2E</td>
+<td><font style="background-color: #2E2E2E;">#2E2E2E</font></td>
+</tr>
+<tr>
+<td>Gray17</td>
+<td>rgb(43,43,43)</td>
+<td>#2B2B2B</td>
+<td><font style="background-color: #2B2B2B;">#2B2B2B</font></td>
+</tr>
+<tr>
+<td>Gray16</td>
+<td>rgb(41,41,41)</td>
+<td>#292929</td>
+<td><font style="background-color: #292929;">#292929</font></td>
+</tr>
+<tr>
+<td>Gray15</td>
+<td>rgb(38,38,38)</td>
+<td>#262626</td>
+<td><font style="background-color: #262626;">#262626</font></td>
+</tr>
+<tr>
+<td>Gray14</td>
+<td>rgb(36,36,36)</td>
+<td>#242424</td>
+<td><font style="background-color: #242424;">#242424</font></td>
+</tr>
+<tr>
+<td>Gray13</td>
+<td>rgb(33,33,33)</td>
+<td>#212121</td>
+<td><font style="background-color: #212121;">#212121</font></td>
+</tr>
+<tr>
+<td>Gray12</td>
+<td>rgb(31,31,31)</td>
+<td>#1F1F1F</td>
+<td><font style="background-color: #1F1F1F;">#1F1F1F</font></td>
+</tr>
+<tr>
+<td>Gray11</td>
+<td>rgb(28,28,28)</td>
+<td>#1C1C1C</td>
+<td><font style="background-color: #1C1C1C;">#1C1C1C</font></td>
+</tr>
+<tr>
+<td>Gray10</td>
+<td>rgb(26,26,26)</td>
+<td>#1A1A1A</td>
+<td><font style="background-color: #1A1A1A;">#1A1A1A</font></td>
+</tr>
+<tr>
+<td>Gray9</td>
+<td>rgb(23,23,23)</td>
+<td>#171717</td>
+<td><font style="background-color: #171717;">#171717</font></td>
+</tr>
+<tr>
+<td>Gray8</td>
+<td>rgb(20,20,20)</td>
+<td>#141414</td>
+<td><font style="background-color: #141414;">#141414</font></td>
+</tr>
+<tr>
+<td>Gray7</td>
+<td>rgb(18,18,18)</td>
+<td>#121212</td>
+<td><font style="background-color: #121212;">#121212</font></td>
+</tr>
+<tr>
+<td>Gray6</td>
+<td>rgb(15,15,15)</td>
+<td>#0F0F0F</td>
+<td><font style="background-color: #0F0F0F;">#0F0F0F</font></td>
+</tr>
+<tr>
+<td>Gray5</td>
+<td>rgb(13,13,13)</td>
+<td>#0D0D0D</td>
+<td><font style="background-color: #0D0D0D;">#0D0D0D</font></td>
+</tr>
+<tr>
+<td>Gray4</td>
+<td>rgb(10,10,10)</td>
+<td>#0A0A0A</td>
+<td><font style="background-color: #0A0A0A;">#0A0A0A</font></td>
+</tr>
+<tr>
+<td>Gray3</td>
+<td>rgb(8,8,8)</td>
+<td>#080808</td>
+<td><font style="background-color: #080808;">#080808</font></td>
+</tr>
+<tr>
+<td>Gray2</td>
+<td>rgb(5,5,5)</td>
+<td>#050505</td>
+<td><font style="background-color: #050505;">#050505</font></td>
+</tr>
+<tr>
+<td>Gray1</td>
+<td>rgb(3,3,3)</td>
+<td>#030303</td>
+<td><font style="background-color: #030303;">#030303</font></td>
 </tr>
 <tr>
 <td>DarkGray</td>
 <td>rgb(169,169,169)</td>
 <td>#A9A9A9</td>
+<td><font style="background-color: #A9A9A9;">#A9A9A9</font></td>
 </tr>
 <tr>
-<td>DarkGrey</td>
-<td>rgb(169,169,169)</td>
-<td>#A9A9A9</td>
-</tr>
-<tr>
-<td>gray66</td>
-<td>rgb(168,168,168)</td>
-<td>#A8A8A8</td>
-</tr>
-<tr>
-<td>grey66</td>
-<td>rgb(168,168,168)</td>
-<td>#A8A8A8</td>
-</tr>
-<tr>
-<td>gray65</td>
-<td>rgb(166,166,166)</td>
-<td>#A6A6A6</td>
-</tr>
-<tr>
-<td>grey65</td>
-<td>rgb(166,166,166)</td>
-<td>#A6A6A6</td>
-</tr>
-<tr>
-<td>gray64</td>
-<td>rgb(163,163,163)</td>
-<td>#A3A3A3</td>
-</tr>
-<tr>
-<td>grey64</td>
-<td>rgb(163,163,163)</td>
-<td>#A3A3A3</td>
-</tr>
-<tr>
-<td>gray63</td>
-<td>rgb(161,161,161)</td>
-<td>#A1A1A1</td>
-</tr>
-<tr>
-<td>grey63</td>
-<td>rgb(161,161,161)</td>
-<td>#A1A1A1</td>
-</tr>
-<tr>
-<td>gray62</td>
-<td>rgb(158,158,158)</td>
-<td>#9E9E9E</td>
-</tr>
-<tr>
-<td>grey62</td>
-<td>rgb(158,158,158)</td>
-<td>#9E9E9E</td>
-</tr>
-<tr>
-<td>gray61</td>
-<td>rgb(156,156,156)</td>
-<td>#9C9C9C</td>
-</tr>
-<tr>
-<td>grey61</td>
-<td>rgb(156,156,156)</td>
-<td>#9C9C9C</td>
-</tr>
-<tr>
-<td>gray60</td>
-<td>rgb(153,153,153)</td>
-<td>#999999</td>
-</tr>
-<tr>
-<td>grey60</td>
-<td>rgb(153,153,153)</td>
-<td>#999999</td>
-</tr>
-<tr>
-<td>gray59</td>
-<td>rgb(150,150,150)</td>
-<td>#969696</td>
-</tr>
-<tr>
-<td>grey59</td>
-<td>rgb(150,150,150)</td>
-<td>#969696</td>
-</tr>
-<tr>
-<td>gray58</td>
-<td>rgb(148,148,148)</td>
-<td>#949494</td>
-</tr>
-<tr>
-<td>grey58</td>
-<td>rgb(148,148,148)</td>
-<td>#949494</td>
-</tr>
-<tr>
-<td>gray57</td>
-<td>rgb(145,145,145)</td>
-<td>#919191</td>
-</tr>
-<tr>
-<td>grey57</td>
-<td>rgb(145,145,145)</td>
-<td>#919191</td>
-</tr>
-<tr>
-<td>gray56</td>
-<td>rgb(143,143,143)</td>
-<td>#8F8F8F</td>
-</tr>
-<tr>
-<td>grey56</td>
-<td>rgb(143,143,143)</td>
-<td>#8F8F8F</td>
-</tr>
-<tr>
-<td>gray55</td>
-<td>rgb(140,140,140)</td>
-<td>#8C8C8C</td>
-</tr>
-<tr>
-<td>grey55</td>
-<td>rgb(140,140,140)</td>
-<td>#8C8C8C</td>
-</tr>
-<tr>
-<td>gray54</td>
-<td>rgb(138,138,138)</td>
-<td>#8A8A8A</td>
-</tr>
-<tr>
-<td>grey54</td>
-<td>rgb(138,138,138)</td>
-<td>#8A8A8A</td>
-</tr>
-<tr>
-<td>gray53</td>
-<td>rgb(135,135,135)</td>
-<td>#878787</td>
-</tr>
-<tr>
-<td>grey53</td>
-<td>rgb(135,135,135)</td>
-<td>#878787</td>
-</tr>
-<tr>
-<td>gray52</td>
-<td>rgb(133,133,133)</td>
-<td>#858585</td>
-</tr>
-<tr>
-<td>gray51</td>
-<td>rgb(130,130,130)</td>
-<td>#828282</td>
-</tr>
-<tr>
-<td>fractal</td>
-<td>rgb(128,128,128)</td>
-<td>#808080</td>
-</tr>
-<tr>
-<td>gray50</td>
-<td>rgb(127,127,127)</td>
-<td>#7F7F7F</td>
-</tr>
-<tr>
-<td>gray</td>
-<td>rgb(126,126,126)</td>
-<td>#7E7E7E</td>
-</tr>
-<tr>
-<td>grey49</td>
-<td>rgb(125,125,125)</td>
-<td>#7D7D7D</td>
-</tr>
-<tr>
-<td>gray47</td>
-<td>rgb(120,120,120)</td>
-<td>#787878</td>
-</tr>
-<tr>
-<td>gray46</td>
-<td>rgb(117,117,117)</td>
-<td>#757575</td>
-</tr>
-<tr>
-<td>gray45</td>
-<td>rgb(115,115,115)</td>
-<td>#737373</td>
-</tr>
-<tr>
-<td>gray44</td>
-<td>rgb(112,112,112)</td>
-<td>#707070</td>
-</tr>
-<tr>
-<td>gray43</td>
-<td>rgb(110,110,110)</td>
-<td>#6E6E6E</td>
-</tr>
-<tr>
-<td>gray42</td>
-<td>rgb(107,107,107)</td>
-<td>#6B6B6B</td>
-</tr>
-<tr>
-<td>DimGrey</td>
-<td>rgb(105,105,105)</td>
-<td>#696969</td>
-</tr>
-<tr>
-<td>gray39</td>
-<td>rgb(99,99,99)</td>
-<td>#636363</td>
-</tr>
-<tr>
-<td>gray38</td>
-<td>rgb(97,97,97)</td>
-<td>#616161</td>
-</tr>
-<tr>
-<td>gray37</td>
-<td>rgb(94,94,94)</td>
-<td>#5E5E5E</td>
-</tr>
-<tr>
-<td>gray36</td>
-<td>rgb(92,92,92)</td>
-<td>#5C5C5C</td>
-</tr>
-<tr>
-<td>gray35</td>
-<td>rgb(89,89,89)</td>
-<td>#595959</td>
-</tr>
-<tr>
-<td>gray34</td>
-<td>rgb(87,87,87)</td>
-<td>#575757</td>
-</tr>
-<tr>
-<td>gray33</td>
-<td>rgb(84,84,84)</td>
-<td>#545454</td>
-</tr>
-<tr>
-<td>gray32</td>
-<td>rgb(82,82,82)</td>
-<td>#525252</td>
-</tr>
-<tr>
-<td>gray31</td>
-<td>rgb(79,79,79)</td>
-<td>#4F4F4F</td>
-</tr>
-<tr>
-<td>gray30</td>
-<td>rgb(77,77,77)</td>
-<td>#4D4D4D</td>
-</tr>
-<tr>
-<td>gray29</td>
-<td>rgb(74,74,74)</td>
-<td>#4A4A4A</td>
-</tr>
-<tr>
-<td>gray28</td>
-<td>rgb(71,71,71)</td>
-<td>#474747</td>
-</tr>
-<tr>
-<td>gray27</td>
-<td>rgb(69,69,69)</td>
-<td>#454545</td>
-</tr>
-<tr>
-<td>gray26</td>
-<td>rgb(66,66,66)</td>
-<td>#424242</td>
-</tr>
-<tr>
-<td>gray25</td>
-<td>rgb(64,64,64)</td>
-<td>#404040</td>
-</tr>
-<tr>
-<td>gray24</td>
-<td>rgb(61,61,61)</td>
-<td>#3D3D3D</td>
-</tr>
-<tr>
-<td>gray23</td>
-<td>rgb(59,59,59)</td>
-<td>#3B3B3B</td>
-</tr>
-<tr>
-<td>gray22</td>
-<td>rgb(56,56,56)</td>
-<td>#383838</td>
-</tr>
-<tr>
-<td>gray21</td>
-<td>rgb(54,54,54)</td>
-<td>#363636</td>
-</tr>
-<tr>
-<td>gray20</td>
-<td>rgb(51,51,51)</td>
-<td>#333333</td>
-</tr>
-<tr>
-<td>gray19</td>
-<td>rgb(48,48,48)</td>
-<td>#303030</td>
-</tr>
-<tr>
-<td>gray18</td>
-<td>rgb(46,46,46)</td>
-<td>#2E2E2E</td>
-</tr>
-<tr>
-<td>gray17</td>
-<td>rgb(43,43,43)</td>
-<td>#2B2B2B</td>
-</tr>
-<tr>
-<td>gray16</td>
-<td>rgb(41,41,41)</td>
-<td>#292929</td>
-</tr>
-<tr>
-<td>gray15</td>
-<td>rgb(38,38,38)</td>
-<td>#262626</td>
-</tr>
-<tr>
-<td>gray14</td>
-<td>rgb(36,36,36)</td>
-<td>#242424</td>
-</tr>
-<tr>
-<td>gray13</td>
-<td>rgb(33,33,33)</td>
-<td>#212121</td>
-</tr>
-<tr>
-<td>gray12</td>
-<td>rgb(31,31,31)</td>
-<td>#1F1F1F</td>
-</tr>
-<tr>
-<td>gray11</td>
-<td>rgb(28,28,28)</td>
-<td>#1C1C1C</td>
-</tr>
-<tr>
-<td>gray10</td>
-<td>rgb(26,26,26)</td>
-<td>#1A1A1A</td>
-</tr>
-<tr>
-<td>gray9</td>
-<td>rgb(23,23,23)</td>
-<td>#171717</td>
-</tr>
-<tr>
-<td>gray8</td>
-<td>rgb(20,20,20)</td>
-<td>#141414</td>
-</tr>
-<tr>
-<td>gray7</td>
-<td>rgb(18,18,18)</td>
-<td>#121212</td>
-</tr>
-<tr>
-<td>gray6</td>
-<td>rgb(15,15,15)</td>
-<td>#0F0F0F</td>
-</tr>
-<tr>
-<td>gray5</td>
-<td>rgb(13,13,13)</td>
-<td>#0D0D0D</td>
-</tr>
-<tr>
-<td>gray4</td>
-<td>rgb(10,10,10)</td>
-<td>#0A0A0A</td>
-</tr>
-<tr>
-<td>gray3</td>
-<td>rgb(8,8,8)</td>
-<td>#080808</td>
-</tr>
-<tr>
-<td>gray2</td>
-<td>rgb(5,5,5)</td>
-<td>#050505</td>
-</tr>
-<tr>
-<td>gray1</td>
-<td>rgb(3,3,3)</td>
-<td>#030303</td>
-</tr>
-<tr>
-<td>black</td>
+<td>Black</td>
 <td>rgb(0,0,0)</td>
 <td>#000000</td>
+<td><font style="background-color: #000000;">#000000</font></td>
 </tr>
 <tr>
-<td>gray0</td>
-<td>rgb(0,0,0)</td>
-<td>#000000</td>
-</tr>
-<tr>
-<td>opaque</td>
-<td>rgb(0,0,0)</td>
-<td>#000000</td>
-</tr>
-<tr>
-<td>none</td>
+<td>Transparent</td>
 <td>rgba(0,0,0,0.0)</td>
 <td>#00000000</td>
-</tr>
-<tr>
-<td>transparent</td>
-<td>rgba(0,0,0,0.0)</td>
-<td>#00000000</td>
+<td><font style="background-color: #00000000;">#00000000</font></td>
 </tr>
 </tbody>
 </table>
