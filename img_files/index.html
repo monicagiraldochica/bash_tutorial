@@ -464,272 +464,4517 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tbody>
 </table>
 <h3 id="imagemagick-options">ImageMagick options</h3>
-<p>| Option | Arguments | Description | Category | <code>magick</code> | <code>identify</code> | <code>mogrify</code> | <code>composite</code> | <code>montage</code> | <code>compare</code> | <code>stream</code> | <code>display</code> | <code>animate</code> | <code>import</code> | <code>conjure</code> |
-|--------|-----------|--------------|-----------|----------|-----------|-----------|-----------|----------|----------|----------|----------|----------|----------|
-| <code>-adjoin</code> | No arguments | used to control how multi-image files are written | bi-functional | no | no | yes | no | yes | yes | no | no | no | yes | no |
-| <code>-affine</code> | <code>matrix</code> | specify an affine transformation matrix that can then be applied to an image with <code>-transform</code> | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-alpha</code> | <code>option</code> | control the alpha channel of an image, which represents transparency | bi-functional | no | yes | yes | yes | yes | yes | no | yes | yes | no | no |
-| <code>-antialias</code> | No arguments | enable or disable antialiasing, which smooths jagged edges in text, shapes, or lines | bi-functional | no | yes | yes | no | no | no | no | yes | no | no | no |
-| <code>-authenticate</code> | <code>password</code> | provide a password or key when reading images that are encrypted | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | no | no |
-| <code>-attenuate</code> | <code>factor</code> | scale the effect of the next image-editing operation | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-background</code> | <code>color</code> | background color  | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
-| <code>-bias</code> | <code>value</code> | add bias when convolving an image | input-option | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-black-point-compensation</code> | No arguments |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-blue-primary</code> | <code>point</code> | chromaticity blue primary point  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-bordercolor</code> | <code>color</code> | border color | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-caption</code> | <code>string</code> | assign a caption to an image | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-clip</code> | No arguments | along the first path from the 8BIM profile  | input-option | no | yes | yes | no | no | no | no | yes | no | no | no |
-| <code>-clip-mask</code> | <code>filename</code> | associate a clip mask with the image  | input-option | no | yes | yes | no | no | no | no | no | no | no | no |
-| <code>-clip-path</code> | <code>id</code> | clip along a named path from the 8BIM profile  | input-option | no | yes | yes | no | no | no | no | yes | no | no | no |
-| <code>-colorspace</code> | <code>type</code> | alternate image colorspace  | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-comment</code> | <code>string</code> | annotate image with comment  | bi-functional | no | no | yes | yes | yes | no | no | yes | no | yes | no |
-| <code>-compose</code> | <code>operator</code> | set image composite operator  | bi-functional | no | no | yes | yes | yes | yes | no | no | no | no | no |
-| <code>-compress</code> | <code>type</code> | type of pixel compression when writing the image  | bi-functional | no | no | yes | yes | yes | yes | yes | yes | no | yes | no |
-| <code>-define</code> | <code>format:key=value</code> |  | output-option | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-delay</code> | <code>seconds</code> | display the next image after pausing  | bi-functional | no | no | yes | no | yes | no | no | yes | yes | yes | no |
-| <code>-density</code> | <code>geometry</code> | horizontal and vertical density of the image  | input-option | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-depth</code> | <code>value</code> | image depth  | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-direction</code> | <code>type</code> | render text right-to-left or left-to-right  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-display</code> | <code>server</code> | get image or font from this X server  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-dispose</code> | <code>method</code> | layer disposal method  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-dither</code> | <code>method</code> | apply error diffusion to image  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-encoding</code> | <code>type</code> | text encoding type  | bi-functional | no | no | yes | yes | yes | no | no | no | no | yes | no |
-| <code>-endian</code> | <code>type</code> | endianness (MSB or LSB) of the image  | bi-functional | no | yes | yes | yes | yes | no | no | yes | no | yes | no |
-| <code>-family</code> | <code>name</code> | render text with this font family  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-features</code> | <code>distance</code> | analyze image features (e.g. contrast, correlation)  | bi-functional | no | yes | yes | no | no | no | no | no | no | no | no |
-| <code>-fill</code> | <code>color</code> | color to use when filling a graphic primitive  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-filter</code> | <code>type</code> | use this filter when resizing an image  | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-font</code> | <code>name</code> | render text with this font  | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-format</code> | <code>string</code> | output formatted image characteristics  | bi-functional | no | yes | yes | yes | yes | yes | no | yes | yes | yes | no |
-| <code>-fuzz</code> | <code>distance</code> | colors within this distance are considered equal  | bi-functional | no | yes | yes | no | no | yes | no | yes | no | no | no |
-| <code>-gravity</code> | <code>type</code> | horizontal and vertical text placement  | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
-| <code>-green-primary</code> | <code>point</code> | chromaticity green primary point | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-illuminant</code> | <code>type</code> | reference illuminant | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-intensity</code> | <code>method</code> | method to generate an intensity value from a pixel | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-intent</code> | <code>type</code> | type of rendering intent when managing the image color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-interlace</code> | <code>type</code> | type of image interlacing scheme | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-interline-spacing</code> | <code>value</code> |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-interpolate</code> | <code>method</code> | pixel color interpolation method | input-option | no | yes | yes | yes | yes | no | yes | yes | yes | yes | no |
-| <code>-interword-spacing</code> | <code>value</code> |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-kerning</code> | <code>value</code> | set the space between two letters | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-label</code> | <code>string</code> | assign a label to an image | bi-functional | no | no | yes | yes | yes | no | no | yes | no | yes | no |
-| <code>-limit</code> | <code>type</code> | value pixel cache resource limit | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-loop</code> | <code>iterations</code> | add Netscape loop extension to your GIF animation | bi-functional | no | no | yes | no | no | no | no | yes | yes | no | no |
-| <code>-matte</code> | No arguments | matte channel if the image has one | bi-functional | no | yes | yes | yes | yes | no | no | yes | yes | no | no |
-| <code>-mattecolor</code> | <code>color</code> | frame color | bi-functional | no | no | yes | no | yes | no | no | yes | yes | no | no |
-| <code>-moments</code> | No arguments | image moments | bi-functional | no | yes | no | no | no | no | no | no | no | no | no |
-| <code>-monitor</code> | No arguments | progress | input-option | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
-| <code>-orient</code> | <code>type</code> | image orientation | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-page</code> | <code>geometry</code> | size and location of an image canvas (setting) | input-option | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-ping</code> | No arguments | determine image attributes | bi-functional | no | yes | yes | no | no | no | no | no | no | no | no |
-| <code>-pointsize</code> | <code>value</code> | font point size | bi-functional | no | no | yes | yes | yes | no | no | no | no | yes | no |
-| <code>-precision</code> | <code>value</code> | maximum number of significant digits to print | bi-functional | no | yes | yes | no | no | yes | no | no | no | no | no |
-| <code>-preview</code> | <code>type</code> | image preview type | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-quality</code> | <code>value</code> | JPEG/MIFF/PNG compression level | output-option | no | no | yes | yes | yes | yes | no | yes | no | yes | no |
-| <code>-quiet</code> | No arguments | suppress all warning messages | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
-| <code>-read-mask</code> | <code>filename</code> | associate a read mask with the image | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
-| <code>-red-primary</code> | <code>point</code> | chromaticity red primary point | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-regard-warnings</code> | No arguments | pay attention to warning messages | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
-| <code>-remap</code> | <code>filename</code> | transform image colors to match this set of colors | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-repage</code> | <code>geometry</code> | size and location of an image canvas | input-option | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
-| <code>-respect-parentheses</code> | No arguments | settings remain in effect until parenthesis boundary | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-sampling-factor</code> | <code>geometry</code> | | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-scene</code> | <code>value</code> | image scene number | bi-functional | no | no | yes | yes | no | no | no | no | no | yes | no |
-| <code>-seed</code> | <code>value</code> | seed a new sequence of pseudo-random numbers | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
-| <code>-size</code> | <code>geometry</code> | width and height of image | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | no | no |
-| <code>-stretch</code> | <code>type</code> | render text with this font stretch | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-stroke</code> | <code>color</code> | graphic primitive stroke color | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-strokewidth</code> | <code>value</code> | graphic primitive stroke width | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-style</code> | <code>type</code> | render text with this font style | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-support</code> | <code>factor</code> | resize support: &gt; 1.0 is blurry, &lt; 1.0 is sharp | bi-functional | no | no | no | yes | yes | no | no | yes | yes | yes | no |
-| <code>-synchronize</code> | <code>synchronize</code> | image to storage device | bi-functional | no | no | yes | yes | yes | yes | yes | no | no | yes | no |
-| <code>-taint</code> | No arguments | declare the image as modified | bi-functional | no | no | yes | yes | yes | yes | yes | no | no | yes | no |
-| <code>-texture</code> | <code>filename</code> | name of texture to tile onto the image background | bi-functional | no | no | yes | no | yes | no | no | yes | no | no | no |
-| <code>-tile-offset</code> | <code>x,y</code> | Horizontal and vertical offset in pixels | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-treedepth</code> | <code>value</code> | color tree depth | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| <code>-transparent-color</code> | <code>color</code> | The color name or value that will be use as the transparent color | bi-functional | no | no | true | true | true | true | true | true | true | true | no |
-| <code>-undercolor</code> | <code>color</code> | Highlight color that is drawn behind text | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-units</code> | <code>type</code> | <code>type</code> can be <code>Undefined</code>, <code>PixelsPerInch</code> or <code>PixelsPerCentimeter</code> | bi-functional | no | true | true | true | true | no | no | no | no | no | no |
-| <code>-verbose</code> | No arguments | print detailed information about the image | bi-functional | no | true | true | true | true | true | true | true | true | true | true |
-| <code>-view</code> | <code>WxH+X+Y</code> | Portion of the image to view or initial viewport | bi-functional (<code>W</code>: width, <code>H</code>: height, <code>X</code>: horizontal offset, <code>Y</code>: vertical offset) | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-virtual-pixel</code> | <code>method</code> | <code>method</code> used to generate pixels outside the image boundaries when performing distortions, transformations, or convolutions | bi-functional | no | true | true | true | true | true | true | true | true | true | no |
-| <code>-weight</code> | <code>value</code> | render text with this font weight value | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-white-point</code> | <code>color</code> | color that represents the white reference for adjusting the image | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| <code>-write-mask</code> | <code>filename</code> | Path to the output file where the mask of the current image will be saved | bi-functional | no | no | no | no | no | true | no | no | no | no | no |
-| <code>-adaptive-blur</code> | <code>radius{,sigma}</code> | <code>radius</code> of the blur in pixels, sigma is optional | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-adaptive-resize</code> | <code>geometry</code> | target size for the resized image (<code>widthxheight</code>, <code>width</code>, <code>height</code>) | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-adaptive-sharpen</code> | <code>radius{,sigma}</code> | <code>radius</code> determines the neighborhood size for the operation, sigma is optional | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| <code>-alpha</code> | <code>option</code> | on, activate, off, deactivate, set, opaque, copy | bi-functional | no | true | true | true | true | true | no | true | true | no | no |
-| <code>-annotate</code> | <code>geometry text</code> | <code>geometry</code>: <code>angle[xoffset][yoffset]</code>, <code>text</code>: string of text to draw on the image | bi-functional | no | no | true | no | true | no | no | no | no | true | no |
-| <code>-auto-gamma</code> | No arguments | automagically adjust gamma level of image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-auto-level</code> | No arguments | automagically adjust color levels of image | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| <code>-auto-orient</code> | No arguments | automagically orient (rotate) image | bi-functional | no | true | true | no | true | true | no | true | no | no | no |
-| <code>-auto-threshold</code> | <code>value</code> | <code>value</code> adjusts how aggressively the image is binarized, if omitted it's computed automatically | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-bench</code> | <code>filename</code> | measure performance | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-bilateral-blur</code> | <code>radius{,sigma}</code> | <code>radius</code> of the filter in pixels, sigma is optional | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-black-threshold</code> | <code>value</code> | pixels with intensity less than or equal to <code>value</code> are converted to black | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-blue-shift</code> | <code>factor</code> | simulate a scene at nighttime in the moonlight, higher <code>factor</code> values increase the effect | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-blur</code> | <code>radius{,sigma}</code> | reduce image noise and detail levels | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| <code>-border</code> | <code>width</code> or <code>widthxheight</code> | surround image with a border of color | bi-functional | no | no | true | true | true | no | no | true | no | true | no |
-| <code>-bordercolor</code> | <code>color</code> | border color | bi-functional | no | no | true | true | true | no | no | no | no | no | no |
-| <code>-brightness-contrast</code> | <code>brightness{,contrast}</code> | positive values for <code>brightness</code> increase it, negative decrease it, same for contrast, which is optional | bi-functional | no | no | true | no | no | true | no | no | no | no | no |
-| <code>-canny</code> | radius+sigma low_threshold+high_threshold | detect edges in the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-cdl</code> | slope,offset,power,saturation | color correct with a color decision list | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-channel</code> | channel-list | set the image channel mask | bi-functional | no | true | true | true | true | true | true | true | true | true | no |
-| <code>-charcoal</code> | radius+sigma | simulate a charcoal drawing | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-chop</code> | -chop {width}x{height}{+-}x{+-}y | remove pixels from the image interior | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-clahe</code> | widthxheight{+clip-limit}{+bins} | contrast limited adaptive histogram equalization | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-clamp</code> | No arguments| keep pixel values in range (0-QuantumRange) | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-colorize</code> | amount{%} color | colorize the image with the fill color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-color-matrix</code> | matrix | apply color correction to the image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-colors</code> | value | preferred maximum number of colors in the image | bi-functional | no | no | true | true | true | no | no | true | true | true | no |
-| <code>-connected-components</code> | options label-type | used for analyzing or labeling connected regions in a binary or grayscale image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-contrast</code> | No arguments| enhance or reduce the image contrast | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| <code>-contrast-stretch</code> | <code>black-point%xwhite-point%</code> | enhance image contrast by remapping pixel values | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-convolve</code> | <code>coefficients</code> | apply a convolution kernel to an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-cycle</code> | <code>amount</code> | cycle the image colormap | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-decipher</code> | <code>key</code> | decode images that were previously encrypted | bi-functional | no | no | true | true | no | true | no | true | true | no | no |
-| <code>-deskew</code> | <code>threshold</code> | straighten an image | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| <code>-despeckle</code> | No arguments| reduce the speckles within an image | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| <code>-distort</code> | <code>method arguments</code> | geometrically transform an image using various distortion methods | bi-functional | no | no | true | true | true | true | no | no | no | no | no |
-| <code>-draw</code> | <code>primitive parameters</code> | render vector graphics, shapes, text, or paths directly onto an image | bi-functional | no | no | true | no | true | no | no | no | no | no | no |
-| <code>-edge</code> | <code>radius</code> | edge detection on an image | no | no | true | no | no | no | no | true | no | no | no |
-| <code>-encipher</code> | <code>key</code> | encrypt an image so that it cannot be viewed normally without a key | bi-functional | no | no | true | true | no | true | no | no | no | true | no |
-| <code>-emboss</code> | <code>radiusxsigma</code> | create a 3D relief effect that makes an image appear raised or stamped | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-enhance</code> | No arguments| improve the quality of an image by reducing noise and optimizing contrast | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| <code>-equalize</code> | No arguments| global histogram equalization, which enhances the contrast of an image by redistributing pixel intensities | bi-functional | no | no | true | no | no | no | no | true | no | no | no |
-| <code>-evaluate</code> | <code>operator value</code> | perform arithmetic operations on the pixel values of an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-extent</code> | <code>widthxheight{+-x+-y}</code> | resize the canvas of an image without scaling the original | bi-functional | no | no | true | no | true | no | no | true | true | true | no |
-| <code>-extract</code> | <code>widthxheight+x+y</code> | crop a rectangular region from an image based on specified geometry | bi-functional | no | true | true | true | true | true | true | true | true | no | no |
-| <code>-fft</code> | No arguments| perform a Fast Fourier Transform (FFT) on an image, converting it from the spatial domain (pixel values) to the frequency domain | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-flip</code> | No arguments| flip image vertically (along the horizontal axis) | bi-functional | no | no | true | no | true | no | no | true | no | no | no |
-| <code>-floodfill</code> | <code>x,y target_color fill_color</code> | fill a connected region of pixels with a new color, starting from a specified point and replacing pixels that match a target color | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-flop</code> | No arguments | flip an image horizontally (along the vertical axis) | bi-functional | no | no | true | no | true | no | no | true | no | no | no |
-| <code>-frame</code> | <code>widthxheight+outerBevel+innerBevel</code> | add a decorative border or frame around an image | bi-functional | no | no | true | no | true | no | no | true | no | true | no |
-| <code>-function</code> | <code>type arguments</code> | apply a mathematical function to pixel values in an image | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-gamma</code> | <code>value</code> | adjust the gamma value of an image, which non-linearly modifies pixel brightness | bi-functional | no | true | true | no | true | no | no | true | true | no | no |
-| <code>-gaussian-blur</code> | <code>radiusxsigma</code> | smooth pixel values in a way that preserves edges | bi-functional | no | no | true | no | no | no | no | no | no | no | no |
-| <code>-geometry</code> | <code>{width}x{height}{offset}</code> | preferred size or location of the image | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-grayscale</code> | <code>method</code> | convert image to grayscale. possible methods: <code>intensity</code>, <code>brightness</code>, <code>lightness</code>, <code>rec601luma</code>, <code>rec601luminance</code>, <code>rec709luma</code>, <code>rec709luminance</code> | bi-functional | no | yes | yes | no | no | no | no | no | no | no | no |
-| <code>-hough-lines</code> | <code>radiusx{sigma}</code> | detect straight lines in an image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-identify</code> | <code>format</code> | identify the format and characteristics of the image. format can include any ImageMagick property escape. | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-ift</code> | <code>{normalize}</code> | implements the inverse discrete Fourier transform (DFT) | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-implode</code> | <code>amount</code> | implode image pixels about the center | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-integral</code> | No arguments | calculate the sum of values (pixel values) in the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-interpolative-resize</code> | <code>interpolator</code> | performs fast resizing using a point‑sampling interpolator. <code>interpolator</code> must be one of ImageMagick point sampling filters | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-kmeans</code> | <code>clusters</code> | K means color reduction | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-kuwahara</code> | <code>radius</code> | edge preserving noise reduction filter | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-lat</code> | geometry | local adaptive thresholding | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-level</code> | value | adjust the level of image contrast | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
-| <code>-level-colors</code> | color,color | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-linear-stretch</code> | geometry | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-liquid-rescale</code> | geometry | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-local-contrast</code> | geometry | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-mean-shift</code> | geometry | delineate arbitrarily shaped clusters in the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-median</code> | geometry | apply a median filter to the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-mode</code> | geometry | make each pixel the 'predominant color' of the | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-modulate</code> | value | vary the brightness, saturation, and hue | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-monochrome</code> | transform | image to black and white | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-morphology</code> | method | kernel | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-motion-blur</code> | geometry | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-negate</code> | replace | every pixel with its complementary color | bi-functional | no | yes | yes | yes | no | yes | no | yes | no | yes | no |
-| <code>-noise</code> | geometry | add or reduce noise in an image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-normalize</code> | transform | image to span the full range of colors | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
-| <code>-opaque</code> | color | change this color to the fill color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-ordered-dither</code> | NxN | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-paint</code> | radius | simulate an oil painting | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-perceptible</code> | epsilon | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-epsilon</code> |  |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-polaroid</code> | angle | simulate a Polaroid picture | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-posterize</code> | levels | reduce the image to a limited number of color levels | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-profile</code> | filename | add, delete, or apply an image profile | bi-functional | no | no | yes | yes | yes | yes | no | yes | no | no | no |
-| <code>-quantize</code> | colorspace | reduce colors in this colorspace | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-raise</code> | value | lighten/darken image edges to create a 3-D effect | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
-| <code>-random-threshold</code> | low,high | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-range-threshold</code> | values | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-region</code> | geometry | apply options to a portion of the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-render</code> | render | vector graphics | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-resample</code> | geometry | change the resolution of an image | bi-functional | no | no | yes | no | no | no | no | yes | yes | no | no |
-| <code>-reshape</code> | geometry | reshape the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-resize</code> | geometry | resize the image | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
-| <code>-roll</code> | geometry | roll an image vertically or horizontally | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
-| <code>-rotate</code> | degrees | apply Paeth rotation to the image | bi-functional | no | no | yes | yes | yes | yes | no | yes | yes | yes | no |
-| <code>-rotational-blur</code> | angle |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-sample</code> | geometry | scale image with pixel sampling | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
-| <code>-scale</code> | geometry | scale the image | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-segment</code> | values | segment an image | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
-| <code>-selective-blur</code> | geometry |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-sepia-tone</code> | threshold |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-set</code> | property | value set an image property | bi-functional | no | yes | yes | no | yes | yes | yes | yes | yes | yes | no |
-| <code>-shade</code> | degrees | shade the image using a distant light source | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-shadow</code> | geometry | simulate an image shadow | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-sharpen</code> | geometry | sharpen the image | bi-functional | no | no | yes | yes | no | no | no | yes | no | no | no |
-| <code>-shave</code> | geometry | shave pixels from the image edges | bi-functional | no | no | yes | yes | no | no | no | no | no | no | no |
-| <code>-shear</code> | geometry | slide one edge of the image along the X or Y axis | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-sigmoidal-contrast</code> | geometry |  | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
-| <code>-sketch</code> | geometry | simulate a pencil sketch | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-solarize</code> | threshold | negate all pixels above the threshold level | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-sort-pixels</code> | sort | each scanline in ascending order of intensity | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-sparse-color</code> | method | args | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-splice</code> | geometry | splice the background color into the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-spread</code> | radius | displace image pixels by a random amount | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-statistic</code> | type | geometry | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-strip</code> | strip | image of all profiles and comments | output-option | no | yes | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-swirl</code> | degrees | swirl image pixels about the center | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-threshold</code> | value | threshold the image | bi-functional | no | no | yes | no | no | no | no | yes | no | no | no |
-| <code>-thumbnail</code> | geometry | create a thumbnail of the image | bi-functional | no | no | yes | yes | yes | no | no | yes | yes | yes | no |
-| <code>-tile</code> | filename | tile image when filling a graphic primitive | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-tint</code> | value | tint the image with the fill color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-transform</code> | affine | transform image | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-transparent</code> | color | make this color transparent within the image | bi-functional | no | no | yes | yes | yes | yes | yes | yes | yes | yes | no |
-| <code>-transpose</code> | flip | image vertically and rotate 90 degrees | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-transverse</code> | flop | image horizontally and rotate 270 degrees | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-trim</code> | trim | image edges | bi-functional | no | no | yes | no | yes | yes | no | yes | yes | yes | no |
-| <code>-type</code> | type | image type | bi-functional | no | no | yes | yes | yes | yes | no | no | no | yes | no |
-| <code>-unique-colors</code> | discard | all but one of any pixel color | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-unsharp</code> | geometry | sharpen the image | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-vignette</code> | geometry | soften the edges of the image in vignette style | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-wave</code> | geometry | alter an image along a sine wave | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-wavelet-denoise</code> | threshold | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-white-balance</code> | automagically | adjust white balance of image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-white-threshold</code> | value | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-channel-fx</code> | expression | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-separate</code> | separate | an image channel into a grayscale image | bi-functional | no | no | yes | no | no | yes | no | no | no | no | no |
-| <code>-append</code> | append | an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-clut</code> | apply | a color lookup table to the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-coalesce</code> | merge | a sequence of images | bi-functional | no | no | yes | no | yes | no | no | yes | yes | no | no |
-| <code>-combine</code> | combine | a sequence of images | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-compare</code> | mathematically | and visually annotate the difference between an image and its reconstruction | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-complex</code> | operator | perform complex mathematics on an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-composite</code> | composite | image | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-copy</code> | geometry | offset | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-crop</code> | geometry | cut out a rectangular region of the image | input-option | no | yes | yes | no | yes | yes | no | yes | yes | yes | no |
-| <code>-deconstruct</code> | break | down an image sequence into constituent parts | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-evaluate-sequence</code> | operator | | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-flatten</code> | flatten | a sequence of images | bi-functional | no | no | yes | no | yes | no | no | yes | yes | no | no |
-| <code>-fx</code> | expression | apply mathematical expression to an image channel(s) | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-hald-clut</code> | apply | a Hald color lookup table to the image | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-layers</code> | method | optimize, merge, or compare image layers | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-morph</code> | value | morph an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-mosaic</code> | create | a mosaic from an image sequence | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-poly</code> | terms | build a polynomial from the image sequence and the corresponding | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-print</code> | string | interpret string and print to console | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-process</code> | arguments | process the image with a custom image filter | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-smush</code> | geometry | smush an image sequence together | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-write</code> | filename | write images to this file | bi-functional | no | no | yes | yes | no | yes | no | yes | no | no | no |
-| <code>-clone</code> | indexes | clone an image | bi-functional | no | no | no | no | yes | no | no | no | no | no | no |
-| <code>-delete</code> | indexes | delete the image from the image sequence | bi-functional | no | no | yes | no | yes | yes | no | no | no | no | no |
-| <code>-duplicate</code> | count,indexes |  | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-insert</code> | index | insert last image into the image sequence | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-reverse</code> | reverse | image sequence | bi-functional | no | no | yes | no | yes | no | no | no | no | no | no |
-| <code>-swap</code> | indexes | swap two images in the image sequence | bi-functional | no | no | yes | yes | yes | no | no | no | no | no | no |
-| <code>-debug</code> | events | display copious debugging information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
-| <code>-distribute-cache</code> | port |  | bi-functional | no | no | yes | no | no | no | no | no | no | no | no |
-| <code>-help</code> | print | program options | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
-| <code>-list</code> | type | print a list of supported option arguments | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
-| <code>-log</code> | format | format of debugging information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
-| <code>-usage</code> | print | program usage | bi-functional | no | no | no | no | no | no | no | no | no | no | no |
-| <code>-version</code> | print | version information | bi-functional | no | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Arguments</th>
+<th>Description</th>
+<th>Category</th>
+<th><code>magick</code></th>
+<th><code>identify</code></th>
+<th><code>mogrify</code></th>
+<th><code>composite</code></th>
+<th><code>montage</code></th>
+<th><code>compare</code></th>
+<th><code>stream</code></th>
+<th><code>display</code></th>
+<th><code>animate</code></th>
+<th><code>import</code></th>
+<th><code>conjure</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-adjoin</code></td>
+<td>No args</td>
+<td>Control how multi-image files are written</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-affine</code></td>
+<td><code>matrix</code></td>
+<td>Specify an affine transformation matrix that can then be applied to an image with <code>-transform</code></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-alpha</code></td>
+<td><code>option</code></td>
+<td>control the alpha channel of an image, which represents transparency</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-antialias</code></td>
+<td>No args</td>
+<td>enable or disable antialiasing, which smooths jagged edges in text, shapes, or lines</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-authenticate</code></td>
+<td><code>password</code></td>
+<td>provide a password or key when reading images that are encrypted</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-attenuate</code></td>
+<td><code>factor</code></td>
+<td>scale the effect of the next image-editing operation</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-background</code></td>
+<td><code>color</code></td>
+<td>background color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-bias</code></td>
+<td><code>value</code></td>
+<td>add bias when convolving an image</td>
+<td>input-option</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-black-point-compensation</code></td>
+<td>No args</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-blue-primary</code></td>
+<td><code>point</code></td>
+<td>chromaticity blue primary point</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-bordercolor</code></td>
+<td><code>color</code></td>
+<td>border color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-caption</code></td>
+<td><code>string</code></td>
+<td>assign a caption to an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-clip</code></td>
+<td>No args</td>
+<td>along the first path from the 8BIM profile</td>
+<td>input-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-clip-mask</code></td>
+<td><code>filename</code></td>
+<td>associate a clip mask with the image</td>
+<td>input-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-clip-path</code></td>
+<td><code>id</code></td>
+<td>clip along a named path from the 8BIM profile</td>
+<td>input-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-colorspace</code></td>
+<td><code>type</code></td>
+<td>alternate image colorspace</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-comment</code></td>
+<td><code>string</code></td>
+<td>annotate image with comment</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-compose</code></td>
+<td><code>operator</code></td>
+<td>set image composite operator</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-compress</code></td>
+<td><code>type</code></td>
+<td>type of pixel compression when writing the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-define</code></td>
+<td><code>format:key=value</code></td>
+<td></td>
+<td>output-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-delay</code></td>
+<td><code>seconds</code></td>
+<td>display the next image after pausing</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-density</code></td>
+<td><code>geometry</code></td>
+<td>horizontal and vertical density of the image</td>
+<td>input-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-depth</code></td>
+<td><code>value</code></td>
+<td>image depth</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-direction</code></td>
+<td><code>type</code></td>
+<td>render text right-to-left or left-to-right</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-display</code></td>
+<td><code>server</code></td>
+<td>get image or font from this X server</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-dispose</code></td>
+<td><code>method</code></td>
+<td>layer disposal method</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-dither</code></td>
+<td><code>method</code></td>
+<td>apply error diffusion to image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-encoding</code></td>
+<td><code>type</code></td>
+<td>text encoding type</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-endian</code></td>
+<td><code>type</code></td>
+<td>endianness (MSB or LSB) of the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-family</code></td>
+<td><code>name</code></td>
+<td>render text with this font family</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-features</code></td>
+<td><code>distance</code></td>
+<td>analyze image features (e.g. contrast, correlation)</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-fill</code></td>
+<td><code>color</code></td>
+<td>color to use when filling a graphic primitive</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-filter</code></td>
+<td><code>type</code></td>
+<td>use this filter when resizing an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-font</code></td>
+<td><code>name</code></td>
+<td>render text with this font</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-format</code></td>
+<td><code>string</code></td>
+<td>output formatted image characteristics</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-fuzz</code></td>
+<td><code>distance</code></td>
+<td>colors within this distance are considered equal</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-gravity</code></td>
+<td><code>type</code></td>
+<td>horizontal and vertical text placement</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-green-primary</code></td>
+<td><code>point</code></td>
+<td>chromaticity green primary point</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-illuminant</code></td>
+<td><code>type</code></td>
+<td>reference illuminant</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-intensity</code></td>
+<td><code>method</code></td>
+<td>method to generate an intensity value from a pixel</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-intent</code></td>
+<td><code>type</code></td>
+<td>type of rendering intent when managing the image color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-interlace</code></td>
+<td><code>type</code></td>
+<td>type of image interlacing scheme</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-interline-spacing</code></td>
+<td><code>value</code></td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-interpolate</code></td>
+<td><code>method</code></td>
+<td>pixel color interpolation method</td>
+<td>input-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-interword-spacing</code></td>
+<td><code>value</code></td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-kerning</code></td>
+<td><code>value</code></td>
+<td>set the space between two letters</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-label</code></td>
+<td><code>string</code></td>
+<td>assign a label to an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-limit</code></td>
+<td><code>type</code></td>
+<td>value pixel cache resource limit</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-loop</code></td>
+<td><code>iterations</code></td>
+<td>add Netscape loop extension to your GIF animation</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-matte</code></td>
+<td>No args</td>
+<td>matte channel if the image has one</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-mattecolor</code></td>
+<td><code>color</code></td>
+<td>frame color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-moments</code></td>
+<td>No args</td>
+<td>image moments</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-monitor</code></td>
+<td>No args</td>
+<td>progress</td>
+<td>input-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>-orient</code></td>
+<td><code>type</code></td>
+<td>image orientation</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-page</code></td>
+<td><code>geometry</code></td>
+<td>size and location of an image canvas (setting)</td>
+<td>input-option</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-ping</code></td>
+<td>No args</td>
+<td>determine image attributes</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-pointsize</code></td>
+<td><code>value</code></td>
+<td>font point size</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-precision</code></td>
+<td><code>value</code></td>
+<td>maximum number of significant digits to print</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-preview</code></td>
+<td><code>type</code></td>
+<td>image preview type</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-quality</code></td>
+<td><code>value</code></td>
+<td>JPEG/MIFF/PNG compression level</td>
+<td>output-option</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-quiet</code></td>
+<td>No args</td>
+<td>suppress all warning messages</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>-read-mask</code></td>
+<td><code>filename</code></td>
+<td>associate a read mask with the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-red-primary</code></td>
+<td><code>point</code></td>
+<td>chromaticity red primary point</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-regard-warnings</code></td>
+<td>No args</td>
+<td>pay attention to warning messages</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>-remap</code></td>
+<td><code>filename</code></td>
+<td>transform image colors to match this set of colors</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-repage</code></td>
+<td><code>geometry</code></td>
+<td>size and location of an image canvas</td>
+<td>input-option</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-respect-parentheses</code></td>
+<td>No args</td>
+<td>settings remain in effect until parenthesis boundary</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-sampling-factor</code></td>
+<td><code>geometry</code></td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-scene</code></td>
+<td><code>value</code></td>
+<td>image scene number</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-seed</code></td>
+<td><code>value</code></td>
+<td>seed a new sequence of pseudo-random numbers</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>-size</code></td>
+<td><code>geometry</code></td>
+<td>width and height of image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-stretch</code></td>
+<td><code>type</code></td>
+<td>render text with this font stretch</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-stroke</code></td>
+<td><code>color</code></td>
+<td>graphic primitive stroke color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-strokewidth</code></td>
+<td><code>value</code></td>
+<td>graphic primitive stroke width</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-style</code></td>
+<td><code>type</code></td>
+<td>render text with this font style</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-support</code></td>
+<td><code>factor</code></td>
+<td>resize support: &gt; 1.0 is blurry, &lt; 1.0 is sharp</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-synchronize</code></td>
+<td><code>synchronize</code></td>
+<td>image to storage device</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-taint</code></td>
+<td>No args</td>
+<td>declare the image as modified</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-texture</code></td>
+<td><code>filename</code></td>
+<td>name of texture to tile onto the image background</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-tile-offset</code></td>
+<td><code>x,y</code></td>
+<td>Horizontal and vertical offset in pixels</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-treedepth</code></td>
+<td><code>value</code></td>
+<td>color tree depth</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-transparent-color</code></td>
+<td><code>color</code></td>
+<td>The color name or value that will be use as the transparent color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-undercolor</code></td>
+<td><code>color</code></td>
+<td>Highlight color that is drawn behind text</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-units</code></td>
+<td><code>type</code></td>
+<td><code>type</code> can be <code>Undefined</code>, <code>PixelsPerInch</code> or <code>PixelsPerCentimeter</code></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-verbose</code></td>
+<td>No args</td>
+<td>print detailed information about the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>-view</code></td>
+<td>geometry</td>
+<td>Portion of the image to view or initial viewport. <code>geometry</code>: <code>widthxheight+horizontal_offsetvertical_offset</code></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-virtual-pixel</code></td>
+<td><code>method</code></td>
+<td><code>method</code> used to generate pixels outside the image boundaries when performing distortions, transformations, or convolutions</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-weight</code></td>
+<td><code>value</code></td>
+<td>render text with this font weight value</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-white-point</code></td>
+<td><code>color</code></td>
+<td>color that represents the white reference for adjusting the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-write-mask</code></td>
+<td><code>filename</code></td>
+<td>Path to the output file where the mask of the current image will be saved</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-adaptive-blur</code></td>
+<td><code>radius{,sigma}</code></td>
+<td><code>radius</code> of the blur in pixels, sigma is optional</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-adaptive-resize</code></td>
+<td><code>geometry</code></td>
+<td>target size for the resized image (<code>widthxheight</code>, <code>width</code>, <code>height</code>)</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-adaptive-sharpen</code></td>
+<td><code>radius{,sigma}</code></td>
+<td><code>radius</code> determines the neighborhood size for the operation, sigma is optional</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-alpha</code></td>
+<td><code>option</code></td>
+<td>on, activate, off, deactivate, set, opaque, copy</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-annotate</code></td>
+<td><code>geometry text</code></td>
+<td><code>geometry</code>: <code>angle[xoffset][yoffset]</code>, <code>text</code>: string of text to draw on the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-auto-gamma</code></td>
+<td>No args</td>
+<td>automagically adjust gamma level of image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-auto-level</code></td>
+<td>No args</td>
+<td>automagically adjust color levels of image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-auto-orient</code></td>
+<td>No args</td>
+<td>automagically orient (rotate) image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-auto-threshold</code></td>
+<td><code>value</code></td>
+<td><code>value</code> adjusts how aggressively the image is binarized, if omitted it's computed automatically</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-bench</code></td>
+<td><code>filename</code></td>
+<td>measure performance</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-bilateral-blur</code></td>
+<td><code>radius{,sigma}</code></td>
+<td><code>radius</code> of the filter in pixels, sigma is optional</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-black-threshold</code></td>
+<td><code>value</code></td>
+<td>pixels with intensity less than or equal to <code>value</code> are converted to black</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-blue-shift</code></td>
+<td><code>factor</code></td>
+<td>simulate a scene at nighttime in the moonlight, higher <code>factor</code> values increase the effect</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-blur</code></td>
+<td><code>radius{,sigma}</code></td>
+<td>reduce image noise and detail levels</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-border</code></td>
+<td><code>width</code> or <code>widthxheight</code></td>
+<td>surround image with a border of color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-bordercolor</code></td>
+<td><code>color</code></td>
+<td>border color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-brightness-contrast</code></td>
+<td><code>brightness{,contrast}</code></td>
+<td>positive values for <code>brightness</code> increase it, negative decrease it, same for contrast, which is optional</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-canny</code></td>
+<td>radius+sigma low_threshold+high_threshold</td>
+<td>detect edges in the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-cdl</code></td>
+<td>slope,offset,power,saturation</td>
+<td>color correct with a color decision list</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-channel</code></td>
+<td>channel-list</td>
+<td>set the image channel mask</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-charcoal</code></td>
+<td>radius+sigma</td>
+<td>simulate a charcoal drawing</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-chop</code></td>
+<td>-chop {width}x{height}{+-}x{+-}y</td>
+<td>remove pixels from the image interior</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-clahe</code></td>
+<td>widthxheight{+clip-limit}{+bins}</td>
+<td>contrast limited adaptive histogram equalization</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-clamp</code></td>
+<td>No args</td>
+<td>keep pixel values in range (0-QuantumRange)</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-colorize</code></td>
+<td>amount{%} color</td>
+<td>colorize the image with the fill color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-color-matrix</code></td>
+<td>matrix</td>
+<td>apply color correction to the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-colors</code></td>
+<td>value</td>
+<td>preferred maximum number of colors in the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-connected-components</code></td>
+<td>options label-type</td>
+<td>used for analyzing or labeling connected regions in a binary or grayscale image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-contrast</code></td>
+<td>No args</td>
+<td>enhance or reduce the image contrast</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-contrast-stretch</code></td>
+<td><code>black-point%xwhite-point%</code></td>
+<td>enhance image contrast by remapping pixel values</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-convolve</code></td>
+<td><code>coefficients</code></td>
+<td>apply a convolution kernel to an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-cycle</code></td>
+<td><code>amount</code></td>
+<td>cycle the image colormap</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-decipher</code></td>
+<td><code>key</code></td>
+<td>decode images that were previously encrypted</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-deskew</code></td>
+<td><code>threshold</code></td>
+<td>straighten an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-despeckle</code></td>
+<td>No args</td>
+<td>reduce the speckles within an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-distort</code></td>
+<td><code>method arguments</code></td>
+<td>geometrically transform an image using various distortion methods</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-draw</code></td>
+<td><code>primitive parameters</code></td>
+<td>render vector graphics, shapes, text, or paths directly onto an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-edge</code></td>
+<td><code>radius</code></td>
+<td>edge detection on an image</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-encipher</code></td>
+<td><code>key</code></td>
+<td>encrypt an image so that it cannot be viewed normally without a key</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-emboss</code></td>
+<td><code>radiusxsigma</code></td>
+<td>create a 3D relief effect that makes an image appear raised or stamped</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-enhance</code></td>
+<td>No args</td>
+<td>improve the quality of an image by reducing noise and optimizing contrast</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-equalize</code></td>
+<td>No args</td>
+<td>global histogram equalization, which enhances the contrast of an image by redistributing pixel intensities</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-evaluate</code></td>
+<td><code>operator value</code></td>
+<td>perform arithmetic operations on the pixel values of an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-extent</code></td>
+<td><code>widthxheight{+-x+-y}</code></td>
+<td>resize the canvas of an image without scaling the original</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-extract</code></td>
+<td><code>widthxheight+x+y</code></td>
+<td>crop a rectangular region from an image based on specified geometry</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-fft</code></td>
+<td>No args</td>
+<td>perform a Fast Fourier Transform (FFT) on an image, converting it from the spatial domain (pixel values) to the frequency domain</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-flip</code></td>
+<td>No args</td>
+<td>flip image vertically (along the horizontal axis)</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-floodfill</code></td>
+<td><code>x,y target_color fill_color</code></td>
+<td>fill a connected region of pixels with a new color, starting from a specified point and replacing pixels that match a target color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-flop</code></td>
+<td>No args</td>
+<td>flip an image horizontally (along the vertical axis)</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-frame</code></td>
+<td><code>widthxheight+outerBevel+innerBevel</code></td>
+<td>add a decorative border or frame around an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-function</code></td>
+<td><code>type arguments</code></td>
+<td>apply a mathematical function to pixel values in an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-gamma</code></td>
+<td><code>value</code></td>
+<td>adjust the gamma value of an image, which non-linearly modifies pixel brightness</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-gaussian-blur</code></td>
+<td><code>radiusxsigma</code></td>
+<td>smooth pixel values in a way that preserves edges</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>true</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-geometry</code></td>
+<td><code>{width}x{height}{offset}</code></td>
+<td>preferred size or location of the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-grayscale</code></td>
+<td><code>method</code></td>
+<td>convert image to grayscale. possible methods: <code>intensity</code>, <code>brightness</code>, <code>lightness</code>, <code>rec601luma</code>, <code>rec601luminance</code>, <code>rec709luma</code>, <code>rec709luminance</code></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-hough-lines</code></td>
+<td><code>radiusx{sigma}</code></td>
+<td>detect straight lines in an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-identify</code></td>
+<td><code>format</code></td>
+<td>identify the format and characteristics of the image. format can include any ImageMagick property escape.</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-ift</code></td>
+<td><code>{normalize}</code></td>
+<td>implements the inverse discrete Fourier transform (DFT)</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-implode</code></td>
+<td><code>amount</code></td>
+<td>implode image pixels about the center</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-integral</code></td>
+<td>No args</td>
+<td>calculate the sum of values (pixel values) in the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-interpolative-resize</code></td>
+<td><code>interpolator</code></td>
+<td>performs fast resizing using a point‑sampling interpolator. <code>interpolator</code> must be one of ImageMagick point sampling filters</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-kmeans</code></td>
+<td><code>clusters</code></td>
+<td>K means color reduction</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-kuwahara</code></td>
+<td><code>radius</code></td>
+<td>edge preserving noise reduction filter</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-lat</code></td>
+<td>geometry</td>
+<td>local adaptive thresholding</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-level</code></td>
+<td>value</td>
+<td>adjust the level of image contrast</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-level-colors</code></td>
+<td>color,color</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-linear-stretch</code></td>
+<td>geometry</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-liquid-rescale</code></td>
+<td>geometry</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-local-contrast</code></td>
+<td>geometry</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-mean-shift</code></td>
+<td>geometry</td>
+<td>delineate arbitrarily shaped clusters in the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-median</code></td>
+<td>geometry</td>
+<td>apply a median filter to the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-mode</code></td>
+<td>geometry</td>
+<td>make each pixel the 'predominant color' of the</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-modulate</code></td>
+<td>value</td>
+<td>vary the brightness, saturation, and hue</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-monochrome</code></td>
+<td>transform</td>
+<td>image to black and white</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-morphology</code></td>
+<td>method</td>
+<td>kernel</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-motion-blur</code></td>
+<td>geometry</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-negate</code></td>
+<td>replace</td>
+<td>every pixel with its complementary color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-noise</code></td>
+<td>geometry</td>
+<td>add or reduce noise in an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-normalize</code></td>
+<td>transform</td>
+<td>image to span the full range of colors</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-opaque</code></td>
+<td>color</td>
+<td>change this color to the fill color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-ordered-dither</code></td>
+<td>NxN</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-paint</code></td>
+<td>radius</td>
+<td>simulate an oil painting</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-perceptible</code></td>
+<td>epsilon</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-epsilon</code></td>
+<td></td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-polaroid</code></td>
+<td>angle</td>
+<td>simulate a Polaroid picture</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-posterize</code></td>
+<td>levels</td>
+<td>reduce the image to a limited number of color levels</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-profile</code></td>
+<td>filename</td>
+<td>add, delete, or apply an image profile</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-quantize</code></td>
+<td>colorspace</td>
+<td>reduce colors in this colorspace</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-raise</code></td>
+<td>value</td>
+<td>lighten/darken image edges to create a 3-D effect</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-random-threshold</code></td>
+<td>low,high</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-range-threshold</code></td>
+<td>values</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-region</code></td>
+<td>geometry</td>
+<td>apply options to a portion of the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-render</code></td>
+<td>render</td>
+<td>vector graphics</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-resample</code></td>
+<td>geometry</td>
+<td>change the resolution of an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-reshape</code></td>
+<td>geometry</td>
+<td>reshape the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-resize</code></td>
+<td>geometry</td>
+<td>resize the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-roll</code></td>
+<td>geometry</td>
+<td>roll an image vertically or horizontally</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-rotate</code></td>
+<td>degrees</td>
+<td>apply Paeth rotation to the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-rotational-blur</code></td>
+<td>angle</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-sample</code></td>
+<td>geometry</td>
+<td>scale image with pixel sampling</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-scale</code></td>
+<td>geometry</td>
+<td>scale the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-segment</code></td>
+<td>values</td>
+<td>segment an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-selective-blur</code></td>
+<td>geometry</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-sepia-tone</code></td>
+<td>threshold</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-set</code></td>
+<td>property</td>
+<td>value set an image property</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-shade</code></td>
+<td>degrees</td>
+<td>shade the image using a distant light source</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-shadow</code></td>
+<td>geometry</td>
+<td>simulate an image shadow</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-sharpen</code></td>
+<td>geometry</td>
+<td>sharpen the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-shave</code></td>
+<td>geometry</td>
+<td>shave pixels from the image edges</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-shear</code></td>
+<td>geometry</td>
+<td>slide one edge of the image along the X or Y axis</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-sigmoidal-contrast</code></td>
+<td>geometry</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-sketch</code></td>
+<td>geometry</td>
+<td>simulate a pencil sketch</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-solarize</code></td>
+<td>threshold</td>
+<td>negate all pixels above the threshold level</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-sort-pixels</code></td>
+<td>sort</td>
+<td>each scanline in ascending order of intensity</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-sparse-color</code></td>
+<td>method</td>
+<td>args</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-splice</code></td>
+<td>geometry</td>
+<td>splice the background color into the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-spread</code></td>
+<td>radius</td>
+<td>displace image pixels by a random amount</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-statistic</code></td>
+<td>type</td>
+<td>geometry</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-strip</code></td>
+<td>strip</td>
+<td>image of all profiles and comments</td>
+<td>output-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-swirl</code></td>
+<td>degrees</td>
+<td>swirl image pixels about the center</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-threshold</code></td>
+<td>value</td>
+<td>threshold the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-thumbnail</code></td>
+<td>geometry</td>
+<td>create a thumbnail of the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-tile</code></td>
+<td>filename</td>
+<td>tile image when filling a graphic primitive</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-tint</code></td>
+<td>value</td>
+<td>tint the image with the fill color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-transform</code></td>
+<td>affine</td>
+<td>transform image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-transparent</code></td>
+<td>color</td>
+<td>make this color transparent within the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-transpose</code></td>
+<td>flip</td>
+<td>image vertically and rotate 90 degrees</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-transverse</code></td>
+<td>flop</td>
+<td>image horizontally and rotate 270 degrees</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-trim</code></td>
+<td>trim</td>
+<td>image edges</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-type</code></td>
+<td>type</td>
+<td>image type</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-unique-colors</code></td>
+<td>discard</td>
+<td>all but one of any pixel color</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-unsharp</code></td>
+<td>geometry</td>
+<td>sharpen the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-vignette</code></td>
+<td>geometry</td>
+<td>soften the edges of the image in vignette style</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-wave</code></td>
+<td>geometry</td>
+<td>alter an image along a sine wave</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-wavelet-denoise</code></td>
+<td>threshold</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-white-balance</code></td>
+<td>automagically</td>
+<td>adjust white balance of image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-white-threshold</code></td>
+<td>value</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-channel-fx</code></td>
+<td>expression</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-separate</code></td>
+<td>separate</td>
+<td>an image channel into a grayscale image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-append</code></td>
+<td>append</td>
+<td>an image sequence</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-clut</code></td>
+<td>apply</td>
+<td>a color lookup table to the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-coalesce</code></td>
+<td>merge</td>
+<td>a sequence of images</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-combine</code></td>
+<td>combine</td>
+<td>a sequence of images</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-compare</code></td>
+<td>mathematically</td>
+<td>and visually annotate the difference between an image and its reconstruction</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-complex</code></td>
+<td>operator</td>
+<td>perform complex mathematics on an image sequence</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-composite</code></td>
+<td>composite</td>
+<td>image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-copy</code></td>
+<td>geometry</td>
+<td>offset</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-crop</code></td>
+<td>geometry</td>
+<td>cut out a rectangular region of the image</td>
+<td>input-option</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-deconstruct</code></td>
+<td>break</td>
+<td>down an image sequence into constituent parts</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-evaluate-sequence</code></td>
+<td>operator</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-flatten</code></td>
+<td>flatten</td>
+<td>a sequence of images</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-fx</code></td>
+<td>expression</td>
+<td>apply mathematical expression to an image channel(s)</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-hald-clut</code></td>
+<td>apply</td>
+<td>a Hald color lookup table to the image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-layers</code></td>
+<td>method</td>
+<td>optimize, merge, or compare image layers</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-morph</code></td>
+<td>value</td>
+<td>morph an image sequence</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-mosaic</code></td>
+<td>create</td>
+<td>a mosaic from an image sequence</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-poly</code></td>
+<td>terms</td>
+<td>build a polynomial from the image sequence and the corresponding</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-print</code></td>
+<td>string</td>
+<td>interpret string and print to console</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-process</code></td>
+<td>arguments</td>
+<td>process the image with a custom image filter</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-smush</code></td>
+<td>geometry</td>
+<td>smush an image sequence together</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-write</code></td>
+<td>filename</td>
+<td>write images to this file</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-clone</code></td>
+<td>indexes</td>
+<td>clone an image</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-delete</code></td>
+<td>indexes</td>
+<td>delete the image from the image sequence</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-duplicate</code></td>
+<td>count,indexes</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-insert</code></td>
+<td>index</td>
+<td>insert last image into the image sequence</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-reverse</code></td>
+<td>reverse</td>
+<td>image sequence</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-swap</code></td>
+<td>indexes</td>
+<td>swap two images in the image sequence</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-debug</code></td>
+<td>events</td>
+<td>display copious debugging information</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>-distribute-cache</code></td>
+<td>port</td>
+<td></td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-help</code></td>
+<td>print</td>
+<td>program options</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>-list</code></td>
+<td>type</td>
+<td>print a list of supported option arguments</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>-log</code></td>
+<td>format</td>
+<td>format of debugging information</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>-usage</code></td>
+<td>print</td>
+<td>program usage</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>-version</code></td>
+<td>print</td>
+<td>version information</td>
+<td>bi-functional</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
 <h3 id="imagemagick-color-list">ImageMagick color list</h3>
 <table>
 <thead>
