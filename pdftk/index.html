@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>PDF files - Bash Tutorial</title>
+    <title>PDFs (pdftk) - Bash Tutorial</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,15 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Manipulating PDF files", url: "#_top", children: [
+          {title: "PDF Toolkit", url: "#_top", children: [
+              {title: "Installation", url: "#installation" },
+              {title: "Syntax", url: "#syntax" },
+              {title: "Merging PDFs", url: "#merging-pdfs" },
+              {title: "Splitting PDFs", url: "#splitting-pdfs" },
+              {title: "Rotating Pages", url: "#rotating-pages" },
+              {title: "Extracting Pages", url: "#extracting-pages" },
+              {title: "Passwords", url: "#passwords" },
+              {title: "Repairing PDFs", url: "#repairing-pdfs" },
           ]},
         ];
 
@@ -59,12 +67,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../advanced_bash/" class="btn btn-xs btn-default pull-right">
+      <a href="../qpdf/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../advanced_bash/" class="btn btn-xs btn-link">
-        Advanced bash
+      <a href="../qpdf/" class="btn btn-xs btn-link">
+        PDFs (qpdf)
       </a>
     </div>
     
@@ -80,7 +88,15 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="manipulating-pdf-files">Manipulating PDF files</h1>
+    <h1 id="pdf-toolkit">PDF Toolkit</h1>
+<h2 id="installation">Installation</h2>
+<h2 id="syntax">Syntax</h2>
+<h2 id="merging-pdfs">Merging PDFs</h2>
+<h2 id="splitting-pdfs">Splitting PDFs</h2>
+<h2 id="rotating-pages">Rotating Pages</h2>
+<h2 id="extracting-pages">Extracting Pages</h2>
+<h2 id="passwords">Passwords</h2>
+<h2 id="repairing-pdfs">Repairing PDFs</h2>
 
   <br>
     
@@ -93,12 +109,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../advanced_bash/" class="btn btn-xs btn-default pull-right">
+      <a href="../qpdf/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../advanced_bash/" class="btn btn-xs btn-link">
-        Advanced bash
+      <a href="../qpdf/" class="btn btn-xs btn-link">
+        PDFs (qpdf)
       </a>
     </div>
     
