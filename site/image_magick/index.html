@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Image files - Bash Tutorial</title>
+    <title>Image files (ImageMagick) - Bash Tutorial</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,9 +32,16 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Manipulating image files", url: "#_top", children: [
-              {title: "ImageMagick (linux, Mac)", url: "#imagemagick-linux-mac" },
-              {title: "sips (Mac)", url: "#sips-mac" },
+          {title: "ImageMagick", url: "#_top", children: [
+              {title: "Installation (Linux, Mac)", url: "#installation-linux-mac" },
+              {title: "Syntax", url: "#syntax" },
+              {title: "Utilities", url: "#utilities" },
+              {title: "Format Escapes", url: "#format-escapes" },
+              {title: "Expressions", url: "#expressions" },
+              {title: "EXIF Tags", url: "#exif-tags" },
+              {title: "Shapes", url: "#shapes" },
+              {title: "Options", url: "#options" },
+              {title: "Color List", url: "#color-list" },
           ]},
         ];
 
@@ -61,12 +68,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../videos/" class="btn btn-xs btn-default pull-right">
+      <a href="../sips/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../videos/" class="btn btn-xs btn-link">
-        Videos
+      <a href="../sips/" class="btn btn-xs btn-link">
+        Image files (sips)
       </a>
     </div>
     
@@ -82,14 +89,16 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="manipulating-image-files">Manipulating image files</h1>
-<h2 id="imagemagick-linux-mac">ImageMagick (linux, Mac)</h2>
-<h3 id="installation">Installation</h3>
+    <h1 id="imagemagick">ImageMagick</h1>
+<h2 id="installation-linux-mac">Installation (Linux, Mac)</h2>
 <p>Go to the <a href="https://imagemagick.org/script/download.php">ImageMagic installation page</a> for detailed instructions for different operating systems.</p>
-<h3 id="utilities">Utilities</h3>
-<p>The following table presents a list of utilities that are part of ImageMagick and that can be used for different purposes. Each tool will have input and output options. Check <a href="#imagemagick-options">this section</a> for a complete list of these options.</p>
-<p>When specifying a color in any ImageMagick command, you can use the name of any <a href="#imagemagick-color-list">recognized color</a>, the RGB value, or the Hex value.</p>
-<p>When specifying a shape to draw on an image, you can use any of the <a href="#imagemagick-shapes">valid shapes</a>.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code class="language-bash">[utility] [options]
+</code></pre>
+<h2 id="utilities">Utilities</h2>
+<p>The following table presents a list of utilities that are part of ImageMagick and that can be used for different purposes. Each tool will have input and output options. Check <a href="#options">this section</a> for a complete list of these options.</p>
+<p>When specifying a color in any ImageMagick command, you can use the name of any <a href="#color-list">recognized color</a>, the RGB value, or the Hex value.</p>
+<p>When specifying a shape to draw on an image, you can use any of the <a href="#shapes">valid shapes</a>.</p>
 <table>
 <thead>
 <tr>
@@ -168,7 +177,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
-<h3 id="imagemagick-format-escapes">ImageMagick Format escapes</h3>
+<h2 id="format-escapes">Format Escapes</h2>
 <table>
 <thead>
 <tr>
@@ -251,11 +260,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 <tr>
 <td><code>%[EXIF:tag]</code></td>
-<td>Image metadata. <a href="#imagemagick-exif-tags">This</a> is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string.</td>
+<td>Image metadata. <a href="#exif-tags">This</a> is the list of acceptable tags. If a tag is not available for the image, ImageMagick will print an empty string.</td>
 </tr>
 <tr>
 <td><code>%[fx:expression]</code></td>
-<td>Custom expression. This is a mathematical formula that can reference pixels, image dimensions, channels or constants. Please see the <a href="#imagemagick-expressions">ImageMagick expressions</a> sections for more details.</td>
+<td>Custom expression. This is a mathematical formula that can reference pixels, image dimensions, channels or constants. Please see the <a href="#expressions">ImageMagick expressions</a> sections for more details.</td>
 </tr>
 <tr>
 <td><code>%[IPTC:tag]</code></td>
@@ -279,7 +288,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
-<h3 id="imagemagick-expressions">ImageMagick expressions</h3>
+<h2 id="expressions">Expressions</h2>
 <p>ImageMagick expressions allow you to compute custom values using image properties.</p>
 <p>Image properties that can be used in expressions:</p>
 <ul>
@@ -291,11 +300,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Functions: <code>abs(x)</code>, <code>sin(x)</code>, <code>cos(x)</code>, <code>tan(x)</code>, <code>log(x)</code>, <code>exp(x)</code>, <code>sqrt(x)</code>, <code>min(a,b)</code>, <code>max(a,b)</code>, <code>floor(x)</code>, <code>ceil(x)</code>.</li>
 <li>Channel statistics: <code>mean.r</code>, <code>mean.g</code>, <code>mean.b</code>, <code>standard_deviation.r</code>, <code>standard_deviation.g</code>, <code>standard_deviation.b</code>.</li>
 </ul>
-<h3 id="imagemagick-exif-tags">ImageMagick EXIF tags</h3>
+<h2 id="exif-tags">EXIF Tags</h2>
 <table>
 <thead>
 <tr>
-<th>EXIF Tag</th>
+<th>Tag</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -386,7 +395,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
-<h3 id="imagemagick-shapes">ImageMagick shapes</h3>
+<h2 id="shapes">Shapes</h2>
 <table>
 <thead>
 <tr>
@@ -463,7 +472,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
-<h3 id="imagemagick-options">ImageMagick options</h3>
+<h2 id="options">Options</h2>
 <table>
 <thead>
 <tr>
@@ -4975,7 +4984,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
-<h3 id="imagemagick-color-list">ImageMagick color list</h3>
+<h2 id="color-list">Color List</h2>
 <table>
 <thead>
 <tr>
@@ -8126,200 +8135,6 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
-<h2 id="sips-mac">sips (Mac)</h2>
-<p>Usage: <code>sips [flags] inputFile [--out outputFile]</code></p>
-<p>Image modification flags:</p>
-<table>
-<thead>
-<tr>
-<th>Flag</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-s key value</code></td>
-<td>Set the value for a <code>key</code> (see table below for the available keys and acceptable values).</td>
-</tr>
-<tr>
-<td><code>-r degreesCW</code></td>
-<td>Rotate an image several degrees clockwise.</td>
-</tr>
-<tr>
-<td><code>-f option</code></td>
-<td>Flip the image using one of the following two options: horizontal or vertical.</td>
-</tr>
-<tr>
-<td><code>-c pixelsH pixelsW</code></td>
-<td>Crop image to fit specified size. <code>pixelsH</code> indicates the new height in number of pixels, <code>pixelsW</code> indicates the new width in number of pixels.</td>
-</tr>
-<tr>
-<td><code>-z pixelsH pixelsW</code></td>
-<td>Resample image at specified size. Image aspect ratio may be altered. <code>pixelsH</code> indicate the new height in number of pixels, <code>pixelsW</code> indicate the new width in number of pixels.</td>
-</tr>
-<tr>
-<td><code>-Z pixelsWH</code></td>
-<td>Resample image so height and width aren't greater than specified.</td>
-</tr>
-<tr>
-<td><code>--resampleWidth pixelsW</code></td>
-<td>Resample image to specified width. <code>pixelsW</code> indicate the new width in number of pixels.</td>
-</tr>
-<tr>
-<td><code>--resampleHeight pixelsH</code></td>
-<td>Resample image to specified height. <code>pixelsH</code> indicate the new height in number of pixels.</td>
-</tr>
-<tr>
-<td><code>-o</code></td>
-<td>Optimize color for sharing.</td>
-</tr>
-<tr>
-<td><code>-p pixelsH pixelsW</code></td>
-<td>Add padding to the image. Use <code>--padColor hexcolor</code> to select the padding color as hexadecimal number.</td>
-</tr>
-</tbody>
-</table>
-<p>If you want to modify one image to match the properties of another image (for example have one image match the height of another image), you can use the flag <code>-g key</code> or <code>--getProperty key</code> on the image that you want to match. Where <code>key</code> is one of the following properties:</p>
-<table>
-<thead>
-<tr>
-<th>Profile property keys</th>
-<th>Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>dpiHeight</code></td>
-<td>Height in dpi (printer dots per inch).</td>
-</tr>
-<tr>
-<td><code>dpiWidth</code></td>
-<td>Width in dpi (printer dots per inch).</td>
-</tr>
-<tr>
-<td><code>pixelHeight</code></td>
-<td>Height in number of pixels.</td>
-</tr>
-<tr>
-<td><code>pixelWidth</code></td>
-<td>Width in number of pixels.</td>
-</tr>
-<tr>
-<td><code>format</code></td>
-<td>Image format. Acceptable values for this key: <code>jpeg</code>, <code>tiff</code>, <code>png</code>, <code>gif</code>, <code>jp2</code>, <code>pict</code>, <code>bmp</code>, <code>qtif</code>, <code>psd</code>, <code>sgi</code>, <code>tga</code>, <code>pdf</code>.</td>
-</tr>
-<tr>
-<td><code>formatOptions</code></td>
-<td>Quality of the new image. Acceptable values for this key: <code>low</code>, <code>normal</code>, <code>high</code>, <code>best</code>, or some percentage.</td>
-</tr>
-<tr>
-<td><code>samplesPerPixel</code></td>
-<td>Samples per pixel.</td>
-</tr>
-<tr>
-<td><code>bitsPerSample</code></td>
-<td>Bits per sample.</td>
-</tr>
-<tr>
-<td><code>software</code></td>
-<td>Software use to create the image.</td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>Description.</td>
-</tr>
-<tr>
-<td><code>copyright</code></td>
-<td>Copyright.</td>
-</tr>
-<tr>
-<td><code>version</code></td>
-<td>Version.</td>
-</tr>
-<tr>
-<td><code>platform</code></td>
-<td>Platform where file was created.</td>
-</tr>
-<tr>
-<td><code>quality</code></td>
-<td>Acceptable values for this key: normal, draft, best.</td>
-</tr>
-<tr>
-<td><code>renderingIntent</code></td>
-<td>Acceptable values for this key: perceptual, relative, saturation, absolute.</td>
-</tr>
-<tr>
-<td><code>creator</code></td>
-<td>Creator of the file.</td>
-</tr>
-</tbody>
-</table>
-<p>For the examples below I will be using the following image, taken from the following article, which I published long time ago: <a href="https://pubmed.ncbi.nlm.nih.gov/29113642/">link to article</a>.</p>
-<p><img alt="original" src="../img/nihms909531f2.jpg" /></p>
-<p>Convert <code>AutismArticle1.png</code> to pdf.</p>
-<pre><code class="language-bash">$ sips -s format pdf AutismArticle1.png --out AutismArticle1.pdf
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.pdf
-</code></pre>
-<p>Rotate <code>AutismArticle1.png</code> 45 degrees clock-wise.</p>
-<pre><code class="language-bash">$ sips -r 45 AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-</code></pre>
-<p>Result image:</p>
-<p><img alt="rotated1" src="../img/rotated1.png" /></p>
-<p>Rotate <code>AutismArticle1.png</code> 45 degrees counter-clock-wise.</p>
-<pre><code class="language-bash">$ sips -r -45 AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/test2.png
-</code></pre>
-<p>Result image:</p>
-<p><img alt="rotated2" src="../img/rotated2.png" /></p>
-<p>Flip <code>AutismArticle1.png</code> horizontally.</p>
-<pre><code class="language-bash">$ sips -f horizontal AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-</code></pre>
-<p>Result image:</p>
-<p><img alt="flipped" src="../img/flipped.png" /></p>
-<p>Flip <code>AutismArticle1.png</code> vertically.</p>
-<pre><code class="language-bash">$ sips -f vertical AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-</code></pre>
-<p>Result image:</p>
-<p><img alt="flipped2" src="../img/flipped2.png" /></p>
-<p>Crop <code>AutismArticle1.png</code> to fit a new size that be 1/4 of its original height and 1/4 of its original weight:</p>
-<p>The first step is to obtain the current width and height using <code>sips</code> with the flags <code>--getProperty pixelWidth</code> and <code>--getProperty pixelHeight</code>. Then, divide the two numbers by four. And finally use <code>sips</code> with the <code>-c</code> flag to crop the file.</p>
-<pre><code class="language-bash">$ sips --getProperty pixelHeight AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-  pixelHeight: 440
-$ sips --getProperty pixelWidth AutismArticle1.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-  pixelWidth: 727
-$ echo &quot;440/4&quot; | bc -l
-110.00000000000000000000
-$ echo &quot;727/4&quot; | bc -l
-181.75000000000000000000
-$ sips -c 110 181 AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-  /Users/monica/Desktop/Backup/images_presentations/test.png
-</code></pre>
-<p>Result image:</p>
-<p><img alt="cropped" src="../img/cropped.png" /></p>
-<p>Resample image to 110x181:</p>
-<pre><code class="language-bash">$ sips -z 110 181 AutismArticle1.png --out test.png
-/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
-  /Users/monica/Desktop/Backup/images_presentations/test.png
-$ sips --getProperty pixelHeight test.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-  pixelHeight: 110
-$ sips --getProperty pixelWidth test.png
-/Users/monica/Desktop/Backup/images_presentations/test.png
-  pixelWidth: 181
-</code></pre>
-<p>Result image:</p>
-<p><img alt="resampled" src="../img/resampled.png" /></p>
 
   <br>
     
@@ -8332,12 +8147,12 @@ $ sips --getProperty pixelWidth test.png
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../videos/" class="btn btn-xs btn-default pull-right">
+      <a href="../sips/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../videos/" class="btn btn-xs btn-link">
-        Videos
+      <a href="../sips/" class="btn btn-xs btn-link">
+        Image files (sips)
       </a>
     </div>
     

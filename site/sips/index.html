@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Monica Keith">
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Image files (sips) - Bash Tutorial</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Sips", url: "#_top", children: [
+              {title: "Installation (Mac)", url: "#installation-mac" },
+              {title: "Syntax", url: "#syntax" },
+              {title: "Flags", url: "#flags" },
+              {title: "Property Keys", url: "#property-keys" },
+              {title: "Examples", url: "#examples" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../videos/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../videos/" class="btn btn-xs btn-link">
+        Videos
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../image_magick/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../image_magick/" class="btn btn-xs btn-link">
+        Image files (ImageMagick)
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="sips">Sips</h1>
+<h2 id="installation-mac">Installation (Mac)</h2>
+<h2 id="syntax">Syntax</h2>
+<pre><code class="language-bash">sips [flags] inputFile [--out outputFile]
+</code></pre>
+<h2 id="flags">Flags</h2>
+<p>Image modification flags:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-s key value</code></td>
+<td>Set the value for a <code>key</code> (see table below for the available keys and acceptable values).</td>
+</tr>
+<tr>
+<td><code>-r degreesCW</code></td>
+<td>Rotate an image several degrees clockwise.</td>
+</tr>
+<tr>
+<td><code>-f option</code></td>
+<td>Flip the image using one of the following two options: horizontal or vertical.</td>
+</tr>
+<tr>
+<td><code>-c pixelsH pixelsW</code></td>
+<td>Crop image to fit specified size. <code>pixelsH</code> indicates the new height in number of pixels, <code>pixelsW</code> indicates the new width in number of pixels.</td>
+</tr>
+<tr>
+<td><code>-z pixelsH pixelsW</code></td>
+<td>Resample image at specified size. Image aspect ratio may be altered. <code>pixelsH</code> indicate the new height in number of pixels, <code>pixelsW</code> indicate the new width in number of pixels.</td>
+</tr>
+<tr>
+<td><code>-Z pixelsWH</code></td>
+<td>Resample image so height and width aren't greater than specified.</td>
+</tr>
+<tr>
+<td><code>--resampleWidth pixelsW</code></td>
+<td>Resample image to specified width. <code>pixelsW</code> indicate the new width in number of pixels.</td>
+</tr>
+<tr>
+<td><code>--resampleHeight pixelsH</code></td>
+<td>Resample image to specified height. <code>pixelsH</code> indicate the new height in number of pixels.</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>Optimize color for sharing.</td>
+</tr>
+<tr>
+<td><code>-p pixelsH pixelsW</code></td>
+<td>Add padding to the image. Use <code>--padColor hexcolor</code> to select the padding color as hexadecimal number.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="property-keys">Property Keys</h2>
+<p>If you want to modify one image to match the properties of another image (for example have one image match the height of another image), you can use the flag <code>-g key</code> or <code>--getProperty key</code> on the image that you want to match. Where <code>key</code> is one of the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Profile property keys</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dpiHeight</code></td>
+<td>Height in dpi (printer dots per inch).</td>
+</tr>
+<tr>
+<td><code>dpiWidth</code></td>
+<td>Width in dpi (printer dots per inch).</td>
+</tr>
+<tr>
+<td><code>pixelHeight</code></td>
+<td>Height in number of pixels.</td>
+</tr>
+<tr>
+<td><code>pixelWidth</code></td>
+<td>Width in number of pixels.</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>Image format. Acceptable values for this key: <code>jpeg</code>, <code>tiff</code>, <code>png</code>, <code>gif</code>, <code>jp2</code>, <code>pict</code>, <code>bmp</code>, <code>qtif</code>, <code>psd</code>, <code>sgi</code>, <code>tga</code>, <code>pdf</code>.</td>
+</tr>
+<tr>
+<td><code>formatOptions</code></td>
+<td>Quality of the new image. Acceptable values for this key: <code>low</code>, <code>normal</code>, <code>high</code>, <code>best</code>, or some percentage.</td>
+</tr>
+<tr>
+<td><code>samplesPerPixel</code></td>
+<td>Samples per pixel.</td>
+</tr>
+<tr>
+<td><code>bitsPerSample</code></td>
+<td>Bits per sample.</td>
+</tr>
+<tr>
+<td><code>software</code></td>
+<td>Software use to create the image.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Description.</td>
+</tr>
+<tr>
+<td><code>copyright</code></td>
+<td>Copyright.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Version.</td>
+</tr>
+<tr>
+<td><code>platform</code></td>
+<td>Platform where file was created.</td>
+</tr>
+<tr>
+<td><code>quality</code></td>
+<td>Acceptable values for this key: normal, draft, best.</td>
+</tr>
+<tr>
+<td><code>renderingIntent</code></td>
+<td>Acceptable values for this key: perceptual, relative, saturation, absolute.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<p>| <code>creator</code> | Creator of the file. |</p>
+<p>For the examples below I will be using the following image, taken from the following article, which I published long time ago: <a href="https://pubmed.ncbi.nlm.nih.gov/29113642/">link to article</a>.</p>
+<p><img alt="original" src="../img/nihms909531f2.jpg" /></p>
+<p>Convert <code>AutismArticle1.png</code> to pdf.</p>
+<pre><code class="language-bash">$ sips -s format pdf AutismArticle1.png --out AutismArticle1.pdf
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.pdf
+</code></pre>
+<p>Rotate <code>AutismArticle1.png</code> 45 degrees clock-wise.</p>
+<pre><code class="language-bash">$ sips -r 45 AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="rotated1" src="../img/rotated1.png" /></p>
+<p>Rotate <code>AutismArticle1.png</code> 45 degrees counter-clock-wise.</p>
+<pre><code class="language-bash">$ sips -r -45 AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/test2.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="rotated2" src="../img/rotated2.png" /></p>
+<p>Flip <code>AutismArticle1.png</code> horizontally.</p>
+<pre><code class="language-bash">$ sips -f horizontal AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="flipped" src="../img/flipped.png" /></p>
+<p>Flip <code>AutismArticle1.png</code> vertically.</p>
+<pre><code class="language-bash">$ sips -f vertical AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="flipped2" src="../img/flipped2.png" /></p>
+<p>Crop <code>AutismArticle1.png</code> to fit a new size that be 1/4 of its original height and 1/4 of its original weight:</p>
+<p>The first step is to obtain the current width and height using <code>sips</code> with the flags <code>--getProperty pixelWidth</code> and <code>--getProperty pixelHeight</code>. Then, divide the two numbers by four. And finally use <code>sips</code> with the <code>-c</code> flag to crop the file.</p>
+<pre><code class="language-bash">$ sips --getProperty pixelHeight AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+  pixelHeight: 440
+$ sips --getProperty pixelWidth AutismArticle1.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+  pixelWidth: 727
+$ echo &quot;440/4&quot; | bc -l
+110.00000000000000000000
+$ echo &quot;727/4&quot; | bc -l
+181.75000000000000000000
+$ sips -c 110 181 AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+  /Users/monica/Desktop/Backup/images_presentations/test.png
+</code></pre>
+<p>Result image:</p>
+<p><img alt="cropped" src="../img/cropped.png" /></p>
+<p>Resample image to 110x181:</p>
+<pre><code class="language-bash">$ sips -z 110 181 AutismArticle1.png --out test.png
+/Users/monica/Desktop/Backup/images_presentations/AutismArticle1.png
+  /Users/monica/Desktop/Backup/images_presentations/test.png
+$ sips --getProperty pixelHeight test.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+  pixelHeight: 110
+$ sips --getProperty pixelWidth test.png
+/Users/monica/Desktop/Backup/images_presentations/test.png
+  pixelWidth: 181
+</code></pre>
+<p>Result image:</p>
+<p><img alt="resampled" src="../img/resampled.png" /></p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../videos/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../videos/" class="btn btn-xs btn-link">
+        Videos
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../image_magick/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../image_magick/" class="btn btn-xs btn-link">
+        Image files (ImageMagick)
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

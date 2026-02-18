@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Backups - Bash Tutorial</title>
+    <title>PDFs (qpdf) - Bash Tutorial</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,13 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Creating backups", url: "#_top", children: [
+          {title: "QPDF", url: "#_top", children: [
+              {title: "Installation", url: "#installation" },
+              {title: "Syntax", url: "#syntax" },
+              {title: "Encrypting PDFs", url: "#encrypting-pdfs" },
+              {title: "Compressing PDFs", url: "#compressing-pdfs" },
+              {title: "Rearranging Pages", url: "#rearranging-pages" },
+              {title: "Splitting and Merging", url: "#splitting-and-merging" },
           ]},
         ];
 
@@ -59,20 +65,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../permissions/" class="btn btn-xs btn-default pull-right">
+      <a href="../ghostscript/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../permissions/" class="btn btn-xs btn-link">
-        File permissions
+      <a href="../ghostscript/" class="btn btn-xs btn-link">
+        PDFs (ghostscript)
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../downloads/" class="btn btn-xs btn-default pull-left">
+      <a href="../pdftk/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../downloads/" class="btn btn-xs btn-link">
-        Downloading files
+        Previous</a><a href="../pdftk/" class="btn btn-xs btn-link">
+        PDFs (pdftk)
       </a>
     </div>
     
@@ -80,7 +86,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="creating-backups">Creating backups</h1>
+    <h1 id="qpdf">QPDF</h1>
+<h2 id="installation">Installation</h2>
+<h2 id="syntax">Syntax</h2>
+<h2 id="encrypting-pdfs">Encrypting PDFs</h2>
+<p>decrypting/encrypting</p>
+<h2 id="compressing-pdfs">Compressing PDFs</h2>
+<h2 id="rearranging-pages">Rearranging Pages</h2>
+<h2 id="splitting-and-merging">Splitting and Merging</h2>
 
   <br>
     
@@ -93,20 +106,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../permissions/" class="btn btn-xs btn-default pull-right">
+      <a href="../ghostscript/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../permissions/" class="btn btn-xs btn-link">
-        File permissions
+      <a href="../ghostscript/" class="btn btn-xs btn-link">
+        PDFs (ghostscript)
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../downloads/" class="btn btn-xs btn-default pull-left">
+      <a href="../pdftk/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../downloads/" class="btn btn-xs btn-link">
-        Downloading files
+        Previous</a><a href="../pdftk/" class="btn btn-xs btn-link">
+        PDFs (pdftk)
       </a>
     </div>
     

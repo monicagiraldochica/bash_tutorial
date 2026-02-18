@@ -32,7 +32,16 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Manipulating videos", url: "#_top", children: [
+          {title: "FFmpeg", url: "#_top", children: [
+              {title: "Installation (linux, Mac)", url: "#installation-linux-mac" },
+              {title: "Syntax", url: "#syntax" },
+              {title: "Trimming", url: "#trimming" },
+              {title: "Geometry", url: "#geometry" },
+              {title: "Speed/Timing", url: "#speedtiming" },
+              {title: "Filter", url: "#filter" },
+              {title: "Audio", url: "#audio" },
+              {title: "Subtitles and Metadata", url: "#subtitles-and-metadata" },
+              {title: "Frames", url: "#frames" },
           ]},
         ];
 
@@ -59,20 +68,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../pdf/" class="btn btn-xs btn-default pull-right">
+      <a href="../pdftk/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../pdf/" class="btn btn-xs btn-link">
-        PDF files
+      <a href="../pdftk/" class="btn btn-xs btn-link">
+        PDFs (pdftk)
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../img_files/" class="btn btn-xs btn-default pull-left">
+      <a href="../sips/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../img_files/" class="btn btn-xs btn-link">
-        Image files
+        Previous</a><a href="../sips/" class="btn btn-xs btn-link">
+        Image files (sips)
       </a>
     </div>
     
@@ -80,7 +89,47 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="manipulating-videos">Manipulating videos</h1>
+    <h1 id="ffmpeg">FFmpeg</h1>
+<h2 id="installation-linux-mac">Installation (linux, Mac)</h2>
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>Install command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MacOS</td>
+<td><code>brew install ffmpeg</code></td>
+</tr>
+<tr>
+<td>Ubuntu/Debian</td>
+<td><code>apt install ffmpeg</code></td>
+</tr>
+<tr>
+<td>RHEL/CentOS/Fedora</td>
+<td><code>dnf install ffmpeg</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="syntax">Syntax</h2>
+<pre><code class="language-bash">ffmpeg -i &lt;input&gt; [options] &lt;output&gt;
+</code></pre>
+<h2 id="trimming">Trimming</h2>
+<p>Trimming options</p>
+<h2 id="geometry">Geometry</h2>
+<p>Cropping/Scaling/Geometry options</p>
+<h2 id="speedtiming">Speed/Timing</h2>
+<p>Speed/Timing options</p>
+<h2 id="filter">Filter</h2>
+<p>Filter options</p>
+<h2 id="audio">Audio</h2>
+<p>audio options</p>
+<h2 id="subtitles-and-metadata">Subtitles and Metadata</h2>
+<p>Subtitles and Metadata options</p>
+<h2 id="frames">Frames</h2>
+<p>Frame options</p>
 
   <br>
     
@@ -93,20 +142,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../pdf/" class="btn btn-xs btn-default pull-right">
+      <a href="../pdftk/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../pdf/" class="btn btn-xs btn-link">
-        PDF files
+      <a href="../pdftk/" class="btn btn-xs btn-link">
+        PDFs (pdftk)
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../img_files/" class="btn btn-xs btn-default pull-left">
+      <a href="../sips/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../img_files/" class="btn btn-xs btn-link">
-        Image files
+        Previous</a><a href="../sips/" class="btn btn-xs btn-link">
+        Image files (sips)
       </a>
     </div>
     
